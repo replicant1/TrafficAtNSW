@@ -1,0 +1,225 @@
+{
+    "type": "FeatureCollection",
+    "rights": {
+        "copyright": "Roads and Traffic Authority (NSW)",
+        "licence": "http://livetraffic.rta.nsw.gov.au/#dev"
+    },
+    "layerName": "F3 Travel Times",
+    "lastPublished": 1331377274984,
+    "features": [
+        {
+            "type": "Feature",
+            "id": "S3",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.20042,
+                    -33.53186
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 6,
+                "fromDisplayName": "Mooney Mooney",
+                "direction": "S-W",
+                "toDisplayName": "Berowra"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S4",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.1682,
+                    -33.60178
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 9,
+                "fromDisplayName": "Berowra",
+                "direction": "S-W",
+                "toDisplayName": "Wahroonga"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N6",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.2867,
+                    -33.42268
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 8,
+                "fromDisplayName": "Gosford",
+                "direction": "N-E",
+                "toDisplayName": "Ourimbah"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "NTOTAL",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.36733,
+                    -33.346
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 32,
+                "fromDisplayName": "Wahroonga",
+                "toDisplayName": "Ourimbah"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S2",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.19855,
+                    -33.46031
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 5,
+                "fromDisplayName": "Mt White",
+                "direction": "S-W",
+                "toDisplayName": "Mooney Mooney"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S1",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.2867,
+                    -33.42268
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 7,
+                "fromDisplayName": "Gosford",
+                "direction": "S-W",
+                "toDisplayName": "Mt White"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N1",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.11454,
+                    -33.71311
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 2,
+                "fromDisplayName": "Wahroonga",
+                "direction": "N-E",
+                "toDisplayName": "Mt Colah"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "STOTAL",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.11454,
+                    -33.71311
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 27,
+                "fromDisplayName": "Gosford",
+                "toDisplayName": "Wahroonga"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N3",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.14439,
+                    -33.64053
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 8,
+                "fromDisplayName": "Berowra",
+                "direction": "N-E",
+                "toDisplayName": "Mooney Mooney"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N2",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.12048,
+                    -33.68338
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "Mt Colah",
+                "direction": "N-E",
+                "toDisplayName": "Berowra"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N5",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.19855,
+                    -33.46031
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 6,
+                "fromDisplayName": "Mt White",
+                "direction": "N-E",
+                "toDisplayName": "Gosford"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N4",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.20042,
+                    -33.53186
+                ]
+            },
+            "properties": {
+                "isActive": false,
+                "travelTimeMinutes": 6,
+                "fromDisplayName": "Mooney Mooney",
+                "direction": "N-E",
+                "toDisplayName": "Mt White"
+            }
+        }
+    ]
+}

@@ -1,0 +1,1771 @@
+{
+    "type": "FeatureCollection",
+    "rights": {
+        "copyright": "Transport for NSW" - Sydney CBD item with Wetsern distributor closed has no subtitle in Android,
+        "licence": "http://livetraffic.com/#dev"
+    },
+    "layerName": "Incident",
+    "lastPublished": 1411268018408,
+    "features": [
+        {
+            "type": "Feature",
+            "id": 482680,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    153.54423,
+                    -28.20279
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "TRAFFIC LIGHTS FLASHING YELLOW - SOUTH TWEED HEADS Minjungbal Dr at Machinery Dr",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411249883099,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": "Reduce speed",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Traffic lights flashing yellow",
+                "lastUpdated": 1411250976259,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "TRAFFIC LIGHTS FLASHING YELLOW",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Machinery Drive",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Minjungbal Drive",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "South Tweed Heads",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482676,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.68486,
+                    -33.00598
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD - Pedestrian on Road - BELMONT NORTH Pacific Hwy at Ntaba Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411240242925,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": " ",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1411241368923,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD - Pedestrian on Road",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Ntaba Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pacific Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Belmont North",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482691,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.70391,
+                    -33.78545
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - ORCHARD HILLS M4 Mwy between The Northern Rd and Mamre Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411261783725,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1411263922620,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "The Northern Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Eastbound",
+                                "closedLanes": "1",
+                                "description": " ",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "between",
+                        "mainStreet": "M4 Motorway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": "Mamre Road",
+                        "suburb": "Orchard Hills",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482685,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.02848,
+                    -33.68114
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car - DURAL Old Northern Rd near Galston Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411255610780,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411256244402,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "Tow truck"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Galston Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "Old Northern Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Dural",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482692,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.98059,
+                    -33.87724
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT 2 cars - VILLAWOOD Woodville Rd near Tangerine St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": true,
+                "created": 1411261964049,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": " ",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411265510700,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT 2 cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Tangerine Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "near",
+                        "mainStreet": "Woodville Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_SOUTH",
+                        "secondLocation": " ",
+                        "suburb": "Villawood",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482675,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.06597,
+                    -33.77433
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car - EPPING Carlingford Rd near Duntroon Ave",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411227169510,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411234990018,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Duntroon Avenue",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Eastbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "Carlingford Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Epping",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482686,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.19284,
+                    -33.55212
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - BROOKLYN M1 Pacific Mwy (F3) - 2km South Of Hawkesbury River Bridge",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411256410187,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1411264550049,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "2km South Of Hawkesbury River Bridge",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "-",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Brooklyn",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482690,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.214,
+                    -33.87391
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HEAVY TRAFFIC - SYDNEY CBD AND DARLINGHURST",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411259317287,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "due to a special event",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Heavy traffic",
+                "lastUpdated": 1411267670686,
+                "otherAdvice": "Heavy traffic is being experienced on William Street in both directions as major roads are closed for the Sydney Running Festival today. <br/><br/>Other roads in the area are busy, delay your travel or expect significant delays.<br/><br/>All road closures will be reopen by 1.30pm.<br/><br/><a href=\"https://www.livetraffic.com/desktop.html#EVENT_TEXT_476381\" target=\"_blank\"><strong>Detailed road closure and clearway information for the Sydney Running Festival</strong></a><br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HEAVY TRAFFIC",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": " ",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": " ",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Sydney CBD and Darlinghurst",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482689,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.21127,
+                    -33.84327
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HEAVY TRAFFIC - SYDNEY HARBOUR TUNNEL",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411257350417,
+                "isMajor": true,
+                "name": null,
+                "subCategoryA": "due to a special event",
+                "adviceB": "Avoid the area",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Heavy traffic",
+                "lastUpdated": 1411261887452,
+                "otherAdvice": "Citybound motorists should allow plenty of extra travel time, the Sydney Harbour Bridge is now open. Major Sydney CBD road closures are still in place for the Sydney Running Festival.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HEAVY TRAFFIC",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "City bound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": " ",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Sydney Harbour Tunnel",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482688,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.06493,
+                    -33.77459
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "CHANGED TRAFFIC CONDITIONS, pole replacement - EPPING Carlingford Rd at Dallwood Ave",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411256581369,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": " ",
+                "adviceB": "Reduce speed",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Changed traffic conditions",
+                "lastUpdated": 1411267788983,
+                "otherAdvice": "A contraflow is in place westbound, so there is a lane open in each direction.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Utility company"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "CHANGED TRAFFIC CONDITIONS, pole replacement",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Dallwood Avenue",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Both directions",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Carlingford Road",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Epping",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482683,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.00468,
+                    -33.827
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Truck, Car - HOLROYD M4 Mwy near Church St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411252626880,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Truck, Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411257114603,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Truck, Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Church Street",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "M4 Motorway",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Holroyd",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482684,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.95661,
+                    -33.7569
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - BAULKHAM HILLS Westlink M7 at Seven Hills Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411253560168,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1411256215027,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Motorway crew"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Seven Hills Road",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Westlink M7",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Baulkham Hills",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482677,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.20752,
+                    -33.85706
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Interactive road closures and clearways",
+                        "linkURL": "http://www.sydneyrunningfestival.com.au/traffic-transport"
+                    }
+                ],
+                "headline": "Sydney Running Festival - today - SYDNEY CBD, NORTH SYDNEY AND MOORE PARK Roads closed until 1.30pm",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411240367181,
+                "isMajor": true,
+                "name": null,
+                "subCategoryA": " ",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411268028432,
+                "otherAdvice": "Access to the Sydney Harbour Bridge on the Western Distributor (northbound) remains closed until 1.30pm. Follow detour signage and use the Bathurst St exit and onto Harbour Drive to access the Sydney Harbour Bridge. Southbound motorists remain unaffected.<br/><br/>Major roads that remain closed: <br/>o <strong>SYDNEY CBD:</strong>  Hickson Road and Sussex St. <br/>o <strong>PYRMONT:</strong>  Pyrmont St and access to the Western Distributor.<br/><br/>All roads will be open by 1.30pm. <br/><br/><a href=\"https://www.livetraffic.com/desktop.html#EVENT_TEXT_476381\" target=\"_blank\"><strong>Full road closures and clearway information</strong></a><br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": null,
+                "start": null,
+                "encodedPolylines": [
+                    {
+                        "coords": "rawmEqfzy[DbBRnCH`@oAVk@HKj@W|@c@z@k@n@y@h@mE`CqE|BCI",
+                        "levels": "A@@A?A@AA@A?AA"
+                    },
+                    {
+                        "coords": "bnwmEazyy[o@sBMI_@BiDpA",
+                        "levels": "A@A@A"
+                    },
+                    {
+                        "coords": "`csmE}`|y[o@zAA`@H\\HPNDfC`@n@b@|BlD?BFLF?dEbGb@hATdABdEBh@Hj@d@fAh@r@^\\xAl@p@FlB@lMa@lY{AdBQZAHCRJrAd@n@PTFdADjA?lCM~Ba@pAOt@E~AEtADnBAMKLJ\\@`CQv@?v@DtATLDTNF@TNf@^\\b@r@xAPn@XxAPbBVfE",
+                        "levels": "AA@A@AAA??@@A@A@?A@A@A?AA@??A??A?A@A@?A@@AA@AA?AA???A@AA?A?A"
+                    },
+                    {
+                        "coords": "t`wmEsxyy[iFtCwClAs@Vm@Z",
+                        "levels": "AA??A"
+                    },
+                    {
+                        "coords": "dxsmEq`|y[u@b@}ClAY@GBu@EQEUQWc@]kCIUGUW[OKMCg@DKHkAf@",
+                        "levels": "A@A?@A@AA?A?A?AA?A"
+                    }
+                ],
+                "displayName": "Sydney Running Festival - today",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": " ",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Roads closed until 1.30pm",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Sydney CBD, North Sydney and Moore Park",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482678,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.56284,
+                    -33.6985
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD Debris - SPRINGWOOD Great Western Hwy near Boland Ave",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411244604067,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Debris",
+                "adviceB": "Reduce speed",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1411245604358,
+                "otherAdvice": "A mattress has been reported near the Police Station.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD Debris",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Boland Avenue",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Eastbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "Great Western Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Springwood",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482681,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.03691,
+                    -33.83929
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD Animal carcass - AUBURN M4 Mwy near Stubbs St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411251229811,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Animal carcass",
+                "adviceB": "Reduce speed",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1411256975073,
+                "otherAdvice": "A dead cat is between lanes 1 and 2.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD Animal carcass",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Stubbs Street",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "M4 Motorway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Auburn",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482687,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.69197,
+                    -32.97863
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car, Bus - GATESHEAD Pacific Hwy at Oxford St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411256444991,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car, Bus",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411261653416,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car, Bus",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Oxford Street",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pacific Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Gateshead",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482682,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.16131,
+                    -33.93387
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HEAVY TRAFFIC - ARNCLIFFE Marsh St approaching Airport Dr",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411251913806,
+                "isMajor": true,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": "Allow extra travel time",
+                "adviceA": "Expect delays",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Heavy traffic",
+                "lastUpdated": 1411252761354,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HEAVY TRAFFIC",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Airport Drive",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "City bound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "approaching",
+                        "mainStreet": "Marsh Street",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Arncliffe",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482695,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.17755,
+                    -33.8124
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - ARTARMON Gore Hill Fwy off-ramp to Epping Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411264746878,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1411265310095,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Epping Road",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "to",
+                        "mainStreet": "Gore Hill Freeway off-ramp",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Artarmon",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482693,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.19806,
+                    -33.87444
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "Western Distributor closed between Bathurst St and King St - SYDNEY CBD",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411263202885,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "due to a special event",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Heavy traffic",
+                "lastUpdated": 1411268021271,
+                "otherAdvice": "Motorists travelling over the Anzac Bridge or from Pyrmont will have to divert via the city until the reopening of the Western Distributor at 1.30pm.  Allow plenty of additional travel time or delay travel.<br/>Those travelling from the Sydney Harbour Bridge are unaffected.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "Western Distributor closed between Bathurst St and King St",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": " ",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": " ",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Sydney CBD",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482696,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.18704,
+                    -33.49274
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT motorcycle - MOUNT WHITE Pacific Hwy - 4km South Of Mount White",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411266318670,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": " ",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411267348774,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT motorcycle",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "4km South Of Mount White",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "-",
+                        "mainStreet": "Pacific Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Mount White",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482697,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.67948,
+                    -33.76614
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT - JAMISONTOWN Mulgoa Rd at Batt St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": true,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": true,
+                "created": 1411266883947,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411266883947,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Batt Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Mulgoa Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Jamisontown",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482694,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.66669,
+                    -33.77496
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT 2 cars - REGENTVILLE Mulgoa Rd near Spencer St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411264661778,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": " ",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1411265709837,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT 2 cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Spencer Street",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "Mulgoa Road",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Regentville",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482679,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.71893,
+                    -32.88206
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "TRAFFIC LIGHTS FLASHING YELLOW - MAYFIELD WEST Maitland Rd at Industrial Dr",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411247884123,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": "Reduce speed",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Traffic lights flashing yellow",
+                "lastUpdated": 1411250970705,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "TRAFFIC LIGHTS FLASHING YELLOW",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Industrial Drive",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Maitland Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Mayfield West",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 482467,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.20679,
+                    -33.88596
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "CHANGED TRAFFIC CONDITIONS - SURRY HILLS Chalmers St between Cleveland St and Eddy Ave",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1411031083042,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": " ",
+                "adviceA": "Check signage",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Changed traffic conditions",
+                "lastUpdated": 1411243654773,
+                "otherAdvice": "A Special Event Clearway will be in operation on the western side of Chalmers Street from 2am Saturday 27 September until 2am Monday 29 September.<br/>The taxi zone will be moved to the eastern side of Chalmers Street (adjacent to the dental hospital).<br/>Please check signage as vehicles will be towed from the Special Event Clearway and fines apply.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "CHANGED TRAFFIC CONDITIONS",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Cleveland Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "between",
+                        "mainStreet": "Chalmers Street",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": "Eddy Avenue",
+                        "suburb": "Surry Hills",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

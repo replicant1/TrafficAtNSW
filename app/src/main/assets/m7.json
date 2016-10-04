@@ -1,0 +1,297 @@
+{
+    "type": "FeatureCollection",
+    "rights": {
+        "copyright": "Transport for NSW",
+        "licence": "http://livetraffic.com/#dev"
+    },
+    "layerName": "M7 Travel Times",
+    "lastPublished": 1409715949009,
+    "features": [
+        {
+            "type": "Feature",
+            "id": "N7",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.91779,
+                    -33.73847
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 4,
+                "fromDisplayName": "Sunnyholt Rd",
+                "direction": "SE",
+                "toDisplayName": "M2"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N6",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.8493,
+                    -33.73262
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 4,
+                "fromDisplayName": "Richmond Rd",
+                "direction": "N",
+                "toDisplayName": "Sunnyholt Rd"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "NTOTAL",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.96345,
+                    -33.76559
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 25,
+                "fromDisplayName": "M5",
+                "toDisplayName": "M2"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S2",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.91779,
+                    -33.73847
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 4,
+                "fromDisplayName": "Sunnyholt Rd",
+                "direction": "NW",
+                "toDisplayName": "Richmond Rd"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S1",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.96345,
+                    -33.76559
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "M2",
+                "direction": "NW",
+                "toDisplayName": "Sunnyholt Rd"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N1",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.87934,
+                    -33.95162
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "M5",
+                "direction": "N",
+                "toDisplayName": "Cowpasture Rd"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N3",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.84277,
+                    -33.87669
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 2,
+                "fromDisplayName": "Elizabeth Dr",
+                "direction": "N",
+                "toDisplayName": "The Horsley Dr"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N2",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.85204,
+                    -33.91829
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "Cowpasture Rd",
+                "direction": "N",
+                "toDisplayName": "Elizabeth Dr"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N5",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.8541,
+                    -33.79769
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 5,
+                "fromDisplayName": "M4",
+                "direction": "N",
+                "toDisplayName": "Richmond Rd"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "N4",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.8553,
+                    -33.84148
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "The Horsley Dr",
+                "direction": "N",
+                "toDisplayName": "M4"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S3",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.8493,
+                    -33.73262
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 5,
+                "fromDisplayName": "Richmond Rd",
+                "direction": "S",
+                "toDisplayName": "M4"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S4",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.8541,
+                    -33.79769
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "M4",
+                "direction": "S",
+                "toDisplayName": "The Horsley Dr"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S5",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.8553,
+                    -33.84148
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "The Horsley Dr",
+                "direction": "S",
+                "toDisplayName": "Elizabeth Dr"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S6",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.84277,
+                    -33.87669
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "Elizabeth Dr",
+                "direction": "S",
+                "toDisplayName": "Cowpasture Rd"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "S7",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.85204,
+                    -33.91829
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 3,
+                "fromDisplayName": "Cowpasture Rd",
+                "direction": "S",
+                "toDisplayName": "M5"
+            }
+        },
+        {
+            "type": "Feature",
+            "id": "STOTAL",
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.87934,
+                    -33.95162
+                ]
+            },
+            "properties": {
+                "isActive": true,
+                "travelTimeMinutes": 25,
+                "fromDisplayName": "M2",
+                "toDisplayName": "M5"
+            }
+        }
+    ]
+}

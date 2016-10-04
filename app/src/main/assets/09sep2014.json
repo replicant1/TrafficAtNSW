@@ -1,0 +1,3458 @@
+{
+    "type": "FeatureCollection",
+    "rights": {
+        "copyright": "Transport for NSW",
+        "licence": "http://livetraffic.com/#dev"
+    },
+    "layerName": "Incident",
+    "lastPublished": 1410263077794,
+    "features": [
+        {
+            "type": "Feature",
+            "id": 481735,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.17926,
+                    -33.80546
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Two cars - CHATSWOOD Pacific Hwy just past Mowbray Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410248732980,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Two cars",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410252008975,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS",
+                    "Tow truck"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Two cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Mowbray Road",
+                        "delay": "Significant",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "just past",
+                        "mainStreet": "Pacific Highway",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Chatswood",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481721,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.63559,
+                    -32.81362
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - BERESFIELD M1 Pacific Mwy (F3) at John Renshaw Dr",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410239782053,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410240049877,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "John Renshaw Drive",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Beresfield",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481733,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.99858,
+                    -33.76801
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Semi trailer - BAULKHAM HILLS M2 Mwy Off Ramp to Windsor Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410246258492,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Semi trailer",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410249273121,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Motorway crew"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Semi trailer",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Windsor Road",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": " ",
+                                "description": "Right turn lane",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "to",
+                        "mainStreet": "M2 Motorway Off Ramp",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Baulkham Hills",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481715,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.67303,
+                    -34.23397
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD Oil spill - WILTON Picton Rd near Hume Mwy On Ramp",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410235506632,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Oil spill",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1410237778293,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD Oil spill",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Hume Motorway On Ramp",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": " ",
+                                "description": "Right turn lane",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "Picton Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_SOUTH",
+                        "secondLocation": " ",
+                        "suburb": "Wilton",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481741,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.36948,
+                    -33.34908
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Multiple vehicles, 3 vehicles - OURIMBAH Pacific Hwy at Ourimbah Creek Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410255496135,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Multiple vehicles, 3 vehicles",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410259287389,
+                "otherAdvice": "Lanes 2 and 3 southbound are closed.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Multiple vehicles, 3 vehicles",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Ourimbah Creek Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "2",
+                                "description": " ",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            },
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 2",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pacific Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Ourimbah",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481705,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.14887,
+                    -33.94973
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "CHANGED TRAFFIC CONDITIONS - Due to Filming - ROCKDALE West Botany St between Bestic St and Bay St",
+                "periods": [
+                    {
+                        "closureType": "ROAD_CLOSURE",
+                        "direction": "Both directions",
+                        "finishTime": "3pm",
+                        "fromDay": "Wednesday",
+                        "startTime": "10am",
+                        "toDay": " "
+                    }
+                ],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410224711200,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": " ",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": 1410357599059,
+                "incidentKind": "Planned",
+                "mainCategory": "Changed traffic conditions",
+                "lastUpdated": 1410224936108,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": "Southbound - Bestic Street, General Holmes Drive and Bay Street.<br/>Northbound - Bay Street, General Holmes Drive and Bestic Street.<br/>",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1410271200000,
+                "displayName": "CHANGED TRAFFIC CONDITIONS - Due to Filming",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Bestic Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "between",
+                        "mainStreet": "West Botany Street",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": "Bay Street",
+                        "suburb": "Rockdale",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481702,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.46564,
+                    -33.11848
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD Livestock - cows - MORISSET M1 Pacific Mwy (F3)",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410222314604,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Livestock",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1410224708423,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD Livestock - cows",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Morisset",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481736,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.16638,
+                    -33.86168
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - ROZELLE Victoria Rd at Terry St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410248770701,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410249283605,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Tow truck"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Terry Street",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "City bound",
+                                "closedLanes": "1",
+                                "description": "Bus lane",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "4",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Victoria Road",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Rozelle",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481726,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.0751,
+                    -33.90952
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Public Transport Information ",
+                        "linkURL": "http://www.transportnsw.info/en/transport-status/alerts-detail.page?MessageNum=2008780"
+                    }
+                ],
+                "headline": "ACCIDENT Car - GREENACRE Juno Pde at Punchbowl Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": "Route 946 buses heading towards Bankstown are being diverted away from Juno Parade. Five stops are being missed.<br/>",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410242752643,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car, Bus",
+                "adviceB": "Use alternative route",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410246137138,
+                "otherAdvice": "There are wires on the road. <br/>Motorists can not access Juno Parade from Punchbowl Road. <br/>",
+                "arrangementElements": [],
+                "diversions": "Local diversion in place. <br/>",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Punchbowl Road",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Closed",
+                                "numberOfLanes": " ",
+                                "roadType": "Road"
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Juno Parade",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Greenacre",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481723,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.03508,
+                    -33.72214
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Two cars - CHERRYBROOK New Line Rd at Purchase Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410240645431,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Two cars",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410241623454,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Two cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Purchase Road",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "New Line Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Cherrybrook",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481728,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.13286,
+                    -33.95227
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Multiple vehicles, 3 vehicles - ROCKDALE Watkin St at King Edward St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410243087345,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Multiple vehicles, 3 vehicles",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410247257778,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Multiple vehicles, 3 vehicles",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "King Edward Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Watkin Street",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Rockdale",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481717,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.20706,
+                    -33.86765
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Public Transport Information ",
+                        "linkURL": "http://www.transportnsw.info/en/transport-status/alerts-detail.page?MessageNum=2008774"
+                    }
+                ],
+                "headline": "ACCIDENT Pedestrian, Bus - SYDNEY CBD George St at Barrack St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": "Buses on George Street are delayed up to 15 minutes due to the accident. Passengers are advised to allow additional travel time. <br/>",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410236905264,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Pedestrian, Bus",
+                "adviceB": "Expect delays",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410239131525,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Pedestrian, Bus",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Barrack Street",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "George Street",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Sydney CBD",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481708,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.1909,
+                    -33.57995
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Truck - COWAN M1 Pacific Mwy (F3) - 3Km South of Hawkesbury River Bridge",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410228482549,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Truck",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410235417165,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Truck",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "3Km South of Hawkesbury River Bridge",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Breakdown lane",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "-",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Cowan",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481699,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    145.87978,
+                    -32.84425
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Truck - MT HOPE Kidman Way at Euabalong Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410217812293,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Truck",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410221753839,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "Local council"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Truck",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Euabalong Road",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Kidman Way",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Mt Hope",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481720,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.04402,
+                    -33.84284
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Two cars - AUBURN M4 Mwy just past Silverwater Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410239117266,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Two cars",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410242028451,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    "Site cleared"
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Two cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Silverwater Road",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Eastbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "just past",
+                        "mainStreet": "M4 Motorway",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Auburn",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481725,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.25996,
+                    -33.43477
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD Debris - garbage bin - MOONEY MOONEY CREEK M1 Pacific Mwy (F3) at Mooney Mooney Creek Bridge",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410241479526,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Debris",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1410241714918,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD Debris - garbage bin",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Mooney Mooney Creek Bridge",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Mooney Mooney Creek",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481739,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.83681,
+                    -34.04985
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "TRAFFIC LIGHTS FLASHING YELLOW - LEUMEAH Pembroke Rd at Rose Payten Dr",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410255271476,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Traffic lights flashing yellow",
+                "lastUpdated": 1410257676762,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "TRAFFIC LIGHTS FLASHING YELLOW",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Rose Payten Drive",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "All directions",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pembroke Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_SOUTH",
+                        "secondLocation": " ",
+                        "suburb": "Leumeah",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481742,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.97552,
+                    -33.91406
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car - GEORGES HALL Henry Lawson Dr at Haig Ave",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": true,
+                "created": 1410255608706,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410256931727,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Haig Avenue",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Henry Lawson Drive",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_SOUTH",
+                        "secondLocation": " ",
+                        "suburb": "Georges Hall",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481706,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.07669,
+                    -33.73499
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Semi trailer - PENNANT HILLS Pennant Hills Rd at Pomona St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410224744397,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Semi trailer",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410231559126,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Semi trailer",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Pomona Street",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pennant Hills Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Pennant Hills",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481689,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.07888,
+                    -33.94712
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Public Transport Information ",
+                        "linkURL": "http://www.transportnsw.info/en/transport-status/alerts-detail.page?MessageNum=2008763"
+                    }
+                ],
+                "headline": "BREAKDOWN Truck - BEVERLY HILLS King Georges Rd at Ponyara Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": "Route 450 buses are delayed up to 20 minutes through Beverly Hills due to a broken down truck on King Georges Road and an earlier car and motorbike accident on Stoney Creek Road.<br/>",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410214794684,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Truck",
+                "adviceB": "Expect delays",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410222095858,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Truck",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Ponyara Road",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "King Georges Road",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Beverly Hills",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481701,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.97395,
+                    -33.88817
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BURST WATER MAIN - VILLAWOOD Woodville Rd at Allowrie Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410219722412,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": "Allow extra travel time",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Burst water main",
+                "lastUpdated": 1410237408110,
+                "otherAdvice": "Expected to remain this way until at least late afternoon. <br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Utility company"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BURST WATER MAIN",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Allowrie Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Woodville Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_SOUTH",
+                        "secondLocation": " ",
+                        "suburb": "Villawood",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481712,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.69374,
+                    -33.73467
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "TRAFFIC LIGHTS FLASHING YELLOW - PENRITH Castlereagh Rd at Lugard St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410229556810,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Traffic lights flashing yellow",
+                "lastUpdated": 1410233200923,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "TRAFFIC LIGHTS FLASHING YELLOW",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Lugard Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Castlereagh Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Penrith",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481678,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    152.42566,
+                    -32.08215
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car, Truck - FAILFORD Pacific Hwy at Failford Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": true,
+                "created": 1410208989490,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car, Truck",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410221965035,
+                "otherAdvice": "Expected to remain this way until at least 11am<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS",
+                    "Heavy tow truck"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car, Truck",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Failford Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pacific Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Failford",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481704,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.16488,
+                    -33.60481
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "CHANGED TRAFFIC CONDITIONS - Medical Emergency - COWAN M1 Pacific Mwy (F3) near Jerusalem Bay Track",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410223670729,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Police operation",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": 1410235199059,
+                "incidentKind": "Planned",
+                "mainCategory": "Changed traffic conditions",
+                "lastUpdated": 1410225581457,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1410148800000,
+                "displayName": "CHANGED TRAFFIC CONDITIONS - Medical Emergency",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Jerusalem Bay Track",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "near",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Cowan",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481709,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.33444,
+                    -33.36199
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD Tyre debris - OURIMBAH M1 Pacific Mwy (F3) at Ourimbah Interchange",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410228797922,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Tyre debris",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1410229838440,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD Tyre debris",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Ourimbah Interchange",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Ourimbah",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481729,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    149.8869,
+                    -34.74437
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car, Truck - MARULAN Hume Hwy at Marulan Checking Station",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410243673663,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car, Truck",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410247455870,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car, Truck",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Marulan Checking Station",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "2",
+                                "description": " ",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Hume Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_SOUTH",
+                        "secondLocation": " ",
+                        "suburb": "Marulan",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481698,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.06712,
+                    -33.87534
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - STRATHFIELD Centenary Dr at Weeroona Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410217373038,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410221266442,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Weeroona Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Centenary Drive",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Strathfield",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481732,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.16629,
+                    -33.94826
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - MASCOT General Holmes Dr at Airport Tunnel",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410244397778,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": "Expect delays",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410244787050,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Airport Tunnel",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "General Holmes Drive",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Mascot",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481722,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.34219,
+                    -33.41884
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - GOSFORD Showground Rd at Racecourse Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410240554856,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410241608743,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Racecourse Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Showground Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Gosford",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481424,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    145.70944,
+                    -29.00038
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Diversion information and advice",
+                        "linkURL": "http://131940.qld.gov.au/RoadConditions/Southern-Queensland-area.aspx?regionids=104,105,107&lgaids=34580"
+                    }
+                ],
+                "headline": "CHANGED TRAFFIC CONDITIONS, following a truck accident, Saturday 6 September - CHARLEVILLE (QUEENSLAND) Mitchell Hwy - 30km south of Charleville",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1409963600471,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Vehicle salvage, Due to earlier incident",
+                "adviceB": "Allow extra travel time",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Changed traffic conditions",
+                "lastUpdated": 1410260724292,
+                "otherAdvice": "The truck accident has damaged a bridge and closed the Mitchell Highway between Cunnamulla and Charleville.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "CHANGED TRAFFIC CONDITIONS, following a truck accident, Saturday 6 September",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "30km south of Charleville",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Both directions",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Closed",
+                                "numberOfLanes": " ",
+                                "roadType": "Highway"
+                            }
+                        ],
+                        "locationQualifier": "-",
+                        "mainStreet": "Mitchell Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Charleville (Queensland)",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481694,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.9159,
+                    -33.8054
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "HAZARD Spillage - Wet and Dry Concrete - PROSPECT M4 Mwy Off-Ramp to Prospect Hwy",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410216709390,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Spillage",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Hazard",
+                "lastUpdated": 1410227916293,
+                "otherAdvice": "There are no significant delays.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "HAZARD Spillage - Wet and Dry Concrete",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Prospect Highway",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": "1",
+                                "description": "Lane 3",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "to",
+                        "mainStreet": "M4 Motorway Off-Ramp",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Prospect",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481711,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.16644,
+                    -33.6032
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - BEROWRA M1 Pacific Mwy (F3) at 3 Kms North of Berowra Exit",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410229241108,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410230412122,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "3 Kms North of Berowra Exit",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "M1 Pacific Motorway (F3)",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Berowra",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481734,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.00268,
+                    -33.83319
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - GRANVILLE Woodville Rd at Daniel St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410248649940,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410252209469,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Daniel Street",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Woodville Road",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Granville",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481695,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.31711,
+                    -33.42726
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "TRAFFIC SIGNALS Faulty lights, Repairs - WEST GOSFORD Brisbane Water Dr at Central Coast Hwy",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410216868855,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Faulty lights, Repairs",
+                "adviceB": "Expect delays",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Traffic signals",
+                "lastUpdated": 1410221323024,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "TRAFFIC SIGNALS Faulty lights, Repairs",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Central Coast Highway",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Brisbane Water Drive",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "West Gosford",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481737,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.19857,
+                    -33.91937
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car, Truck - ALEXANDRIA Botany Rd at Harcourt Pde",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410249926848,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car, Truck",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410251782117,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car, Truck",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Harcourt Parade",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Botany Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Alexandria",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481719,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    147.91629,
+                    -35.15146
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car - TUMBLONG Hume Hwy at Tumblong Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410237420754,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410240796924,
+                "otherAdvice": "There are no significant delays.<br/>The lane will remain closed in order to salvage the car.<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Tumblong Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Hume Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_SOUTH",
+                        "secondLocation": " ",
+                        "suburb": "Tumblong",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481731,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.26124,
+                    -33.68342
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - INGLESIDE Mona Vale Rd at Powder Works Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410244096382,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410246269505,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Powder Works Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Northbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Mona Vale Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Ingleside",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481724,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    153.46312,
+                    -28.96111
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Car - EAST WARDELL Pacific Hwy at Owens Lane",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410241274275,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Two cars",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410247628564,
+                "otherAdvice": "Alternating traffic conditions in place Stop/Slow. <br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Owens Lane",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Both directions",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pacific Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "East Wardell",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481714,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.13092,
+                    -33.87015
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Two cars - FIVE DOCK Ramsay Rd at Fairlight St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410232957747,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Two cars",
+                "adviceB": " ",
+                "adviceA": "Exercise caution",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410235248028,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)",
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Two cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Fairlight Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Ramsay Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Five Dock",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481193,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.17117,
+                    -33.8619
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Bus diversion information",
+                        "linkURL": "http://www.transportnsw.info/en/transport-status/alerts-detail.page?MessageNum=2008694"
+                    }
+                ],
+                "headline": "CHANGED TRAFFIC CONDITIONS - Road closed after building fire on Thu 4 Sep - ROZELLE Darling St between Victoria Rd and Beattie St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": false,
+                "isNewIncident": false,
+                "publicTransport": "Bus stops on Darling Street between Victoria Road and Thornton Street are being missed.<br/><br/>Route 433, 444 and 445 buses are diverting along Robert Street, Mullens Street and Montague Street and then travelling along Darling Street to Balmain East Wharf (Darling Street Wharf) as normal.   <br/><br/>Route 433, 444 and 445 buses departing Gladstone Park and Balmain East Wharf (Darling Street Wharf) are diverting off Darling Street into Thornton Street, Terry Street, Wellington Street and Victoria Road.<br/>",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1409772145342,
+                "isMajor": true,
+                "name": null,
+                "subCategoryA": "Vehicle salvage, Due to earlier incident",
+                "adviceB": "Use alternative route",
+                "adviceA": "Avoid the area",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Changed traffic conditions",
+                "lastUpdated": 1410260716913,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "encodedPolylines": [
+                    {
+                        "coords": "h_umEulty[yNuGeAc@_@E",
+                        "levels": "AA@A"
+                    }
+                ],
+                "displayName": "CHANGED TRAFFIC CONDITIONS - Road closed after building fire on Thu 4 Sep",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Victoria Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Both directions",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Closed",
+                                "numberOfLanes": " ",
+                                "roadType": "Road"
+                            }
+                        ],
+                        "locationQualifier": "between",
+                        "mainStreet": "Darling Street",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": "Beattie Street",
+                        "suburb": "Rozelle",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481713,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.9929,
+                    -33.76193
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "TRAFFIC LIGHTS BLACKED OUT Power failure - BAULKHAM HILLS Windsor Rd at Seven Hills Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410231975527,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Power failure",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Traffic lights blacked out",
+                "lastUpdated": 1410238550618,
+                "otherAdvice": "Several sets of signals are blacked out in the area.<br/>Expected to remain this way until at least 4pm<br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Utility company"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "TRAFFIC LIGHTS BLACKED OUT Power failure",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Seven Hills Road",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "All directions",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Windsor Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Baulkham Hills",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481738,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.99858,
+                    -33.76786
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Two cars - BAULKHAM HILLS Windsor Rd just past M2 Mwy",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410252857345,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Two cars",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410253960669,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Two cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "M2 Motorway",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "just past",
+                        "mainStreet": "Windsor Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_WEST",
+                        "secondLocation": " ",
+                        "suburb": "Baulkham Hills",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481727,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.06454,
+                    -33.74003
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Car - PENNANT HILLS Pennant Hills Rd at Beecroft Rd",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410242830145,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Car",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410244421974,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "RMS"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Car",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Beecroft Road",
+                        "delay": " ",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Southbound",
+                                "closedLanes": "1",
+                                "description": "Lane 1",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "3",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Pennant Hills Road",
+                        "quadrant": "",
+                        "queueLength": -1,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Pennant Hills",
+                        "trafficVolume": "Moderate"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481707,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.12359,
+                    -33.60043
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "FERRY OUT OF SERVICE Routine maintenance - BEROWRA WATERS Berowra Waters Ferry",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": true,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410227089435,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Routine maintenance",
+                "adviceB": "Use alternative route",
+                "adviceA": "Allow extra travel time",
+                "end": 1410235199059,
+                "incidentKind": "Planned",
+                "mainCategory": "Ferry out of service",
+                "lastUpdated": 1410237206014,
+                "otherAdvice": "Ferry out of service from Midday to 2.30pm <br/>",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1410148800000,
+                "displayName": "FERRY OUT OF SERVICE Routine maintenance",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Both directions",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Closed",
+                                "numberOfLanes": " ",
+                                "roadType": "Road"
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "Berowra Waters Ferry",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "BEROWRA WATERS",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481710,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.10487,
+                    -33.81291
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "ACCIDENT Two cars - RYDE Blaxland Rd just past Devlin St",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410228878918,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Two cars",
+                "adviceB": " ",
+                "adviceA": "Allow extra travel time",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Accident",
+                "lastUpdated": 1410231992094,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Emergency service(s)"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "ACCIDENT Two cars",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Devlin Street",
+                        "delay": "",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Eastbound",
+                                "closedLanes": "1",
+                                "description": "Lane 2",
+                                "extent": "Lanes closed",
+                                "numberOfLanes": "2",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "just past",
+                        "mainStreet": "Blaxland Road",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_NORTH",
+                        "secondLocation": " ",
+                        "suburb": "Ryde",
+                        "trafficVolume": ""
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 481716,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.11468,
+                    -33.93615
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "BREAKDOWN Truck - BEXLEY NORTH M5 East Mwy at Main Tunnel",
+                "periods": [],
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": null,
+                "ended": true,
+                "isNewIncident": false,
+                "publicTransport": " ",
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1410236814147,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Truck",
+                "adviceB": "Allow extra travel time",
+                "adviceA": "Expect delays",
+                "end": null,
+                "incidentKind": "Unplanned",
+                "mainCategory": "Breakdown",
+                "lastUpdated": 1410241031551,
+                "otherAdvice": " ",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    "Site cleared"
+                ],
+                "webLinkName": null,
+                "attendingGroups": [
+                    "Motorway crew"
+                ],
+                "duration": null,
+                "start": null,
+                "displayName": "BREAKDOWN Truck",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Main Tunnel",
+                        "delay": "Significant",
+                        "impactedLanes": [
+                            {
+                                "affectedDirection": "Westbound",
+                                "closedLanes": " ",
+                                "description": " ",
+                                "extent": "Affected",
+                                "numberOfLanes": " ",
+                                "roadType": " "
+                            }
+                        ],
+                        "locationQualifier": "at",
+                        "mainStreet": "M5 East Motorway",
+                        "quadrant": "",
+                        "queueLength": 6,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Bexley North",
+                        "trafficVolume": "Heavy"
+                    }
+                ]
+            }
+        }
+    ]
+}

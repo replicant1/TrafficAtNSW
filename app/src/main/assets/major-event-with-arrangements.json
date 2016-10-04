@@ -1,0 +1,527 @@
+{
+    "type": "FeatureCollection",
+    "rights": {
+        "copyright": "Roads and Traffic Authority (NSW)",
+        "licence": "http://livetraffic.rta.nsw.gov.au/#dev"
+    },
+    "layerName": "MajorEvent",
+    "lastPublished": 1368811879137,
+    "features": [
+        {
+            "type": "Feature",
+            "id": 432239,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.21045,
+                    -33.86135
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Transport Info 131500",
+                        "linkURL": "http://www.131500.com.au/"
+                    },
+                    {
+                        "linkText": "Half Marathon",
+                        "linkURL": "http://www.smhhalfmarathon.com.au/"
+                    }
+                ],
+                "headline": "SPECIAL EVENT - SYDNEY CBD AND PYRMONT Various Roads",
+                "periods": [],
+                "specialEventClearwaysUrl": " ",
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": false,
+                "isNewIncident": false,
+                "impactingNetwork": true,
+                "subCategoryB": " ",
+                "arrangementAttachments": [
+                    {
+                        "displayName": "",
+                        "fileName": "road_closures_clearways3.pdf",
+                        "fileType": "pdf",
+                        "linkName": "Road closures and special event clearways",
+                        "sizeInBytes": 727052,
+                        "uniqueFileName": "road_closures_clearways3_1366947932612ixb.pdf"
+                    },
+                    {
+                        "displayName": "",
+                        "fileName": "route_map_v2.pdf",
+                        "fileType": "pdf",
+                        "linkName": "Route map",
+                        "sizeInBytes": 256292,
+                        "uniqueFileName": "route_map_v2_1366692843663djd.pdf"
+                    },
+                    {
+                        "displayName": "",
+                        "fileName": "king_st_wharf_access.pdf",
+                        "fileType": "pdf",
+                        "linkName": "King St Wharf access",
+                        "sizeInBytes": 515597,
+                        "uniqueFileName": "king_st_wharf_access_1366947963925poz.pdf"
+                    },
+                    {
+                        "displayName": "",
+                        "fileName": "pyrmont_access.pdf",
+                        "fileType": "pdf",
+                        "linkName": "Pyrmont access",
+                        "sizeInBytes": 487319,
+                        "uniqueFileName": "pyrmont_access_1366947978268tt5.pdf"
+                    },
+                    {
+                        "displayName": "",
+                        "fileName": "hospital_access.pdf",
+                        "fileType": "pdf",
+                        "linkName": "Hospital Road access",
+                        "sizeInBytes": 381391,
+                        "uniqueFileName": "hospital_access_1366947993987e3o.pdf"
+                    },
+                    {
+                        "displayName": "",
+                        "fileName": "detours.pdf",
+                        "fileType": "pdf",
+                        "linkName": "Detours map",
+                        "sizeInBytes": 431233,
+                        "uniqueFileName": "detours_1367895513421gze.pdf"
+                    }
+                ],
+                 "publicTransport" : "Line one about buses<br>Line two more about buses<br>Something in <b>bold</b>",
+                "isInitialReport": false,
+                "created": 1366761265587,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Special event",
+                "adviceB": "Expect delays",
+                "adviceA": "Use public transport",
+                "end": 1368971999059,
+                "mainCategory": "Changed traffic conditions - planned",
+                "lastUpdated": 1368753879005,
+                "otherAdvice": "Road closures will be in place between 4am and 11am in the Sydney CBD, The Rocks and Pyrmont on Sunday 19 May for the Half Marathon. Special event clearways in place from 3am.<br><br><b>Major road closures include:</b><br><b>CAHILL EXPRESSWAY:</b> between the Sydney Harbour Bridge and Macquarie St.<br><b>WESTERN DISTRIBUTOR:</b> between Harbour St and Druitt St, including some on-ramps and off-ramps.<br><b>SYDNEY CBD:</b> Sussex St, Phillip St, Alfred St, Loftus St and Macquarie St. <br><b>THE ROCKS:</b> George St, Hickson Rd and Kent St.<br><b>PYRMONT:</b> Pyrmont St, Pirrama Rd, Jones Bay Rd and Darling Drive.<br> <br><b>Special event clearways</b> will be in place throughout the Sydney CBD, Pyrmont and Ultimo. Check signs before parking as vehicles left in special event clearways will be towed and a towing fee applies.<br><br>If you are travelling to the SMH Half Marathon, consider the public transport options. Go to <a href=\"http://www.131500.com.au\" target=\"_blank\">131500.com.au</a> to plan your trip.",
+                "arrangementElements": [
+                    {
+                        "html": "<p>Roads will be progressively re-opened by RMS and Police after cleaning.</p><p></p><h1>Sydney, Pyrmont, Ultimo</h1><p><strong>Between 4am to 10am</strong></p><ul><li>Allen St between Harris St and Pyrmont St </li><li>Pyrmont St between Pyrmont Bridge Rd and Quarry St </li><li>Quarry St between Harris St and Pyrmont St </li></ul><p></p><p><strong>Notes:</strong></p><p>A) Local access to Pyrmont St south of Quarry St will be via traffic control at Harris St and Quarry St. </p><p>Access is for vehicles southbound on Harris St making a left turn into Quarry St only.</p><p>B) Local access to Gipps St, Experiment St, the Harris St car park and the Pyrmont St resident underground car parks will be via traffic control on Harris St at Allen St. Access is for vehicles southbound on Harris St making a left hand turn into Allen St only. </p><p></p><h1>Sydney Harbour Bridge</h1><p><strong>Between 4am to 10am</strong></p><ul><li>Cahill Expressway between Sydney Harbour Bridge and Macquarie St </li><li>Kent St on ramp between Kent St and Sydney Harbour Bridge </li></ul><p></p><h1>Western Distributor</h1><p><strong>Between 4am to 10am</strong></p><ul><li>Western Distributor between Harbour St and Druitt St (southbound)</li><li>Western Distributor Fig St on ramp (eastbound)</li><li>Western Distributor Harris St off ramp (westbound)</li><li>Western Distributor King St off ramp (northbound)</li><li>Western Distributor Pyrmont St on ramp (southbound)</li><li>Western Distributor Market St on ramp (westbound)</li></ul><p></p><p>Traffic on the Western Distributor wanting to access the Sydney Harbour Bridge will be diverted via the Bathurst St exit and can turn left into Harbour St.</p><p></p><p>The Western Distributor westbound is only accessible from Druitt St or the Cross City Tunnel. Traffic leaving the Harbour Bridge southbound on the Western Distributor will be diverted onto Harbour St.</p><p> </p><h1>Sydney, Royal Botanic Gardens</h1><p><strong>Between 4am to 11am</strong></p><ul><li>Art Gallery Rd between Hospital Rd and Mrs Macquaries Rd </li><li>College St between Prince Albert Rd and Park St </li><li>Hospital Rd*1 between Prince Albert Rd and Shakespeare Pl </li><li>Mrs Macquaries Rd between Art Gallery Rd and Northern loop </li><li>Prince Albert Rd between Macquarie St and Hospital Rd </li><li>St James Rd between Elizabeth St and Macquarie St (eastbound)</li><li>St Marys Rd between Cathedral St and Prince Albert Rd </li></ul><p></p><p>*1 between 5am and 10:30am access to Hospital Road will be via two way contra flow at Shakespeare Place. </p><p></p><h1>Sydney, The Rocks and Dawes Point</h1><p><strong>Between 5am to 8am</strong></p><ul><li>Albert St between Macquarie St and Phillip St </li><li>Alfred St between George St and Phillip St </li><li>Argyle St between George St and Circular Quay west </li><li>George St between Essex St and Hickson Rd </li><li>Bridge St between Gresham St and Phillip St </li><li>Circular Quay west between Argyle St and the roundabout </li><li>Hickson Rd between George St and Pier One </li><li>Loftus St*1 between Bent St and Alfred St </li><li>Pitt St between Reiby Pl and Alfred St </li><li>Phillip Lane*1 between Phillip St and Macquarie St </li><li>Phillip St*1 between Bent St and Alfred St </li><li>Young St between Farrer Place and Alfred St </li></ul><p></p><p>*Notes:</p><p>*1property access maintained south of Bridge St </p><p></p><h1>Sydney, Pyrmont, Ultimo</h1><p><strong>Between 5am to 10am</strong></p><ul><li>Argyle Pl between High St and Argyle Place Park </li><li>Argyle St between Kent St and Argyle Place Park </li><li>Bent St between Phillip St and Macquarie St </li><li>Bowman St between Tambua St and Harris St </li><li>Bridge St between Phillip St and Macquarie St </li><li>Cadigal Ave*1 between Bowman St and John St </li><li>Dalgety Rd between Windmill St and Towns Pl </li><li>Darling Dr*2 between roundabout at Harbourside entry and Murray St </li><li>Darling Island Rd between Pirrama Rd and Trouton Pl </li><li>Edward St between Pyrmont Bridge Rd and Union St </li><li>Erskine St*3 between Kent St and Shelley St </li><li>Harris St between Pyrmont Point Park and John St </li><li>Harvey St between Mount St Wk and Harris St </li><li>Hickson Rd between Pier One and Sussex St </li><li>Hunter St between Phillip St and Macquarie St </li><li>Jones St*4 between Bowman St and John St </li><li>Jones Bay Rd between Pyrmont St and Pirrama Rd </li><li>Kent St*5 between Margaret St and Windmill St </li><li>Macquarie St between St James Rd and Albert St </li><li>Mount St Walk between Refinery Drive and Harvey St </li><li>Murray St between Union St and Pirrama Rd </li><li>Napoleon St between Hickson Rd and Kent St </li><li>Pirrama Rd between Murray St and Harris St </li><li>Pottinger St between Hickson Rd and Windmill St </li><li>Pyrmont Bridge Rd between Harris St and Pyrmont St (northbound)</li><li>Pyrmont Bridge Rd  between Pyrmont St and Union St </li><li>Refinery Drive between Bowman St and Mount St Walk </li><li>Shakespeare Pl*6 between Hospital Rd and Macquarie St </li><li>Shelley St between Sussex St and Shelley Ln </li><li>Slip St between Sussex St and Car Park </li><li>St James Rd between Macquarie St and Elizabeth St (westbound)</li><li>Sussex St between Hickson Rd and Market St </li><li>Towns Pl between Hickson Rd and Dalgety Rd </li><li>Trouton Pl from Darling Island Rd to 90m east of Darling Island Rd</li><li>Union St between Darling Dr and Edward St </li><li>Wharf Cres from Darling Island Rd to 100m east of Darling Island Rd</li><li>Windmill St between Dalgety Rd and Lower Fort St </li></ul><p></p><p>*Notes:</p><p>*1 Cadigal Ave residents &amp; guests excepted</p><p>*2 During the Darling Drive closure local access will be maintained to Murray St south of Union St</p><p>*3 Erskine St will remain as a crossover between Shelley St and Kent St until 6:45am. Between 6:45am and 10am, access to King St wharf area will be via Wheat Rd only. During the Erskine St closure egress from King St wharf area will be via traffic control on Wheat Rd.</p><p>*4 Jones St residents &amp; guests excepted </p><p>*5 Access from Argyle Place to Kent St will remain open till 6:45am</p><p>*6 Shakespeare Pl and Bent St will remain as a crossover between Hospital Rd and Phillip St until 6:30am</p>",
+                        "title": "Road closures"
+                    },
+                    {
+                        "html": "<h1>Sydney</h1><p><strong>Between 3am to 8am</strong></p><ul><li>Art Gallery Rd between Hospital Rd and Mrs Macquaries Rd (except Art Gallery parking on eastern side) </li><li>Alfred St between George St and Loftus St </li><li>Bridge St between Loftus St and Macquarie St (northern side)</li><li>Castlereagh St between Hunter St and Martin Place (western side)</li><li>College St between St James Rd and Park St </li><li>George St between Alfred St and Hickson Rd </li><li>Elizabeth St between Hunter St and Martin Place (western side)</li><li>Hickson Rd between George St and Napoleon St </li><li>Kent St between High St and Gas Lane </li><li>Loftus St between Alfred St and Bridge St (eastern side)</li><li>Loftus St between Bridge St and Reiby Pl (western side)</li><li>Macquarie St between St James Rd and Bridge St </li><li>Mrs Macquaries Rd between Art Gallery Rd and Northern loop </li><li>Pitt St between Bridge St and Hunter St (western side)</li><li>Pitt St between Bridge St and Spring St (eastern side)</li><li>Prince Albert Rd between St James Rd and Hospital Rd </li><li>Shakespeare Pl between Hospital Rd and Macquarie St </li><li>Sussex St between Napoleon St and Druitt St </li><li>St James Rd between Elizabeth St and Macquarie St  </li><li>Wheat Rd between Harbour St and King St (except private restaurant parking on western side) </li></ul><p></p><h1>Sydney</h1><p><strong>Between 3am to 10:30am</strong></p><ul><li>Hospital Rd between Prince Albert Rd and Shakespeare Pl </li></ul><p></p><h1>Pyrmont and Ultimo </h1><p><strong>Between 3am to 8am</strong></p><ul><li>Allen St between Harris St and Pyrmont St </li><li>Darling Island Rd between Wharf Crescent and Trouton Pl (eastern side)</li><li>Harris St between Fig St and Quarry St (eastern side)</li><li>Jones Bay Rd between Pyrmont St and Pirrama Rd (northern side)</li><li>Murray St between Union St and Pirrama Rd </li><li>Pirrama Rd between Murray St and Star City car park entry </li><li>Pyrmont St between Pyrmont Bridge Rd and Allen St </li><li>Pyrmont St between Allen St and Quarry St (western side)</li><li>Quarry St between Harris St and Pyrmont St </li><li>Wharf Crescent between Darling Island Rd and eastern side of Fairfax Building (approximately 100m) Southern side)</li></ul><p></p><h1>What are special event clearways?</h1><p>You must not stop or park on a length of road where a Special Event Clearway sign applies: no exceptions. </p><p></p><p>Holders of residential parking permits are not exempt.</p><p>The drivers of public buses, taxis and hire cars are permitted to stop when dropping off or picking up passengers only. </p><p></p><p>If your vehicle is left on a Special Event Clearway it will be towed away, usually to a nearby street, and fines will apply. Check for signage when parking.</p>",
+                        "title": "Special event clearways"
+                    },
+                    {
+                        "html": "<p>Cycleways will be progressively re-opened by RMS and Police after cleaning.</p><p></p><h1>Sydney</h1><p><strong><u>Between 4am to 11am</u></strong></p><ul><li>College St between St James Rd and Park St </li></ul><p></p><h1>Sydney, Pyrmont and Ultimo</h1><p><strong><u>Between 5am to 10am</u></strong></p><ul><li>Kent St between Margaret St and Gas Lane </li><li>King St between Sussex St and Kent St </li><li>Union St between Edward St and Murray St<br/></li></ul>",
+                        "title": "Cycleways closures"
+                    }
+                ],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "roadClosureUrl": " ",
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1368885600000,
+                "displayName": "Half Marathon - Sunday 19 May",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Various Roads",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Sydney CBD and Pyrmont",
+                        "trafficVolume": "",
+                        "ubdRef": " "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 431715,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.22194,
+                    -33.88709
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "SPECIAL EVENT - MOORE PARK Various roads",
+                "periods": [],
+                "specialEventClearwaysUrl": " ",
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": false,
+                "isNewIncident": false,
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1366164237623,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Special event",
+                "adviceB": "Use public transport",
+                "adviceA": "Check signage",
+                "end": 1369490399059,
+                "mainCategory": "Changed traffic conditions - planned",
+                "lastUpdated": 1368683807325,
+                "otherAdvice": "Special event clearways will be in place between 3pm and 11pm in Moore Park and surrounding areas on Saturday 25 May for the NRL Sydney Roosters v Melbourne Storm match at Allianz Stadium kicking off at 7.30pm.<br>    <br>Check signs before parking as vehicles left in special event clearways will be towed and a towing fee applies.<br><br>For the safety of pedestrians, parts of Driver Avenue may be closed to traffic prior to, during and after the game. It will reopen to traffic once crowds have left the area. <br><br>If you are planning to attend the NRL game, consider the public transport options.<br><br>Plan your trip at <a href=\"http://www. www.131500.com.au\" target=\"_blank\">www.131500.com.au</a> or call 131 500.",
+                "arrangementElements": [
+                    {
+                        "html": "<ul><li>Cleveland Street between City Road and Anzac Parade (both sides)</li><li>Flinders Street between Albion Street and Moore Park Road (eastern side)</li><li>Fitzroy Street between South Dowling Street and Bourke Street (both sides)</li><li>Foveaux Street between Bourke Street and Crown Street (northern side)</li><li>Lang Road  between Cook Road and Anzac Parade (both sides)</li><li>Moore Park Road between Flinders Street and Driver Avenue (northern side)</li><li>Moore Park Road between Poate Road  and Anzac Parade (southern side)<br/></li></ul>",
+                        "title": "Special event clearways"
+                    }
+                ],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "roadClosureUrl": " ",
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1369404000000,
+                "displayName": "NRL match - Saturday 25 May",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Various roads",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Moore Park",
+                        "trafficVolume": "",
+                        "ubdRef": " "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 431714,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.22063,
+                    -33.88685
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "SPECIAL EVENT - MOORE PARK Various roads",
+                "periods": [],
+                "specialEventClearwaysUrl": " ",
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": false,
+                "isNewIncident": false,
+                "impactingNetwork": true,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1366340099043,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Special event",
+                "adviceB": " ",
+                "adviceA": " ",
+                "end": 1368885599059,
+                "mainCategory": "Changed traffic conditions - planned",
+                "lastUpdated": 1368688231828,
+                "otherAdvice": "Special event clearways will be in place between 3pm and 11pm in Moore Park and surrounding areas on Saturday 18 May for the AFL Sydney Swans v Fremantle Dockers match at the Sydney Cricket Ground starting at 7.40pm.<br>    <br>Check signs before parking as vehicles left in special event clearways will be towed and a towing fee applies.<br><br>For the safety of pedestrians, parts of Driver Avenue may be closed to traffic prior to, during and after the game. It will reopen to traffic once crowds have left the area. <br><br>If you are planning to attend the AFL game, consider the public transport options.<br><br>Plan your trip at <a href=\"http://www. www.131500.com.au\" target=\"_blank\">www.131500.com.au</a> or call 131 500.",
+                "arrangementElements": [
+                    {
+                        "html": "<ul><li>Cleveland Street between City Road and Anzac Parade (both sides)</li><li>Flinders Street between Albion Street and Moore Park Road (eastern side)</li><li>Fitzroy Street between South Dowling Street and Bourke Street (both sides)</li><li>Foveaux Street between Bourke Street and Crown Street (northern side)</li><li>Lang Road  between Cook Road and Anzac Parade (both sides)</li><li>Moore Park Road between Flinders Street and Driver Avenue (northern side)</li><li>Moore Park Road between Poate Road  and Anzac Parade (southern side)<br/></li></ul>",
+                        "title": "Special event clearways"
+                    }
+                ],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "roadClosureUrl": " ",
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1368799200000,
+                "displayName": "AFL match - Saturday 18 May",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Various roads",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Moore Park",
+                        "trafficVolume": "",
+                        "ubdRef": " "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 433666,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    150.70238,
+                    -34.77455
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "SPECIAL EVENT - BERRY Princes Hwy between Edward St and Woodhill Mountain Rd",
+                "periods": [
+                    {
+                        "closureType": "ROAD_CLOSURE",
+                        "direction": "Both directions",
+                        "finishTime": "10am",
+                        "fromDay": "Saturday",
+                        "startTime": "9am",
+                        "toDay": " "
+                    }
+                ],
+                "specialEventClearwaysUrl": " ",
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": false,
+                "isNewIncident": false,
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1367902457697,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Special event",
+                "adviceB": "Use diversions",
+                "adviceA": "Use alternative route",
+                "end": 1369490399059,
+                "mainCategory": "Changed traffic conditions - planned",
+                "lastUpdated": 1368683779869,
+                "otherAdvice": "The Princes Highway will be closed for one hour from 9am to 10am on Saturday 25th May between Edward Street and Woodhill Mountain Road.",
+                "arrangementElements": [],
+                "diversions": "A detour will be in place for motorists via Albert and Edward streets.<br>B Double and larger heavy vehicles will not be able to use the detour and will be parked while the highway is closed.",
+                "additionalInfo": [
+                    " "
+                ],
+                "roadClosureUrl": " ",
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1369404000000,
+                "displayName": "Berry Celtic Festival - Saturday 25 May",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": "Edward Street",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "between",
+                        "mainStreet": "Princes Highway",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "REG_SOUTH",
+                        "secondLocation": "Woodhill Mountain Road",
+                        "suburb": "Berry",
+                        "trafficVolume": "",
+                        "ubdRef": " "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 433798,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.20828,
+                    -33.86366
+                ]
+            },
+            "properties": {
+                "webLinks": [
+                    {
+                        "linkText": "Transport Info 131 500",
+                        "linkURL": "http://www.131500.com.au/"
+                    }
+                ],
+                "headline": "SPECIAL EVENT - SYDNEY CBD Various Roads",
+                "periods": [],
+                "specialEventClearwaysUrl": " ",
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": false,
+                "isNewIncident": false,
+                "impactingNetwork": false,
+                "subCategoryB": " ",
+                "arrangementAttachments": [
+                    {
+                        "displayName": "",
+                        "fileName": "ReligiousProcession-June2013-A3.pdf",
+                        "fileType": "pdf",
+                        "linkName": "Road closures and special event clearways",
+                        "sizeInBytes": 790402,
+                        "uniqueFileName": "religiousprocession-june2013-a3_1367993392372enr.pdf"
+                    }
+                ],
+                "isInitialReport": false,
+                "created": 1368214639561,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Special event",
+                "adviceB": "Use public transport",
+                "adviceA": "Check signage",
+                "end": 1370181599059,
+                "mainCategory": "Changed traffic conditions - planned",
+                "lastUpdated": 1368683517305,
+                "otherAdvice": "Road closures will be in place in the Sydney CBD on Sunday 2 June for the Procession of the Blessed Sacrament.<br><br>Roads will begin closing between midday and 2pm, and will progressively reopen by 5pm.<br><br><b>The road closures in the Sydney CBD include Grosvenor, Bridge, Castlereagh, College, Elizabeth, King, George and Pitt streets.</b><br><br>Due to these road closures, motorists should take an alternative route, allow additional travel time and expect delays in the city. <br><br>Hospital Road is accessible at all times via St Mary's Road. <br><br>Special event clearways will be in place between 11am and 5pm throughout the Sydney CBD. Check signs before parking as vehicles left in special event clearways will be towed and a towing fee applies.<br><br>Bus services that normally travel along the Procession route will be diverted until the roads reopen.<br><br>If you are travelling to the Sydney CBD, consider the public transport options. <br><br>To plan your trip at <a href=\"http://www.131500.com.au\" target=\"_blank\">131500.com.au</a> or phone 131500.",
+                "arrangementElements": [
+                    {
+                        "html": "<p><strong>Sydney CBD </strong></p><p></p><p><strong>From midday to 5pm</strong></p><ul><li>Gloucester St between Grosvenor St and Essex St - Both directions</li><li>Grosvenor St between York St  &amp; George St - Eastbound</li><li>Grosvenor St between Lang St and York St - Westbound</li><li>Harrington St  between Essex St &amp; Grosvenor St - Both directions</li><li>Lang St between York St &amp; Grosvenor St - Eastbound</li></ul><p></p><p>From 2pm to 5pm </p><ul><li>Bligh St between Bent St and Hunter St - Both directions</li><li>Bond St between George St and Pitt St - Both directions</li><li>Bridge St between Loftus St and George St - Westbound</li><li>Bent St between Loftus St and Gresham St - Westbound </li><li>Bridge St between George St and Pitt St - Both directions</li><li>Castlereagh St between Hunter St and King St - Southbound</li><li>College St between Prince Albert Rd and Park St - Both directions</li><li>Elizabeth St between Hunter St and King St - Both directions</li><li>Elizabeth St between Market St and King St - Northbound</li><li>George St between Essex St and Margaret St - Both directions</li><li>Grosvenor St between George St and Lang St - Westbound</li><li>Hunter St between George St and Macquarie St - Both directions</li><li>King St between Elizabeth St and Phillip St -Both directions</li><li>Lang St between Grosvenor St and York St - Westbound</li><li>Macquarie St between Bent St and St James Rd - Both directions</li><li>Margaret St between Wynyard Lane and George St - Eastbound</li><li>O�??Connell St between Bent St and Hunter St - Southbound</li><li>Pitt St between Bridge St and Martin Place - Southbound</li><li>Phillip St between Bent St and Hunter St - Both directions</li><li>Phillip St (South) between King St and Hunter St- Both directions</li><li>Prince Albert Rd between Macquarie St and St Mary's Rd - Both directions</li><li>Spring St between Bent St and Pitt St - Southbound</li><li>St James Rd between Elizabeth St and Macquarie St - Both directions</li><p></p><p></p></ul>",
+                        "title": "Road closures"
+                    },
+                    {
+                        "html": "<p><strong>Sydney CBD </strong></p><p><strong>From 11am to 5pm</strong></p><ul><li>Alfred St between George St and Pitt St - Both sides</li><li>Bent St Between Macquarie St and Loftus St - Southern side </li><li>Bridge St Between George St and Pitt St - Both directions</li><li>College St between William St and Prince Albert Rd - Both sides</li><li>Elizabeth St between King St and Market St - Both sides</li><li>Elizabeth St between Park St and Market St - Western side</li><li>Essex St between George St and Cumberland St - Both sides</li><li>George St between Essex St and Margaret St - Both sides</li><li>Grosvenor St between York St and George St - Both sides</li><li>Hunter St between Pitt St and Macquarie St - Both sides</li><li>King St between York St and George St - Northern side</li><li>King St Between Pitt St and Elizabeth St - Northern side</li><li>Lang St between York St and Grosvenor St - Both sides</li><li>Loftus St Between Bent St and Bridge St - Western side</li><li>Macquarie St Between Hunter St and St James Rd - Both sides</li><li>Market St between Elizabeth St and Castlereagh St - Southern side</li><li>Market St Between Pitt St and George St  - Southern side</li><li>Prince Albert Rd Between Macquarie St and College St - Both sides</li><li>Pitt St Between Bridge St and Hunter St - Both directions</li><li>York St between Wynyard St and King St - Eastern side</li><p></p><p></p><p></p></ul>",
+                        "title": "Special event clearways"
+                    }
+                ],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "roadClosureUrl": " ",
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1370095200000,
+                "displayName": "Procession of the Blessed Sacrament - Sunday 2 June",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Various Roads",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Sydney CBD",
+                        "trafficVolume": "",
+                        "ubdRef": " "
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "id": 434687,
+            "geometry": {
+                "type": "POINT",
+                "coordinates": [
+                    151.07092,
+                    -33.85648
+                ]
+            },
+            "properties": {
+                "webLinks": [],
+                "headline": "SPECIAL EVENT - SYDNEY OLYMPIC PARK Various Roads",
+                "periods": [],
+                "specialEventClearwaysUrl": " ",
+                "speedLimit": -1,
+                "webLinkUrl": null,
+                "expectedDelay": " ",
+                "ended": false,
+                "isNewIncident": false,
+                "impactingNetwork": true,
+                "subCategoryB": " ",
+                "arrangementAttachments": [],
+                "isInitialReport": false,
+                "created": 1368684841074,
+                "isMajor": false,
+                "name": null,
+                "subCategoryA": "Special event",
+                "adviceB": "Expect delays",
+                "adviceA": "Use public transport",
+                "end": 1368885599059,
+                "mainCategory": "Changed traffic conditions - planned",
+                "lastUpdated": 1368688244448,
+                "otherAdvice": "Heavy traffic is expected along the M4, Homebush Bay Drive and Silverwater Road for the Super Rugby match between the Waratahs v Brumbies at ANZ Stadium on Saturday 18 May - kick off is at 7.40pm. <br><br>There will be Limited parking. Public transport is the best option with all tickets to the game including travel on CityRail services, Sydney Olympic Park Major Event Buses and regular Sydney Buses services, Liverpool to Parramatta T-way buses and Sydney Ferries services.",
+                "arrangementElements": [],
+                "diversions": " ",
+                "additionalInfo": [
+                    " "
+                ],
+                "roadClosureUrl": " ",
+                "webLinkName": null,
+                "attendingGroups": [
+                    " "
+                ],
+                "duration": " ",
+                "start": 1368799200000,
+                "displayName": "Super Rugby Match - Saturday 18 May",
+                "media": [],
+                "roads": [
+                    {
+                        "conditionTendency": "",
+                        "crossStreet": " ",
+                        "delay": "",
+                        "impactedLanes": [],
+                        "locationQualifier": "at",
+                        "mainStreet": "Various Roads",
+                        "quadrant": "",
+                        "queueLength": 0,
+                        "region": "SYD_MET",
+                        "secondLocation": " ",
+                        "suburb": "Sydney Olympic Park",
+                        "trafficVolume": "",
+                        "ubdRef": " "
+                    }
+                ]
+            }
+        }
+    ]
+}
