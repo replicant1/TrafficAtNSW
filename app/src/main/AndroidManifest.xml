@@ -27,6 +27,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="rod.bailey.trafficatnsw.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -37,6 +38,7 @@
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
 
@@ -47,6 +49,7 @@
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
 
@@ -57,6 +60,7 @@
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
 

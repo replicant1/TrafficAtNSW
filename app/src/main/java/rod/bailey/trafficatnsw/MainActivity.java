@@ -5,9 +5,11 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,54 +51,54 @@ public class MainActivity extends AppCompatActivity {
 
 	private ListView navList;
 
-	private void createUI() {
-		drawer = new DrawerLayout(this);
-		drawer.setDrawerShadow(R.drawable.drawer_shadow, LEFT);
-
-		// 'content is the bit that is NOT the nav drawer
-		final FrameLayout contentframeLayout = new FrameLayout(this);
-		contentframeLayout.setId(CONTENT_FRAME_ID);
-		contentframeLayout.setBackgroundColor(DisplayUtils
-				.viewBackgroundColor());
-
-		// List of items that appear in the nav drawer
-		navList = new ListView(this);
-		navList.setDividerHeight(0);
-		navList.setAdapter(new NavigationListAdapter(this));
-		navList.setBackgroundColor(WHITE);
-		DrawerItemClickListener navClickListener = new DrawerItemClickListener();
-		navList.setOnItemClickListener(navClickListener);
-
-		DrawerLayout.LayoutParams navListDLP = new DrawerLayout.LayoutParams(
-				dp2Px(this, DRAWER_WIDTH_DP), MATCH_PARENT);
-		navListDLP.gravity = Gravity.START;
-
-		navList.setLayoutParams(navListDLP);
-
-		// Drawer
-		drawer.addView(contentframeLayout, new FrameLayout.LayoutParams(
-				WRAP_CONTENT, MATCH_PARENT));
-		drawer.addView(navList);
-
-		drawerToggle = new ActionBarDrawerToggle(this, drawer,
-												 R.drawable.ic_drawer, R.string.app_name, R.string.app_name);
-		drawer.setDrawerListener(drawerToggle);
-
-		setContentView(drawer);
-
-		// getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//		getActionBar().setDisplayHomeAsUpEnabled(true);
-//		getActionBar().setHomeButtonEnabled(true);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
-
-		// Start by auto-navigating to the "Incidents in Sydney" - which will
-		// probably be
-		// the most commonly used screen.
-		// Is it OK to do this now, or should I wait a while for the UI to
-		// finish setup>?
-		navClickListener.selectItem(0);
-	}
+//	private void createUI() {
+//		drawer = new DrawerLayout(this);
+//		drawer.setDrawerShadow(R.drawable.drawer_shadow, LEFT);
+//
+//		// 'content is the bit that is NOT the nav drawer
+//		final FrameLayout contentframeLayout = new FrameLayout(this);
+//		contentframeLayout.setId(CONTENT_FRAME_ID);
+//		contentframeLayout.setBackgroundColor(DisplayUtils
+//				.viewBackgroundColor());
+//
+//		// List of items that appear in the nav drawer
+//		navList = new ListView(this);
+//		navList.setDividerHeight(0);
+//		navList.setAdapter(new NavigationListAdapter(this));
+//		navList.setBackgroundColor(WHITE);
+//		DrawerItemClickListener navClickListener = new DrawerItemClickListener();
+//		navList.setOnItemClickListener(navClickListener);
+//
+//		DrawerLayout.LayoutParams navListDLP = new DrawerLayout.LayoutParams(
+//				dp2Px(this, DRAWER_WIDTH_DP), MATCH_PARENT);
+//		navListDLP.gravity = Gravity.START;
+//
+//		navList.setLayoutParams(navListDLP);
+//
+//		// Drawer
+//		drawer.addView(contentframeLayout, new FrameLayout.LayoutParams(
+//				WRAP_CONTENT, MATCH_PARENT));
+//		drawer.addView(navList);
+//
+//		drawerToggle = new ActionBarDrawerToggle(this, drawer,
+//												 R.drawable.ic_drawer, R.string.app_name, R.string.app_name);
+//		drawer.setDrawerListener(drawerToggle);
+//
+//		setContentView(drawer);
+//
+//		// getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+////		getActionBar().setDisplayHomeAsUpEnabled(true);
+////		getActionBar().setHomeButtonEnabled(true);
+//		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//		getSupportActionBar().setHomeButtonEnabled(true);
+//
+//		// Start by auto-navigating to the "Incidents in Sydney" - which will
+//		// probably be
+//		// the most commonly used screen.
+//		// Is it OK to do this now, or should I wait a while for the UI to
+//		// finish setup>?
+//		navClickListener.selectItem(0);
+//	}
 
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
@@ -110,10 +112,26 @@ public class MainActivity extends AppCompatActivity {
 
 		ConfigSingleton config = ConfigSingleton.getInstance();
 		config.init(CONFIG_PROPERTIES_FILE_NAME, this);
+
 		MLog.init(config, this);
 
-		createUI();
+		setContentView(R.layout.activity_main);
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		setSupportActionBar(toolbar);
 
+		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+		android.support.v7.app.ActionBarDrawerToggle toggle = new android.support.v7.app.ActionBarDrawerToggle(
+				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+		drawer.setDrawerListener(toggle);
+		toggle.syncState();
+
+		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
+			@Override
+			public boolean onNavigationItemSelected(MenuItem item) {
+				return false;
+			}
+		});
 	}
 
 	@Override
@@ -127,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
 		super.onPostCreate(savedInstanceState);
-		drawerToggle.syncState();
+//		drawerToggle.syncState();
 	}
 
 	/**

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_camera"
+            android:icon="@drawable/ic_action_camera"
+            android:title="Import"/>
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_action_place"
+            android:title="Gallery"/>
+        <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_action_half_important"
+            android:title="Slideshow"/>
+        <item
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_action_refresh"
+            android:title="Tools"/>
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_action_time"
+                android:title="Share"/>
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_action_important"
+                android:title="Send"/>
+        </menu>
+    </item>
+
+</menu>
