@@ -9,6 +9,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,21 +27,21 @@ import static rod.bailey.trafficatnsw.traveltime.TravelTimesFragment.*;
 
 public class MainActivity extends AppCompatActivity {
 
-	/* Width of the navigation drawer when fully extended */
-	private static final int DRAWER_WIDTH_DP = 160;
+    /* Width of the navigation drawer when fully extended */
+    private static final int DRAWER_WIDTH_DP = 160;
 
-	private static final String CONFIG_PROPERTIES_FILE_NAME = "config.properties";
+    private static final String CONFIG_PROPERTIES_FILE_NAME = "config.properties";
 
-	private static final int CONTENT_FRAME_ID = 1010;
+    private static final int CONTENT_FRAME_ID = 1010;
 
-	@SuppressWarnings("unused")
-	private static final String TAG = MainActivity.class.getSimpleName();
+    @SuppressWarnings("unused")
+    private static final String TAG = MainActivity.class.getSimpleName();
 
-	private DrawerLayout drawer;
+    private DrawerLayout drawer;
 
-	private ActionBarDrawerToggle drawerToggle;
+    private ActionBarDrawerToggle drawerToggle;
 
-	private ListView navList;
+    private ListView navList;
 
 //	private void createUI() {
 //		drawer = new DrawerLayout(this);
@@ -91,184 +92,187 @@ public class MainActivity extends AppCompatActivity {
 //		navClickListener.selectItem(0);
 //	}
 
-	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		drawerToggle.onConfigurationChanged(newConfig);
-	}
+    // A method to find height of the status bar
+    private int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        drawerToggle.onConfigurationChanged(newConfig);
+    }
 
-		ConfigSingleton config = ConfigSingleton.getInstance();
-		config.init(CONFIG_PROPERTIES_FILE_NAME, this);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		MLog.init(config, this);
+        ConfigSingleton config = ConfigSingleton.getInstance();
+        config.init(CONFIG_PROPERTIES_FILE_NAME, this);
 
-		setContentView(R.layout.activity_main);
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		setSupportActionBar(toolbar);
+        MLog.init(config, this);
+
+        setContentView(R.layout.activity_main);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        android.support.v7.app.ActionBarDrawerToggle toggle = new android.support.v7.app.ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
 
-		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-		android.support.v7.app.ActionBarDrawerToggle toggle = new android.support.v7.app.ActionBarDrawerToggle(
-				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-		drawer.setDrawerListener(toggle);
-		toggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_drawer_view);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                return false;
+            }
+        });
 
-		NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_drawer_view);
-		navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
-			@Override
-			public boolean onNavigationItemSelected(MenuItem item) {
-				return false;
-			}
-		});
+        View topLevel = findViewById(R.id.top_level_linear_layout);
 
-		navigationView.setPadding(0, // left
-						   getStatusBarHeight(), //top
-						   0, // right
-						   0); // bottom
-	}
+        Log.i(TAG, "Status bar height is " + getStatusBarHeight());
 
-	// A method to find height of the status bar
-	private int getStatusBarHeight() {
-		int result = 0;
-		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-		if (resourceId > 0) {
-			result = getResources().getDimensionPixelSize(resourceId);
-		}
-		return result;
-	}
+//		topLevel.setPadding(0, // left
+//						   getStatusBarHeight(), //top
+//						   0, // right
+//						   0); // bottom
+    }
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		if (drawerToggle.onOptionsItemSelected(item)) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (drawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-	@Override
-	protected void onPostCreate(Bundle savedInstanceState) {
-		super.onPostCreate(savedInstanceState);
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
 //		drawerToggle.syncState();
-	}
+    }
 
-	/**
-	 * Listens for a tap on an item in the navigation drawer and invokes the
-	 * corresponding Fragment. Also changes the title approriately.
-	 */
-	public class DrawerItemClickListener implements OnItemClickListener {
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position,
-				long id) {
-			selectItem(position);
-		}
+    /**
+     * Listens for a tap on an item in the navigation drawer and invokes the
+     * corresponding Fragment. Also changes the title approriately.
+     */
+    public class DrawerItemClickListener implements OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            selectItem(position);
+        }
 
-		private void selectItem(int position) {
-			// Create a new fragment and specify the planet to show based on
-			// position
+        private void selectItem(int position) {
+            // Create a new fragment and specify the planet to show based on
+            // position
 
-			int argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_ALL;
-			String argTravelTimeValue = null;
-			int argHazardModeValue = HazardsFragment.ARG_MODE_VALUE_SYDNEY;
+            int argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_ALL;
+            String argTravelTimeValue = null;
+            int argHazardModeValue = HazardsFragment.ARG_MODE_VALUE_SYDNEY;
 
-			switch (position) {
-			// Hazards
-			case 0:
-			case 1:
-				argHazardModeValue = HazardsFragment.ARG_MODE_VALUE_SYDNEY;
-				break;
-			case 2:
-				argHazardModeValue = HazardsFragment.ARG_MODE_VALUE_REGIONAL;
-				break;
+            switch (position) {
+                // Hazards
+                case 0:
+                case 1:
+                    argHazardModeValue = HazardsFragment.ARG_MODE_VALUE_SYDNEY;
+                    break;
+                case 2:
+                    argHazardModeValue = HazardsFragment.ARG_MODE_VALUE_REGIONAL;
+                    break;
 
-			// Cameras
-			case 3:
-			case 4:
-				argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_FAVOURITES;
-				break;
-			case 5:
-				argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_SYDNEY;
-				break;
-			case 6:
-				argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_REGIONAL;
-				break;
+                // Cameras
+                case 3:
+                case 4:
+                    argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_FAVOURITES;
+                    break;
+                case 5:
+                    argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_SYDNEY;
+                    break;
+                case 6:
+                    argCameraModeValue = TrafficCameraListFragment.ARG_MODE_VALUE_REGIONAL;
+                    break;
 
-			// Travel Times
-			case 7:
-			case 8:
-				argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M1;
-				break;
+                // Travel Times
+                case 7:
+                case 8:
+                    argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M1;
+                    break;
 
-			case 9:
-				argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M2;
-				break;
+                case 9:
+                    argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M2;
+                    break;
 
-			case 10:
-				argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M4;
-				break;
+                case 10:
+                    argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M4;
+                    break;
 
-			case 11:
-				argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M7;
-				break;
-			}
+                case 11:
+                    argTravelTimeValue = TravelTimesFragment.ARG_MWAY_VALUE_M7;
+                    break;
+            }
 
-			// NOTE: If I could find a way of retrieving the fragments (if
-			// previously created) from the FragmentManager Iwouldn't have to
-			// "new" the fragment every time.
-			// This would prevent the data from reloading in the fragment's
-			// onCreate() method every time, which would perhaps be preferable.
-			// Try fragmentManager.beginTransaction().replace(int, Fragment,S
-			// tring tag). Then you can retrieve the fragment by "tag"
+            // NOTE: If I could find a way of retrieving the fragments (if
+            // previously created) from the FragmentManager Iwouldn't have to
+            // "new" the fragment every time.
+            // This would prevent the data from reloading in the fragment's
+            // onCreate() method every time, which would perhaps be preferable.
+            // Try fragmentManager.beginTransaction().replace(int, Fragment,S
+            // tring tag). Then you can retrieve the fragment by "tag"
 
-			// Selected an item in the Incidents section of the nav list
-			if ((position >= 0) && (position <= 2)) {
-				Fragment fragment = new HazardsFragment();
+            // Selected an item in the Incidents section of the nav list
+            if ((position >= 0) && (position <= 2)) {
+                Fragment fragment = new HazardsFragment();
 
-				Bundle bundle = new Bundle();
-				bundle.putInt(ARG_MODE_KEY, argHazardModeValue);
-				fragment.setArguments(bundle);
+                Bundle bundle = new Bundle();
+                bundle.putInt(ARG_MODE_KEY, argHazardModeValue);
+                fragment.setArguments(bundle);
 
-				// Insert the fragment by replacing any existing fragment
-				FragmentManager fragmentManager = getFragmentManager();
-				fragmentManager.beginTransaction()
-						.replace(CONTENT_FRAME_ID, fragment).commit();
-			}
+                // Insert the fragment by replacing any existing fragment
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(CONTENT_FRAME_ID, fragment).commit();
+            }
 
-			// Selected an item in the Traffic Cameras section of the list
-			if ((position >= 3) && (position <= 6)) {
-				Fragment fragment = new TrafficCameraListFragment();
+            // Selected an item in the Traffic Cameras section of the list
+            if ((position >= 3) && (position <= 6)) {
+                Fragment fragment = new TrafficCameraListFragment();
 
-				Bundle bundle = new Bundle();
-				bundle.putInt(ARG_MODE_KEY, argCameraModeValue);
-				fragment.setArguments(bundle);
+                Bundle bundle = new Bundle();
+                bundle.putInt(ARG_MODE_KEY, argCameraModeValue);
+                fragment.setArguments(bundle);
 
-				// Insert the fragment by replacing any existing fragment
-				FragmentManager fragmentManager = getFragmentManager();
-				fragmentManager.beginTransaction()
-						.replace(CONTENT_FRAME_ID, fragment).commit();
-			}
+                // Insert the fragment by replacing any existing fragment
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(CONTENT_FRAME_ID, fragment).commit();
+            }
 
-			// Selected an item in the Trvel Times section of the list
-			if ((position >= 7) && (position <= 11)) {
-				Fragment fragment = new TravelTimesFragment();
-				Bundle bundle = new Bundle();
-				bundle.putString(ARG_MWAY_KEY, argTravelTimeValue);
-				fragment.setArguments(bundle);
+            // Selected an item in the Trvel Times section of the list
+            if ((position >= 7) && (position <= 11)) {
+                Fragment fragment = new TravelTimesFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(ARG_MWAY_KEY, argTravelTimeValue);
+                fragment.setArguments(bundle);
 
-				FragmentManager fragmentManager = getFragmentManager();
-				fragmentManager.beginTransaction()
-						.replace(CONTENT_FRAME_ID, fragment).commit();
-			}
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(CONTENT_FRAME_ID, fragment).commit();
+            }
 
-			// Highlight the selected item, update the title, and close the
-			// drawer
-			navList.setItemChecked(position, true);
-			drawer.closeDrawer(navList);
-		}
-	}
+            // Highlight the selected item, update the title, and close the
+            // drawer
+            navList.setItemChecked(position, true);
+            drawer.closeDrawer(navList);
+        }
+    }
 
 }
