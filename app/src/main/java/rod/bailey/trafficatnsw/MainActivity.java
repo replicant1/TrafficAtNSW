@@ -1,6 +1,5 @@
 package rod.bailey.trafficatnsw;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.res.Configuration;
@@ -10,28 +9,20 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 
 import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment;
 import rod.bailey.trafficatnsw.hazard.HazardsFragment;
 import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment;
 import rod.bailey.trafficatnsw.util.ConfigSingleton;
-import rod.bailey.trafficatnsw.util.DisplayUtils;
 import rod.bailey.trafficatnsw.util.MLog;
 
-import static android.R.attr.*;
-import static android.graphics.Color.*;
-import static android.view.Gravity.*;
-import static android.view.ViewGroup.LayoutParams.*;
 import static rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment.*;
 import static rod.bailey.trafficatnsw.traveltime.TravelTimesFragment.*;
-import static rod.bailey.trafficatnsw.util.DisplayUtils.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -119,19 +110,36 @@ public class MainActivity extends AppCompatActivity {
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
+
+
 		DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 		android.support.v7.app.ActionBarDrawerToggle toggle = new android.support.v7.app.ActionBarDrawerToggle(
 				this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 		drawer.setDrawerListener(toggle);
 		toggle.syncState();
 
-		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+		NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_drawer_view);
 		navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener(){
 			@Override
 			public boolean onNavigationItemSelected(MenuItem item) {
 				return false;
 			}
 		});
+
+		navigationView.setPadding(0, // left
+						   getStatusBarHeight(), //top
+						   0, // right
+						   0); // bottom
+	}
+
+	// A method to find height of the status bar
+	private int getStatusBarHeight() {
+		int result = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			result = getResources().getDimensionPixelSize(resourceId);
+		}
+		return result;
 	}
 
 	@Override

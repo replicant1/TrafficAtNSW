@@ -1,35 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_action_camera"
-            android:title="Import"/>
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_action_place"
-            android:title="Gallery"/>
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_action_half_important"
-            android:title="Slideshow"/>
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_action_refresh"
-            android:title="Tools"/>
-    </group>
-
-    <item android:title="Communicate">
+    <item android:title="Incidents">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_action_time"
-                android:title="Share"/>
+                android:id="@+id/menu_item_sydney_incidents"
+                android:icon="@drawable/ic_action_warning"
+                android:title="Sydney"/>
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/menu_item_regional_nsw_incidents"
+                android:icon="@drawable/ic_action_warning"
+                android:title="Regional NSW"/>
+        </menu>
+    </item>
+
+    <item android:title="Cameras">
+        <menu>
+            <item
+                android:id="@+id/menu_item_favourite_cameras"
                 android:icon="@drawable/ic_action_important"
-                android:title="Send"/>
+                android:title="Favourites"/>
+            <item
+                android:id="@+id/menu_item_sydney_cameras"
+                android:icon="@drawable/ic_action_camera"
+                android:title="Sydney"/>
+            <item
+                android:id="@+id/menu_item_regional_nsw_cameras"
+                android:icon="@drawable/ic_action_camera"
+                android:title="Regional NSW"/>
+        </menu>
+    </item>
+
+    <item android:title="Travel Times">
+        <menu>
+            <item
+                android:id="@+id/menu_item_travel_times_m1"
+                android:icon="@drawable/ic_action_time"
+                android:title="M1"/>
+            <item
+                android:id="@+id/menu_item_travel_times_m2"
+                android:icon="@drawable/ic_action_time"
+                android:title="M2"/>
+            <item
+                android:id="@+id/menu_item_travel_times_m3"
+                android:icon="@drawable/ic_action_time"
+                android:title="M3"/>
+            <item
+                android:id="@+id/menu_item_travel_times_m4"
+                android:icon="@drawable/ic_action_time"
+                android:title="M4"/>
         </menu>
     </item>
 
