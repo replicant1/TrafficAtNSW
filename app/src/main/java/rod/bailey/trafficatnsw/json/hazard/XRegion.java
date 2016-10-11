@@ -1,6 +1,6 @@
 package rod.bailey.trafficatnsw.json.hazard;
 
-public enum Region {
+public enum XRegion {
 	SYD_MET("Inner Sydney"), // hello
 	SYD_NORTH("Sydney North"), //
 	SYD_SOUTH("Sydney South"), //
@@ -11,7 +11,7 @@ public enum Region {
 
 	private final String description;
 
-	Region(String description) {
+	XRegion(String description) {
 		assert description != null;
 		this.description = description;
 	}

@@ -79,7 +79,7 @@ public class TrafficCameraListFragment extends Fragment implements
 	private static final String TAG = TrafficCameraListFragment.class
 			.getSimpleName();
 
-	/** List of traffic cameras, divided into sections by Region */
+	/** List of traffic cameras, divided into sections by XRegion */
 	// private ListView listView;
 
 	/** Top level layout has list on top, DataLicenceView at bottom */

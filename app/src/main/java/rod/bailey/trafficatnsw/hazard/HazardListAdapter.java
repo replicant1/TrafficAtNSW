@@ -12,8 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter;
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
-import rod.bailey.trafficatnsw.json.hazard.Region;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
+import rod.bailey.trafficatnsw.json.hazard.XRegion;
 import rod.bailey.trafficatnsw.util.ListHeadingView;
 import rod.bailey.trafficatnsw.util.MLog;
 
@@ -43,20 +43,20 @@ public class HazardListAdapter extends BaseAdapter implements ListAdapter {
 	public void primeListDataFromHazardDatabase() {
 		MLog.d(TAG, "About to collate the listData from HazardDatase contents");
 
-		for (Region region : sortedHazardRegions()) {
+		for (XRegion region : sortedHazardRegions()) {
 			listData.add(region);
-			List<Hazard> hazards = db.getHazardsForRegion(region);
+			List<XHazard> hazards = db.getHazardsForRegion(region);
 			Collections.sort(hazards);
 			listData.addAll(hazards);
 		}
 	}
 
-	private View createHazardListItem(Context ctx, Hazard hazard) {
+	private View createHazardListItem(Context ctx, XHazard hazard) {
 		HazardListItemView view = new HazardListItemView(ctx, hazard, true, true);
 		return view;
 	}
 
-	private View createHeading(Context ctx, Region region) {
+	private View createHeading(Context ctx, XRegion region) {
 		ListHeadingView heading = new ListHeadingView(ctx,
 				region.getDescription(), false);
 		return heading;
@@ -83,11 +83,11 @@ public class HazardListAdapter extends BaseAdapter implements ListAdapter {
 
 		Object listItem = listData.get(position);
 
-		if (listItem instanceof Region) {
-			result = createHeading(parent.getContext(), (Region) listItem);
+		if (listItem instanceof XRegion) {
+			result = createHeading(parent.getContext(), (XRegion) listItem);
 		} else {
 			result = createHazardListItem(parent.getContext(),
-					(Hazard) listItem);
+					(XHazard) listItem);
 		}
 
 		return result;
@@ -96,15 +96,15 @@ public class HazardListAdapter extends BaseAdapter implements ListAdapter {
 	@Override
 	public boolean isEnabled(int position) {
 		Object dataObj = listData.get(position);
-		return (dataObj instanceof Hazard);
+		return (dataObj instanceof XHazard);
 	}
 
-	private List<Region> sortedHazardRegions() {
+	private List<XRegion> sortedHazardRegions() {
 
-		List<Region> sortedRegions = new LinkedList<Region>();
+		List<XRegion> sortedRegions = new LinkedList<XRegion>();
 
-		for (Region region : Region.values()) {
-			List<Hazard> hazardsForRegion = db.getHazardsForRegion(region);
+		for (XRegion region : XRegion.values()) {
+			List<XHazard> hazardsForRegion = db.getHazardsForRegion(region);
 
 			if ((hazardsForRegion != null) && (!hazardsForRegion.isEmpty())) {
 				sortedRegions.add(region);

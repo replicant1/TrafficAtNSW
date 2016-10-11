@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter;
-import rod.bailey.trafficatnsw.json.hazard.Region;
+import rod.bailey.trafficatnsw.json.hazard.XRegion;
 import rod.bailey.trafficatnsw.util.ListHeadingView;
 
 public class TrafficCameraListAdapter extends BaseAdapter implements
@@ -33,10 +33,10 @@ public class TrafficCameraListAdapter extends BaseAdapter implements
 		db.setFilter(filter);
 
 		// Linearize the info in the TrafficCameraDatabase. The resulting list
-		// has two sorts of entries. A Region instance if for the beginning of a
+		// has two sorts of entries. A XRegion instance if for the beginning of a
 		// region section, a TrafficCamera instance if a camera within a
 		// region section.
-		for (Region region : sortedCameraRegions()) {
+		for (XRegion region : sortedCameraRegions()) {
 			listData.add(region);
 			List<TrafficCamera> cameras = db.getCamerasForRegion(region);
 			Collections.sort(cameras);
@@ -50,7 +50,7 @@ public class TrafficCameraListAdapter extends BaseAdapter implements
 		return dataObj instanceof TrafficCamera;
 	}
 
-	private View createHeading(Region region, ViewGroup parent) {
+	private View createHeading(XRegion region, ViewGroup parent) {
 		ListHeadingView heading = new ListHeadingView(parent.getContext(),
 				region.getDescription(), false);
 		return heading;
@@ -85,8 +85,8 @@ public class TrafficCameraListAdapter extends BaseAdapter implements
 
 		Object listItem = listData.get(position);
 
-		if (listItem instanceof Region) {
-			result = createHeading((Region) listItem, parent);
+		if (listItem instanceof XRegion) {
+			result = createHeading((XRegion) listItem, parent);
 		} else {
 			result = createTrafficCameraListItem(parent.getContext(),
 					(TrafficCamera) listItem);
@@ -95,10 +95,10 @@ public class TrafficCameraListAdapter extends BaseAdapter implements
 		return result;
 	}
 
-	private List<Region> sortedCameraRegions() {
-		List<Region> sortedRegions = new LinkedList<Region>();
+	private List<XRegion> sortedCameraRegions() {
+		List<XRegion> sortedRegions = new LinkedList<XRegion>();
 
-		for (Region region : Region.values()) {
+		for (XRegion region : XRegion.values()) {
 			if ((db.getCamerasForRegion(region) != null)
 					&& (!db.getCamerasForRegion(region).isEmpty())) {
 				sortedRegions.add(region);

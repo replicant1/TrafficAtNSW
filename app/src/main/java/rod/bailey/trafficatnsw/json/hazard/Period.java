@@ -1,51 +1,27 @@
 package rod.bailey.trafficatnsw.json.hazard;
 
-import org.json.JSONObject;
-
-import static rod.bailey.trafficatnsw.util.JSONUtils.*;
-
+/**
+ * Created by rodbailey on 11/10/2016.
+ */
 public class Period {
+    public String closureType;
+    public String direction;
+    public String finishTime;
+    public String fromDay;
+    public String startTime;
+    public String toDay;
 
-	private String closureType;
-	private String direction;
-	private String finishTime;
-	private String fromDay;
-	private String startTime;
-	private String toDay;
+    @Override
+    public String toString() {
+        StringBuffer buf = new StringBuffer( super.toString());
 
-	public Period(JSONObject json) {
-		assert json != null;
+        buf.append("closeType="+ closureType);
+        buf.append(",direction=" + direction);
+        buf.append(",finishTime=" +finishTime);
+        buf.append(",fromDay=" + fromDay);
+        buf.append(",startTime="+ startTime);
+        buf.append(",toDay="+ toDay);
 
-		closureType = safeGetString(json, "closureType");
-		direction = safeGetString(json, "direction");
-		finishTime = safeGetString(json, "finishTime");
-		fromDay = safeGetString(json, "fromDay");
-		startTime = safeGetString(json, "startTime");
-		toDay = safeGetString(json, "toDay");
-	}
-
-	public String getClosureType() {
-		return closureType;
-	}
-
-	public String getDirection() {
-		return direction;
-	}
-
-	public String getFinishTime() {
-		return finishTime;
-	}
-
-	public String getFromDay() {
-		return fromDay;
-	}
-
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public String getToDay() {
-		return toDay;
-	}
-
+        return buf.toString();
+    }
 }

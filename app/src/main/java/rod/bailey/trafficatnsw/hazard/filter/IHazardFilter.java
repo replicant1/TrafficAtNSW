@@ -1,14 +1,14 @@
 package rod.bailey.trafficatnsw.hazard.filter;
 
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
 
 public interface IHazardFilter {
 
 	/**
 	 * @param hazard
-	 *            Hazard to be filtered. Must be non-null.
+	 *            XHazard to be filtered. Must be non-null.
 	 * @return true if teh given hazard is admitted (gets through) this filter
 	 */
-	public boolean admit(Hazard hazard);
+	public boolean admit(XHazard hazard);
 
 }

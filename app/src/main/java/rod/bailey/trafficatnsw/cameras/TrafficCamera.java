@@ -3,7 +3,7 @@ package rod.bailey.trafficatnsw.cameras;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import rod.bailey.trafficatnsw.json.hazard.Region;
+import rod.bailey.trafficatnsw.json.hazard.XRegion;
 
 
 public class TrafficCamera implements Comparable<TrafficCamera> {
@@ -14,12 +14,12 @@ public class TrafficCamera implements Comparable<TrafficCamera> {
 	private String street;
 	private String description;
 	private String url;
-	private Region region;
+	private XRegion region;
 	private boolean favourite;
 	private int index;
 	private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 	
-	public TrafficCamera(String street, String suburb, String description, String url, Region region, int index) {
+	public TrafficCamera(String street, String suburb, String description, String url, XRegion region, int index) {
 		assert street != null;
 		assert suburb != null;
 		assert description != null;
@@ -72,7 +72,7 @@ public class TrafficCamera implements Comparable<TrafficCamera> {
 		return url;
 	}
 
-	public Region getRegion() {
+	public XRegion getRegion() {
 		return region;
 	}
 

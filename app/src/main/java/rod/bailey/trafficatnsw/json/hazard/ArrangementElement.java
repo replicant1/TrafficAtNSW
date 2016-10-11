@@ -1,26 +1,18 @@
 package rod.bailey.trafficatnsw.json.hazard;
 
-import org.json.JSONObject;
-
-import static rod.bailey.trafficatnsw.util.JSONUtils.*;
-
+/**
+ * Created by rodbailey on 11/10/2016.
+ */
 public class ArrangementElement {
+    public String html;
 
-	private String title;
-	private String html;
+    public String title;
 
-	public ArrangementElement(JSONObject elementJSONObject) {
-		assert elementJSONObject != null;
-
-		title = safeGetString(elementJSONObject, "title");
-		html = safeGetString(elementJSONObject, "html");
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getHtml() {
-		return html;
-	}
+    @Override
+    public String toString() {
+        StringBuffer buf = new StringBuffer(super.toString());
+        buf.append("title="+ title);
+        buf.append(",html="+ html);
+        return buf.toString();
+    }
 }

@@ -69,7 +69,7 @@ public class TravelTime implements Comparable<TravelTime> {
 				String featureId = featureJSONObject.getString("id");
 
 				MLog.d(TAG,
-						String.format("Feature[%d] has id %s", i, featureId));
+						String.format("Hazard[%d] has id %s", i, featureId));
 				MLog.d(TAG, String.format(
 						"Creating a TravelTime object with id %s", featureId));
 

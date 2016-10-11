@@ -2,9 +2,9 @@ package rod.bailey.trafficatnsw.hazard.filter;
 
 import java.util.List;
 
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
-import rod.bailey.trafficatnsw.json.hazard.Region;
-import rod.bailey.trafficatnsw.json.hazard.Road;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
+import rod.bailey.trafficatnsw.json.hazard.XRegion;
+import rod.bailey.trafficatnsw.json.hazard.XRoad;
 import rod.bailey.trafficatnsw.util.MLog;
 
 public class AdmitRegionalHazardFilter implements IHazardFilter {
@@ -13,19 +13,19 @@ public class AdmitRegionalHazardFilter implements IHazardFilter {
 			.getSimpleName();
 
 	@Override
-	public boolean admit(Hazard hazard) {
+	public boolean admit(XHazard hazard) {
 		assert hazard != null;
 
 		boolean result = false;
 
-		List<Road> roads = hazard.getRoads();
+		List<XRoad> roads = hazard.getRoads();
 		if ((roads != null) && (!roads.isEmpty())) {
-			Road road = roads.get(0);
+			XRoad road = roads.get(0);
 			String roadRegionStr = road.getRegion();
 
 			if (roadRegionStr != null) {
 				try {
-					Region roadRegion = Region.valueOf(roadRegionStr);
+					XRegion roadRegion = XRegion.valueOf(roadRegionStr);
 					if (roadRegion != null) {
 						result = roadRegion.isRegional();
 					}

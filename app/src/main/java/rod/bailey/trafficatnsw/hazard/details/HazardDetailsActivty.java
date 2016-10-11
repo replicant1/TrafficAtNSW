@@ -14,7 +14,7 @@ import android.widget.ListView;
 import rod.bailey.trafficatnsw.R;
 import rod.bailey.trafficatnsw.hazard.HazardDatabase;
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity;
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
 import rod.bailey.trafficatnsw.util.FooterCancellingListView;
 import rod.bailey.trafficatnsw.util.MLog;
 
@@ -35,7 +35,7 @@ public class HazardDetailsActivty extends Activity {
 	private static final String TAG = HazardDetailsActivty.class
 			.getSimpleName();
 	
-	private Hazard hazard;
+	private XHazard hazard;
 
 	private void createUI() {
 		FooterCancellingListView listView = new FooterCancellingListView(this);

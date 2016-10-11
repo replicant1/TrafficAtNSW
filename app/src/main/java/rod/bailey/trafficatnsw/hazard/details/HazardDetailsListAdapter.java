@@ -14,11 +14,11 @@ import java.util.List;
 import java.util.Set;
 
 import rod.bailey.trafficatnsw.hazard.HazardListItemView;
-import rod.bailey.trafficatnsw.json.hazard.ArrangementElement;
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
-import rod.bailey.trafficatnsw.json.hazard.Lane;
-import rod.bailey.trafficatnsw.json.hazard.Period;
-import rod.bailey.trafficatnsw.json.hazard.Road;
+import rod.bailey.trafficatnsw.json.hazard.XArrangementElement;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
+import rod.bailey.trafficatnsw.json.hazard.XLane;
+import rod.bailey.trafficatnsw.json.hazard.XPeriod;
+import rod.bailey.trafficatnsw.json.hazard.XRoad;
 import rod.bailey.trafficatnsw.util.DateUtils;
 import rod.bailey.trafficatnsw.util.ListHeadingView;
 
@@ -27,9 +27,9 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 
 	private List<CellRec> cellRecs = new LinkedList<CellRec>();
 
-	private final Hazard hazard;
+	private final XHazard hazard;
 
-	public HazardDetailsListAdapter(Hazard hazard) {
+	public HazardDetailsListAdapter(XHazard hazard) {
 		assert hazard != null;
 		this.hazard = hazard;
 
@@ -60,7 +60,7 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 		// "Closures" cells
 		addClosureCellRecs();
 
-		// "Lane" cells (each is an instance of LineCellRec in the lineCellRec
+		// "XLane" cells (each is an instance of LineCellRec in the lineCellRec
 		// aray
 		addLaneCellRecs();
 
@@ -86,7 +86,7 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 	
 	private void addArrangementElementCellRecs() {
 		if (!isEmptyList(hazard.getArrangementElements())) {
-			for (ArrangementElement element : hazard.getArrangementElements()) {
+			for (XArrangementElement element : hazard.getArrangementElements()) {
 				addHeadingCellRec(element.getTitle());
 				addHtmlFieldCellRec(element.getHtml());
 			}
@@ -123,7 +123,7 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 
 	private void addClosureCellRecs() {
 		if (hazard.getPeriods() != null) {
-			for (Period period : hazard.getPeriods()) {
+			for (XPeriod period : hazard.getPeriods()) {
 				if ("ROAD_CLOSURE".equals(period.getClosureType())
 						|| "LANE_CLOSURE".equals(period.getClosureType())) {
 					// Planned road closure of lane closure
@@ -222,10 +222,10 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 
 	private void addLaneCellRecs() {
 		if (!isEmptyList(hazard.getRoads())) {
-			Road firstRoad = hazard.getRoads().get(0);
+			XRoad firstRoad = hazard.getRoads().get(0);
 
 			if (!isEmptyList(firstRoad.getImpactedLanes())) {
-				for (Lane lane : firstRoad.getImpactedLanes()) {
+				for (XLane lane : firstRoad.getImpactedLanes()) {
 					if (!isEmptyStr(lane.getExtent())) {
 						String line = null;
 
@@ -311,7 +311,7 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 
 	private void addQueueLengthCellRec() {
 		if (!isEmptyList(hazard.getRoads())) {
-			Road firstRoad = hazard.getRoads().get(0);
+			XRoad firstRoad = hazard.getRoads().get(0);
 
 			if ((firstRoad != null) && (firstRoad.getQueueLength() > 0)) {
 				String fieldName = "Queues";
@@ -366,7 +366,7 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 	 */
 	private void addTrafficVolumeAndDelayCellRec() {
 		if (!isEmptyList(hazard.getRoads())) {
-			Road firstRoad = hazard.getRoads().get(0);
+			XRoad firstRoad = hazard.getRoads().get(0);
 
 			StringBuffer str = new StringBuffer();
 

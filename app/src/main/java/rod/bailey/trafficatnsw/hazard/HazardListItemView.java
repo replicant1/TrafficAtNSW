@@ -19,8 +19,8 @@ import java.util.Date;
 
 import rod.bailey.trafficatnsw.R;
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty;
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
-import rod.bailey.trafficatnsw.json.hazard.Road;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
+import rod.bailey.trafficatnsw.json.hazard.XRoad;
 import rod.bailey.trafficatnsw.util.DateUtils;
 import rod.bailey.trafficatnsw.util.DisplayUtils;
 
@@ -66,14 +66,14 @@ public class HazardListItemView extends ViewGroup {
 	private final Context ctx;
 	private final LinearLayout dateLinearLayout;
 	private final TextView dateView;
-	private final Hazard hazard;
+	private final XHazard hazard;
 	private final ImageView imageView;
 	private final boolean showLastUpdatedDate;
 	private final TextView subSubTitleView;
 	private final TextView subTitleView;
 	private final TextView titleView;
 
-	public HazardListItemView(Context ctx, Hazard hazard,
+	public HazardListItemView(Context ctx, XHazard hazard,
 			boolean showLastUpdatedDate, boolean clickable) {
 		super(ctx);
 		this.ctx = ctx;
@@ -106,7 +106,7 @@ public class HazardListItemView extends ViewGroup {
 			addView(dateLinearLayout);
 		}
 
-		Road road = hazard.getRoads().get(0);
+		XRoad road = hazard.getRoads().get(0);
 
 		imageView
 				.setImageResource(hazard.isInitialReport() ? R.drawable.incident_initial_report
@@ -168,7 +168,7 @@ public class HazardListItemView extends ViewGroup {
 		}
 	}
 
-	public Hazard getHazard() {
+	public XHazard getHazard() {
 		return hazard;
 	}
 

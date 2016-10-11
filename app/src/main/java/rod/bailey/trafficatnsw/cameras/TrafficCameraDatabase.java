@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter;
-import rod.bailey.trafficatnsw.json.hazard.Region;
+import rod.bailey.trafficatnsw.json.hazard.XRegion;
 import rod.bailey.trafficatnsw.util.MLog;
 
 public class TrafficCameraDatabase implements PropertyChangeListener {
@@ -41,11 +41,11 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 	
 	private ITrafficCameraFilter filter;
 
-	private final Map<Region, List<TrafficCamera>> filteredCamerasPerRegion = new HashMap<Region, List<TrafficCamera>>();
+	private final Map<XRegion, List<TrafficCamera>> filteredCamerasPerRegion = new HashMap<XRegion, List<TrafficCamera>>();
 
-	// Key = Region
+	// Key = XRegion
 	// Value = List of TrafficCamera instances
-	private final Map<Region, List<TrafficCamera>> unfilteredCamerasPerRegion = new HashMap<Region, List<TrafficCamera>>();
+	private final Map<XRegion, List<TrafficCamera>> unfilteredCamerasPerRegion = new HashMap<XRegion, List<TrafficCamera>>();
 	
 	private Context ctx;
 
@@ -78,16 +78,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Hexham",
 				"New England Highway near Hexham Bridge looking south towards Newcastle.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/newenglandhwy_hexham.jpg",
-				Region.REG_NORTH, 100);
+				XRegion.REG_NORTH, 100);
 		hexham.setFavourite(false);
 		data.add(hexham);
 
 		TrafficCamera newcastle_rd = new TrafficCamera(
-				"Newcastle Road",
+				"Newcastle XRoad",
 				"Newcastle",
-				"Newcastle Road at Croudace Street looking west towards M1 Pacific Motorway.",
+				"Newcastle XRoad at Croudace Street looking west towards M1 Pacific Motorway.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/newcastlelinkrd_newcastle.jpg",
-				Region.REG_NORTH, 101);
+				XRegion.REG_NORTH, 101);
 		data.add(newcastle_rd);
 
 		// [108] = M1 Pacific Mwy (John Renshaw Dr)
@@ -96,16 +96,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"John Renshaw Drive",
 				"M1 Pacific Motorway at John Renshaw Drive looking south towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_johnrenshawdr.jpg",
-				Region.REG_NORTH, 108);
+				XRegion.REG_NORTH, 108);
 		data.add(renshaw_dr);
 
 		// [109] = M1 Pacific Mwy (Sparks road)
 		TrafficCamera sparks_rd = new TrafficCamera(
 				"M1 Pacific Motorway",
-				"Sparks Road",
-				"M1 Pacific Motorway at Sparks Road looking north towards Newcastle.",
+				"Sparks XRoad",
+				"M1 Pacific Motorway at Sparks XRoad looking north towards Newcastle.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_sparkesrd.jpg",
-				Region.REG_NORTH, 109);
+				XRegion.REG_NORTH, 109);
 		data.add(sparks_rd);
 
 		// [26] = M1 Pacific Mwy (Kariong)
@@ -114,7 +114,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Kariong",
 				"M1 Pacific Motorway at the Kariong on ramp looking south towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_kariong.jpg",
-				Region.REG_NORTH, 26);
+				XRegion.REG_NORTH, 26);
 		data.add(f3_kariong);
 
 		// [27] = M1 (hawkesbuy river)
@@ -123,7 +123,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Hawkesbury River",
 				"M1 Pacific Motorway crossing the Hawkesbury River Bridge looking south towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_mooney.jpg",
-				Region.REG_NORTH, 27);
+				XRegion.REG_NORTH, 27);
 		data.add(f3_hawkesbury);
 
 		// [28] = m1 pacific mwy (mount white)
@@ -132,7 +132,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Mount White",
 				"M1 Pacific Motorway at the Mount White heavy vehicle checking station looking north towards Calga.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_mountwhite.jpg",
-				Region.REG_NORTH, 28);
+				XRegion.REG_NORTH, 28);
 		data.add(f3_mt_white);
 
 		// [29] = m1 pacific mwy (ourimbah)
@@ -141,7 +141,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Ourimbah",
 				"M1 Pacific Motorway at Ourimbah on ramp looking north towards Wyong.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_ourimbah.jpg",
-				Region.REG_NORTH, 29);
+				XRegion.REG_NORTH, 29);
 		data.add(f3_ourimbah);
 
 		// [30] = m1 pacific mwy (wahroonga)
@@ -150,7 +150,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Wahroonga",
 				"The Pacific Highway on ramp to the M1 Pacific Motorway looking north towards the Central Coast.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_wahroonga.jpg",
-				Region.REG_NORTH, 30);
+				XRegion.REG_NORTH, 30);
 		data.add(f3_wahroonga);
 
 		// [31] = m1 pacific mwy (windy banks)
@@ -159,7 +159,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Windy Banks",
 				"M1 Pacific Motorway at the Windy Banks on ramp looking south towards Hornsby.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f3_windybanks.jpg",
-				Region.REG_NORTH, 31);
+				XRegion.REG_NORTH, 31);
 		data.add(f3_windy);
 
 		Collections.sort(data);
@@ -171,28 +171,28 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 		List<TrafficCamera> data = new LinkedList<TrafficCamera>();
 
 		TrafficCamera kosciuszko_rd = new TrafficCamera(
-				"Kosciuszko Road",
+				"Kosciuszko XRoad",
 				"Wilson's Valley",
 				"Wilson's Valley chain bay looking south-west towards Perisher Valley.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/kosciuszkord_wilsonsvalley.jpg",
-				Region.REG_SOUTH, 65);
+				XRegion.REG_SOUTH, 65);
 		data.add(kosciuszko_rd);
 
 		TrafficCamera mt_ousley = new TrafficCamera(
 				"M1 Princes Motorway",
 				"Mt Ousley",
-				"M1 Princes Motorway at Mt Ousley Road looking north towards Sydney.",
+				"M1 Princes Motorway at Mt Ousley XRoad looking north towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f6_mtousley.jpg",
-				Region.REG_SOUTH, 200);
+				XRegion.REG_SOUTH, 200);
 		data.add(mt_ousley);
 
 		// [201] = Princes Hwy (Albion park rail)
 		TrafficCamera albion = new TrafficCamera(
 				"Princes Highway",
 				"Albion Park Rail",
-				"Princes Highway at Airport Road looking north towards Wollongong.",
+				"Princes Highway at Airport XRoad looking north towards Wollongong.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/princeshwy_albionparkrail.jpg",
-				Region.REG_SOUTH, 201);
+				XRegion.REG_SOUTH, 201);
 		data.add(albion);
 
 		// [202] = Princes Hwy (Wollongong)
@@ -201,7 +201,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Wollongong",
 				"Princes Highway near Bourke Street looking north towards Bulli.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/princeshwy_wollongong.jpg",
-				Region.REG_SOUTH, 202);
+				XRegion.REG_SOUTH, 202);
 		data.add(wollongong);
 
 		Collections.sort(data);
@@ -213,11 +213,11 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 		List<TrafficCamera> data = new LinkedList<TrafficCamera>();
 
 		TrafficCamera king_georges_rd = new TrafficCamera(
-				"King Georges Road",
+				"King Georges XRoad",
 				"Beverly Hills",
-				"Corner of King Georges Road and Stoney Creek Road looking north towards Beverly Hills.",
+				"Corner of King Georges XRoad and Stoney Creek XRoad looking north towards Beverly Hills.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/knggrd_beverlyhills.jpg",
-				Region.SYD_MET, 1);
+				XRegion.SYD_MET, 1);
 		king_georges_rd.setFavourite(false);
 		data.add(king_georges_rd);
 
@@ -226,7 +226,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Botany",
 				"General Holmes Drive at the east end of the Airport Tunnel looking east towards Botany.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/ghd_airport.jpg",
-				Region.SYD_MET, 2);
+				XRegion.SYD_MET, 2);
 		general_holmes_dr.setFavourite(false);
 		data.add(general_holmes_dr);
 
@@ -235,7 +235,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"East Sydney",
 				"Corner of William Street and College Street near Hyde Park looking east towards Kings Cross.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/williamst.jpg",
-				Region.SYD_MET, 3);
+				XRegion.SYD_MET, 3);
 		data.add(william_st_east_syd);
 
 		TrafficCamera gladesville_bridge = new TrafficCamera(
@@ -243,59 +243,59 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Drummoyne",
 				"Gladesville Bridge looking west towards Gladesville.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/gladesvillebr.jpg",
-				Region.SYD_MET, 4);
+				XRegion.SYD_MET, 4);
 		data.add(gladesville_bridge);
 		
 		TrafficCamera hume_hwy_ashfield = new TrafficCamera(
 				"Hume Highway",
 				"Ashfield",
-				"Corner of Hume Highway and Roberts Road looking west towards Strathfield.",
+				"Corner of Hume Highway and Roberts XRoad looking west towards Strathfield.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/humehwy_ashfield.jpg",
-				Region.SYD_MET, 5);
+				XRegion.SYD_MET, 5);
 		data.add(hume_hwy_ashfield);
 
 		TrafficCamera hume_hwy_strathfield = new TrafficCamera(
 				"Hume Highway",
 				"Strathfield",
-				"Corner of Hume Highway and Roberts Road looking west towards Yagoona.",
+				"Corner of Hume Highway and Roberts XRoad looking west towards Yagoona.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/humehwy_strathfield.jpg",
-				Region.SYD_MET, 6);
+				XRegion.SYD_MET, 6);
 		data.add(hume_hwy_strathfield);
 
 		// City West Link (Lilyfield)
 		TrafficCamera city_west = new TrafficCamera(
 				"City West Link",
 				"Lilyfield",
-				"City West Link at Lilyfield looking east towards Victoria Road intersection.",
+				"City West Link at Lilyfield looking east towards Victoria XRoad intersection.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/citywestlink.jpg",
-				Region.SYD_MET, 7);
+				XRegion.SYD_MET, 7);
 		data.add(city_west);
 
 		// Easter distributor (Kensington)
 		TrafficCamera eastern_dist = new TrafficCamera(
 				"Eastern Distributor",
 				"Kensington",
-				"Southern end of the Eastern Distributor tunnel near the Link Road on-ramp looking north towards Sydney",
+				"Southern end of the Eastern Distributor tunnel near the Link XRoad on-ramp looking north towards Sydney",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/easterndist.jpg",
-				Region.SYD_MET, 8);
+				XRegion.SYD_MET, 8);
 		data.add(eastern_dist);
 
-		// Alison Road (Randwick)
+		// Alison XRoad (Randwick)
 		TrafficCamera alison_road = new TrafficCamera(
-				"Alison Road",
+				"Alison XRoad",
 				"Randwick",
-				"Alison Road at Darley Street looking north-west towards Anzac Parade.",
+				"Alison XRoad at Darley Street looking north-west towards Anzac Parade.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/alisonrd_randwick.jpg",
-				Region.SYD_MET, 9);
+				XRegion.SYD_MET, 9);
 		data.add(alison_road);
 
 		// Anzac Bridge (Rozelle)
 		TrafficCamera anzac_bridge = new TrafficCamera(
 				"Anzac Bridge",
 				"Rozelle",
-				"Intersection of Victoria Road and Anzac Bridge looking east towards the Sydney CBD.",
+				"Intersection of Victoria XRoad and Anzac Bridge looking east towards the Sydney CBD.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacbr.jpg",
-				Region.SYD_MET, 10);
+				XRegion.SYD_MET, 10);
 		data.add(anzac_bridge);
 
 		// Anzac Parade (Moore Park)
@@ -304,7 +304,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Moore Park",
 				"Corner of Anzac Parade and Cleveland Street looking south towards Randwick.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/anzacpde.jpg",
-				Region.SYD_MET, 11);
+				XRegion.SYD_MET, 11);
 		data.add(anzac_pde);
 
 		// [12] = M4 Western Mwy (Olympic Park)
@@ -313,52 +313,52 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Olympic Park",
 				"M4 at Sydney Olympic Park looking east towards Strathfield.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m4_olympic.jpg",
-				Region.SYD_MET, 12);
+				XRegion.SYD_MET, 12);
 		data.add(m4_olympic_park);
 
 		// [13] = M5 East (Beverly Hills)
 		TrafficCamera m5_east = new TrafficCamera(
 				"M5 East",
 				"Beverly Hills",
-				"M5 East at the King Georges Road on ramp looking west towards Riverwood.",
+				"M5 East at the King Georges XRoad on ramp looking west towards Riverwood.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m5east.jpg",
-				Region.SYD_MET, 13);
+				XRegion.SYD_MET, 13);
 		data.add(m5_east);
 
-		// [14] = Parramatta Road (Leichardt)
+		// [14] = Parramatta XRoad (Leichardt)
 		TrafficCamera parramatta_rd_leichardt = new TrafficCamera(
-				"Parramatta Road",
+				"Parramatta XRoad",
 				"Leichardt",
-				"Parramatta Road at Elswick Street looking west towards Ashfield.",
+				"Parramatta XRoad at Elswick Street looking west towards Ashfield.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/parrard_leichhardt.jpg",
-				Region.SYD_MET, 14);
+				XRegion.SYD_MET, 14);
 		data.add(parramatta_rd_leichardt);
 
-		// [15] = Parramatta Road (Silverwater)
+		// [15] = Parramatta XRoad (Silverwater)
 		TrafficCamera parramatta_rd_silverwater = new TrafficCamera(
-				"Parramatta Road",
+				"Parramatta XRoad",
 				"Silverwater",
-				"Parramatta Road at Silverwater Road looking west towards Parramatta.",
+				"Parramatta XRoad at Silverwater XRoad looking west towards Parramatta.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/parrard_silverwater.jpg",
-				Region.SYD_MET, 15);
+				XRegion.SYD_MET, 15);
 		data.add(parramatta_rd_silverwater);
 
-		// [16] = Parramatta Road (Strathfield)
+		// [16] = Parramatta XRoad (Strathfield)
 		TrafficCamera parramatta_rd_strathfield = new TrafficCamera(
-				"Parramatta Road",
+				"Parramatta XRoad",
 				"Strathfield",
-				"Parramatta Road at Leicester Avenue looking east towards Burwood.",
+				"Parramatta XRoad at Leicester Avenue looking east towards Burwood.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/parrard_strathfield.jpg",
-				Region.SYD_MET, 16);
+				XRegion.SYD_MET, 16);
 		data.add(parramatta_rd_strathfield);
 
 		// [17] = Princes Hwy (Blakehurst)
 		TrafficCamera princes_hwy_blakehurst = new TrafficCamera(
 				"Princes Highway",
 				"Blakehurst",
-				"Princes Highway at the King Georges Road intersection looking south towards Sutherland.",
+				"Princes Highway at the King Georges XRoad intersection looking south towards Sutherland.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/princes_blakehurst.jpg",
-				Region.SYD_MET, 17);
+				XRegion.SYD_MET, 17);
 		data.add(princes_hwy_blakehurst);
 
 		// [18] = Princes Hwy (Kogarah)
@@ -367,16 +367,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Kogarah",
 				"Princes Highway at President Avenue looking south towards Ramsgate.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/princes_kogarah.jpg",
-				Region.SYD_MET, 18);
+				XRegion.SYD_MET, 18);
 		data.add(princes_hwy_kogarah);
 
 		// [19] = Princes Hwy (St Peters)
 		TrafficCamera princes_hwy_st_peters = new TrafficCamera(
 				"Princes Highway",
 				"St Peters",
-				"Princes Highway at the Canal Road intersection looking north towards Sydney.",
+				"Princes Highway at the Canal XRoad intersection looking north towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/princes_stpeters.jpg",
-				Region.SYD_MET, 19);
+				XRegion.SYD_MET, 19);
 		data.add(princes_hwy_st_peters);
 
 		// [20] = Southern Cross Drive (Eastlakes)
@@ -385,7 +385,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Eastlakes",
 				"Southern Cross Drive at Wentworth Avenue looking south towards Mascot.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/scd_eastlakes.jpg",
-				Region.SYD_MET, 20);
+				XRegion.SYD_MET, 20);
 		data.add(southern_cross_dr);
 
 		// [21] = Syd Einfield Drive (Bondi Junction)
@@ -394,7 +394,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Bondi Junction",
 				"Syd Einfeld Drive looking west towards Sydney CBD.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/sed_bondijunction.jpg",
-				Region.SYD_MET, 21);
+				XRegion.SYD_MET, 21);
 		data.add(syd_einfield_dr);
 
 		// [22] = SHB (Milsons Pt)
@@ -403,7 +403,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Milsons Point",
 				"Sydney Harbour Bridge deck looking south towards the Sydney CBD.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/harbourbridge.jpg",
-				Region.SYD_MET, 22);
+				XRegion.SYD_MET, 22);
 		data.add(shb);
 
 		// [23] = The Grand Pde (Brighton-le-sands)
@@ -412,7 +412,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Brighton-Le-Sands",
 				"The Grand Parade at Bay Street looking north towards Sydney Airport.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/grandpde_bls.jpg",
-				Region.SYD_MET, 23);
+				XRegion.SYD_MET, 23);
 		data.add(grand_pde);
 
 		// [24] = George St (Railway Sq)
@@ -421,7 +421,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Railway square",
 				"Railway Square, George Street looking north towards Sydney CBD.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/georgest.jpg",
-				Region.SYD_MET, 24);
+				XRegion.SYD_MET, 24);
 		data.add(george_st);
 
 		Collections.sort(data);
@@ -435,9 +435,9 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 		TrafficCamera cumberland_hwy_carlingford = new TrafficCamera(
 				"Cumberland Highway",
 				"Carlingford",
-				"Cumberland Highway at Marsden Road looking north towards Beecroft.",
+				"Cumberland Highway at Marsden XRoad looking north towards Beecroft.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/cumberlandhwy_carlingford.jpg",
-				Region.SYD_NORTH, 25);
+				XRegion.SYD_NORTH, 25);
 		data.add(cumberland_hwy_carlingford);
 
 		TrafficCamera falcon_st_crows_nest = new TrafficCamera(
@@ -445,34 +445,34 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Crows Nest",
 				"Corner of Falcon Street and the Pacific Highway looking East towards the Warringah Freeway.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/falconst_crowsnest.jpg",
-				Region.SYD_NORTH, 32);
+				XRegion.SYD_NORTH, 32);
 		data.add(falcon_st_crows_nest);
 
 		// [33] = M2 (Pennant Hills)
 		TrafficCamera m2_pennant_hills = new TrafficCamera(
 				"M2",
 				"Pennant Hills",
-				"M2 at Pennant Hills Road looking west towards Baulkham Hills.",
+				"M2 at Pennant Hills XRoad looking west towards Baulkham Hills.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m2_pennanthills.jpg",
-				Region.SYD_NORTH, 33);
+				XRegion.SYD_NORTH, 33);
 		data.add(m2_pennant_hills);
 
-		// [34] = Manly Road (Seaforth)
+		// [34] = Manly XRoad (Seaforth)
 		TrafficCamera manly_rd = new TrafficCamera(
-				"Manly Road",
+				"Manly XRoad",
 				"Seaforth",
-				"Corner of Manly Road and Battle Boulevard near The Spit Bridge, looking north towards Manly.",
+				"Corner of Manly XRoad and Battle Boulevard near The Spit Bridge, looking north towards Manly.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/manlyrd.jpg",
-				Region.SYD_NORTH, 34);
+				XRegion.SYD_NORTH, 34);
 		data.add(manly_rd);
 
-		// [35] = Military Road (Neutral Bay)
+		// [35] = Military XRoad (Neutral Bay)
 		TrafficCamera military_rd = new TrafficCamera(
-				"Military Road",
+				"Military XRoad",
 				"Neutral Bay",
-				"Military Road at Wycombe Road looking west towards the Warringah Freeway.",
+				"Military XRoad at Wycombe XRoad looking west towards the Warringah Freeway.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/militaryrd_neutralbay.jpg",
-				Region.SYD_NORTH, 35);
+				XRegion.SYD_NORTH, 35);
 		data.add(military_rd);
 
 		// [36] = Pacific Highway (Chatswood)
@@ -481,34 +481,34 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Chatswood",
 				"Corner of the Pacific Highway and Centennial Avenue near Chatswood Park, looking south towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/pacific_chats.jpg",
-				Region.SYD_NORTH, 36);
+				XRegion.SYD_NORTH, 36);
 		data.add(pacific_hwy_chatswood);
 
 		// [37] = Pacific Hwy (Pymble)
 		TrafficCamera pacific_hwy_pymble = new TrafficCamera(
 				"Pacific Highway",
 				"Pymble",
-				"Pacific Highway at Ryde Road looking south-west towards Ryde.",
+				"Pacific Highway at Ryde XRoad looking south-west towards Ryde.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/pacific_pymble.jpg",
-				Region.SYD_NORTH, 37);
+				XRegion.SYD_NORTH, 37);
 		data.add(pacific_hwy_pymble);
 
 		// [38] = Stewart Street (Eastwood)
 		TrafficCamera stewart_st = new TrafficCamera(
 				"Stewart St",
 				"Eastwood",
-				"Corner of Stewart Street and Marsden Road looking west towards Parramatta.",
+				"Corner of Stewart Street and Marsden XRoad looking west towards Parramatta.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/stewartst_eastwood.jpg",
-				Region.SYD_NORTH, 38);
+				XRegion.SYD_NORTH, 38);
 		data.add(stewart_st);
 
-		// [39] = Victoria Road (Gladesville)
+		// [39] = Victoria XRoad (Gladesville)
 		TrafficCamera victoria_rd = new TrafficCamera(
-				"Victoria Road",
+				"Victoria XRoad",
 				"Gladesville",
-				"Victoria Road at Pittwater Road looking north-west towards Ryde.",
+				"Victoria XRoad at Pittwater XRoad looking north-west towards Ryde.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/victoriard_gladesville.jpg",
-				Region.SYD_NORTH, 39);
+				XRegion.SYD_NORTH, 39);
 		data.add(victoria_rd);
 
 		// [40] = Warringah Fwy (North Sydney)
@@ -517,25 +517,25 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"North Sydney",
 				"The Warringah Freeway, approaching the Sydney Harbour Tunnel looking south towards the city.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/warringahfwy.jpg",
-				Region.SYD_NORTH, 40);
+				XRegion.SYD_NORTH, 40);
 		data.add(warringah_fwy);
 
-		// [41] = Warringah Road (Frenchs Forrest)
+		// [41] = Warringah XRoad (Frenchs Forrest)
 		TrafficCamera warringah_rd = new TrafficCamera(
-				"Warringah Road",
+				"Warringah XRoad",
 				"Frenchs Forrest",
-				"Warringah Road at Forest Way looking west towards Forestville.",
+				"Warringah XRoad at Forest Way looking west towards Forestville.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/warringahrd_frenchsforest.jpg",
-				Region.SYD_NORTH, 41);
+				XRegion.SYD_NORTH, 41);
 		data.add(warringah_rd);
 
-		// [42] = Pittwater Road (Narrabeen)
+		// [42] = Pittwater XRoad (Narrabeen)
 		TrafficCamera pittwater_rd_narrabeen = new TrafficCamera(
-				"Pittwater Road",
+				"Pittwater XRoad",
 				"Narrabeen",
-				"Pittwater Road at Wakehurst Parkway looking north towards Mona Vale.",
+				"Pittwater XRoad at Wakehurst Parkway looking north towards Mona Vale.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/pittwaterrd_narrabeen.jpg",
-				Region.SYD_NORTH, 42);
+				XRegion.SYD_NORTH, 42);
 		data.add(pittwater_rd_narrabeen);
 
 		// [43] = Ryde Bridge (Ryde)
@@ -544,52 +544,52 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Ryde",
 				"Church Street crossing Ryde Bridge looking north towards Ryde.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/rydebridge.jpg",
-				Region.SYD_NORTH, 43);
+				XRegion.SYD_NORTH, 43);
 		data.add(ryde_bridge);
 
 		// [400] = M2 (Ryde)
 		TrafficCamera m2_ryde = new TrafficCamera(
 				"M2",
 				"Ryde",
-				"M2 at the Lane Cove Road exit looking west towards Epping.",
+				"M2 at the XLane Cove XRoad exit looking west towards Epping.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m2_ryde.jpg",
-				Region.SYD_NORTH, 400);
+				XRegion.SYD_NORTH, 400);
 		data.add(m2_ryde);
 
 		// [401] = Epping Rd (Macquarie Park)
 		TrafficCamera epping_rd_mac_park = new TrafficCamera(
-				"Epping Road",
+				"Epping XRoad",
 				"Macquarie Park",
-				"Epping Road at Balaclava Road looking west towards Epping.",
+				"Epping XRoad at Balaclava XRoad looking west towards Epping.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/eppingrd_macquariepark.jpg",
-				Region.SYD_NORTH, 401);
+				XRegion.SYD_NORTH, 401);
 		data.add(epping_rd_mac_park);
 
-		// [402] = Pennant Hills Road (Thornleigh)
+		// [402] = Pennant Hills XRoad (Thornleigh)
 		TrafficCamera thornleigh = new TrafficCamera(
-				"Pennant Hills Road",
+				"Pennant Hills XRoad",
 				"Thornleigh",
-				"Pennant Hills Road at The Comenarra Parkway looking south towards Carlingford.",
+				"Pennant Hills XRoad at The Comenarra Parkway looking south towards Carlingford.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/pennanthillsrd_thornleigh.jpg",
-				Region.SYD_NORTH, 402);
+				XRegion.SYD_NORTH, 402);
 		data.add(thornleigh);
 
-		// [403] = Epping Road (Lane cove)
+		// [403] = Epping XRoad (XLane cove)
 		TrafficCamera epping_rd_lane_cove = new TrafficCamera(
-				"Epping Road",
-				"Lane Cove",
-				"Epping Road at Centennial Avenue looking west towards Lane Cove.",
+				"Epping XRoad",
+				"XLane Cove",
+				"Epping XRoad at Centennial Avenue looking west towards XLane Cove.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/eppingrd_lanecove.jpg",
-				Region.SYD_NORTH, 403);
+				XRegion.SYD_NORTH, 403);
 		data.add(epping_rd_lane_cove);
 
-		// [404] = Beecroft Road (Epping)
+		// [404] = Beecroft XRoad (Epping)
 		TrafficCamera beecroft_rd = new TrafficCamera(
-				"Beecroft Road",
+				"Beecroft XRoad",
 				"Epping",
-				"Beecroft Road at Carlingford Road looking west towards Carlingford.",
+				"Beecroft XRoad at Carlingford XRoad looking west towards Carlingford.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/beecroftrd_epping.jpg",
-				Region.SYD_NORTH, 404);
+				XRegion.SYD_NORTH, 404);
 		data.add(beecroft_rd);
 
 		// [405] = Gore Hill Fwy (Artarmon)
@@ -598,16 +598,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Artarmon",
 				"Gore Hill Freeway at Artarmon looking south towards Sydney Harbour Bridge.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/gorehillfwy_artarmon.jpg",
-				Region.SYD_NORTH, 405);
+				XRegion.SYD_NORTH, 405);
 		data.add(gore_fwy_artarmon);
 
-		// [406] = Warringah Road (Forestville)
+		// [406] = Warringah XRoad (Forestville)
 		TrafficCamera warringah_rd_forestville = new TrafficCamera(
-				"Warringah Road",
+				"Warringah XRoad",
 				"Forestville",
-				"Warringah Road at Healey Way looking east towards Frenchs Forest",
+				"Warringah XRoad at Healey Way looking east towards Frenchs Forest",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/warringahrd_forestville.jpg",
-				Region.SYD_NORTH, 406);
+				XRegion.SYD_NORTH, 406);
 		data.add(warringah_rd_forestville);
 
 		Collections.sort(data);
@@ -624,7 +624,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Miranda",
 				"5 ways at The Boulevarde looking west towards Sutherland.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/5ways.jpg",
-				Region.SYD_SOUTH, 44);
+				XRegion.SYD_SOUTH, 44);
 		data.add(five_ways);
 
 		// [45] = Hume Hwy (Bankstown)
@@ -633,16 +633,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Bankstown",
 				"Corner of Hume Highway and Stacey Street looking east towards Strathfield.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/humehwy_bankstown.jpg",
-				Region.SYD_SOUTH, 45);
+				XRegion.SYD_SOUTH, 45);
 		data.add(hume_hwy_bankstown);
 
 		// [46] = Hume Mwy (Campbelltown)
 		TrafficCamera hume_hwy_campbelltown = new TrafficCamera(
 				"Hume Motorway",
 				"Campbelltown",
-				"Corner of Hume Motorway and Narellan Road looking north towards Liverpool.",
+				"Corner of Hume Motorway and Narellan XRoad looking north towards Liverpool.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/humehwy_campbelltown.jpg",
-				Region.SYD_SOUTH, 46);
+				XRegion.SYD_SOUTH, 46);
 		data.add(hume_hwy_campbelltown);
 
 		// [47] = Hume highway (liverpool)
@@ -651,25 +651,25 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Liverpool",
 				"Corner of Hume Highway and Cumberland Highway looking south towards Casula.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/humehwy_liverpool.jpg",
-				Region.SYD_SOUTH, 47);
+				XRegion.SYD_SOUTH, 47);
 		data.add(hume_hwy_liverpool);
 
 		// [48] = Hume Motorway (St Andrews)
 		TrafficCamera hume_hwy_st_andrews = new TrafficCamera(
 				"Hume Motorway",
 				"St Andrews",
-				"Corner of Hume Motorway and Raby Road looking north towards Liverpool.",
+				"Corner of Hume Motorway and Raby XRoad looking north towards Liverpool.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/humehwy_standrews.jpg",
-				Region.SYD_SOUTH, 48);
+				XRegion.SYD_SOUTH, 48);
 		data.add(hume_hwy_st_andrews);
 
 		// [49] = Hume Hwy (Villawood)
 		TrafficCamera hume_hwy_villawood = new TrafficCamera(
 				"Hume Highway",
 				"Villawood",
-				"Corner of Hume Highway and Woodville Road looking east towards Bass Hill.",
+				"Corner of Hume Highway and Woodville XRoad looking east towards Bass Hill.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/humehwy_villawood.jpg",
-				Region.SYD_SOUTH, 49);
+				XRegion.SYD_SOUTH, 49);
 		data.add(hume_hwy_villawood);
 
 		// [50] = M5 / M7 (Prestons)
@@ -678,7 +678,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Prestons",
 				"Junction of M5 and M7 looking south towards Ingleburn.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m5_m7.jpg",
-				Region.SYD_SOUTH, 50);
+				XRegion.SYD_SOUTH, 50);
 		data.add(m5_m7);
 
 		// [51] = M5 (LIverpool)
@@ -687,7 +687,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Liverpool",
 				"M5 at Hume Highway looking east towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m5_liverpool.jpg",
-				Region.SYD_SOUTH, 51);
+				XRegion.SYD_SOUTH, 51);
 		data.add(m5_liverpool);
 
 		// [52] = M5 (Milperra)
@@ -696,16 +696,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Milperra",
 				"M5 Motorway at Henry Lawson Drive looking east towards Beverly Hills.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m5_milperra.jpg",
-				Region.SYD_SOUTH, 52);
+				XRegion.SYD_SOUTH, 52);
 		data.add(m5_milperra);
 
-		// [500] = Audley Road(Audley Weir)
+		// [500] = Audley XRoad(Audley Weir)
 		TrafficCamera audley_rd = new TrafficCamera(
-				"Audley Road",
+				"Audley XRoad",
 				"Audley Weir",
-				"Audley Road at Audley Weir looking east towards Sir Bertram Stevens Drive.",
+				"Audley XRoad at Audley Weir looking east towards Sir Bertram Stevens Drive.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/audleyrd_audley.jpg",
-				Region.SYD_SOUTH, 500);
+				XRegion.SYD_SOUTH, 500);
 		data.add(audley_rd);
 
 		// [501] = A1 Princes Mwy (heathcote)
@@ -714,25 +714,25 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Heathcote",
 				"A1 Princes Motorway at Heathcote looking south towards Wollongong.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/f6_waterfall.jpg",
-				Region.SYD_SOUTH, 501);
+				XRegion.SYD_SOUTH, 501);
 		data.add(heathcote);
 
 		// [502] = M5 (padstow)
 		TrafficCamera padstow = new TrafficCamera(
 				"M5",
 				"Padstow",
-				"M5 at Fairford Road looking east towards Arncliffe.",
+				"M5 at Fairford XRoad looking east towards Arncliffe.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m5_padstow.jpg",
-				Region.SYD_SOUTH, 502);
+				XRegion.SYD_SOUTH, 502);
 		data.add(padstow);
 
 		// [503] = Princes Hwy (sutherland)
 		TrafficCamera sutherland = new TrafficCamera(
 				"Princes Highway",
 				"Sutherland",
-				"Princes Highway at Acacia Road looking south towards Waterfall.",
+				"Princes Highway at Acacia XRoad looking south towards Waterfall.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/princeshwy_sutherland.jpg",
-				Region.SYD_SOUTH, 503);
+				XRegion.SYD_SOUTH, 503);
 		data.add(sutherland);
 
 		Collections.sort(data);
@@ -746,17 +746,17 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 		TrafficCamera church_st = new TrafficCamera(
 				"Church Street",
 				"Parramatta",
-				"Corner of Church Street and Victoria Road looking north towards Northmead.",
+				"Corner of Church Street and Victoria XRoad looking north towards Northmead.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/churchst_parra.jpg",
-				Region.SYD_WEST, 53);
+				XRegion.SYD_WEST, 53);
 		data.add(church_st);
 
 		TrafficCamera cumberland_hwy_merrylands = new TrafficCamera(
 				"Cumberland Highway",
 				"Merrylands",
-				"Cumberland Highway at Merrylands Road looking north towards the M4 Western Motorway.",
+				"Cumberland Highway at Merrylands XRoad looking north towards the M4 Western Motorway.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/cumberlandhwy_merrylands.jpg",
-				Region.SYD_WEST, 54);
+				XRegion.SYD_WEST, 54);
 		data.add(cumberland_hwy_merrylands);
 
 		// [55] = James Ruse Drive (Rosehills)
@@ -765,16 +765,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Rosehills",
 				"James Ruse Drive at Grand Avenue looking north towards Rydalmere.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/jrd_rosehill.jpg",
-				Region.SYD_WEST, 55);
+				XRegion.SYD_WEST, 55);
 		data.add(james_ruse_dr_rosehill);
 
 		// [56] = M4 Western Mwy (Minchinbury)
 		TrafficCamera m4_western_motorway = new TrafficCamera(
 				"M4 Western Motorway",
 				"Minchinbury",
-				"M4 Western Motorway at Wallgrove Road looking east towards Eastern Creek.",
+				"M4 Western Motorway at Wallgrove XRoad looking east towards Eastern Creek.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m4_minchinbury.jpg",
-				Region.SYD_WEST, 56);
+				XRegion.SYD_WEST, 56);
 		data.add(m4_western_motorway);
 
 		// [57] = M4 Western Mwy (Prospect)
@@ -783,25 +783,25 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Prospect",
 				"M4 Western Motorway at the Prospect Highway exit ramp looking east towards Parramatta.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m4_prospect.jpg",
-				Region.SYD_WEST, 57);
+				XRegion.SYD_WEST, 57);
 		data.add(m4_prospect);
 
 		// [58] = M4 Western Mwy (St marys)
 		TrafficCamera m4_st_marys = new TrafficCamera(
 				"M4 Western Motorway",
 				"St Marys",
-				"M4 Western Motorway at Mamre Road looking west towards Penrith.",
+				"M4 Western Motorway at Mamre XRoad looking west towards Penrith.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m4_stmarys.jpg",
-				Region.SYD_WEST, 58);
+				XRegion.SYD_WEST, 58);
 		data.add(m4_st_marys);
 
 		// [59] = M7 Motorway (Glenwood)
 		TrafficCamera m7_glenwood = new TrafficCamera(
 				"M7 Motorway",
 				"Glenwood",
-				"M7 Motorway at Sunnyholt Road looking east towards Bella Vista.",
+				"M7 Motorway at Sunnyholt XRoad looking east towards Bella Vista.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m7_glenwood.jpg",
-				Region.SYD_WEST, 59);
+				XRegion.SYD_WEST, 59);
 		data.add(m7_glenwood);
 
 		// [60] = m7 (horsely park)
@@ -810,43 +810,43 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Horsley Park",
 				"M7 Motorway at The Horsley Drive looking south towards Hoxton Park.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m7_horsleydr.jpg",
-				Region.SYD_WEST, 60);
+				XRegion.SYD_WEST, 60);
 		data.add(m7_horsely);
 
 		// [61] = Old windsor rd (beaumont hills)
 		TrafficCamera old_windsor_rd = new TrafficCamera(
-				"Old Windsor Road",
+				"Old Windsor XRoad",
 				"Beaumont Hills",
-				"The intersection of Old Windsor Road and Windsor Road looking south towards Parramatta.",
+				"The intersection of Old Windsor XRoad and Windsor XRoad looking south towards Parramatta.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/oldwindsorrd.jpg",
-				Region.SYD_WEST, 61);
+				XRegion.SYD_WEST, 61);
 		data.add(old_windsor_rd);
 
 		// [62] = old windsor rd (winston hills)
 		TrafficCamera old_windsor_rd_winston_hills = new TrafficCamera(
-				"Old Windsor Road",
+				"Old Windsor XRoad",
 				"Winston Hills",
-				"Old Windsor Road at Abbott Road looking north towards Bella Vista.",
+				"Old Windsor XRoad at Abbott XRoad looking north towards Bella Vista.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/oldwindsorrd_winstonhills.jpg",
-				Region.SYD_WEST, 62);
+				XRegion.SYD_WEST, 62);
 		data.add(old_windsor_rd_winston_hills);
 
 		// [63] = parramatta rd (parramatta)
 		TrafficCamera parramatta_rd_parramatta = new TrafficCamera(
-				"Parramatta Road",
+				"Parramatta XRoad",
 				"Parramatta",
-				"Parramatta Road at Woodville Road looking east towards Auburn.",
+				"Parramatta XRoad at Woodville XRoad looking east towards Auburn.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/parrard_parra.jpg",
-				Region.SYD_WEST, 63);
+				XRegion.SYD_WEST, 63);
 		data.add(parramatta_rd_parramatta);
 
 		// [64] = Seven hills road (seven hills)
 		TrafficCamera seven_hills_rd = new TrafficCamera(
-				"Seven Hills Road",
+				"Seven Hills XRoad",
 				"Seven Hills",
-				"Seven Hills Road at Abbot Road looking west towards Seven Hills.",
+				"Seven Hills XRoad at Abbot XRoad looking west towards Seven Hills.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/sevenhillsrd_sevenhills.jpg",
-				Region.SYD_WEST, 64);
+				XRegion.SYD_WEST, 64);
 		data.add(seven_hills_rd);
 
 		// [300] = M4 wetsern mwy (auburn)
@@ -855,16 +855,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Auburn",
 				"M4 Western Motorway at Auburn looking west towards St Marys.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m4_auburn.jpg",
-				Region.SYD_WEST, 300);
+				XRegion.SYD_WEST, 300);
 		data.add(m4_auburn);
 
 		// [301] = Greay western highway (hazelbrook)
 		TrafficCamera hazelbrook = new TrafficCamera(
 				"Great Western Highway",
 				"Hazelbrook",
-				"Great Western Highway at Oaklands Road looking east towards Sydney.",
+				"Great Western Highway at Oaklands XRoad looking east towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/greatwesternhwy_hazelbrook.jpg",
-				Region.SYD_WEST, 301);
+				XRegion.SYD_WEST, 301);
 		data.add(hazelbrook);
 
 		// [302] = M4 Western Motorway (Mays Hills)
@@ -873,16 +873,16 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 				"Mays Hill",
 				"M4 Western Motorway at Cumberland Highway looking east towards Sydney.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/m4_mayshill.jpg",
-				Region.SYD_WEST, 302);
+				XRegion.SYD_WEST, 302);
 		data.add(mays_hill);
 
-		// [303] = Silverwater Road (Silverwater)
+		// [303] = Silverwater XRoad (Silverwater)
 		TrafficCamera silverwater_rd = new TrafficCamera(
 				"Silverwater Rd",
 				"Silverwater",
-				"Silverwater Road at M4 Western Motorway looking south towards Auburn.",
+				"Silverwater XRoad at M4 Western Motorway looking south towards Auburn.",
 				"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/silverwaterrd_silverwater.jpg",
-				Region.SYD_WEST, 303);
+				XRegion.SYD_WEST, 303);
 		data.add(silverwater_rd);
 
 		Collections.sort(data);
@@ -907,18 +907,18 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 		return result;
 	}
 
-	public List<TrafficCamera> getCamerasForRegion(Region region) {
+	public List<TrafficCamera> getCamerasForRegion(XRegion region) {
 		assert region != null;
 		return filteredCamerasPerRegion.get(region);
 	}
 
 	private void initUnfiltered() {
-		unfilteredCamerasPerRegion.put(Region.SYD_MET, createSydMetData());
-		unfilteredCamerasPerRegion.put(Region.SYD_NORTH, createSydNorthData());
-		unfilteredCamerasPerRegion.put(Region.SYD_SOUTH, createSydSouthData());
-		unfilteredCamerasPerRegion.put(Region.SYD_WEST, createSydWestData());
-		unfilteredCamerasPerRegion.put(Region.REG_NORTH, createRegNorthData());
-		unfilteredCamerasPerRegion.put(Region.REG_SOUTH, createRegSouthData());
+		unfilteredCamerasPerRegion.put(XRegion.SYD_MET, createSydMetData());
+		unfilteredCamerasPerRegion.put(XRegion.SYD_NORTH, createSydNorthData());
+		unfilteredCamerasPerRegion.put(XRegion.SYD_SOUTH, createSydSouthData());
+		unfilteredCamerasPerRegion.put(XRegion.SYD_WEST, createSydWestData());
+		unfilteredCamerasPerRegion.put(XRegion.REG_NORTH, createRegNorthData());
+		unfilteredCamerasPerRegion.put(XRegion.REG_SOUTH, createRegSouthData());
 		// Note: There are no cameras in REG_WEST at this time
 		
 		addSelfAsListenerToAllCameras();
@@ -1005,7 +1005,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 
 		filteredCamerasPerRegion.clear();
 
-		for (Region region : unfilteredCamerasPerRegion.keySet()) {
+		for (XRegion region : unfilteredCamerasPerRegion.keySet()) {
 			List<TrafficCamera> unfilteredCameras = unfilteredCamerasPerRegion
 					.get(region);
 

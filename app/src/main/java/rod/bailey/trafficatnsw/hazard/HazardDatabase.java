@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter;
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
-import rod.bailey.trafficatnsw.json.hazard.Region;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
+import rod.bailey.trafficatnsw.json.hazard.XRegion;
 
 public class HazardDatabase {
 
@@ -24,9 +24,9 @@ public class HazardDatabase {
 
 	private IHazardFilter filter;
 
-	private final Map<Region, List<Hazard>> unfilteredHazardsPerRegion = new HashMap<Region, List<Hazard>>();
+	private final Map<XRegion, List<XHazard>> unfilteredHazardsPerRegion = new HashMap<XRegion, List<XHazard>>();
 
-	private final Map<Region, List<Hazard>> filteredHazardsPerRegion = new HashMap<Region, List<Hazard>>();
+	private final Map<XRegion, List<XHazard>> filteredHazardsPerRegion = new HashMap<XRegion, List<XHazard>>();
 
 	private HazardDatabase() {
 	}
@@ -41,7 +41,7 @@ public class HazardDatabase {
 
 	public int unfilteredSize() {
 		int result = 0;
-		for (List<Hazard> unfilteredHazards : unfilteredHazardsPerRegion
+		for (List<XHazard> unfilteredHazards : unfilteredHazardsPerRegion
 				.values()) {
 			result += unfilteredHazards.size();
 		}
@@ -51,7 +51,7 @@ public class HazardDatabase {
 	public int filteredSize() {
 		int result = 0;
 
-		for (List<Hazard> filteredHazards : filteredHazardsPerRegion.values()) {
+		for (List<XHazard> filteredHazards : filteredHazardsPerRegion.values()) {
 			result += filteredHazards.size();
 		}
 
@@ -59,24 +59,24 @@ public class HazardDatabase {
 	}
 
 	private void initUnfilteredHazards(Context ctx, String hazardsJSON) {
-		List<Hazard> allHazards = Hazard
+		List<XHazard> allHazards = XHazard
 				.createHazardsFromIncidentJsonContents(hazardsJSON);
 
 		unfilteredHazardsPerRegion.clear();
 
 		// Put hazards into unfiltered hazards map
-		for (Hazard hazard : allHazards) {
+		for (XHazard hazard : allHazards) {
 			if (!hazard.isEnded()) {
 				String regionStr = hazard.getRoads().get(0).getRegion();
-				Region region = Region.valueOf(regionStr);
+				XRegion region = XRegion.valueOf(regionStr);
 
 				// Add this hazard into the unfiltered map
-				List<Hazard> hazardsPerRegion = null;
+				List<XHazard> hazardsPerRegion = null;
 
 				if (unfilteredHazardsPerRegion.containsKey(region)) {
 					hazardsPerRegion = unfilteredHazardsPerRegion.get(region);
 				} else {
-					hazardsPerRegion = new LinkedList<Hazard>();
+					hazardsPerRegion = new LinkedList<XHazard>();
 					unfilteredHazardsPerRegion.put(region, hazardsPerRegion);
 				}
 
@@ -85,18 +85,18 @@ public class HazardDatabase {
 		}
 	}
 
-	public List<Hazard> getHazardsForRegion(Region region) {
+	public List<XHazard> getHazardsForRegion(XRegion region) {
 		assert region != null;
 		return filteredHazardsPerRegion.get(region);
 	}
 
-	public Hazard getHazard(int hazardId) {
-		Hazard result = null;
+	public XHazard getHazard(int hazardId) {
+		XHazard result = null;
 
-		Collection<List<Hazard>> hazardCollections = unfilteredHazardsPerRegion
+		Collection<List<XHazard>> hazardCollections = unfilteredHazardsPerRegion
 				.values();
-		for (List<Hazard> hazardList : hazardCollections) {
-			for (Hazard hazard : hazardList) {
+		for (List<XHazard> hazardList : hazardCollections) {
+			for (XHazard hazard : hazardList) {
 				if (hazard.getHazardId() == hazardId) {
 					result = hazard;
 					break;
@@ -115,14 +115,14 @@ public class HazardDatabase {
 	private void refilter() {
 		filteredHazardsPerRegion.clear();
 
-		for (Region region : unfilteredHazardsPerRegion.keySet()) {
-			List<Hazard> unfilteredHazards = unfilteredHazardsPerRegion
+		for (XRegion region : unfilteredHazardsPerRegion.keySet()) {
+			List<XHazard> unfilteredHazards = unfilteredHazardsPerRegion
 					.get(region);
 
 			if (!unfilteredHazards.isEmpty()) {
-				List<Hazard> filteredHazards = new LinkedList<Hazard>();
+				List<XHazard> filteredHazards = new LinkedList<XHazard>();
 
-				for (Hazard hazard : unfilteredHazards) {
+				for (XHazard hazard : unfilteredHazards) {
 					if (filter.admit(hazard)) {
 						filteredHazards.add(hazard);
 					}

@@ -17,7 +17,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import rod.bailey.trafficatnsw.hazard.HazardDatabase;
-import rod.bailey.trafficatnsw.json.hazard.Hazard;
+import rod.bailey.trafficatnsw.json.hazard.XHazard;
 
 import static android.view.ViewGroup.LayoutParams.*;
 import static android.widget.RelativeLayout.*;
@@ -31,7 +31,7 @@ public class ShowHazardOnMapActivity extends Activity {
 	private static final String TAG = ShowHazardOnMapActivity.class
 			.getSimpleName();
 	
-	private Hazard hazard;
+	private XHazard hazard;
 	
 	private MapFragment fragment;
 	
