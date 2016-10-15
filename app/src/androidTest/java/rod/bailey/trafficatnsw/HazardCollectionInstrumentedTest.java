@@ -38,7 +38,7 @@ public class HazardCollectionInstrumentedTest {
      * Sample json file 09jul2013 contains 29 hazards.
      */
     @Test
-    public void parse09jul2013Json() throws IOException {
+    public void parse09jul2013Json440375() throws IOException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         String jsonString = AssetUtils.loadAssetFileAsString(appContext, "09jul2013.json");
         HazardCollection hazards = HazardCollection.parseJson(jsonString);
@@ -112,4 +112,69 @@ public class HazardCollectionInstrumentedTest {
         assertEquals("2", lane.numberOfLanes);
         assertEquals(" ", lane.roadType);
     }
+
+    @Test
+    public void parse09jul2013Json440361()  throws IOException {
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        String jsonString = AssetUtils.loadAssetFileAsString(appContext, "09jul2013.json");
+        HazardCollection hazards = HazardCollection.parseJson(jsonString);
+
+        // This test case examines hazard id 440361
+        Hazard hazard = hazards.findHazardById(440361);
+
+        // Check geometry
+        HazardGeometry geometry = hazard.geometry;
+        assertNotNull(geometry);
+        List<Float> coords = geometry.coordinates;
+        assertEquals(2, coords.size());
+        assertEquals(coords.get(0), 147.59154, 0.0001);
+        assertEquals(coords.get(1), -35.46987, 0.0001);
+
+        // Check properties
+        HazardProperties properties = hazard.properties;
+        assertNotNull(properties.headline);
+        assertTrue(properties.periods.isEmpty());
+        assertNull(properties.webLinkUrl);
+        assertFalse(properties.ended);
+        assertFalse(properties.impactingNetwork);
+        assertEquals(" ", properties.subCategoryB);
+        assertFalse(properties.isInitialReport);
+        assertEquals(1373305277059L, properties.created);
+        assertFalse(properties.isMajor);
+        assertEquals("Truck", properties.subCategoryA);
+        assertEquals(" ", properties.adviceB);
+        assertEquals("Exercise caution", properties.adviceA);
+        assertEquals("Accident", properties.mainCategory);
+        assertEquals(1373324947947L, properties.lastUpdated);
+        assertEquals(" ", properties.otherAdvice);
+        assertTrue(properties.arrangementElements.isEmpty());
+        assertNull(properties.webLinkName);
+        assertEquals(2, properties.attendingGroups.size());
+        assertEquals("Emergency service(s)", properties.attendingGroups.get(0));
+        assertEquals("RMS", properties.attendingGroups.get(1));
+        assertEquals(0L, properties.start);
+        assertEquals("ACCIDENT Truck", properties.displayName);
+
+        // Check road
+        Road road = properties.roads.get(0);
+        assertEquals("", road.conditionTendency);
+        assertEquals("Tumbarumba Road", road.crossStreet);
+        assertEquals("", road.delay);
+        assertEquals("between", road.locationQualifier);
+        assertEquals("Hume Highway", road.mainStreet);
+        assertEquals("REG_SOUTH", road.region);
+        assertEquals("Little Billabong Road", road.secondLocation);
+        assertEquals("Kyeamba Gap", road.suburb);
+        assertEquals("", road.trafficVolume);
+
+        // Check impacted lane
+        Lane lane = road.impactedLanes.get(0);
+        assertEquals("Northbound", lane.affectedDirection);
+        assertEquals("1", lane.closedLanes);
+        assertEquals("Lane 1", lane.description);
+        assertEquals("Lanes closed", lane.extent);
+        assertEquals("2", lane.numberOfLanes);
+        assertEquals(" ", lane.roadType);
+    }
+
 }
