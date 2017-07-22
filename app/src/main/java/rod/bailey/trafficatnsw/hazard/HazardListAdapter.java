@@ -14,7 +14,8 @@ import java.util.List;
 import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter;
 import rod.bailey.trafficatnsw.json.hazard.XHazard;
 import rod.bailey.trafficatnsw.json.hazard.XRegion;
-import rod.bailey.trafficatnsw.util.ListHeadingView;
+import rod.bailey.trafficatnsw.ui.HazardListItemView;
+import rod.bailey.trafficatnsw.ui.ListHeadingView;
 import rod.bailey.trafficatnsw.util.MLog;
 
 public class HazardListAdapter extends BaseAdapter implements ListAdapter {

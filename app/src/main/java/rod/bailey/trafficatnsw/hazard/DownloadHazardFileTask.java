@@ -13,7 +13,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import rod.bailey.trafficatnsw.util.ConfigSingleton;
-import rod.bailey.trafficatnsw.util.ListWithEmptyMessage;
+import rod.bailey.trafficatnsw.ui.ListWithEmptyMessage;
 import rod.bailey.trafficatnsw.util.MLog;
 
 /**

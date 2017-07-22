@@ -1,8 +1,11 @@
-package rod.bailey.trafficatnsw.util;
+package rod.bailey.trafficatnsw.ui;
 
 import android.content.Context;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import rod.bailey.trafficatnsw.ui.DataLicenceView;
+import rod.bailey.trafficatnsw.util.DisplayUtils;
 
 public class FooterCancellingListView extends ListView {
 

@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.util;
+package rod.bailey.trafficatnsw.ui;
 
 import android.content.Context;
 import android.view.View;

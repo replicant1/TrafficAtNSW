@@ -21,8 +21,8 @@ import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase;
 import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton;
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig;
 import rod.bailey.trafficatnsw.util.ConfigSingleton;
-import rod.bailey.trafficatnsw.util.InactiveTravelTimeEmptyMessagePredicate;
-import rod.bailey.trafficatnsw.util.ListWithEmptyMessage;
+import rod.bailey.trafficatnsw.ui.predicate.InactiveTravelTimeEmptyMessagePredicate;
+import rod.bailey.trafficatnsw.ui.ListWithEmptyMessage;
 import rod.bailey.trafficatnsw.util.MLog;
 
 public class TravelTimesFragment extends Fragment implements

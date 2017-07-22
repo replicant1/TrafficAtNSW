@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.util
+package rod.bailey.trafficatnsw.ui.predicate
 
 import android.widget.ListAdapter
 

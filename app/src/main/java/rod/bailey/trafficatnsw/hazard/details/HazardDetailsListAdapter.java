@@ -13,14 +13,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import rod.bailey.trafficatnsw.hazard.HazardListItemView;
+import rod.bailey.trafficatnsw.ui.HazardListItemView;
 import rod.bailey.trafficatnsw.json.hazard.XArrangementElement;
 import rod.bailey.trafficatnsw.json.hazard.XHazard;
 import rod.bailey.trafficatnsw.json.hazard.XLane;
 import rod.bailey.trafficatnsw.json.hazard.XPeriod;
 import rod.bailey.trafficatnsw.json.hazard.XRoad;
 import rod.bailey.trafficatnsw.util.DateUtils;
-import rod.bailey.trafficatnsw.util.ListHeadingView;
+import rod.bailey.trafficatnsw.ui.ListHeadingView;
 
 public class HazardDetailsListAdapter extends BaseAdapter implements
 		ListAdapter {

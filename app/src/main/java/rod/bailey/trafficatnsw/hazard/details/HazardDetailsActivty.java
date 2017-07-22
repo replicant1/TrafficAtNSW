@@ -15,7 +15,7 @@ import rod.bailey.trafficatnsw.R;
 import rod.bailey.trafficatnsw.hazard.HazardDatabase;
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity;
 import rod.bailey.trafficatnsw.json.hazard.XHazard;
-import rod.bailey.trafficatnsw.util.FooterCancellingListView;
+import rod.bailey.trafficatnsw.ui.FooterCancellingListView;
 import rod.bailey.trafficatnsw.util.MLog;
 
 /**

@@ -1,9 +1,11 @@
-package rod.bailey.trafficatnsw.util;
+package rod.bailey.trafficatnsw.ui;
 
 import android.content.Context;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import rod.bailey.trafficatnsw.ui.predicate.IEmptyMessagePredicate;
 
 public class ListWithEmptyMessage extends FrameLayout {
 	

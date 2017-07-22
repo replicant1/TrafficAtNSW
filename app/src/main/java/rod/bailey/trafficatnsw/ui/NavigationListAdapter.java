@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw;
+package rod.bailey.trafficatnsw.ui;
 
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +7,9 @@ import android.widget.ListAdapter;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import rod.bailey.trafficatnsw.MainActivity;
+import rod.bailey.trafficatnsw.R;
 
 public class NavigationListAdapter extends BaseAdapter implements ListAdapter {
 
