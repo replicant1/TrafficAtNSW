@@ -7,20 +7,17 @@ import rod.bailey.trafficatnsw.util.MLog
 
 class AdmitSydneyHazardFilter : IHazardFilter {
 	override fun admit(hazard: XHazard): Boolean {
-		assert(hazard != null)
 		var result = false
 		val roads = hazard.roads
 
-		if (roads != null && !roads.isEmpty()) {
+		if (!roads.isEmpty()) {
 			val road = roads[0]
-			val roadRegionStr = road.region
+			val roadRegionStr:String? = road.region
 
 			if (roadRegionStr != null) {
 				try {
 					val roadRegion = XRegion.valueOf(roadRegionStr)
-					if (roadRegion != null) {
-						result = roadRegion.isSydney
-					}
+					result = roadRegion.isSydney
 				}
 				catch (thr: Throwable) {
 					MLog.w(TAG,
@@ -34,7 +31,6 @@ class AdmitSydneyHazardFilter : IHazardFilter {
 	}
 
 	companion object {
-		private val TAG = AdmitSydneyHazardFilter::class.java
-			.simpleName
+		private val TAG = AdmitSydneyHazardFilter::class.java.simpleName
 	}
 }

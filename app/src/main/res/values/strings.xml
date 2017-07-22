@@ -7,4 +7,8 @@
     <string name="hazards_list_screen_title_regional_nsw">Incidents in Regional NSW</string>
     <string name="hazards_list_screen_empty_sydney">There are no incidents in Sydney.\n\nTap the refresh button above to check again.</string>
     <string name="hazards_list_screen_empty_regional_nsw">There are no incidents in Regional NSW.\n\nTap the refresh button above\nto check again.</string>
+    <string name="hazards_list_load_progress_msg">Loading incidents&#8230;</string>
+    <string name="hazards_list_load_failure_dialog_title">No Incident Data</string>
+    <string name="hazards_list_load_failure_dialog_msg">Tap the refreshicon at top right to try again.</string>
+    <string name="hazards_list_load_failure_dialog_positive_button">OK</string>
 </resources>

@@ -1,6 +1,5 @@
 package rod.bailey.trafficatnsw.hazard
 
-import android.content.Context
 import rod.bailey.trafficatnsw.hazard.filter.AdmitAllHazardFilter
 import java.util.HashMap
 import java.util.LinkedList
@@ -8,14 +7,14 @@ import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XRegion
 
-class HazardDatabase private constructor() {
+class HazardCacheSingleton private constructor() {
 	private object Holder {
-		val INSTANCE = HazardDatabase()
+		val INSTANCE = HazardCacheSingleton()
 	}
 
 	companion object {
-		private val LOG_TAG = HazardDatabase::class.java.simpleName
-		val instance: HazardDatabase by lazy { Holder.INSTANCE }
+		private val LOG_TAG = HazardCacheSingleton::class.java.simpleName
+		val instance: HazardCacheSingleton by lazy { Holder.INSTANCE }
 	}
 
 	var filter: IHazardFilter = AdmitAllHazardFilter()
@@ -33,16 +32,19 @@ class HazardDatabase private constructor() {
 		unfilteredHazardsPerRegion.clear()
 		// Put hazards into unfiltered hazards map
 		for (hazard in allHazards) {
-			if (!hazard.isEnded) {
-				val regionStr = hazard.roads[0].region
-				val region = XRegion.valueOf(regionStr)
+			if ((hazard.isEnded != null) && (!hazard.isEnded)) {
+				if (!hazard.roads.isEmpty()) {
+					val regionStr:String? = hazard.roads[0].region
+					if (regionStr != null) {
+						val region = XRegion.valueOf(regionStr)
+						// Add this hazard into the unfiltered map
+						if (!unfilteredHazardsPerRegion.containsKey(region)) {
+							unfilteredHazardsPerRegion.put(region, LinkedList<XHazard>())
+						}
 
-				// Add this hazard into the unfiltered map
-				if (!unfilteredHazardsPerRegion.containsKey(region)) {
-					unfilteredHazardsPerRegion.put(region, LinkedList<XHazard>())
+						unfilteredHazardsPerRegion[region]?.add(hazard)
+					}
 				}
-
-				unfilteredHazardsPerRegion[region]?.add(hazard)
 			}
 		}
 	}

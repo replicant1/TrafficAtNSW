@@ -2,16 +2,10 @@ package rod.bailey.trafficatnsw.hazard
 
 import android.app.Fragment
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.hazard.filter.AdmitAllHazardFilter
-import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.ui.ListWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
@@ -19,8 +13,8 @@ import rod.bailey.trafficatnsw.util.MLog
  * List of hazards is divided into groups per XRegion.
  */
 class HazardListFragment : Fragment() {
-	private var mode: HazardListMode? = null
-	private var mainLayout: ListWithEmptyMessage? = null
+	private lateinit var mode: HazardListMode
+	private lateinit var mainLayout: ListWithEmptyMessage
 
 	private fun emptyMessageForMode(mode: HazardListMode?): String {
 		return if (mode === HazardListMode.SYDNEY)
@@ -47,14 +41,14 @@ class HazardListFragment : Fragment() {
 			MLog.w(LOG_TAG, "Missing argument ARG_HAZARDS_FRAGMENT_MODE")
 		}
 
-		HazardDatabase.instance.filter = mode?.filter ?: AdmitAllHazardFilter()
+		HazardCacheSingleton.instance.filter = mode.filter
 	}
 
 	override fun onCreateView(inflater: LayoutInflater,
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
 		mainLayout = ListWithEmptyMessage(activity,
-																	 emptyMessageForMode(mode),
+										  emptyMessageForMode(mode),
 										  EmptyListEmptyMessagePredicate())
 		setHasOptionsMenu(true)
 		activity.title = screenTitleForMode(mode)
@@ -82,7 +76,7 @@ class HazardListFragment : Fragment() {
 		val ARG_HAZARDS_FRAGMENT_MODE: String = "rod.bailey.trafficatnsw.hazards.fragment.mode"
 		private val LOG_TAG = HazardListFragment::class.java.simpleName
 
-		fun create(mode: HazardListMode) : HazardListFragment {
+		fun create(mode: HazardListMode): HazardListFragment {
 			val result = HazardListFragment()
 			val bundle = Bundle()
 			bundle.putInt(ARG_HAZARDS_FRAGMENT_MODE, mode.ordinal)

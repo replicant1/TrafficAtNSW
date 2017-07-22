@@ -1,7 +1,7 @@
 package rod.bailey.trafficatnsw.json.hazard
 
 enum class XRegion private constructor(val description: String?) {
-	SYD_MET("Inner Sydney"), // hello
+	SYD_MET("Inner Sydney"), //
 	SYD_NORTH("Sydney North"), //
 	SYD_SOUTH("Sydney South"), //
 	SYD_WEST("Sydney West"), //

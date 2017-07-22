@@ -4,18 +4,16 @@ import org.json.JSONObject
 
 import rod.bailey.trafficatnsw.util.JSONUtils.*
 
-class XPeriod(json: JSONObject?) {
+class XPeriod(json: JSONObject) {
 
-	val closureType: String
-	val direction: String
-	val finishTime: String
-	val fromDay: String
-	val startTime: String
-	val toDay: String
+	val closureType: String?
+	val direction: String?
+	val finishTime: String?
+	val fromDay: String?
+	val startTime: String?
+	val toDay: String?
 
 	init {
-		assert(json != null)
-
 		closureType = safeGetString(json, "closureType")
 		direction = safeGetString(json, "direction")
 		finishTime = safeGetString(json, "finishTime")

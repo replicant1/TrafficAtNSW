@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import rod.bailey.trafficatnsw.R;
-import rod.bailey.trafficatnsw.hazard.HazardDatabase;
+import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton;
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity;
 import rod.bailey.trafficatnsw.json.hazard.XHazard;
 import rod.bailey.trafficatnsw.ui.FooterCancellingListView;
@@ -61,7 +61,7 @@ public class HazardDetailsActivty extends Activity {
 
 		MLog.i(TAG, "Showing details of hazard id " + hazardId);
 
-		hazard = HazardDatabase.Companion.getInstance().getUnfilteredHazard(hazardId);
+		hazard = HazardCacheSingleton.Companion.getInstance().getUnfilteredHazard(hazardId);
 		createUI();
 	}
 	

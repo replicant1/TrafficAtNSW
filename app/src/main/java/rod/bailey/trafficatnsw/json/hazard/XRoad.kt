@@ -11,20 +11,20 @@ import rod.bailey.trafficatnsw.util.MLog
 
 import rod.bailey.trafficatnsw.util.JSONUtils.*
 
-class XRoad(json: JSONObject?) {
+class XRoad(json: JSONObject) {
 
-	val conditionTendency: String
-	val crossStreet: String
-	val delay: String
-	val locationQualifier: String
-	val mainStreet: String
-	val region: String
-	val secondLocation: String
-	val suburb: String
-	val trafficVolume: String
-	val queueLength: Int
-	val fullStreetAddress: String
-	val impactedLanes: List<XLane>
+	val conditionTendency: String?
+	val crossStreet: String?
+	val delay: String?
+	val locationQualifier: String?
+	val mainStreet: String?
+	val region: String?
+	val secondLocation: String?
+	val suburb: String?
+	val trafficVolume: String?
+	val queueLength: Int?
+	val fullStreetAddress: String?
+	val impactedLanes: List<XLane>?
 
 	init {
 		assert(json != null)

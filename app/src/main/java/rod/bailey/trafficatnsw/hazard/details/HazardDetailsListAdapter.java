@@ -13,6 +13,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import rod.bailey.trafficatnsw.hazard.details.cellrec.CellRec;
+import rod.bailey.trafficatnsw.hazard.details.cellrec.HeadingCellRec;
+import rod.bailey.trafficatnsw.hazard.details.cellrec.HtmlFieldCellRec;
+import rod.bailey.trafficatnsw.hazard.details.cellrec.LineCellRec;
+import rod.bailey.trafficatnsw.hazard.details.cellrec.TextFieldCellRec;
+import rod.bailey.trafficatnsw.hazard.details.cellrec.TitleCellRec;
+import rod.bailey.trafficatnsw.hazard.details.view.HtmlListItemView;
+import rod.bailey.trafficatnsw.hazard.details.view.LineListItemView;
+import rod.bailey.trafficatnsw.hazard.details.view.TextFieldListItemView;
 import rod.bailey.trafficatnsw.ui.HazardListItemView;
 import rod.bailey.trafficatnsw.json.hazard.XArrangementElement;
 import rod.bailey.trafficatnsw.json.hazard.XHazard;
@@ -216,7 +225,7 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 	}
 
 	private void addHtmlFieldCellRec(String html) {
-		HtmlFieldCellRec rec = new HtmlFieldCellRec(html, null, 0);
+		HtmlFieldCellRec rec = new HtmlFieldCellRec(html);
 		cellRecs.add(rec);
 	}
 
@@ -432,21 +441,21 @@ public class HazardDetailsListAdapter extends BaseAdapter implements
 
 		if (cellRec instanceof TitleCellRec) {
 			TitleCellRec titleCellRec = (TitleCellRec) cellRec;
-			result = new HazardListItemView(ctx, titleCellRec.hazard, false,
+			result = new HazardListItemView(ctx, titleCellRec.getHazard(), false,
 					false);
 		} else if (cellRec instanceof HeadingCellRec) {
 			HeadingCellRec headingCellRec = (HeadingCellRec) cellRec;
-			result = new ListHeadingView(ctx, headingCellRec.heading, false);
+			result = new ListHeadingView(ctx, headingCellRec.getHeading(), false);
 		} else if (cellRec instanceof LineCellRec) {
 			LineCellRec lineCellRec = (LineCellRec) cellRec;
 			result = new LineListItemView(ctx, lineCellRec.getLine());
 		} else if (cellRec instanceof TextFieldCellRec) {
 			TextFieldCellRec textCellRec = (TextFieldCellRec) cellRec;
-			result = new TextFieldListItemView(ctx, textCellRec.fieldName,
-					textCellRec.fieldValue);
+			result = new TextFieldListItemView(ctx, textCellRec.getFieldName(),
+					textCellRec.getFieldValue());
 		} else if (cellRec instanceof HtmlFieldCellRec) {
 			HtmlFieldCellRec htmlCellRec = (HtmlFieldCellRec) cellRec;
-			result = new HtmlListItemView(ctx, htmlCellRec.fieldHtml);
+			result = new HtmlListItemView(ctx, htmlCellRec.getFieldHtml());
 		}
 
 		return result;

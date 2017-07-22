@@ -3,8 +3,11 @@ package rod.bailey.trafficatnsw.ui
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Color.*
 import android.graphics.Rect
 import android.graphics.Typeface
+import android.graphics.Typeface.DEFAULT
+import android.text.TextUtils.TruncateAt.END
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -12,21 +15,20 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import java.text.SimpleDateFormat
-import java.util.Date
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.util.DateUtils
 import rod.bailey.trafficatnsw.util.DisplayUtils
-import android.graphics.Color.*
-import android.graphics.Typeface.*
-import android.text.TextUtils.TruncateAt.*
-import rod.bailey.trafficatnsw.util.DisplayUtils.*
+import rod.bailey.trafficatnsw.util.DisplayUtils.dp2Px
+import rod.bailey.trafficatnsw.util.DisplayUtils.getDisplaySizePx
+import java.text.SimpleDateFormat
+import java.util.*
 
-class HazardListItemView(private val ctx: Context, val hazard: XHazard,
-						 private val showLastUpdatedDate: Boolean, clickable: Boolean) : ViewGroup(
-	ctx) {
+class HazardListItemView(private val ctx: Context,
+						 val hazard: XHazard,
+						 private val showLastUpdatedDate: Boolean,
+						 clickable: Boolean) : ViewGroup(ctx) {
 	private inner class ItemTouchListener : View.OnTouchListener {
 		override fun onTouch(v: View, event: MotionEvent): Boolean {
 			if (event.action == MotionEvent.ACTION_DOWN) {
@@ -80,30 +82,31 @@ class HazardListItemView(private val ctx: Context, val hazard: XHazard,
 		if (showLastUpdatedDate) {
 			addView(dateLinearLayout)
 		}
-		val road = hazard.roads[0]
+		if (!hazard.roads.isEmpty()) {
+			val road = hazard.roads[0]
+			val resId = if ((hazard.isInitialReport != null) && hazard.isInitialReport)
+				R.drawable.incident_initial_report
+			else
+				R.drawable.incident
 
-		imageView
-			.setImageResource(if (hazard.isInitialReport)
-								  R.drawable.incident_initial_report
-							  else
-								  R.drawable.incident)
-		titleView.text = road.suburb
-		subTitleView.text = road.mainStreet
+			imageView
+				.setImageResource(resId)
+			titleView.text = road.suburb
+			subTitleView.text = road.mainStreet
+		}
 		subSubTitleView.text = hazard.displayName
 		val lu = hazard.lastUpdated
-		if (lu != null) {
-			var dateText: String? = ""
-			if (DateUtils.isYesterday(lu)) {
-				dateText = "Yesterday"
-			} else if (DateUtils.isToday(lu)) {
-				dateText = SimpleDateFormat("h:mm a").format(lu).toLowerCase()
-			} else {
-				dateText = SimpleDateFormat("dd/MM/yyyy").format(lu)
-			}
+		var dateText: String?
+		if (DateUtils.isYesterday(lu)) {
+			dateText = "Yesterday"
+		} else if (DateUtils.isToday(lu)) {
+			dateText = SimpleDateFormat("h:mm a").format(lu).toLowerCase()
+		} else {
+			dateText = SimpleDateFormat("dd/MM/yyyy").format(lu)
+		}
 
-			if (dateText != null) {
-				dateView.text = dateText
-			}
+		if (dateText != null) {
+			dateView.text = dateText
 		}
 
 		titleView.setTextColor(BLACK)

@@ -14,33 +14,33 @@ import rod.bailey.trafficatnsw.util.MLog
 
 import rod.bailey.trafficatnsw.util.JSONUtils.*
 
-class XHazard(json: JSONObject?) : Comparable<XHazard> {
-	val adviceA: String
-	val adviceB: String
+class XHazard(json: JSONObject) : Comparable<XHazard> {
+	val adviceA: String?
+	val adviceB: String?
 	val arrangementElements: LinkedList<XArrangementElement> = LinkedList<XArrangementElement>()
 	val attendingGroups: LinkedList<String> = LinkedList<String>()
-	val created: Date
-	val displayName: String
+	val created: Date?
+	val displayName: String?
 	val end: Date?
-	val isEnded: Boolean
-	val hazardId: Int
-	val headline: String
-	val isImpactingNetwork: Boolean
-	val isInitialReport: Boolean
-	val isMajor: Boolean
-	val lastUpdated: Date
-	val latlng: Location
-	val mainCategory: String
-	val otherAdvice: String
+	val isEnded: Boolean?
+	val hazardId: Int?
+	val headline: String?
+	val isImpactingNetwork: Boolean?
+	val isInitialReport: Boolean?
+	val isMajor: Boolean?
+	val lastUpdated: Date?
+	val latlng: Location?
+	val mainCategory: String?
+	val otherAdvice: String?
 	val periods: LinkedList<XPeriod> = LinkedList<XPeriod>()
-	val properties: JSONObject
-	val publicTransport: String
+	val properties: JSONObject?
+	val publicTransport: String?
 	val roads: LinkedList<XRoad> = LinkedList<XRoad>()
 	val start: Date?
-	val subCategoryA: String
-	val subCategoryB: String
-	val webLinkName: String
-	val webLinkUrl: String
+	val subCategoryA: String?
+	val subCategoryB: String?
+	val webLinkName: String?
+	val webLinkUrl: String?
 
 	init {
 		assert(json != null)
@@ -160,7 +160,9 @@ class XHazard(json: JSONObject?) : Comparable<XHazard> {
 	 * 0 if this .euqals another
 	 */
 	override fun compareTo(other: XHazard): Int {
-		return lastUpdated.compareTo(other.lastUpdated) * -1
+		val thisLastUpdate: Date = lastUpdated ?: Date()
+		val otherLastUpdate: Date = other?.lastUpdated ?: Date()
+		return thisLastUpdate.compareTo(otherLastUpdate) * -1
 	}
 
 	companion object {
