@@ -50,7 +50,7 @@ public class ShowHazardOnMapActivity extends Activity {
 
 		Bundle extras = getIntent().getExtras();
 		int hazardId = extras.getInt("hazardId");
-		hazard = HazardDatabase.getInstance().getHazard(hazardId);
+		hazard = HazardDatabase.Companion.getInstance().getHazard(hazardId);
 
 		createUI();
 	}

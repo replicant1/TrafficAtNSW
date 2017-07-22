@@ -36,7 +36,7 @@ public class HazardListAdapter extends BaseAdapter implements ListAdapter {
 
 		this.filter = filter;
 
-		db = HazardDatabase.getInstance();
+		db = HazardDatabase.Companion.getInstance();
 		primeListDataFromHazardDatabase();
 	}
 

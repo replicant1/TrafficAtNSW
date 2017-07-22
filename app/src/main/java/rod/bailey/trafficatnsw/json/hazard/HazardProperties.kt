@@ -41,9 +41,9 @@ data class HazardProperties(
 	 * @return A negative integer if this < another. A positive integer if
 	 * * this > another. 0 if this.equals() another,
 	 */
-	override fun compareTo(another: HazardProperties): Int {
+	override fun compareTo(other: HazardProperties): Int {
 		val thisUpdated: Long = lastUpdated ?: 0
-		val otherUpdated: Long = another.lastUpdated ?: 0
+		val otherUpdated: Long = other.lastUpdated ?: 0
 		return (thisUpdated - otherUpdated).toInt()
 	}
 

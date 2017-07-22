@@ -61,7 +61,7 @@ public class HazardDetailsActivty extends Activity {
 
 		MLog.i(TAG, "Showing details of hazard id " + hazardId);
 
-		hazard = HazardDatabase.getInstance().getHazard(hazardId);
+		hazard = HazardDatabase.Companion.getInstance().getHazard(hazardId);
 		createUI();
 	}
 	

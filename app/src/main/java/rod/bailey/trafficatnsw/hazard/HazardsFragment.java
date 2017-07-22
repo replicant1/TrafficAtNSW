@@ -129,7 +129,7 @@ public class HazardsFragment extends Fragment {
 		}
 
 		MLog.i(TAG, "Setting hazard list mode to " + newmode.name());
-		HazardDatabase.getInstance().setFilter(newmode.getFilter());
+		HazardDatabase.Companion.getInstance().setFilter(newmode.getFilter());
 		mode = newmode;
 	}
 
@@ -201,7 +201,7 @@ public class HazardsFragment extends Fragment {
 					input.close();
 					String text = new String(buffer);
 
-					HazardDatabase.getInstance().init(ctx, text);
+					HazardDatabase.Companion.getInstance().init(ctx, text);
 				} else {
 					URL url = new URL(ConfigSingleton.getInstance()
 							.remoteIncidentsJSONFile());
@@ -216,7 +216,7 @@ public class HazardsFragment extends Fragment {
 						lineBuffer.append(line);
 					}
 
-					HazardDatabase.getInstance().init(ctx,
+					HazardDatabase.Companion.getInstance().init(ctx,
 							lineBuffer.toString());
 					bufferedReader.close();
 				}

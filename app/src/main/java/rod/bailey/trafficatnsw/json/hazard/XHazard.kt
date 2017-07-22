@@ -91,12 +91,10 @@ class XHazard(json: JSONObject?) : Comparable<XHazard> {
 				val groupStr = JSONUtils.safeGetStringArrayElement(
 					attendingGroupsJSONArray, i)
 				if (groupStr != null) {
-					attendingGroups!!.add(groupStr)
+					attendingGroups.add(groupStr)
 				}
 			}
 		}
-
-		assert(attendingGroups != null)
 	}
 
 	// Parse ArrangementElements array
@@ -112,12 +110,11 @@ class XHazard(json: JSONObject?) : Comparable<XHazard> {
 				if (elementJsonObject != null) {
 					val element = XArrangementElement(
 						elementJsonObject)
-					arrangementElements!!.add(element)
+					arrangementElements.add(element)
 				}
 			}
 		}
 
-		assert(arrangementElements != null)
 	}
 
 	init {
@@ -132,12 +129,10 @@ class XHazard(json: JSONObject?) : Comparable<XHazard> {
 
 				if (periodJsonObject != null) {
 					val period = XPeriod(periodJsonObject)
-					periods!!.add(period)
+					periods.add(period)
 				}
 			}
 		}
-
-		assert(periods != null)
 	}
 
 	init {
@@ -152,12 +147,11 @@ class XHazard(json: JSONObject?) : Comparable<XHazard> {
 
 				if (roadJsonObject != null) {
 					val road = XRoad(roadJsonObject)
-					roads!!.add(road)
+					roads.add(road)
 				}
 			}
 		}
 
-		assert(roads != null)
 	}
 
 	override
@@ -166,12 +160,12 @@ class XHazard(json: JSONObject?) : Comparable<XHazard> {
 		 * * a positive integer if this > another
 		 * * 0 if this .euqals another
 		 */
-	fun compareTo(another: XHazard): Int {
+	fun compareTo(other: XHazard): Int {
 		var result = 0
 
-		if (lastUpdated != null && another.lastUpdated != null) {
-			result = lastUpdated!!.compareTo(another.lastUpdated) * -1
-		} else if (lastUpdated == null && another.lastUpdated != null) {
+		if (other.lastUpdated != null) {
+			result = lastUpdated.compareTo(other.lastUpdated) * -1
+		} else if (lastUpdated == null && other.lastUpdated != null) {
 			result = 0
 		}
 
