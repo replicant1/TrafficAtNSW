@@ -59,7 +59,7 @@ public class HazardDatabase {
 	}
 
 	private void initUnfilteredHazards(Context ctx, String hazardsJSON) {
-		List<XHazard> allHazards = XHazard
+		List<XHazard> allHazards = XHazard.Companion
 				.createHazardsFromIncidentJsonContents(hazardsJSON);
 
 		unfilteredHazardsPerRegion.clear();
