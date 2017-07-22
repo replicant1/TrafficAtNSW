@@ -45,7 +45,7 @@ public class HazardListAdapter extends BaseAdapter implements ListAdapter {
 
 		for (XRegion region : sortedHazardRegions()) {
 			listData.add(region);
-			List<XHazard> hazards = db.getHazardsForRegion(region);
+			List<XHazard> hazards = db.getFilteredHazardsForRegion(region);
 			Collections.sort(hazards);
 			listData.addAll(hazards);
 		}
@@ -104,7 +104,7 @@ public class HazardListAdapter extends BaseAdapter implements ListAdapter {
 		List<XRegion> sortedRegions = new LinkedList<XRegion>();
 
 		for (XRegion region : XRegion.values()) {
-			List<XHazard> hazardsForRegion = db.getHazardsForRegion(region);
+			List<XHazard> hazardsForRegion = db.getFilteredHazardsForRegion(region);
 
 			if ((hazardsForRegion != null) && (!hazardsForRegion.isEmpty())) {
 				sortedRegions.add(region);

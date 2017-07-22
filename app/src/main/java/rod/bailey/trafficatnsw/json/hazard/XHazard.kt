@@ -154,29 +154,20 @@ class XHazard(json: JSONObject?) : Comparable<XHazard> {
 
 	}
 
-	override
-		/**
-		 * @reutn a negative integer if this < another
-		 * * a positive integer if this > another
-		 * * 0 if this .euqals another
-		 */
-	fun compareTo(other: XHazard): Int {
-		var result = 0
-
-		if (other.lastUpdated != null) {
-			result = lastUpdated.compareTo(other.lastUpdated) * -1
-		} else if (lastUpdated == null && other.lastUpdated != null) {
-			result = 0
-		}
-
-		return result
+	/**
+	 * @return a negative integer if this < another
+	 * a positive integer if this > another
+	 * 0 if this .euqals another
+	 */
+	override fun compareTo(other: XHazard): Int {
+		return lastUpdated.compareTo(other.lastUpdated) * -1
 	}
 
 	companion object {
 
 		private val TAG = XHazard::class.java.simpleName
 
-		fun createHazardsFromIncidentJsonContents(
+		fun parseIncidentJson(
 			jsonContents: String?): List<XHazard> {
 			assert(jsonContents != null)
 

@@ -60,7 +60,7 @@ public class TrafficCameraListFragment extends Fragment implements
 	public static final String ARG_MODE_KEY = "MODE";
 
 	/**
-	 * Value for ARG_MODE_KEY that indicates the list should contain ALL traffic
+	 * Value for ARG_HAZARDS_FRAGMENT_MODE that indicates the list should contain ALL traffic
 	 * cameras
 	 */
 	public static final int ARG_MODE_VALUE_ALL = 0;
@@ -70,7 +70,7 @@ public class TrafficCameraListFragment extends Fragment implements
 	public static final int ARG_MODE_VALUE_REGIONAL = 2;
 
 	/**
-	 * Value for ARG_MODE_KEY that indicates the list should contain only those
+	 * Value for ARG_HAZARDS_FRAGMENT_MODE that indicates the list should contain only those
 	 * traffic cameras marked as favourites.
 	 */
 	public static final int ARG_MODE_VALUE_FAVOURITES = 3;
@@ -87,7 +87,7 @@ public class TrafficCameraListFragment extends Fragment implements
 
 	/**
 	 * Mode of display = what cameras appear in list. Derived from the value
-	 * passed into this fragment for the ARG_MODE_KEY argument.
+	 * passed into this fragment for the ARG_HAZARDS_FRAGMENT_MODE argument.
 	 */
 	private TrafficCameraListMode mode = TrafficCameraListMode.SYDNEY;
 

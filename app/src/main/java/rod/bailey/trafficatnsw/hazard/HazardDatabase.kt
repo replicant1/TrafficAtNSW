@@ -1,60 +1,36 @@
 package rod.bailey.trafficatnsw.hazard
 
 import android.content.Context
+import rod.bailey.trafficatnsw.hazard.filter.AdmitAllHazardFilter
 import java.util.HashMap
 import java.util.LinkedList
-
 import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XRegion
 
 class HazardDatabase private constructor() {
-
 	private object Holder {
 		val INSTANCE = HazardDatabase()
 	}
 
 	companion object {
-		private val TAG = HazardDatabase::class.java.simpleName
+		private val LOG_TAG = HazardDatabase::class.java.simpleName
 		val instance: HazardDatabase by lazy { Holder.INSTANCE }
 	}
 
-	private var filter: IHazardFilter? = null
+	var filter: IHazardFilter = AdmitAllHazardFilter()
 	private val unfilteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
 	private val filteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
 
-	@Synchronized fun init(ctx: Context, hazardsJSON: String) {
-		initUnfilteredHazards(ctx, hazardsJSON)
-
-		if (filter != null) {
-			refilter()
-		}
+	@Synchronized
+	fun init(hazardsJSON: String) {
+		initUnfilteredHazards(hazardsJSON)
+		filter()
 	}
 
-	fun unfilteredSize(): Int {
-		var result = 0
-		for (unfilteredHazards in unfilteredHazardsPerRegion.values) {
-			result += unfilteredHazards.size
-		}
-		return result
-	}
-
-	fun filteredSize(): Int {
-		var result = 0
-
-		for (filteredHazards in filteredHazardsPerRegion.values) {
-			result += filteredHazards.size
-		}
-
-		return result
-	}
-
-	private fun initUnfilteredHazards(ctx: Context, hazardsJSON: String) {
-		val allHazards = XHazard
-			.createHazardsFromIncidentJsonContents(hazardsJSON)
-
+	private fun initUnfilteredHazards(hazardsJSON: String) {
+		val allHazards = XHazard.parseIncidentJson(hazardsJSON)
 		unfilteredHazardsPerRegion.clear()
-
 		// Put hazards into unfiltered hazards map
 		for (hazard in allHazards) {
 			if (!hazard.isEnded) {
@@ -62,29 +38,22 @@ class HazardDatabase private constructor() {
 				val region = XRegion.valueOf(regionStr)
 
 				// Add this hazard into the unfiltered map
-				var hazardsPerRegion: MutableList<XHazard>?
-
-				if (unfilteredHazardsPerRegion.containsKey(region)) {
-					hazardsPerRegion = unfilteredHazardsPerRegion[region]
-				} else {
-					hazardsPerRegion = LinkedList<XHazard>()
-					unfilteredHazardsPerRegion.put(region, hazardsPerRegion)
+				if (!unfilteredHazardsPerRegion.containsKey(region)) {
+					unfilteredHazardsPerRegion.put(region, LinkedList<XHazard>())
 				}
 
-				hazardsPerRegion!!.add(hazard)
+				unfilteredHazardsPerRegion[region]?.add(hazard)
 			}
 		}
 	}
 
-	fun getHazardsForRegion(region: XRegion): List<XHazard>? {
+	fun getFilteredHazardsForRegion(region: XRegion): List<XHazard>? {
 		return filteredHazardsPerRegion.get(region)
 	}
 
-	fun getHazard(hazardId: Int): XHazard? {
+	fun getUnfilteredHazard(hazardId: Int): XHazard? {
 		var result: XHazard? = null
-
-		val hazardCollections = unfilteredHazardsPerRegion
-			.values
+		val hazardCollections = unfilteredHazardsPerRegion.values
 		for (hazardList in hazardCollections) {
 			for (hazard in hazardList) {
 				if (hazard.hazardId == hazardId) {
@@ -96,13 +65,7 @@ class HazardDatabase private constructor() {
 		return result
 	}
 
-	fun setFilter(filter: IHazardFilter?) {
-		assert(filter != null)
-		this.filter = filter
-		refilter()
-	}
-
-	private fun refilter() {
+	private fun filter() {
 		filteredHazardsPerRegion.clear()
 
 		for (region in unfilteredHazardsPerRegion.keys) {
@@ -112,7 +75,7 @@ class HazardDatabase private constructor() {
 				val filteredHazards = LinkedList<XHazard>()
 
 				for (hazard in unfilteredHazards) {
-					if (filter!!.admit(hazard)) {
+					if (filter.admit(hazard)) {
 						filteredHazards.add(hazard)
 					}
 				}
@@ -123,6 +86,4 @@ class HazardDatabase private constructor() {
 			}
 		}
 	}
-
-
 }
