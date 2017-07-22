@@ -9,7 +9,9 @@ import java.util.LinkedList
 import rod.bailey.trafficatnsw.util.JSONUtils
 import rod.bailey.trafficatnsw.util.MLog
 
-import rod.bailey.trafficatnsw.util.JSONUtils.*
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetInt
+import rod.bailey.trafficatnsw.util.JSONUtils.isNonEmpty
 
 class XRoad(json: JSONObject) {
 
@@ -27,8 +29,6 @@ class XRoad(json: JSONObject) {
 	val impactedLanes: List<XLane>?
 
 	init {
-		assert(json != null)
-
 		conditionTendency = safeGetString(json, "conditionTendency")
 		crossStreet = safeGetString(json, "crossStreet")
 		delay = safeGetString(json, "delay")
@@ -63,18 +63,19 @@ class XRoad(json: JSONObject) {
 		// Parse out the Lanes objects
 
 		val lanes = LinkedList<XLane>()
-		val lanesJSONArray = JSONUtils.safeGetJSONArray(json,
-			"impactedLanes")
+		val lanesJSONArray:JSONArray? = JSONUtils.safeGetJSONArray(json, "impactedLanes")
 
-		for (i in 0..lanesJSONArray.length() - 1) {
-			try {
-				val laneJsonObject = lanesJSONArray.getJSONObject(i)
-				val lane = XLane(laneJsonObject)
-				lanes.add(lane)
-			} catch (e: JSONException) {
-				MLog.w(TAG, "Failed to parse XLane from JSON object", e)
+		if (lanesJSONArray != null) {
+			for (i in 0..lanesJSONArray.length() - 1) {
+				try {
+					val laneJsonObject = lanesJSONArray.getJSONObject(i)
+					val lane = XLane(laneJsonObject)
+					lanes.add(lane)
+				}
+				catch (e: JSONException) {
+					MLog.w(TAG, "Failed to parse XLane from JSON object", e)
+				}
 			}
-
 		}
 
 		impactedLanes = lanes

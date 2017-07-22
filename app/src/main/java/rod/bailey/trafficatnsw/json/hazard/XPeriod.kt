@@ -2,7 +2,7 @@ package rod.bailey.trafficatnsw.json.hazard
 
 import org.json.JSONObject
 
-import rod.bailey.trafficatnsw.util.JSONUtils.*
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
 
 class XPeriod(json: JSONObject) {
 

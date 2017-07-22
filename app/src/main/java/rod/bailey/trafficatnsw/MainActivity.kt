@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
 		drawerToggle = ActionBarDrawerToggle(
 			this, drawer, toolbar, R.string.app_navigation_drawer_open,
 			R.string.app_navigation_drawer_close)
-		drawer.setDrawerListener(drawerToggle)
+		drawer.addDrawerListener(drawerToggle)
 		drawerToggle.syncState()
 		val navView = findViewById(R.id.navigation_drawer_view) as NavigationView
 		navView.setNavigationItemSelectedListener(DrawerItemClickListener(drawer))

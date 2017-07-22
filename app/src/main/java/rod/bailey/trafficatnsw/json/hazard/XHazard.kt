@@ -1,18 +1,18 @@
 package rod.bailey.trafficatnsw.json.hazard
 
 import android.location.Location
-
-import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-
-import java.util.Date
-import java.util.LinkedList
-
 import rod.bailey.trafficatnsw.util.JSONUtils
-import rod.bailey.trafficatnsw.util.MLog
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetJSONObject
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetBoolean
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetJSONArray
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetDate
+import rod.bailey.trafficatnsw.util.JSONUtils.safeGetDoubleArrayElement
 
-import rod.bailey.trafficatnsw.util.JSONUtils.*
+import rod.bailey.trafficatnsw.util.MLog
+import java.util.*
 
 class XHazard(json: JSONObject) : Comparable<XHazard> {
 	val adviceA: String?
@@ -43,8 +43,6 @@ class XHazard(json: JSONObject) : Comparable<XHazard> {
 	val webLinkUrl: String?
 
 	init {
-		assert(json != null)
-
 		properties = safeGetJSONObject(json, "properties")
 		headline = safeGetString(properties, "headline")
 		hazardId = JSONUtils.safeGetInt(json, "id")
@@ -56,8 +54,10 @@ class XHazard(json: JSONObject) : Comparable<XHazard> {
 		val secondCoord = safeGetDoubleArrayElement(coordinates, 1)
 
 		latlng = Location("")
-		latlng.latitude = secondCoord
-		latlng.longitude = firstCoord
+		if ((firstCoord != null) && (secondCoord != null)) {
+			latlng.latitude = secondCoord
+			latlng.longitude = firstCoord
+		}
 
 		isInitialReport = safeGetBoolean(properties, "isInitialReport")
 		isMajor = safeGetBoolean(properties, "isMajor")
@@ -161,7 +161,7 @@ class XHazard(json: JSONObject) : Comparable<XHazard> {
 	 */
 	override fun compareTo(other: XHazard): Int {
 		val thisLastUpdate: Date = lastUpdated ?: Date()
-		val otherLastUpdate: Date = other?.lastUpdated ?: Date()
+		val otherLastUpdate: Date = other.lastUpdated ?: Date()
 		return thisLastUpdate.compareTo(otherLastUpdate) * -1
 	}
 
