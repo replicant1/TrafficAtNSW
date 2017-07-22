@@ -41,21 +41,21 @@ public class HazardCollectionInstrumentedTest {
     public void parse09jul2013Json440375() throws IOException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         String jsonString = AssetUtils.loadAssetFileAsString(appContext, "09jul2013.json");
-        HazardCollection hazards = HazardCollection.parseJson(jsonString);
+        HazardCollection hazards = HazardCollection.Companion.parseJson(jsonString);
 
         assertNotNull(hazards);
-        assertNotNull(hazards.features);
-        assertEquals(29,hazards.features.size());
+        assertNotNull(hazards.getFeatures());
+        assertEquals(29, hazards.getFeatures().size());
 
         // Examine the first hazard, which has ID 440375
         Hazard hazard = hazards.findHazardById(440375);
         assertNotNull(hazard);
 
         // Check its geometry
-        HazardGeometry geometry = hazard.geometry;
+        HazardGeometry geometry = hazard.getGeometry();
         assertNotNull(geometry);
 
-        List<Float> coords = geometry.coordinates;
+        List<Float> coords = geometry.getCoordinates();
         assertNotNull(coords);
 
         // Check latitude and longitude
@@ -63,118 +63,118 @@ public class HazardCollectionInstrumentedTest {
         assertEquals(coords.get(1), -33.86936, 0.0001);
 
         // Check simple (non-object, non-array) properties of hazard
-        HazardProperties properties = hazard.properties;
-        assertEquals("BREAKDOWN Car - ROZELLE Western Distributor approaching City West Link", properties.headline);
-        assertNull(properties.webLinkUrl);
-        assertTrue(properties.ended);
-        assertFalse(properties.impactingNetwork);
-        assertEquals(" ", properties.subCategoryB);
-        assertFalse(properties.isInitialReport);
-        assertEquals(1373321524927L, properties.created);
-        assertFalse(properties.isMajor);
-        assertEquals("Car", properties.subCategoryA);
-        assertEquals(" ", properties.adviceA);
-        assertEquals(" ", properties.adviceB);
-        assertEquals(0L, properties.end);
-        assertEquals("Breakdown", properties.mainCategory);
-        assertEquals(1373322559566L, properties.lastUpdated);
-        assertEquals(" ", properties.otherAdvice);
-        assertNull(properties.webLinkName);
-        assertEquals(0L, properties.start);
-        assertEquals("BREAKDOWN Car", properties.displayName);
+        HazardProperties properties = hazard.getProperties();
+        assertEquals("BREAKDOWN Car - ROZELLE Western Distributor approaching City West Link", properties.getHeadline());
+        assertNull(properties.getWebLinkUrl());
+        assertTrue(properties.getEnded());
+        assertFalse(properties.getImpactingNetwork());
+        assertEquals(" ", properties.getSubCategoryB());
+        assertFalse(properties.isInitialReport());
+        assertEquals(new Long(1373321524927L), (Long) properties.getCreated());
+        assertFalse(properties.isMajor());
+        assertEquals("Car", properties.getSubCategoryA());
+        assertEquals(" ", properties.getAdviceA());
+        assertEquals(" ", properties.getAdviceB());
+        assertEquals(0L, properties.getEnd());
+        assertEquals("Breakdown", properties.getMainCategory());
+        assertEquals(new Long(1373322559566L), (Long)properties.getLastUpdated());
+        assertEquals(" ", properties.getOtherAdvice());
+        assertNull(properties.getWebLinkName());
+        assertNull(properties.getStart());
+        assertEquals("BREAKDOWN Car", properties.getDisplayName());
 
         // Check arrays
-        assertTrue(properties.periods.isEmpty());
-        assertTrue(properties.arrangementElements.isEmpty());
-        assertEquals(1, properties.attendingGroups.size());
-        assertEquals("Tow truck", properties.attendingGroups.get(0));
-        assertEquals(1, properties.roads.size());
+        assertTrue(properties.getPeriods().isEmpty());
+        assertTrue(properties.getArrangementElements().isEmpty());
+        assertEquals(1, properties.getAttendingGroups().size());
+        assertEquals("Tow truck", properties.getAttendingGroups().get(0));
+        assertEquals(1, properties.getRoads().size());
 
         // Check road
-        Road road = properties.roads.get(0);
-        assertEquals("", road.conditionTendency);
-        assertEquals("City West Link", road.crossStreet);
-        assertEquals("", road.delay);
-        assertEquals("approaching", road.locationQualifier);
-        assertEquals("Western Distributor", road.mainStreet);
-        assertEquals(0, road.queueLength);
-        assertEquals("SYD_MET", road.region);
-        assertEquals(" ", road.secondLocation);
-        assertEquals("ROZELLE", road.suburb);
-        assertEquals("", road.trafficVolume);
+        Road road = properties.getRoads().get(0);
+        assertEquals("", road.getConditionTendency());
+        assertEquals("City West Link", road.getCrossStreet());
+        assertEquals("", road.getDelay());
+        assertEquals("approaching", road.getLocationQualifier());
+        assertEquals("Western Distributor", road.getMainStreet());
+        assertEquals(0, road.getQueueLength());
+        assertEquals("SYD_MET", road.getRegion());
+        assertEquals(" ", road.getSecondLocation());
+        assertEquals("ROZELLE", road.getSuburb());
+        assertEquals("", road.getTrafficVolume());
 
         // Check impacted lane
-        Lane lane = road.impactedLanes.get(0);
-        assertEquals("Westbound", lane.affectedDirection);
-        assertEquals("1", lane.closedLanes);
-        assertEquals("Lane 2", lane.description);
-        assertEquals("Lanes closed", lane.extent);
-        assertEquals("2", lane.numberOfLanes);
-        assertEquals(" ", lane.roadType);
+        Lane lane = road.getImpactedLanes().get(0);
+        assertEquals("Westbound", lane.getAffectedDirection());
+        assertEquals("1", lane.getClosedLanes());
+        assertEquals("Lane 2", lane.getDescription());
+        assertEquals("Lanes closed", lane.getExtent());
+        assertEquals("2", lane.getNumberOfLanes());
+        assertEquals(" ", lane.getRoadType());
     }
 
     @Test
     public void parse09jul2013Json440361()  throws IOException {
         Context appContext = InstrumentationRegistry.getTargetContext();
         String jsonString = AssetUtils.loadAssetFileAsString(appContext, "09jul2013.json");
-        HazardCollection hazards = HazardCollection.parseJson(jsonString);
+        HazardCollection hazards = HazardCollection.Companion.parseJson(jsonString);
 
         // This test case examines hazard id 440361
         Hazard hazard = hazards.findHazardById(440361);
 
         // Check geometry
-        HazardGeometry geometry = hazard.geometry;
+        HazardGeometry geometry = hazard.getGeometry();
         assertNotNull(geometry);
-        List<Float> coords = geometry.coordinates;
+        List<Float> coords = geometry.getCoordinates();
         assertEquals(2, coords.size());
         assertEquals(coords.get(0), 147.59154, 0.0001);
         assertEquals(coords.get(1), -35.46987, 0.0001);
 
         // Check properties
-        HazardProperties properties = hazard.properties;
-        assertNotNull(properties.headline);
-        assertTrue(properties.periods.isEmpty());
-        assertNull(properties.webLinkUrl);
-        assertFalse(properties.ended);
-        assertFalse(properties.impactingNetwork);
-        assertEquals(" ", properties.subCategoryB);
-        assertFalse(properties.isInitialReport);
-        assertEquals(1373305277059L, properties.created);
-        assertFalse(properties.isMajor);
-        assertEquals("Truck", properties.subCategoryA);
-        assertEquals(" ", properties.adviceB);
-        assertEquals("Exercise caution", properties.adviceA);
-        assertEquals("Accident", properties.mainCategory);
-        assertEquals(1373324947947L, properties.lastUpdated);
-        assertEquals(" ", properties.otherAdvice);
-        assertTrue(properties.arrangementElements.isEmpty());
-        assertNull(properties.webLinkName);
-        assertEquals(2, properties.attendingGroups.size());
-        assertEquals("Emergency service(s)", properties.attendingGroups.get(0));
-        assertEquals("RMS", properties.attendingGroups.get(1));
-        assertEquals(0L, properties.start);
-        assertEquals("ACCIDENT Truck", properties.displayName);
+        HazardProperties properties = hazard.getProperties();
+        assertNotNull(properties.getHeadline());
+        assertTrue(properties.getPeriods().isEmpty());
+        assertNull(properties.getWebLinkUrl());
+        assertFalse(properties.getEnded());
+        assertFalse(properties.getImpactingNetwork());
+        assertEquals(" ", properties.getSubCategoryB());
+        assertFalse(properties.isInitialReport());
+        assertEquals(new Long(1373305277059L),(Long) properties.getCreated());
+        assertFalse(properties.isMajor());
+        assertEquals("Truck", properties.getSubCategoryA());
+        assertEquals(" ", properties.getAdviceB());
+        assertEquals("Exercise caution", properties.getAdviceA());
+        assertEquals("Accident", properties.getMainCategory());
+        assertEquals(new Long(1373324947947L), (Long) properties.getLastUpdated());
+        assertEquals(" ", properties.getOtherAdvice());
+        assertTrue(properties.getArrangementElements().isEmpty());
+        assertNull(properties.getWebLinkName());
+        assertEquals(2, properties.getAttendingGroups().size());
+        assertEquals("Emergency service(s)", properties.getAttendingGroups().get(0));
+        assertEquals("RMS", properties.getAttendingGroups().get(1));
+        assertNull(properties.getStart());
+        assertEquals("ACCIDENT Truck", properties.getDisplayName());
 
         // Check road
-        Road road = properties.roads.get(0);
-        assertEquals("", road.conditionTendency);
-        assertEquals("Tumbarumba Road", road.crossStreet);
-        assertEquals("", road.delay);
-        assertEquals("between", road.locationQualifier);
-        assertEquals("Hume Highway", road.mainStreet);
-        assertEquals("REG_SOUTH", road.region);
-        assertEquals("Little Billabong Road", road.secondLocation);
-        assertEquals("Kyeamba Gap", road.suburb);
-        assertEquals("", road.trafficVolume);
+        Road road = properties.getRoads().get(0);
+        assertEquals("", road.getConditionTendency());
+        assertEquals("Tumbarumba Road", road.getCrossStreet());
+        assertEquals("", road.getDelay());
+        assertEquals("between", road.getLocationQualifier());
+        assertEquals("Hume Highway", road.getMainStreet());
+        assertEquals("REG_SOUTH", road.getRegion());
+        assertEquals("Little Billabong Road", road.getSecondLocation());
+        assertEquals("Kyeamba Gap", road.getSuburb());
+        assertEquals("", road.getTrafficVolume());
 
         // Check impacted lane
-        Lane lane = road.impactedLanes.get(0);
-        assertEquals("Northbound", lane.affectedDirection);
-        assertEquals("1", lane.closedLanes);
-        assertEquals("Lane 1", lane.description);
-        assertEquals("Lanes closed", lane.extent);
-        assertEquals("2", lane.numberOfLanes);
-        assertEquals(" ", lane.roadType);
+        Lane lane = road.getImpactedLanes().get(0);
+        assertEquals("Northbound", lane.getAffectedDirection());
+        assertEquals("1", lane.getClosedLanes());
+        assertEquals("Lane 1", lane.getDescription());
+        assertEquals("Lanes closed", lane.getExtent());
+        assertEquals("2", lane.getNumberOfLanes());
+        assertEquals(" ", lane.getRoadType());
     }
 
 }
