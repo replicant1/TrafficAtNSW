@@ -16,6 +16,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import rod.bailey.trafficatnsw.R;
 import rod.bailey.trafficatnsw.hazard.HazardDatabase;
 import rod.bailey.trafficatnsw.json.hazard.XHazard;
 
@@ -56,7 +57,7 @@ public class ShowHazardOnMapActivity extends Activity {
 
 	private void createUI() {
 		RelativeLayout mainLayout = new RelativeLayout(this);
-		mainLayout.setId(CONTENT_FRAME_ID);
+		mainLayout.setId(R.id.content_frame);
 
 		MarginLayoutParams mainLayoutMLP = new MarginLayoutParams(
 				MATCH_PARENT, MATCH_PARENT);
@@ -74,7 +75,7 @@ public class ShowHazardOnMapActivity extends Activity {
 
 		// Insert the fragment by replacing any existing fragment
 		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction().replace(CONTENT_FRAME_ID, fragment)
+		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment)
 				.commit();
 
 		setContentView(mainLayout);
@@ -89,7 +90,7 @@ public class ShowHazardOnMapActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 
-		GoogleMap googleMap = fragment.getMap();
+		GoogleMap googleMap = null; // fragment.getMap(); NOw getMzapAsync
 		googleMap.clear();
 
 		LatLng latlng = new LatLng(hazard.getLatlng().getLatitude(), hazard
