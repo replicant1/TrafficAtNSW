@@ -55,29 +55,29 @@ public class TravelTime implements Comparable<TravelTime> {
 		List<TravelTime> result = new LinkedList<TravelTime>();
 
 		try {
-			MLog.d(TAG, "Parsing top level object");
+			MLog.INSTANCE.d(TAG, "Parsing top level object");
 
 			JSONObject topLevelObject = new JSONObject(jsonFileContents);
 
-			MLog.d(TAG, "Parsed top level object OK");
+			MLog.INSTANCE.d(TAG, "Parsed top level object OK");
 
 			JSONArray features = topLevelObject.getJSONArray("features");
 
-			MLog.d(TAG, "Number of features in JSON file: " + features.length());
+			MLog.INSTANCE.d(TAG, "Number of features in JSON file: " + features.length());
 			for (int i = 0; i < features.length(); i++) {
 				JSONObject featureJSONObject = features.getJSONObject(i);
 				String featureId = featureJSONObject.getString("id");
 
-				MLog.d(TAG,
+				MLog.INSTANCE.d(TAG,
 						String.format("Hazard[%d] has id %s", i, featureId));
-				MLog.d(TAG, String.format(
+				MLog.INSTANCE.d(TAG, String.format(
 						"Creating a TravelTime object with id %s", featureId));
 
 				TravelTime travelTime = new TravelTime(featureJSONObject);
 				result.add(travelTime);
 			}
 		} catch (JSONException e) {
-			MLog.e(TAG, "Failed to parse JSON", e);
+			MLog.INSTANCE.e(TAG, "Failed to parse JSON", e);
 		}
 
 		return result;
@@ -104,7 +104,7 @@ public class TravelTime implements Comparable<TravelTime> {
 		try {
 			segmentId = featureJSONObject.getString("id");
 		} catch (JSONException e) {
-			MLog.e(TAG, "Failed to parse 'id' property of travel time segment",
+			MLog.INSTANCE.e(TAG, "Failed to parse 'id' property of travel time segment",
 					e);
 		}
 
@@ -112,7 +112,7 @@ public class TravelTime implements Comparable<TravelTime> {
 		try {
 			fromDisplayName = properties.getString("fromDisplayName");
 		} catch (JSONException e) {
-			MLog.d(TAG,
+			MLog.INSTANCE.d(TAG,
 					"Failed to parse 'fromDisplayName' property of travel time segment");
 		}
 
@@ -120,7 +120,7 @@ public class TravelTime implements Comparable<TravelTime> {
 		try {
 			toDisplayName = properties.getString("toDisplayName");
 		} catch (JSONException e) {
-			MLog.d(TAG,
+			MLog.INSTANCE.d(TAG,
 					"Failed to parse 'toDisplayName' property of travel time segment");
 		}
 
@@ -128,14 +128,14 @@ public class TravelTime implements Comparable<TravelTime> {
 		try {
 			active = properties.getBoolean("isActive");
 		} catch (JSONException e) {
-			MLog.d(TAG,
+			MLog.INSTANCE.d(TAG,
 					"Failed to parse 'isActive' property of travel time segment");
 		}
 
 		try {
 			travelTimeMinutes = properties.getInt("travelTimeMinutes");
 		} catch (JSONException e) {
-			MLog.d(TAG,
+			MLog.INSTANCE.d(TAG,
 					"Failed to parse 'travelTimeMinutes' property of travel time segment");
 		}
 

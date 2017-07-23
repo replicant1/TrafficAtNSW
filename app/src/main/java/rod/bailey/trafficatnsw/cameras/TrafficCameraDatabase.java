@@ -934,7 +934,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 
 	private void loadFavourites() {
 		assert ctx != null;
-		MLog.i(TAG, "Loading favourites");
+		MLog.INSTANCE.i(TAG, "Loading favourites");
 		
 		// To begin with, mark all as NOT favourite
 		for (List<TrafficCamera> camerasInRegion : unfilteredCamerasPerRegion.values()) {
@@ -949,17 +949,17 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 		Set<String> favouriteCameraIds = prefs.getStringSet(
 				FAVOURITE_STATE_PREF_KEY, null);
 		
-		MLog.i(TAG, "Favourite cameras as loaded from prefs is: " + favouriteCameraIds);
+		MLog.INSTANCE.i(TAG, "Favourite cameras as loaded from prefs is: " + favouriteCameraIds);
 		
 		if (favouriteCameraIds != null) {
 			for (String cameraId : favouriteCameraIds) {
-				MLog.i(TAG, cameraId + ",");
+				MLog.INSTANCE.i(TAG, cameraId + ",");
 			}
 			
 			for (List<TrafficCamera> camerasInRegion : unfilteredCamerasPerRegion.values()) {
 				for (TrafficCamera camera : camerasInRegion) {
 					if (favouriteCameraIds.contains(String.valueOf(camera.getIndex()))) {
-						MLog.i(TAG, "Calling setFavourite(true) for camera " + camera.getIndex());
+						MLog.INSTANCE.i(TAG, "Calling setFavourite(true) for camera " + camera.getIndex());
 						camera.setFavourite(true);
 					}
 				}
@@ -974,7 +974,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 	public void saveFavourites() {
 		assert ctx != null;
 
-		MLog.d(TAG, "Saving favourite states for all cameras");
+		MLog.INSTANCE.d(TAG, "Saving favourite states for all cameras");
 
 		Set<String> favouriteCameraIds = new HashSet<String>();
 
@@ -995,7 +995,7 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 	}
 
 	public void setCameraFavourite(int cameraIndex, boolean isFavourite) {
-		MLog.i(TAG, "Set in database: camera " + cameraIndex
+		MLog.INSTANCE.i(TAG, "Set in database: camera " + cameraIndex
 				+ " has favourite status = " + isFavourite);
 	}
 
@@ -1027,11 +1027,11 @@ public class TrafficCameraDatabase implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		MLog.d(TAG, "***TCDb " + hashCode() + " receives PCE for event " + event.getPropertyName());
+		MLog.INSTANCE.d(TAG, "***TCDb " + hashCode() + " receives PCE for event " + event.getPropertyName());
 		
 		// TODO Auto-generated method stub
 		if (TrafficCamera.PROPERTY_FAVOURITE.equals(event.getPropertyName())) {
-			MLog.d(TAG, "TCDb receives notice that favourite state of a camera has changed.");
+			MLog.INSTANCE.d(TAG, "TCDb receives notice that favourite state of a camera has changed.");
 			saveFavourites();
 			fireFavouritePropertyChangeEvent();
 		}

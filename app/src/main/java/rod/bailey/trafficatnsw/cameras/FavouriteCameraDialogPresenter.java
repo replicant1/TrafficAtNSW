@@ -20,7 +20,7 @@ public class FavouriteCameraDialogPresenter {
 
 			switch (index) {
 			case DialogInterface.BUTTON_POSITIVE:
-				MLog.i(TAG, "*** About to toggle favourite state of camera " + camera.getIndex());
+				MLog.INSTANCE.i(TAG, "*** About to toggle favourite state of camera " + camera.getIndex());
 				camera.setFavourite(!camera.isFavourite());
 				break;
 
@@ -35,7 +35,7 @@ public class FavouriteCameraDialogPresenter {
 	public FavouriteCameraDialogPresenter(TrafficCamera camera) {
 		assert camera != null;
 		this.camera = camera;
-		MLog.i(TAG, "Presenter created for a camera whose favourite status is "
+		MLog.INSTANCE.i(TAG, "Presenter created for a camera whose favourite status is "
 				+ camera.isFavourite());
 	}
 

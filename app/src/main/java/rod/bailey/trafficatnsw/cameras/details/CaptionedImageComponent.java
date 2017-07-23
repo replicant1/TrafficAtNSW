@@ -76,12 +76,12 @@ public class CaptionedImageComponent extends ViewGroup {
 	@Override
 	protected void onLayout(boolean changed, int left, int top, int right,
 			int bottom) {
-		MLog.i(TAG,
+		MLog.INSTANCE.i(TAG,
 				String.format(
 						"left:%d, top:%d, right:%d, bottom:%d, imageBItmap:%s, frameBitmap:%s",
 						left, top, right, bottom, imageBitmap, frameBitmap));
 
-		int margin = DisplayUtils.dp2Px(getContext(), MARGIN_DP);
+		int margin = DisplayUtils.INSTANCE.dp2Px(getContext(), MARGIN_DP);
 
 		int rawWidth = right - left;
 		int rawHeight = bottom - top;
@@ -104,7 +104,7 @@ public class CaptionedImageComponent extends ViewGroup {
 		// Work out what the top margin should be so that the combination of
 		// camera image
 		// and caption appears vertically centered.
-		int captionHeightPx = DisplayUtils.sp2Px(getContext(), TEXT_SIZE_SP) * 3;
+		int captionHeightPx = DisplayUtils.INSTANCE.sp2Px(getContext(), TEXT_SIZE_SP) * 3;
 		int excessHeight = rawHeight - scaledImageHeight - captionHeightPx;
 
 		int topMargin = excessHeight / 2;

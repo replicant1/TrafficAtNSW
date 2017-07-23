@@ -137,13 +137,13 @@ public class TravelTimesSingleton {
 
 		try {
 			String assetFileName = config.localJsonFileName;
-			MLog.d(TAG, String.format("Fetching %s from assets folder",
+			MLog.INSTANCE.d(TAG, String.format("Fetching %s from assets folder",
 					assetFileName));
 
 			InputStream input = ctx.getAssets().open(assetFileName);
 			int size = input.available();
 
-			MLog.d(TAG, String.format("Found %d available bytes in %s", size,
+			MLog.INSTANCE.d(TAG, String.format("Found %d available bytes in %s", size,
 					assetFileName));
 			byte[] buffer = new byte[size];
 			input.read(buffer);
@@ -158,7 +158,7 @@ public class TravelTimesSingleton {
 			result = new MotorwayTravelTimesDatabase(ctx, config);
 			result.primeWithTravelTimes(tts);
 		} catch (IOException ioe) {
-			MLog.e(TAG, "M4 JSON parsing failed", ioe);
+			MLog.INSTANCE.e(TAG, "M4 JSON parsing failed", ioe);
 		}
 
 		return result;
@@ -173,7 +173,7 @@ public class TravelTimesSingleton {
 	public MotorwayTravelTimesDatabase loadTravelTimesFromRemoteJSONFile(Context ctx,
 			TravelTimeConfig config) {
 		
-		MLog.i(TAG, "Beginning load of " + config.motorwayName + " travel times from remote file " 
+		MLog.INSTANCE.i(TAG, "Beginning load of " + config.motorwayName + " travel times from remote file "
 				+ config.remoteJsonUrl);
 
 		MotorwayTravelTimesDatabase result = null;
@@ -199,7 +199,7 @@ public class TravelTimesSingleton {
 			result = new MotorwayTravelTimesDatabase(ctx, config);
 			result.primeWithTravelTimes(tts);
 		} catch (Exception e) {
-			MLog.e(TAG, "Failed to retrive and/or parse travel times for "
+			MLog.INSTANCE.e(TAG, "Failed to retrive and/or parse travel times for "
 					+ config.motorwayName, e);
 			result = null;
 		} finally {

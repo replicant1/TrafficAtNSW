@@ -84,7 +84,7 @@ public class MotorwayTravelTimesDatabase implements PropertyChangeListener {
 	 * changed.
 	 */
 	private void fireExclusionStatePropertyChangedEvent(TravelTime travelTime) {
-		MLog.i(TAG, "Firing a PCE on property name "
+		MLog.INSTANCE.i(TAG, "Firing a PCE on property name "
 				+ PROPERTY_TOTAL_TRAVEL_TIME + " with value " + travelTime);
 		support.firePropertyChange(PROPERTY_TOTAL_TRAVEL_TIME, null, this);
 	}
@@ -110,7 +110,7 @@ public class MotorwayTravelTimesDatabase implements PropertyChangeListener {
 	 * prior to this.
 	 */
 	private void loadExclusionStates() {
-		MLog.i(TAG, "Loading exclusion states");
+		MLog.INSTANCE.i(TAG, "Loading exclusion states");
 
 		// To begin with mark all as included
 		for (TravelTime travelTime : travelTimes) {
@@ -120,12 +120,12 @@ public class MotorwayTravelTimesDatabase implements PropertyChangeListener {
 		Set<String> excludedSegmentIds = prefs.getStringSet(
 				EXCLUSION_STATE_PREFS_KEY, null);
 
-		MLog.i(TAG, "Exclusion set as loaded from prefs is:");
-		MLog.i(TAG, "excludedSegmentIds = " + excludedSegmentIds);
+		MLog.INSTANCE.i(TAG, "Exclusion set as loaded from prefs is:");
+		MLog.INSTANCE.i(TAG, "excludedSegmentIds = " + excludedSegmentIds);
 
 		if (excludedSegmentIds != null) {
 			for (String segId : excludedSegmentIds) {
-				MLog.i(TAG, segId + ",");
+				MLog.INSTANCE.i(TAG, segId + ",");
 			}
 
 			for (String excludedSegmentId : excludedSegmentIds) {
@@ -174,7 +174,7 @@ public class MotorwayTravelTimesDatabase implements PropertyChangeListener {
 		if (event.getPropertyName().equals(
 				TravelTime.PROPERTY_INCLUDED_IN_TOTAL)) {
 			if (!source.isTotal()) {
-				MLog.i(TAG,
+				MLog.INSTANCE.i(TAG,
 						"MotorwayTTDb gets notices that property "
 								+ event.getPropertyName()
 								+ " has changed for segment id "
@@ -203,14 +203,14 @@ public class MotorwayTravelTimesDatabase implements PropertyChangeListener {
 	 * this.Order is not important.
 	 */
 	private void saveExclusionStates() {
-		MLog.d(TAG, "Saving exclusion states for motorway "
+		MLog.INSTANCE.d(TAG, "Saving exclusion states for motorway "
 				+ config.motorwayName);
 
 		Set<String> excludedSegmentIds = new HashSet<String>();
 
 		for (TravelTime travelTime : travelTimes) {
 			if (!travelTime.isIncludedInTotal()) {
-				MLog.d(TAG, "Segment " + travelTime.getSegmentId()
+				MLog.INSTANCE.d(TAG, "Segment " + travelTime.getSegmentId()
 						+ " is excluded so save to prefs");
 				excludedSegmentIds.add(travelTime.getSegmentId());
 			}

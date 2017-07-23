@@ -128,17 +128,17 @@ public class TrafficCameraListFragment extends Fragment implements
 				}
 			}
 		} else {
-			MLog.i(TAG, "args was null");
+			MLog.INSTANCE.i(TAG, "args was null");
 		}
 
-		MLog.i(TAG, "Setting camera mode to " + newmode.name());
+		MLog.INSTANCE.i(TAG, "Setting camera mode to " + newmode.name());
 		mode = newmode;
 
 		// Initialize TrafficCameraDatabase
 		TrafficCameraDatabase db = TrafficCameraDatabase.getInstance();
 		db.init(getActivity());
 
-		MLog.i(TAG, "TCLFragment add self as listener to TCDb " + db.hashCode());
+		MLog.INSTANCE.i(TAG, "TCLFragment add self as listener to TCDb " + db.hashCode());
 		db.addPropertyChangeListener(this);
 	}
 

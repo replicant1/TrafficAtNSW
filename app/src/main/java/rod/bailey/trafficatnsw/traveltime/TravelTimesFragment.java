@@ -51,7 +51,7 @@ public class TravelTimesFragment extends Fragment implements
 	private TravelTimeConfig travelTimeConfig;
 
 	private void createUI() {
-		MLog.i(TAG, "Into TravelTimesFragment.createUI()");
+		MLog.INSTANCE.i(TAG, "Into TravelTimesFragment.createUI()");
 
 		Context ctx = getActivity();
 		mainLayout = new ListWithEmptyMessage(ctx, EMPTY_MESSAGE,
@@ -115,7 +115,7 @@ public class TravelTimesFragment extends Fragment implements
 	}
 
 	private void refreshAsync() {
-		MLog.i(TAG, "Refreshing travel times");
+		MLog.INSTANCE.i(TAG, "Refreshing travel times");
 
 		DownloadTravelTimesTask task = new DownloadTravelTimesTask(
 				getActivity());
@@ -169,7 +169,7 @@ public class TravelTimesFragment extends Fragment implements
 				db.addPropertyChangeListener(TravelTimesFragment.this);
 			}
 
-			MLog.i(TAG, "Result of loading is database " + db);
+			MLog.INSTANCE.i(TAG, "Result of loading is database " + db);
 
 			return travelTimesLoadedOK;
 		}
@@ -185,7 +185,7 @@ public class TravelTimesFragment extends Fragment implements
 			} else {
 				// We don't all mainLayout.setAdapter, which means that the old (stale)
 				// data will still remain visible.
-				MLog.i(TAG, "Failed to load " + travelTimeConfig.motorwayName + " travel times - showing error dialog");
+				MLog.INSTANCE.i(TAG, "Failed to load " + travelTimeConfig.motorwayName + " travel times - showing error dialog");
 				AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 				builder.setTitle(String.format("No Travel Times for %s", travelTimeConfig.motorwayName));
 				builder.setMessage("Tap the refresh icon at top right to try again.");
@@ -199,7 +199,7 @@ public class TravelTimesFragment extends Fragment implements
 
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
-		MLog.i(TAG,
+		MLog.INSTANCE.i(TAG,
 				"TravelTimesFragment gets notice that property "
 						+ event.getPropertyName() + " has changed");
 		if (event.getPropertyName().equals(

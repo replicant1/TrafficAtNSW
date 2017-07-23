@@ -72,7 +72,7 @@ public class TrafficCameraImageActivity extends Activity {
 			assert urls != null;
 			assert urls.length == 1;
 
-			MLog.i(TAG, "Up to doInBackground");
+			MLog.INSTANCE.i(TAG, "Up to doInBackground");
 
 			String urlToLoad = urls[0];
 			Bitmap result = null;
@@ -81,7 +81,7 @@ public class TrafficCameraImageActivity extends Activity {
 				InputStream stream = new java.net.URL(urlToLoad).openStream();
 				result = BitmapFactory.decodeStream(stream);
 			} catch (Exception e) {
-				MLog.e(TAG, e.getMessage());
+				MLog.INSTANCE.e(TAG, e.getMessage());
 			}
 
 			return result;
@@ -96,7 +96,7 @@ public class TrafficCameraImageActivity extends Activity {
 			if (result == null) {
 				// Failed to load camera image - bad connection or just not
 				// available on server.
-				MLog.i(TAG,
+				MLog.INSTANCE.i(TAG,
 						"Failed to load camera image - showing error dialog");
 				AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 				builder.setTitle("Could not load camera image");
@@ -128,12 +128,12 @@ public class TrafficCameraImageActivity extends Activity {
 		String strUrl = extras.getString("url");
 		String strFavourite = extras.getString("favourite");
 
-		MLog.d(TAG, "index=" + strIndex);
-		MLog.d(TAG, "stree=" + strStreet);
-		MLog.d(TAG, "suburb=" + strSuburb);
-		MLog.d(TAG, "description=" + strDescription);
-		MLog.d(TAG, "url=" + strUrl);
-		MLog.d(TAG, "favourite=" + strFavourite);
+		MLog.INSTANCE.d(TAG, "index=" + strIndex);
+		MLog.INSTANCE.d(TAG, "stree=" + strStreet);
+		MLog.INSTANCE.d(TAG, "suburb=" + strSuburb);
+		MLog.INSTANCE.d(TAG, "description=" + strDescription);
+		MLog.INSTANCE.d(TAG, "url=" + strUrl);
+		MLog.INSTANCE.d(TAG, "favourite=" + strFavourite);
 
 		assert strIndex != null;
 		assert strStreet != null;
@@ -191,13 +191,13 @@ public class TrafficCameraImageActivity extends Activity {
 	}
 
 	public void refresh() {
-		MLog.i(TAG, "Refreshing");
+		MLog.INSTANCE.i(TAG, "Refreshing");
 		DownloadImageTask task = new DownloadImageTask(this);
 		task.execute(cameraUrl);
 	}
 
 	public void toggleFavourite() {
-		MLog.i(TAG, "Toggle favourite");
+		MLog.INSTANCE.i(TAG, "Toggle favourite");
 
 		// Raise dialog
 		final TrafficCamera camera = TrafficCameraDatabase.getInstance()
@@ -210,7 +210,7 @@ public class TrafficCameraImageActivity extends Activity {
 
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				MLog.i(TAG,
+				MLog.INSTANCE.i(TAG,
 						"On dismiss listener, camera.isFavourite="
 								+ camera.isFavourite());
 				updateActionBarToReflectFavouriteStatus(camera.isFavourite());
@@ -218,7 +218,7 @@ public class TrafficCameraImageActivity extends Activity {
 		});
 		dialog.show();
 
-		MLog.i(TAG, "After dialog.show");
+		MLog.INSTANCE.i(TAG, "After dialog.show");
 	}
 
 	private void updateActionBarToReflectFavouriteStatus(boolean isFavourite) {
@@ -232,7 +232,7 @@ public class TrafficCameraImageActivity extends Activity {
 		inflater.inflate(R.menu.traffic_camera_image_options_menu, menu);
 		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite);
 
-		MLog.i(TAG, "Found favouriteMenuItem=" + favouriteMenuItem);
+		MLog.INSTANCE.i(TAG, "Found favouriteMenuItem=" + favouriteMenuItem);
 		updateActionBarToReflectFavouriteStatus(cameraFavourite);
 
 		return super.onCreateOptionsMenu(menu);

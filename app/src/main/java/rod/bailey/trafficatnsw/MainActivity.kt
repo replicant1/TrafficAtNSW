@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		val config = ConfigSingleton.getInstance()
+		val config = ConfigSingleton.instance
 		config.init(CONFIG_PROPERTIES_FILE_NAME, this)
 
 		MLog.init(config, this)

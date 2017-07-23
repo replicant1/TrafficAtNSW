@@ -17,7 +17,7 @@ public class FooterCancellingListView extends ListView {
 		super(ctx);
 		footerView = new DataLicenceView(ctx);
 		setFooterDividersEnabled(false);
-		setBackgroundColor(DisplayUtils.viewBackgroundColor());
+		setBackgroundColor(DisplayUtils.INSTANCE.viewBackgroundColor());
 	}
 
 	@Override

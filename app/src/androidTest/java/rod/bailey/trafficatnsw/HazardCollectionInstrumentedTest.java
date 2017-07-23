@@ -40,7 +40,7 @@ public class HazardCollectionInstrumentedTest {
     @Test
     public void parse09jul2013Json440375() throws IOException {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        String jsonString = AssetUtils.loadAssetFileAsString(appContext, "09jul2013.json");
+        String jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, "09jul2013.json");
         HazardCollection hazards = HazardCollection.Companion.parseJson(jsonString);
 
         assertNotNull(hazards);
@@ -116,7 +116,7 @@ public class HazardCollectionInstrumentedTest {
     @Test
     public void parse09jul2013Json440361()  throws IOException {
         Context appContext = InstrumentationRegistry.getTargetContext();
-        String jsonString = AssetUtils.loadAssetFileAsString(appContext, "09jul2013.json");
+        String jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, "09jul2013.json");
         HazardCollection hazards = HazardCollection.Companion.parseJson(jsonString);
 
         // This test case examines hazard id 440361

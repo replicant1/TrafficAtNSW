@@ -24,7 +24,7 @@ public class TravelTimesListItemView extends LinearLayout {
 	private final class ItemTouchListener implements OnTouchListener {
 		@Override
 		public boolean onTouch(View view, MotionEvent event) {
-			MLog.i(TAG, "onTouch event for " + travelTime.getFromDisplayName() + " - " + travelTime.getToDisplayName() + ":" + event);
+			MLog.INSTANCE.i(TAG, "onTouch event for " + travelTime.getFromDisplayName() + " - " + travelTime.getToDisplayName() + ":" + event);
 
 			if (event.getAction() == MotionEvent.ACTION_DOWN) {
 				setBackgroundColor(Color.LTGRAY);
@@ -69,7 +69,7 @@ public class TravelTimesListItemView extends LinearLayout {
 		addView(leftColView);
 		addView(rightColView);
 
-		int m = DisplayUtils.dp2Px(ctx, 5);
+		int m = DisplayUtils.INSTANCE.dp2Px(ctx, 5);
 
 		// Left column contains a string of form "<from> - <to>"
 		leftColView.setSingleLine();
@@ -137,7 +137,7 @@ public class TravelTimesListItemView extends LinearLayout {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		setMeasuredDimension(DisplayUtils.getDisplaySizePx(ctx).x,
+		setMeasuredDimension(DisplayUtils.INSTANCE.getDisplaySizePx(ctx).x,
 				dp2Px(ctx, 35));
 	}
 

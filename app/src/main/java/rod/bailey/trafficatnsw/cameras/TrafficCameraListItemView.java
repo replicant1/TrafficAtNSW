@@ -133,8 +133,8 @@ public class TrafficCameraListItemView extends ViewGroup {
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		setMeasuredDimension(DisplayUtils.getDisplaySizePx(ctx).x,
-				DisplayUtils.dp2Px(ctx, 50));
+		setMeasuredDimension(DisplayUtils.INSTANCE.getDisplaySizePx(ctx).x,
+				DisplayUtils.INSTANCE.dp2Px(ctx, 50));
 	}
 
 	public void setFavourite(boolean favourite) {

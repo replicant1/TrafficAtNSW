@@ -38,9 +38,9 @@ class DownloadHazardFileTask(private val ctx: Context,
 		var hazardsLoadedOK: Boolean = true
 
 		try {
-			if (ConfigSingleton.getInstance().loadIncidentsFromLocalJSONFile()) {
+			if (ConfigSingleton.instance.loadIncidentsFromLocalJSONFile()) {
 				MLog.d(LOG_TAG, "Loading incidents from local JSON file")
-				val assetFileName = ConfigSingleton.getInstance().localIncidentsJSONFile()
+				val assetFileName = ConfigSingleton.instance.localIncidentsJSONFile()
 				val input = ctx.assets.open(assetFileName)
 				val size = input.available()
 				val buffer = ByteArray(size)
@@ -54,7 +54,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 				MLog.d(LOG_TAG, "Just passed text into singleton. hazardsLoadedOK")
 			} else {
 				MLog.d(LOG_TAG, "Loading incidents from remote JSON file")
-				val url = URL(ConfigSingleton.getInstance().remoteIncidentsJSONFile())
+				val url = URL(ConfigSingleton.instance.remoteIncidentsJSONFile())
 				val instreamReader = InputStreamReader(
 					url.openStream())
 				bufferedReader = BufferedReader(instreamReader)
