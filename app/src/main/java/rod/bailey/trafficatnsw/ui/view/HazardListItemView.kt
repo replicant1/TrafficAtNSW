@@ -23,6 +23,7 @@ import rod.bailey.trafficatnsw.util.DisplayUtils
 import rod.bailey.trafficatnsw.util.DisplayUtils.dp2Px
 import rod.bailey.trafficatnsw.util.DisplayUtils.getDisplaySizePx
 import java.text.SimpleDateFormat
+import java.util.*
 
 class HazardListItemView(private val ctx: Context,
 						 val hazard: XHazard,
@@ -94,18 +95,20 @@ class HazardListItemView(private val ctx: Context,
 			subTitleView.text = road.mainStreet
 		}
 		subSubTitleView.text = hazard.displayName
-		val lu = hazard.lastUpdated
-		var dateText: String?
-		if (DateUtils.isYesterday(lu)) {
-			dateText = "Yesterday"
-		} else if (DateUtils.isToday(lu)) {
-			dateText = SimpleDateFormat("h:mm a").format(lu).toLowerCase()
-		} else {
-			dateText = SimpleDateFormat("dd/MM/yyyy").format(lu)
-		}
+		val lu: Date? = hazard.lastUpdated
+		if (lu != null) {
+			var dateText: String?
+			if (DateUtils.isYesterday(lu)) {
+				dateText = "Yesterday"
+			} else if (DateUtils.isToday(lu)) {
+				dateText = SimpleDateFormat("h:mm a").format(lu).toLowerCase()
+			} else {
+				dateText = SimpleDateFormat("dd/MM/yyyy").format(lu)
+			}
 
-		if (dateText != null) {
-			dateView.text = dateText
+			if (dateText != null) {
+				dateView.text = dateText
+			}
 		}
 
 		titleView.setTextColor(BLACK)

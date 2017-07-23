@@ -19,7 +19,7 @@ import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import android.view.ViewGroup.LayoutParams.*
 import android.widget.RelativeLayout.*
-import rod.bailey.trafficatnsw.util.DisplayUtils.*
+import rod.bailey.trafficatnsw.util.DisplayUtils
 
 class ShowHazardOnMapActivity : Activity() {
 	private var hazard: XHazard? = null
@@ -46,7 +46,7 @@ class ShowHazardOnMapActivity : Activity() {
 		mainLayout.id = R.id.content_frame
 		val mainLayoutMLP = MarginLayoutParams(
 			MATCH_PARENT, MATCH_PARENT)
-		val marginPx = dp2Px(this, 5)
+		val marginPx = DisplayUtils.dp2Px(this, 5)
 		mainLayoutMLP.setMargins(marginPx, marginPx, marginPx, marginPx)
 		val mainLayoutRLP = RelativeLayout.LayoutParams(
 			mainLayoutMLP)

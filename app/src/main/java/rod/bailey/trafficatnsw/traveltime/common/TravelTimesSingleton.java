@@ -112,7 +112,7 @@ public class TravelTimesSingleton {
 	}
 
 	public synchronized void init(Context ctx) {
-		configSingleton = ConfigSingleton.getInstance();
+		configSingleton = ConfigSingleton.Companion.getInstance();
 
 		if ((m1Config == null) || (m2Config == null) || (m4Config == null)
 				|| (m7Config == null)) {

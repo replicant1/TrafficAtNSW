@@ -156,7 +156,7 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 		// Second CellRec is for "Last updated" date/time. But we only create a
 		// 'last updated' cellrec if it will show a different date to the
 		// 'created' date.
-		if (!isLastUpdatedSameAsCreated) {
+		if ((!isLastUpdatedSameAsCreated) && (hazard.lastUpdated != null)) {
 			val lastUpdatedStr = DateUtils.relativeDateAndTime(
 				hazard.lastUpdated, true)
 			val lastUpdatedCellRec = TextFieldCellRec(

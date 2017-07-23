@@ -105,13 +105,13 @@ public class TrafficCameraListItemView extends ViewGroup {
 	protected void onLayout(boolean changed, int left, int top, int right,
 			int bottom) {
 		if (changed) {
-			int hpadPx = dp2Px(ctx, 6);
+			int hpadPx = DisplayUtils.INSTANCE.dp2Px(ctx, 6);
 			
 			int availableWidth = right - left;
 			int availableHeight = bottom - top;
 
-			int imageHeight = dp2Px(ctx, 30);
-			int imageWidth = dp2Px(ctx, 30);
+			int imageHeight = DisplayUtils.INSTANCE.dp2Px(ctx, 30);
+			int imageWidth = DisplayUtils.INSTANCE.dp2Px(ctx, 30);
 
 			// Layout the icon. Work out the location in our coordinate space.
 			int iconTop = (availableHeight - imageHeight) / 2;

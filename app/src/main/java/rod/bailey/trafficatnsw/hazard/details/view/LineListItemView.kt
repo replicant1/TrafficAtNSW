@@ -6,7 +6,7 @@ import android.widget.TextView
 import android.graphics.Color.*
 import android.graphics.Typeface.*
 import android.text.TextUtils.TruncateAt.*
-import rod.bailey.trafficatnsw.util.DisplayUtils.*
+import rod.bailey.trafficatnsw.util.DisplayUtils
 
 class LineListItemView(ctx: Context, text: String) : AppCompatTextView(ctx) {
 
@@ -20,7 +20,7 @@ class LineListItemView(ctx: Context, text: String) : AppCompatTextView(ctx) {
 		ellipsize = END
 		setBackgroundColor(TRANSPARENT)
 		setBackgroundColor(WHITE)
-		val p = dp2Px(ctx, 5)
+		val p = DisplayUtils.dp2Px(ctx, 5)
 		setPadding(p, p, p, p)
 	}
 

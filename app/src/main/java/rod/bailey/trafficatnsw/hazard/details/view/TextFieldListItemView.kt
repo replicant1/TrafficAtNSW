@@ -8,7 +8,7 @@ import android.graphics.Typeface.*
 import android.text.TextUtils.TruncateAt.END
 import android.view.Gravity.*
 import android.view.ViewGroup.LayoutParams.*
-import rod.bailey.trafficatnsw.util.DisplayUtils.*
+import rod.bailey.trafficatnsw.util.DisplayUtils
 
 class TextFieldListItemView(private val ctx: Context, fieldName: String,
 							fieldValue: String) : LinearLayout(ctx) {
@@ -47,7 +47,7 @@ class TextFieldListItemView(private val ctx: Context, fieldName: String,
 		fieldValueTextView.gravity = RIGHT
 
 		setBackgroundColor(WHITE)
-		val p = dp2Px(ctx, 5)
+		val p = DisplayUtils.dp2Px(ctx, 5)
 		setPadding(p, p, p, p)
 		orientation = LinearLayout.HORIZONTAL
 
@@ -57,7 +57,7 @@ class TextFieldListItemView(private val ctx: Context, fieldName: String,
 
 	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-		setMeasuredDimension(getDisplaySizePx(ctx).x, dp2Px(ctx, 30))
+		setMeasuredDimension(DisplayUtils.getDisplaySizePx(ctx).x, DisplayUtils.dp2Px(ctx, 30))
 	}
 
 	companion object {

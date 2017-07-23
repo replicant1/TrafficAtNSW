@@ -51,7 +51,7 @@ class NavigationListAdapter(private val mainActivity: MainActivity) : BaseAdapte
 
 	override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
 		val item = items[position]
-		var result: View? = null
+		var result: View?
 
 		if (item is PrimaryItem) {
 			result = NavigationListHeadingView(mainActivity,

@@ -138,7 +138,7 @@ public class TravelTimesListItemView extends LinearLayout {
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		setMeasuredDimension(DisplayUtils.INSTANCE.getDisplaySizePx(ctx).x,
-				dp2Px(ctx, 35));
+				DisplayUtils.INSTANCE.dp2Px(ctx, 35));
 	}
 
 	public void updateAppearancePerExclusionState() {

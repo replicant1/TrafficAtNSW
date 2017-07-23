@@ -152,7 +152,7 @@ public class TravelTimesFragment extends Fragment implements
 				db.removePropertyChangeListener(TravelTimesFragment.this);
 			}
 
-			if (ConfigSingleton.getInstance()
+			if (ConfigSingleton.Companion.getInstance()
 					.loadTravelTimesFromLocalJSONFiles()) {
 				db = TravelTimesSingleton
 						.getSingleton()
