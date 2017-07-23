@@ -12,7 +12,7 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.ui.FooterCancellingListView
+import rod.bailey.trafficatnsw.ui.view.FooterCancellingListView
 import rod.bailey.trafficatnsw.util.MLog
 
 /**

@@ -1,12 +1,10 @@
 package rod.bailey.trafficatnsw.hazard.details
 
-import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.HashSet
 import java.util.LinkedList
 import rod.bailey.trafficatnsw.hazard.details.cellrec.CellRec
@@ -18,14 +16,10 @@ import rod.bailey.trafficatnsw.hazard.details.cellrec.TitleCellRec
 import rod.bailey.trafficatnsw.hazard.details.view.HtmlListItemView
 import rod.bailey.trafficatnsw.hazard.details.view.LineListItemView
 import rod.bailey.trafficatnsw.hazard.details.view.TextFieldListItemView
-import rod.bailey.trafficatnsw.ui.HazardListItemView
-import rod.bailey.trafficatnsw.json.hazard.XArrangementElement
+import rod.bailey.trafficatnsw.ui.view.HazardListItemView
 import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.json.hazard.XLane
-import rod.bailey.trafficatnsw.json.hazard.XPeriod
-import rod.bailey.trafficatnsw.json.hazard.XRoad
 import rod.bailey.trafficatnsw.util.DateUtils
-import rod.bailey.trafficatnsw.ui.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView
 
 class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), ListAdapter {
 	private val cellRecs = LinkedList<CellRec>()
@@ -395,8 +389,12 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 		val cellRec:CellRec = cellRecs[position]
 
 		result = when (cellRec) {
-			is TitleCellRec -> HazardListItemView(ctx, cellRec.hazard, false, false)
-			is HeadingCellRec -> ListHeadingView(ctx, cellRec.heading, false)
+			is TitleCellRec -> HazardListItemView(ctx,
+																				  cellRec.hazard,
+																				  false, false)
+			is HeadingCellRec -> ListHeadingView(ctx,
+																				 cellRec.heading,
+																				 false)
 			is LineCellRec -> LineListItemView(ctx, cellRec.line)
 			is TextFieldCellRec -> TextFieldListItemView(ctx, cellRec.fieldName, cellRec.fieldValue)
 			is HtmlFieldCellRec -> HtmlListItemView(ctx, cellRec.fieldHtml)

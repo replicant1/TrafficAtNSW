@@ -12,7 +12,7 @@ import java.util.List;
 import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase;
 import rod.bailey.trafficatnsw.traveltime.common.TravelTime;
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig;
-import rod.bailey.trafficatnsw.ui.ListHeadingView;
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView;
 
 public class TravelTimesListAdapter extends BaseAdapter implements ListAdapter {
 

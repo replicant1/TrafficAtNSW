@@ -5,8 +5,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.json.hazard.Hazard
-import rod.bailey.trafficatnsw.ui.ListWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.view.ListWithEmptyMessage
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
 import java.io.BufferedReader

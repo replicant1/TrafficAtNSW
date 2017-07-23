@@ -16,7 +16,7 @@ import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitSydneyTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter;
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate;
-import rod.bailey.trafficatnsw.ui.ListWithEmptyMessage;
+import rod.bailey.trafficatnsw.ui.view.ListWithEmptyMessage;
 import rod.bailey.trafficatnsw.util.MLog;
 
 public class TrafficCameraListFragment extends Fragment implements

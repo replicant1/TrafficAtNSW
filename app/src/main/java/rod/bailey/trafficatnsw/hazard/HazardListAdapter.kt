@@ -5,11 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
-import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XRegion
-import rod.bailey.trafficatnsw.ui.HazardListItemView
-import rod.bailey.trafficatnsw.ui.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.HazardListItemView
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView
 import rod.bailey.trafficatnsw.util.MLog
 import java.util.*
 

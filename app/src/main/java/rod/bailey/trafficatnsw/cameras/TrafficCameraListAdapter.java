@@ -13,7 +13,7 @@ import java.util.List;
 
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter;
 import rod.bailey.trafficatnsw.json.hazard.XRegion;
-import rod.bailey.trafficatnsw.ui.ListHeadingView;
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView;
 
 public class TrafficCameraListAdapter extends BaseAdapter implements
 		ListAdapter {

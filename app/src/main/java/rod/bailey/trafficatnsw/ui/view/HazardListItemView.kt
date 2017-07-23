@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.ui
+package rod.bailey.trafficatnsw.ui.view
 
 import android.content.Context
 import android.content.Intent
@@ -23,7 +23,6 @@ import rod.bailey.trafficatnsw.util.DisplayUtils
 import rod.bailey.trafficatnsw.util.DisplayUtils.dp2Px
 import rod.bailey.trafficatnsw.util.DisplayUtils.getDisplaySizePx
 import java.text.SimpleDateFormat
-import java.util.*
 
 class HazardListItemView(private val ctx: Context,
 						 val hazard: XHazard,

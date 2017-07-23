@@ -4,7 +4,7 @@ import android.app.Fragment
 import android.os.Bundle
 import android.view.*
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.ui.ListWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.view.ListWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.util.MLog
 
@@ -48,8 +48,8 @@ class HazardListFragment : Fragment() {
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
 		mainLayout = ListWithEmptyMessage(activity,
-										  emptyMessageForMode(mode),
-										  EmptyListEmptyMessagePredicate())
+																		  emptyMessageForMode(mode),
+																		  EmptyListEmptyMessagePredicate())
 		setHasOptionsMenu(true)
 		activity.title = screenTitleForMode(mode)
 		refreshAsync()
