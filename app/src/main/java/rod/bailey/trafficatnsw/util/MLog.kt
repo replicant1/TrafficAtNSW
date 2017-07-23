@@ -36,7 +36,7 @@ object MLog {
 		}
 	}
 
-	fun init(config: ConfigSingleton, ctx: Context) {
+	fun init(config: ConfigSingleton) {
 		showLogMessages = config.showLogMessages()
 	}
 

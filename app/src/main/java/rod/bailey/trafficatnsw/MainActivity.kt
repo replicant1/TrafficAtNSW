@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 		val config = ConfigSingleton.instance
 		config.init(CONFIG_PROPERTIES_FILE_NAME, this)
 
-		MLog.init(config, this)
+		MLog.init(config)
 
 		setContentView(R.layout.activity_main)
 		val toolbar = findViewById(R.id.toolbar) as Toolbar

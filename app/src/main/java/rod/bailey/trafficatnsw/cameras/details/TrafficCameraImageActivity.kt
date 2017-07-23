@@ -20,7 +20,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout.LayoutParams
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.FavouriteCameraDialogPresenter
-import rod.bailey.trafficatnsw.cameras.TrafficCameraDatabase
+import rod.bailey.trafficatnsw.cameras.TrafficCamera
+import rod.bailey.trafficatnsw.cameras.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.util.MLog
 
 class TrafficCameraImageActivity : Activity() {
@@ -174,17 +175,17 @@ class TrafficCameraImageActivity : Activity() {
 	fun toggleFavourite() {
 		MLog.i(TAG, "Toggle favourite")
 		// Raise dialog
-		val camera = TrafficCameraDatabase.getInstance()
-			.getCamera(cameraIndex)
-		val pres = FavouriteCameraDialogPresenter(
-			camera)
-		val dialog = pres.build(this)
-		dialog.setOnDismissListener {
-			MLog.i(TAG,
-				   "On dismiss listener, camera.isFavourite=" + camera.isFavourite)
-			updateActionBarToReflectFavouriteStatus(camera.isFavourite)
+		val camera:TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(cameraIndex)
+		if (camera != null) {
+			val pres = FavouriteCameraDialogPresenter(camera)
+			val dialog = pres.build(this)
+			dialog.setOnDismissListener {
+				MLog.i(TAG,
+					   "On dismiss listener, camera.isFavourite=" + camera.isFavourite)
+				updateActionBarToReflectFavouriteStatus(camera.isFavourite)
+			}
+			dialog.show()
 		}
-		dialog.show()
 
 		MLog.i(TAG, "After dialog.show")
 	}
