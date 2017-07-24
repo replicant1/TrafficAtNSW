@@ -1,7 +1,6 @@
 package rod.bailey.trafficatnsw.cameras
 
 import android.app.Fragment
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -36,7 +35,7 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	private var mode: TrafficCameraListMode? = TrafficCameraListMode.SYDNEY
 
 	private fun createUI() {
-		Log.i(TAG, "Into TrafficCameraListFragment.createUI")
+		Log.i(LOG_TAG, "Into TrafficCameraListFragment.createUI")
 		val ctx = activity
 
 		mainLayout = ListWithEmptyMessage(ctx, EMPTY_MESSAGE,
@@ -63,16 +62,16 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 				}
 			}
 		} else {
-			MLog.i(TAG, "args was null")
+			MLog.i(LOG_TAG, "args was null")
 		}
 
-		MLog.i(TAG, "Setting camera mode to " + newmode.name)
+		MLog.i(LOG_TAG, "Setting camera mode to " + newmode.name)
 		mode = newmode
 		// Initialize TrafficCameraCacheSingleton
 		val db = TrafficCameraCacheSingleton.instance
 		db.init(activity)
 
-		MLog.i(TAG, "TCLFragment add self as listener to TCDb " + db.hashCode())
+		MLog.i(LOG_TAG, "TCLFragment add self as listener to TCDb " + db.hashCode())
 		db.addPropertyChangeListener(this)
 	}
 
@@ -100,22 +99,22 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		private val EMPTY_MESSAGE:String = """You have no favourite cameras.\n\n
 		To make a camera one of your favourites, view the camera image and
 		tap the star at the top right of the screen."""
+
 		/** Key for the sole argument passed to this fragment.  */
 		val ARG_MODE_KEY = "MODE"
-		/**
-		 * Value for ARG_HAZARDS_FRAGMENT_MODE that indicates the list should contain ALL traffic
-		 * cameras
-		 */
-		val ARG_MODE_VALUE_ALL = 0
 		val ARG_MODE_VALUE_SYDNEY = 1
 		val ARG_MODE_VALUE_REGIONAL = 2
-		/**
-		 * Value for ARG_HAZARDS_FRAGMENT_MODE that indicates the list should contain only those
-		 * traffic cameras marked as favourites.
-		 */
 		val ARG_MODE_VALUE_FAVOURITES = 3
-		/** Tag for logging  */
-		private val TAG = TrafficCameraListFragment::class.java
-			.simpleName
+
+		private val LOG_TAG = TrafficCameraListFragment::class.java.simpleName
+
+		fun create(mode: Int): TrafficCameraListFragment {
+			MLog.d(LOG_TAG, "Creating TrafficCameraListFragment, mode=${mode}")
+			val result = TrafficCameraListFragment()
+			val bundle = Bundle()
+			bundle.putInt(ARG_MODE_KEY, mode)
+			result.arguments = bundle
+			return result
+		}
 	}
 }

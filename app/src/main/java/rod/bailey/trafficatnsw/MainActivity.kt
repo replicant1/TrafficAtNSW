@@ -116,13 +116,8 @@ class MainActivity : AppCompatActivity() {
 		}
 
 		private fun navToCameras(argCameraModeValue: Int) {
-			val fragment = TrafficCameraListFragment()
-			val bundle = Bundle()
-			bundle.putInt(TrafficCameraListFragment.ARG_MODE_KEY, argCameraModeValue)
-			fragment.arguments = bundle
-			val fragmentManager = fragmentManager
-			fragmentManager.beginTransaction()
-				.replace(R.id.content_main, fragment).commit()
+			val fragment = TrafficCameraListFragment.create(argCameraModeValue)
+			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
 
 		private fun navToTimes(argTravelTimeValue: String) {
