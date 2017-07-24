@@ -11,7 +11,7 @@ class ListHeadingView(ctx: Context, headingText: String?, addDivider: Boolean) :
 
 	init {
 		val inflater: LayoutInflater = LayoutInflater.from(ctx)
-		val content: View = inflater.inflate(R.layout.list_item_heading_hazard, this)
+		val content: View = inflater.inflate(R.layout.list_item_heading, this)
 		val textView: AppCompatTextView = content.findViewById(
 			R.id.tv_list_item) as AppCompatTextView
 

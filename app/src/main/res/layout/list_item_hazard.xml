@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_item_hazard"
+    android:layout_width="match_parent"
+    android:layout_height="88dp"
+    android:background="@color/White"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/margin_std"
+    android:paddingRight="@dimen/margin_std">
+
+    <!-- Icon is vertically centered in parent -->
+
+    <ImageView
+        android:id="@+id/iv_hazard_list_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        
+        android:src="@drawable/incident"/>
+
+    <!-- Line 1 is a fixed offset above line 2 -->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_hazard_list_item_line_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_hazard_list_item_line_2"
+        android:layout_alignLeft="@+id/tv_hazard_list_item_line_2"
+        android:layout_toLeftOf="@+id/tv_hazard_list_item_date"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="#DE000000"
+        android:textSize="16sp"
+        tools:text="Line One Twas Brillig and the slithy tove did gyre and gymbal"/>
+
+    <!-- Line 2 is vertically centered in the parent -->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_hazard_list_item_line_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="16dp"
+        android:layout_toRightOf="@+id/iv_hazard_list_item"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif"
+        android:maxLines="1"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:singleLine="true"
+        android:textColor="#DE000000"
+        android:textSize="14sp"
+        tools:text="Line Two Twas Brillig and the slithy tove did gyre and gymbal"/>
+
+    <!-- Line 3 is a fixed offset below line 2 -->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_hazard_list_item_line_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_hazard_list_item_line_2"
+        android:layout_below="@+id/tv_hazard_list_item_line_2"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:textColor="#8A000000"
+        android:textSize="14sp"
+        tools:text="Line Three Twas Brillig and the slithy tove dyd gyre and gymbal"/>
+
+    <!-- Date is vertically centered about line 1 -->
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/tv_hazard_list_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tv_hazard_list_item_line_1"
+        android:layout_alignBottom="@+id/tv_hazard_list_item_line_1"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="16dp"
+        android:textColor="#8A000000"
+        android:textSize="12sp"
+        tools:text="Yesterday"/>
+</RelativeLayout>

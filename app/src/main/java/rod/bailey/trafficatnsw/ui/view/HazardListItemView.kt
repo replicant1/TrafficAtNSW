@@ -208,28 +208,6 @@ class HazardListItemView(private val ctx: Context,
 		dateLinearLayout.measure(dateWidthSpec, dateHeightSpec)
 	}
 
-//	fun setDate(date: Date) {
-//		if (showLastUpdatedDate) {
-//			dateView.text = "12/03/2014"
-//			dateView.invalidate()
-//		}
-//	}
-
-	fun setSubSubTitle(title: String) {
-		subSubTitleView.text = title
-		subSubTitleView.invalidate()
-	}
-
-	fun setSubTitle(title: String) {
-		subTitleView.text = title
-		subTitleView.invalidate()
-	}
-
-	fun setTitle(title: String) {
-		titleView.text = title
-		titleView.invalidate()
-	}
-
 	companion object {
 		private val DATE_VIEW_TEXT_SIZE_SP = 12
 		private val SUB_SUB_TITLE_TEXT_SIZE_SP = 12
