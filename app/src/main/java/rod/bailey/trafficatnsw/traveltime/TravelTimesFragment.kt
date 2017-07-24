@@ -31,7 +31,7 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	private var travelTimeConfig: TravelTimeConfig? = null
 
 	private fun createUI() {
-		MLog.i(TAG, "Into TravelTimesFragment.createUI()")
+		MLog.i(LOG_TAG, "Into TravelTimesFragment.createUI()")
 		val ctx = activity
 		mainLayout = ListWithEmptyMessage(ctx, EMPTY_MESSAGE,
 										  InactiveTravelTimeEmptyMessagePredicate())
@@ -87,7 +87,7 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	}
 
 	private fun refreshAsync() {
-		MLog.i(TAG, "Refreshing travel times")
+		MLog.i(LOG_TAG, "Refreshing travel times")
 		val task = DownloadTravelTimesTask(
 			activity)
 		task.execute()
@@ -132,7 +132,7 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 				db!!.addPropertyChangeListener(this@TravelTimesFragment)
 			}
 
-			MLog.i(TAG, "Result of loading is database " + db!!)
+			MLog.i(LOG_TAG, "Result of loading is database " + db!!)
 
 			return travelTimesLoadedOK
 		}
@@ -147,7 +147,7 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 			} else {
 				// We don't all mainLayout.setAdapter, which means that the old (stale)
 				// data will still remain visible.
-				MLog.i(TAG,
+				MLog.i(LOG_TAG,
 					   "Failed to load " + travelTimeConfig!!.motorwayName + " travel times - showing error dialog")
 				val builder = AlertDialog.Builder(ctx)
 				builder.setTitle(
@@ -161,7 +161,7 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		MLog.i(TAG,
+		MLog.i(LOG_TAG,
 			   "TravelTimesFragment gets notice that property "
 				   + event.propertyName + " has changed")
 		if (event.propertyName == MotorwayTravelTimesDatabase.PROPERTY_TOTAL_TRAVEL_TIME) {
@@ -178,6 +178,15 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 		val ARG_MWAY_VALUE_M2 = "M2"
 		val ARG_MWAY_VALUE_M4 = "M4"
 		val ARG_MWAY_VALUE_M7 = "M7"
-		private val TAG = TravelTimesFragment::class.java.simpleName
+		private val LOG_TAG = TravelTimesFragment::class.java.simpleName
+
+		fun create(mwayKey: String): TravelTimesFragment {
+			val result = TravelTimesFragment()
+			val bundle = Bundle()
+			bundle.putString(ARG_MWAY_KEY, mwayKey)
+			MLog.d(LOG_TAG, "Creating TravelTimesFragment,key=${mwayKey}")
+			result.arguments = bundle
+			return result
+		}
 	}
 }

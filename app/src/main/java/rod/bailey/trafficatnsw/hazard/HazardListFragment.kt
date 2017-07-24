@@ -80,7 +80,7 @@ class HazardListFragment : Fragment() {
 			val result = HazardListFragment()
 			val bundle = Bundle()
 			bundle.putInt(ARG_HAZARDS_FRAGMENT_MODE, mode.ordinal)
-			MLog.d(LOG_TAG, "Creating HazardListFragment with mode arg value " + mode.ordinal)
+			MLog.d(LOG_TAG, "Creating HazardListFragment,mode=${mode.ordinal}")
 			result.arguments = bundle
 			return result
 		}

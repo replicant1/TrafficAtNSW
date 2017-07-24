@@ -38,9 +38,13 @@ class MainActivity : AppCompatActivity() {
 		// This logging facility needs initialization
 		MLog.init(config)
 
+		// Init screen with main layout
 		setContentView(R.layout.activity_main)
+
 		val toolbar = findViewById(R.id.toolbar) as Toolbar
 		setSupportActionBar(toolbar)
+
+		// Link drawer toggle icon to nav drawer open/close state
 		val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
 		drawerToggle = ActionBarDrawerToggle(
 			this,
@@ -107,7 +111,6 @@ class MainActivity : AppCompatActivity() {
 		} // onNavigationItemSelected()
 
 		private fun navToHazards(mode: HazardListMode) {
-			MLog.d(LOG_TAG, "Navigating to hazards list in mode " + mode)
 			val fragment = HazardListFragment.create(mode)
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
@@ -123,18 +126,14 @@ class MainActivity : AppCompatActivity() {
 		}
 
 		private fun navToTimes(argTravelTimeValue: String) {
-			val fragment = TravelTimesFragment()
-			val bundle = Bundle()
-			bundle.putString(TravelTimesFragment.ARG_MWAY_KEY, argTravelTimeValue)
-			fragment.arguments = bundle
-			val fragmentManager = fragmentManager
-			fragmentManager.beginTransaction()
-				.replace(R.id.content_main, fragment).commit()
+			val fragment = TravelTimesFragment.create(argTravelTimeValue)
+			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
 	} // class DrawItemClickListener
 
 	companion object {
 		private val CONFIG_PROPERTIES_FILE_NAME = "config.properties"
 		private val LOG_TAG = MainActivity::class.java.simpleName
+
 	}
 }
