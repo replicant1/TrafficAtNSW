@@ -17,93 +17,98 @@ import java.net.URL
  * Async task for downloading the incident.json file from the Live Traffic web site
  */
 class DownloadHazardFileTask(private val ctx: Context,
-							 private val listWithEmptyMessage: ListWithEmptyMessage,
-							 private val mode: HazardListMode) : AsyncTask<Void, Void, Boolean>() {
+							 private val hazardList: ListWithEmptyMessage) : AsyncTask<Void, Void, Boolean>() {
 	private var dialog: ProgressDialog? = null
 
+	/**
+	 * Show a "loading incidents..." progress dialog
+	 */
 	override fun onPreExecute() {
 		super.onPreExecute()
 
 		dialog = ProgressDialog(ctx)
 		dialog?.setMessage(ctx.getString(R.string.hazards_list_load_progress_msg))
-		dialog?.setCancelable(false)
+		dialog?.setCancelable(true)
 		dialog?.isIndeterminate = true
 		dialog?.show()
 	}
 
-	override fun doInBackground(vararg params: Void): Boolean {
-		// Download the JSON file. The URL is in params[0].
+	private fun loadIncidentsFromLocalJSONFile(): String? {
+		MLog.d(LOG_TAG, "Loading incidents from local JSON file")
+		val assetFileName = ConfigSingleton.instance.localIncidentsJSONFile()
+		val input = ctx.assets.open(assetFileName)
+		val size = input.available()
+		val buffer = ByteArray(size)
+		input.read(buffer)
+		input.close()
+		val text = String(buffer)
+		return text
+	}
+
+	private fun loadIncidentsFromRemoteJSONFile(): String? {
 		var bufferedReader: BufferedReader? = null
-		var hazardsLoadedOK: Boolean = true
+		var result: String? = null
 
 		try {
-			if (ConfigSingleton.instance.loadIncidentsFromLocalJSONFile()) {
-				MLog.d(LOG_TAG, "Loading incidents from local JSON file")
-				val assetFileName = ConfigSingleton.instance.localIncidentsJSONFile()
-				val input = ctx.assets.open(assetFileName)
-				val size = input.available()
-				val buffer = ByteArray(size)
-				input.read(buffer)
-				input.close()
-				val text = String(buffer)
+			MLog.d(LOG_TAG, "Loading incidents from remote JSON file")
+			val url = URL(ConfigSingleton.instance.remoteIncidentsJSONFile())
+			val inStreamReader = InputStreamReader(url.openStream())
+			bufferedReader = BufferedReader(inStreamReader)
+			var line: String?
+			val lineBuffer = StringBuffer()
+			var eof: Boolean = false
 
-				MLog.d(LOG_TAG, "text=" + text)
-
-				HazardCacheSingleton.instance.init(text)
-				MLog.d(LOG_TAG, "Just passed text into singleton. hazardsLoadedOK")
-			} else {
-				MLog.d(LOG_TAG, "Loading incidents from remote JSON file")
-				val url = URL(ConfigSingleton.instance.remoteIncidentsJSONFile())
-				val instreamReader = InputStreamReader(
-					url.openStream())
-				bufferedReader = BufferedReader(instreamReader)
-				var line: String?
-				val lineBuffer = StringBuffer()
-				var eof: Boolean = false
-
-				while (!eof) {
-					line = bufferedReader.readLine()
-					if (line == null) {
-						eof = true
-					} else {
-						lineBuffer.append(line)
-					}
+			while (!eof) {
+				line = bufferedReader.readLine()
+				if (line == null) {
+					eof = true
+				} else {
+					lineBuffer.append(line)
 				}
-
-				HazardCacheSingleton.instance.init(lineBuffer.toString())
-				bufferedReader.close()
 			}
+
+			bufferedReader.close()
+			result = lineBuffer.toString()
 		}
 		catch (e: Throwable) {
 			MLog.w(LOG_TAG, "Failed to load hazards JSON", e)
-			hazardsLoadedOK = false
 		}
 		finally {
 			try {
-				MLog.d(LOG_TAG, "Pre-close in finally")
 				bufferedReader?.close()
-				MLog.d(LOG_TAG, "Post-close in finally")
 			}
 			catch (e: IOException) {
 				MLog.w(LOG_TAG, e)
 			}
 		}
 
-		MLog.d(LOG_TAG, "Returning hazardsLoadedOK=" + hazardsLoadedOK)
-		return hazardsLoadedOK
+		return result
+	}
+
+	override fun doInBackground(vararg params: Void): Boolean {
+		val jsonText: String? =
+			if (ConfigSingleton.instance.loadIncidentsFromLocalJSONFile()) {
+				loadIncidentsFromLocalJSONFile()
+			} else {
+				loadIncidentsFromRemoteJSONFile()
+			}
+
+		if (jsonText != null) {
+			HazardCacheSingleton.instance.init(jsonText)
+			return true
+		}
+		return false
 	}
 
 	override fun onPostExecute(result: Boolean) {
-		MLog.d(LOG_TAG, "result=" + result)
-
-		// Force the listView to refresh its data
+		// Hide the progress dialog
 		dialog?.dismiss()
 
 		if (result) {
-			listWithEmptyMessage.setAdapter(HazardListAdapter())
+			hazardList.setAdapter(HazardListAdapter())
 		} else {
-			// We don't call mainLayout.setAdapter, which means that the old
-			// (stale) data will still remain visible under this dialog
+			// We haven't called mainLayout.setAdapter, which means that the old
+			// (stale) data will still remain visible under this error dialog
 			MLog.i(LOG_TAG, "Failed to load hazard JSON - showing error dialog")
 			val builder = AlertDialog.Builder(ctx)
 			builder.setTitle(ctx.getString(R.string.hazards_list_load_failure_dialog_title))
@@ -111,7 +116,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 			builder.setMessage(ctx.getString(R.string.hazards_list_load_failure_dialog_msg))
 			builder.setPositiveButton(
 				ctx.getString(R.string.hazards_list_load_failure_dialog_positive_button),
-				{ dialog, _->dialog.cancel() })
+				{ dialog, _ -> dialog.cancel() })
 			builder.create().show()
 		}
 	}

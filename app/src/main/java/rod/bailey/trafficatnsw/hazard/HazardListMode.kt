@@ -5,9 +5,9 @@ import rod.bailey.trafficatnsw.hazard.filter.AdmitSydneyHazardFilter
 import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter
 
 /**
- * Mode of operation of HazardListFragment
+ * Mode of operation of HazardListFragment - determines which hazard list is displayed
  */
-enum class HazardListMode private constructor(val displayName: String, val filter: IHazardFilter)  {
-	REGIONAL("Regional Incidents", AdmitRegionalHazardFilter()), //
-	SYDNEY("Sydney Incidents", AdmitSydneyHazardFilter())
+enum class HazardListMode private constructor(val filter: IHazardFilter)  {
+	REGIONAL(AdmitRegionalHazardFilter()), //
+	SYDNEY(AdmitSydneyHazardFilter())
 }

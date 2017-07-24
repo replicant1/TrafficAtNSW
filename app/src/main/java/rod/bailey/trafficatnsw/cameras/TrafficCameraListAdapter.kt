@@ -62,7 +62,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter?) : BaseAdapter(), L
 		return position.toLong()
 	}
 
-	override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
+	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		var result: View?
 		val listItem = listData[position]
 

@@ -129,6 +129,5 @@ class MainActivity : AppCompatActivity() {
 	companion object {
 		private val CONFIG_PROPERTIES_FILE_NAME = "config.properties"
 		private val LOG_TAG = MainActivity::class.java.simpleName
-
 	}
 }

@@ -12,23 +12,23 @@ import rod.bailey.trafficatnsw.ui.view.ListHeadingView
 import rod.bailey.trafficatnsw.util.MLog
 import java.util.*
 
+/**
+ * Adapts data in the HazardCacheSingleton to a list of hazards
+ */
 class HazardListAdapter() : BaseAdapter(), ListAdapter {
-	private val db: HazardCacheSingleton
+
+	/** Each element is an instance of XRegion (sub-heading) or XHazard (list item) */
 	private val listData = ArrayList<Any>()
 
 	init {
-		db = HazardCacheSingleton.instance
-		primeListDataFromHazardDatabase()
-	}
-
-	fun primeListDataFromHazardDatabase() {
-		MLog.d(TAG, "About to collate the listData from HazardDatase contents")
-
+		MLog.d(TAG, "About to collate the listData from HazardCacheSingleton contents")
 		for (region in sortedHazardRegions()) {
 			listData.add(region)
-			val hazards = db.getFilteredHazardsForRegion(region)
-			Collections.sort(hazards!!)
-			listData.addAll(hazards)
+			val hazards: List<XHazard>? =
+				HazardCacheSingleton.instance.getFilteredHazardsForRegion(region)
+			if (hazards != null) {
+				listData.addAll(hazards.sorted())
+			}
 		}
 	}
 
@@ -52,9 +52,10 @@ class HazardListAdapter() : BaseAdapter(), ListAdapter {
 		return position.toLong()
 	}
 
+	// TODO: Introduce ViewHolder pattern
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-		var result: View?
-		val listItem = listData[position]
+		val result: View
+		val listItem: Any = listData[position]
 
 		if (listItem is XRegion) {
 			result = createHeading(parent.context, listItem)
@@ -74,7 +75,8 @@ class HazardListAdapter() : BaseAdapter(), ListAdapter {
 		val sortedRegions = LinkedList<XRegion>()
 
 		for (region in XRegion.values()) {
-			val hazardsForRegion = db.getFilteredHazardsForRegion(region)
+			val hazardsForRegion =
+				HazardCacheSingleton.instance.getFilteredHazardsForRegion(region)
 
 			if (hazardsForRegion != null && !hazardsForRegion.isEmpty()) {
 				sortedRegions.add(region)

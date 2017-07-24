@@ -10,12 +10,16 @@ import rod.bailey.trafficatnsw.util.MLog
 
 /**
  * Screen that displays a list of hazards for (a) All Sydney, or (b) Regional NSW.
- * List of hazards is divided into groups per XRegion.
+ * List of hazards is divided into groups per XRegion. The 'mode' construction arg
+ * determines which list is displayed. Construct using static create() method.
  */
 class HazardListFragment : Fragment() {
 	private lateinit var mode: HazardListMode
 	private lateinit var mainLayout: ListWithEmptyMessage
 
+	/**
+	 * @return The string to display in place of the hazard list when there are no hazards
+	 */
 	private fun emptyMessageForMode(mode: HazardListMode?): String {
 		return if (mode === HazardListMode.SYDNEY)
 			getString(R.string.hazards_list_screen_empty_sydney)
@@ -23,6 +27,9 @@ class HazardListFragment : Fragment() {
 			getString(R.string.hazards_list_screen_empty_regional_nsw)
 	}
 
+	/**
+	 * @return The title for the screen, depending on mode
+	 */
 	private fun screenTitleForMode(mode: HazardListMode?): String {
 		return if (mode === HazardListMode.SYDNEY)
 			getString(R.string.hazards_list_screen_title_sydney)
@@ -48,8 +55,8 @@ class HazardListFragment : Fragment() {
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
 		mainLayout = ListWithEmptyMessage(activity,
-																		  emptyMessageForMode(mode),
-																		  EmptyListEmptyMessagePredicate())
+										  emptyMessageForMode(mode),
+										  EmptyListEmptyMessagePredicate())
 		setHasOptionsMenu(true)
 		activity.title = screenTitleForMode(mode)
 		refreshAsync()
@@ -69,11 +76,11 @@ class HazardListFragment : Fragment() {
 	}
 
 	private fun refreshAsync() {
-		DownloadHazardFileTask(activity, mainLayout, mode).execute()
+		DownloadHazardFileTask(activity, mainLayout).execute()
 	}
 
 	companion object {
-		val ARG_HAZARDS_FRAGMENT_MODE: String = "rod.bailey.trafficatnsw.hazards.fragment.mode"
+		private val ARG_HAZARDS_FRAGMENT_MODE: String = "rod.bailey.trafficatnsw.hazards.fragment.mode"
 		private val LOG_TAG = HazardListFragment::class.java.simpleName
 
 		fun create(mode: HazardListMode): HazardListFragment {
