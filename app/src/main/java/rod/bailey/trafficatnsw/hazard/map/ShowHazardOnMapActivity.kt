@@ -1,14 +1,11 @@
 package rod.bailey.trafficatnsw.hazard.map
 
-import android.app.ActionBar
 import android.app.Activity
-import android.app.FragmentManager
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.view.MenuItem
 import android.view.ViewGroup.MarginLayoutParams
 import android.widget.RelativeLayout
-import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapFragment
@@ -43,7 +40,7 @@ class ShowHazardOnMapActivity : Activity() {
 
 	private fun createUI() {
 		val mainLayout = RelativeLayout(this)
-		mainLayout.id = R.id.content_frame
+		mainLayout.id = R.id.content_main
 		val mainLayoutMLP = MarginLayoutParams(
 			MATCH_PARENT, MATCH_PARENT)
 		val marginPx = DisplayUtils.dp2Px(this, 5)
@@ -59,7 +56,7 @@ class ShowHazardOnMapActivity : Activity() {
 		fragment = MapFragment()
 		// Insert the fragment by replacing any existing fragment
 		val fragmentManager = fragmentManager
-		fragmentManager.beginTransaction().replace(R.id.content_frame, fragment)
+		fragmentManager.beginTransaction().replace(R.id.content_main, fragment)
 			.commit()
 
 		setContentView(mainLayout)

@@ -76,8 +76,9 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		db.addPropertyChangeListener(this)
 	}
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-							  savedInstanceState: Bundle): View? {
+	override fun onCreateView(inflater: LayoutInflater,
+							  container: ViewGroup?,
+							  savedInstanceState: Bundle?): View? {
 		createUI()
 		return mainLayout
 	}

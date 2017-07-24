@@ -5,8 +5,8 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.widget.DrawerLayout
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.ActionBarDrawerToggle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.util.AttributeSet
 import android.util.Log
@@ -30,9 +30,12 @@ class MainActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+
+		// Initialize config facility
 		val config = ConfigSingleton.instance
 		config.init(CONFIG_PROPERTIES_FILE_NAME, this)
 
+		// This logging facility needs initialization
 		MLog.init(config)
 
 		setContentView(R.layout.activity_main)
@@ -40,17 +43,21 @@ class MainActivity : AppCompatActivity() {
 		setSupportActionBar(toolbar)
 		val drawer = findViewById(R.id.drawer_layout) as DrawerLayout
 		drawerToggle = ActionBarDrawerToggle(
-			this, drawer, toolbar, R.string.app_navigation_drawer_open,
+			this,
+			drawer,
+			toolbar,
+			R.string.app_navigation_drawer_open,
 			R.string.app_navigation_drawer_close)
 		drawer.addDrawerListener(drawerToggle)
 		drawerToggle.syncState()
+
+		// Navigation
 		val navView = findViewById(R.id.navigation_drawer_view) as NavigationView
 		navView.setNavigationItemSelectedListener(DrawerItemClickListener(drawer))
 	}
 
 	override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-		val view = super.onCreateView(name, context, attrs)
-		return view
+		return super.onCreateView(name, context, attrs)
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -75,11 +82,12 @@ class MainActivity : AppCompatActivity() {
 			Log.d(LOG_TAG, "onNavigationItemSelected: item=" + item)
 
 			when (item.itemId) {
-				R.id.menu_item_sydney_incidents -> navToHazards(HazardListMode.SYDNEY)
-				R.id.menu_item_regional_nsw_incidents -> navToHazards(
-					HazardListMode.REGIONAL)
-				R.id.menu_item_favourite_cameras -> navToCameras(
-					TrafficCameraListFragment.ARG_MODE_VALUE_FAVOURITES)
+				R.id.menu_item_sydney_incidents ->
+					navToHazards(HazardListMode.SYDNEY)
+				R.id.menu_item_regional_nsw_incidents ->
+					navToHazards(HazardListMode.REGIONAL)
+				R.id.menu_item_favourite_cameras ->
+					navToCameras(TrafficCameraListFragment.ARG_MODE_VALUE_FAVOURITES)
 				R.id.menu_item_sydney_cameras -> navToCameras(
 					TrafficCameraListFragment.ARG_MODE_VALUE_SYDNEY)
 				R.id.menu_item_regional_nsw_cameras -> navToCameras(
@@ -92,7 +100,8 @@ class MainActivity : AppCompatActivity() {
 					TravelTimesFragment.ARG_MWAY_VALUE_M4)
 				R.id.menu_item_travel_times_m4 -> navToTimes(
 					TravelTimesFragment.ARG_MWAY_VALUE_M7)
-			} // switch
+			} // when
+
 			drawerLayout.closeDrawer(Gravity.START)
 			return true
 		} // onNavigationItemSelected()
@@ -100,7 +109,7 @@ class MainActivity : AppCompatActivity() {
 		private fun navToHazards(mode: HazardListMode) {
 			MLog.d(LOG_TAG, "Navigating to hazards list in mode " + mode)
 			val fragment = HazardListFragment.create(mode)
-			fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit()
+			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
 
 		private fun navToCameras(argCameraModeValue: Int) {
@@ -110,7 +119,7 @@ class MainActivity : AppCompatActivity() {
 			fragment.arguments = bundle
 			val fragmentManager = fragmentManager
 			fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit()
+				.replace(R.id.content_main, fragment).commit()
 		}
 
 		private fun navToTimes(argTravelTimeValue: String) {
@@ -120,7 +129,7 @@ class MainActivity : AppCompatActivity() {
 			fragment.arguments = bundle
 			val fragmentManager = fragmentManager
 			fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit()
+				.replace(R.id.content_main, fragment).commit()
 		}
 	} // class DrawItemClickListener
 
