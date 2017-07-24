@@ -171,8 +171,6 @@ class XHazard(json: JSONObject) : Comparable<XHazard> {
 
 		fun parseIncidentJson(
 			jsonContents: String?): List<XHazard> {
-			assert(jsonContents != null)
-
 			val result = LinkedList<XHazard>()
 
 			try {

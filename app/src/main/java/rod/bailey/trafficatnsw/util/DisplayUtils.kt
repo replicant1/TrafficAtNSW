@@ -44,9 +44,8 @@ object DisplayUtils {
 	 * *
 	 * @return
 	 */
-	fun dp2Px(context: Context?, dp: Int): Int {
-		assert(context != null)
-		val scale = context!!.resources.displayMetrics.density
+	fun dp2Px(context: Context, dp: Int): Int {
+		val scale = context.resources.displayMetrics.density
 		val pixels = (dp.toFloat() * scale + 0.5f).toInt()
 		return pixels
 	}
@@ -64,8 +63,7 @@ object DisplayUtils {
 	 * *
 	 * @return Largest text size that achieves the desired result. Units = PX.
 	 */
-	fun findLargestTextSize(text: String, maxTextSizePx: Int,
-							maximumWidthPx: Int): Int {
+	fun findLargestTextSize(text: String, maxTextSizePx: Int, maximumWidthPx: Int): Int {
 		var textFits = false
 		// 200Px
 		val textPaint = DisplayUtils
@@ -95,26 +93,22 @@ object DisplayUtils {
 	 * @return Size of the display. If in landscape mode it is W * H, if in
 	 * *         portrait mode it is H * W
 	 */
-	fun getDisplaySizePx(ctx: Context?): Point {
-		assert(ctx != null)
-		val wm = ctx!!
-			.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+	fun getDisplaySizePx(ctx: Context): Point {
+		val wm = ctx.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 		val display = wm.defaultDisplay
-		val width = display.width
-		val height = display.height
-		return Point(width, height)
+		val outPoint = Point()
+		display.getSize(outPoint)
+		return outPoint
 	}
 
-	fun getDisplaySizeDp(ctx: Context?): Point {
-		assert(ctx != null)
-		val wm = ctx!!
-			.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-		val density = ctx.resources.displayMetrics.density
-		val display = wm.defaultDisplay
-		val width = (display.width / density).toInt()
-		val height = (display.height / density).toInt()
-		return Point(width, height)
-	}
+//	fun getDisplaySizeDp(ctx: Context): Point {
+//		val wm = ctx.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+//		val density = ctx.resources.displayMetrics.density
+//		val display = wm.defaultDisplay
+//		val width = (display.width / density).toInt()
+//		val height = (display.height / density).toInt()
+//		return Point(width, height)
+//	}
 
 	/**
 	 * @return True if the calling thread is the Android UI thread
@@ -132,10 +126,10 @@ object DisplayUtils {
 	 * *
 	 * @return
 	 */
-	fun sp2Px(context: Context?, sp: Int): Int {
-		assert(context != null)
-		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp.toFloat(),
-										 context!!.resources.displayMetrics).toInt()
+	fun sp2Px(context: Context, sp: Int): Int {
+		return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP,
+										 sp.toFloat(),
+										 context.resources.displayMetrics).toInt()
 	}
 
 	fun measureSpec2String(measureSpec: Int): String {

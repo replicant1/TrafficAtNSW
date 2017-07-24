@@ -51,12 +51,10 @@ class ConfigSingleton private constructor() {
 	}
 
 	private fun getBoolProperty(propertyName: String?): Boolean {
-		assert(propertyName != null)
 		return java.lang.Boolean.parseBoolean(configProperties.getProperty(propertyName))
 	}
 
 	private fun getStringProperty(propertyName: String?): String {
-		assert(propertyName != null)
 		return configProperties.getProperty(propertyName)
 	}
 

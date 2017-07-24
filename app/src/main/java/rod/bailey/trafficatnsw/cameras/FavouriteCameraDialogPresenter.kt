@@ -27,7 +27,6 @@ class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 	}
 
 	fun build(ctx: Context?): AlertDialog {
-		assert(ctx != null)
 		val listener = AlertsDialogListener()
 		val builder = AlertDialog.Builder(ctx)
 		builder.setTitle("Favourite")

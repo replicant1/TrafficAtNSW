@@ -19,8 +19,6 @@ import rod.bailey.trafficatnsw.hazard.HazardListMode
 import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
-import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment.ARG_MODE_KEY
-import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment.ARG_MWAY_KEY
 
 class MainActivity : AppCompatActivity() {
 	private lateinit var drawerToggle: ActionBarDrawerToggle
@@ -108,7 +106,7 @@ class MainActivity : AppCompatActivity() {
 		private fun navToCameras(argCameraModeValue: Int) {
 			val fragment = TrafficCameraListFragment()
 			val bundle = Bundle()
-			bundle.putInt(ARG_MODE_KEY, argCameraModeValue)
+			bundle.putInt(TrafficCameraListFragment.ARG_MODE_KEY, argCameraModeValue)
 			fragment.arguments = bundle
 			val fragmentManager = fragmentManager
 			fragmentManager.beginTransaction()
@@ -118,7 +116,7 @@ class MainActivity : AppCompatActivity() {
 		private fun navToTimes(argTravelTimeValue: String) {
 			val fragment = TravelTimesFragment()
 			val bundle = Bundle()
-			bundle.putString(ARG_MWAY_KEY, argTravelTimeValue)
+			bundle.putString(TravelTimesFragment.ARG_MWAY_KEY, argTravelTimeValue)
 			fragment.arguments = bundle
 			val fragmentManager = fragmentManager
 			fragmentManager.beginTransaction()

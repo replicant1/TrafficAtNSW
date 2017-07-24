@@ -63,7 +63,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter?) : BaseAdapter(), L
 	}
 
 	override fun getView(position: Int, convertView: View, parent: ViewGroup): View {
-		var result: View? = null
+		var result: View?
 		val listItem = listData[position]
 
 		if (listItem is XRegion) {

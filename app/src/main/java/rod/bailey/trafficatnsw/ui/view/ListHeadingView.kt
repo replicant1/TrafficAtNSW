@@ -9,13 +9,10 @@ import android.graphics.Color.*
 import android.graphics.Typeface.*
 import android.view.ViewGroup.LayoutParams.*
 
-class ListHeadingView(ctx: Context?, headingText: String?, addDivider: Boolean) : LinearLayout(
+class ListHeadingView(ctx: Context, headingText: String?, addDivider: Boolean) : LinearLayout(
 	ctx) {
 
 	init {
-		assert(ctx != null)
-		assert(headingText != null)
-
 		orientation = LinearLayout.VERTICAL
 		// Text
 		val textView = TextView(ctx)

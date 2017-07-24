@@ -35,10 +35,6 @@ class TrafficCameraImageActivity : Activity() {
 		private val ctx: Context?) : AsyncTask<String, Void, Bitmap>() {
 		private var dialog: ProgressDialog? = null
 
-		init {
-			assert(ctx != null)
-		}
-
 		override fun onPreExecute() {
 			super.onPreExecute()
 			val frameBitmap = decodeResource(resources,

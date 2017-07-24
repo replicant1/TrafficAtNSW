@@ -10,15 +10,6 @@ class TrafficCamera(val street: String?, val suburb: String?, val description: S
 	private var favourite: Boolean = false
 	private val support = PropertyChangeSupport(this)
 
-	init {
-		assert(street != null)
-		assert(suburb != null)
-		assert(description != null)
-		assert(url != null)
-		assert(region != null)
-		assert(index >= 0)
-	}
-
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
 		support.addPropertyChangeListener(listener)
 	}
