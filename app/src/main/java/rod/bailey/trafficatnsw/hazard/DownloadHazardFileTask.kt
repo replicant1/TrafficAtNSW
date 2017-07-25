@@ -5,7 +5,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.ui.view.ListWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
 import java.io.BufferedReader
@@ -14,10 +14,12 @@ import java.io.InputStreamReader
 import java.net.URL
 
 /**
- * Async task for downloading the incident.json file from the Live Traffic web site
+ * Async task for downloading the incident.json file from the Live Traffic web site.
+ * If  ConfigSingleton.instance.loadIncidentsFromLocalJSONFile is true, the data is
+ * loaded from a JSON file in the app's /asset directory instead.
  */
 class DownloadHazardFileTask(private val ctx: Context,
-							 private val hazardList: ListWithEmptyMessage) : AsyncTask<Void, Void, Boolean>() {
+							 private val hazardList: ListViewWithEmptyMessage) : AsyncTask<Void, Void, Boolean>() {
 	private var dialog: ProgressDialog? = null
 
 	/**

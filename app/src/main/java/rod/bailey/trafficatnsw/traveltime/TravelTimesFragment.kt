@@ -20,11 +20,11 @@ import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.ui.predicate.InactiveTravelTimeEmptyMessagePredicate
-import rod.bailey.trafficatnsw.ui.view.ListWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.util.MLog
 
 class TravelTimesFragment : Fragment(), PropertyChangeListener {
-	private var mainLayout: ListWithEmptyMessage? = null
+	private var mainLayout: ListViewWithEmptyMessage? = null
 	/** Travel times for the motorway currently being displayed  */
 	private var db: MotorwayTravelTimesDatabase? = null
 	/** Config for the motorway currently being display  */
@@ -33,8 +33,8 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	private fun createUI() {
 		MLog.i(LOG_TAG, "Into TravelTimesFragment.createUI()")
 		val ctx = activity
-		mainLayout = ListWithEmptyMessage(ctx, EMPTY_MESSAGE,
-										  InactiveTravelTimeEmptyMessagePredicate())
+		mainLayout = ListViewWithEmptyMessage(ctx, EMPTY_MESSAGE,
+											  InactiveTravelTimeEmptyMessagePredicate())
 		setHasOptionsMenu(true)
 
 		activity.title = travelTimeConfig!!.motorwayName + " Travel Times"

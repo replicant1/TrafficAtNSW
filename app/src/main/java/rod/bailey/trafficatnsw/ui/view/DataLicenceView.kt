@@ -1,26 +1,20 @@
 package rod.bailey.trafficatnsw.ui.view
 
 import android.content.Context
-import android.graphics.Color.GRAY
-import android.graphics.Color.TRANSPARENT
 import android.support.v7.widget.AppCompatTextView
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.FrameLayout
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.util.DisplayUtils
 
-class DataLicenceView(ctx: Context) : AppCompatTextView(ctx) {
-
+/**
+ * Footer that appears at bottom of several lists in the app that contains
+ * text of the licencsing conditions for the web site data.
+ */
+class DataLicenceView(ctx: Context) : FrameLayout(ctx) {
 	init {
-		text = ctx.getString(R.string.data_licensing_msg)
-		setBackgroundColor(TRANSPARENT)
-		setTextColor(GRAY)
-		// Note that setTextSize takes an argument in SP not PX
-		textSize = TEXT_SIZE_SP.toFloat()
-		val smallPx = DisplayUtils.dp2Px(ctx, 5)
-		val bigPx = DisplayUtils.dp2Px(ctx, 10)
-		setPadding(smallPx, bigPx, smallPx, bigPx)
-	}
-
-	companion object {
-		private val TEXT_SIZE_SP = 10
+		val inflater: LayoutInflater = LayoutInflater.from(ctx)
+		val content: View = inflater.inflate(R.layout.list_item_data_licence, this)
+		val textView: AppCompatTextView = content.findViewById(R.id.tv_list_item_data_licence) as AppCompatTextView
 	}
 }

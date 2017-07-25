@@ -13,7 +13,7 @@ import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.AdmitSydneyTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
-import rod.bailey.trafficatnsw.ui.view.ListWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.util.MLog
 
 class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
@@ -24,10 +24,9 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		REGIONAL("Regional", "Cameras in Regional NSW", AdmitRegionalTrafficCameraFilter()), //
 		SYDNEY("Sydney", "Cameras in Sydney", AdmitSydneyTrafficCameraFilter())
 	}
-	/** List of traffic cameras, divided into sections by XRegion  */
-	// private ListView listView;
-	/** Top level layout has list on top, DataLicenceView at bottom  */
-	private var mainLayout: ListWithEmptyMessage? = null
+	/** Top level layout has list with DataLicenceView in footer  */
+	private var cameraListView: ListViewWithEmptyMessage? = null
+
 	/**
 	 * Mode of display = what cameras appear in list. Derived from the value
 	 * passed into this fragment for the ARG_HAZARDS_FRAGMENT_MODE argument.
@@ -38,11 +37,11 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		Log.i(LOG_TAG, "Into TrafficCameraListFragment.createUI")
 		val ctx = activity
 
-		mainLayout = ListWithEmptyMessage(ctx, EMPTY_MESSAGE,
-										  EmptyListEmptyMessagePredicate())
+		cameraListView = ListViewWithEmptyMessage(ctx, EMPTY_MESSAGE,
+												  EmptyListEmptyMessagePredicate())
 		val adapter = TrafficCameraListAdapter(
 			mode!!.filter)
-		mainLayout!!.setAdapter(adapter)
+		cameraListView!!.setAdapter(adapter)
 
 		activity.title = mode!!.actionBarTitle
 	}
@@ -67,6 +66,7 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 
 		MLog.i(LOG_TAG, "Setting camera mode to " + newmode.name)
 		mode = newmode
+
 		// Initialize TrafficCameraCacheSingleton
 		val db = TrafficCameraCacheSingleton.instance
 		db.init(activity)
@@ -79,18 +79,18 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
 		createUI()
-		return mainLayout
+		return cameraListView
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
 		if (TrafficCameraCacheSingleton.PROPERTY_FAVOURITE_SET == event
 			.propertyName) {
-			if (mainLayout != null && mode != null) {
+			if (cameraListView != null && mode != null) {
 				// TODO: WOuld be nice to save list's scroll pos here and them
 				// restore after setting the new adapter.
 				val adapter = TrafficCameraListAdapter(
 					mode!!.filter)
-				mainLayout!!.setAdapter(adapter)
+				cameraListView!!.setAdapter(adapter)
 			}
 		}
 	}

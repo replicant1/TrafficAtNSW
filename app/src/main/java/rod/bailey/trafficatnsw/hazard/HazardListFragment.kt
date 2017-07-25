@@ -4,7 +4,7 @@ import android.app.Fragment
 import android.os.Bundle
 import android.view.*
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.ui.view.ListWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.util.MLog
 
@@ -15,7 +15,7 @@ import rod.bailey.trafficatnsw.util.MLog
  */
 class HazardListFragment : Fragment() {
 	private lateinit var mode: HazardListMode
-	private lateinit var mainLayout: ListWithEmptyMessage
+	private lateinit var hazardListView: ListViewWithEmptyMessage
 
 	/**
 	 * @return The string to display in place of the hazard list when there are no hazards
@@ -54,13 +54,13 @@ class HazardListFragment : Fragment() {
 	override fun onCreateView(inflater: LayoutInflater,
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
-		mainLayout = ListWithEmptyMessage(activity,
-										  emptyMessageForMode(mode),
-										  EmptyListEmptyMessagePredicate())
+		hazardListView = ListViewWithEmptyMessage(activity,
+												  emptyMessageForMode(mode),
+												  EmptyListEmptyMessagePredicate())
 		setHasOptionsMenu(true)
 		activity.title = screenTitleForMode(mode)
 		refreshAsync()
-		return mainLayout
+		return hazardListView
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -76,7 +76,7 @@ class HazardListFragment : Fragment() {
 	}
 
 	private fun refreshAsync() {
-		DownloadHazardFileTask(activity, mainLayout).execute()
+		DownloadHazardFileTask(activity, hazardListView).execute()
 	}
 
 	companion object {

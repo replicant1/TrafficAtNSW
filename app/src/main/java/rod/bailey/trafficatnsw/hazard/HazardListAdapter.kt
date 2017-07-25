@@ -52,7 +52,7 @@ class HazardListAdapter() : BaseAdapter(), ListAdapter {
 		return position.toLong()
 	}
 
-	// TODO: Introduce ViewHolder pattern
+	// TODO: Introduce ViewHolder pattern for efficiency
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		val result: View
 		val listItem: Any = listData[position]

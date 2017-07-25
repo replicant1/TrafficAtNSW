@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.AppCompatTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tv_list_item_data_licence"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fontFamily="sans-serif"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_half_std"
+    android:paddingLeft="@dimen/margin_std"
+    android:paddingRight="@dimen/margin_std"
+    android:paddingTop="@dimen/margin_half_std"
+    android:text="@string/data_licensing_msg"
+    android:background="@color/White"
+    android:textSize="10sp"/>

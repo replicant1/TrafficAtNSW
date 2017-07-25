@@ -13,7 +13,7 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.ui.view.FooterCancellingListView
+import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
@@ -31,10 +31,9 @@ class HazardDetailsActivty : Activity() {
 	private lateinit var hazard: XHazard
 
 	private fun createUI() {
-		val listView = FooterCancellingListView(this)
-		listView.adapter = HazardDetailsListAdapter(hazard)
-		listView.choiceMode = ListView.CHOICE_MODE_SINGLE
-		listView.isEnabled = true
+		val listView = ListViewAutoHideFooter(this)
+		listView.setAdapter(HazardDetailsListAdapter(hazard))
+
 
 		setContentView(listView)
 		val actionBar = actionBar

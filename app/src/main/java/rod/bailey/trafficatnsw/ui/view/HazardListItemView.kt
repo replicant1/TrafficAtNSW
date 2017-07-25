@@ -3,10 +3,10 @@ package rod.bailey.trafficatnsw.ui.view
 import android.content.Context
 import android.support.v7.widget.AppCompatTextView
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty
 import rod.bailey.trafficatnsw.json.hazard.XHazard
@@ -29,18 +29,18 @@ class HazardListItemView(val ctx: Context,
 						 showLastUpdatedDate: Boolean,
 						 clickable: Boolean) : FrameLayout(ctx) {
 
-	private inner class ItemTouchListener : View.OnTouchListener {
-		override fun onTouch(v: View, event: MotionEvent): Boolean {
+	private inner class HazardListItemClickListener : View.OnClickListener {
+		override fun onClick(v: View) {
 			if (hazard.hazardId != null) {
 				HazardDetailsActivty.start(ctx, hazard.hazardId)
 			}
-			return true
 		}
 	}
 
 	init {
 		val inflater: LayoutInflater = LayoutInflater.from(ctx)
 		val content: View = inflater.inflate(R.layout.list_item_hazard, this)
+		val rl: RelativeLayout = content.findViewById(R.id.rl_item_hazard) as RelativeLayout
 		val imageView: ImageView = content.findViewById(R.id.iv_hazard_list_item) as ImageView
 		val line1TextView: AppCompatTextView = content.findViewById(
 			R.id.tv_hazard_list_item_line_1) as AppCompatTextView
@@ -79,7 +79,7 @@ class HazardListItemView(val ctx: Context,
 		}
 
 		if (clickable) {
-			setOnTouchListener(ItemTouchListener())
+			rl.setOnClickListener(HazardListItemClickListener())
 		}
 	}
 
