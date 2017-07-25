@@ -31,6 +31,8 @@ class ConfigSingleton private constructor() {
 		private val REMOTE_M4_JSON_FILE = "RemoteM4JSONURL"
 		private val REMOTE_M7_JSON_FILE = "RemoteM7JSONURL"
 		private val SHOW_LOG_MESSAGES = "ShowLogMessages"
+		private val HAZARD_TIME_FORMAT = "HazardTimeFormat"
+		private val HAZARD_DATE_FORMAT = "HazardDateFormat"
 
 		private val LOG_TAG = ConfigSingleton::class.java.simpleName
 		val instance: ConfigSingleton by lazy { Holder.INSTANCE }
@@ -48,6 +50,14 @@ class ConfigSingleton private constructor() {
 		catch (e: IOException) {
 			Log.e(LOG_TAG, "Failed to load config.properties file", e)
 		}
+	}
+
+	fun hazardTimeFormat(): String {
+		return configProperties.getProperty(HAZARD_TIME_FORMAT)
+	}
+
+	fun hazardDateFormat(): String {
+		return configProperties.getProperty(HAZARD_DATE_FORMAT)
 	}
 
 	private fun getBoolProperty(propertyName: String?): Boolean {

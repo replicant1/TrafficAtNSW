@@ -12,4 +12,5 @@
     <string name="hazards_list_load_failure_dialog_msg">Tap the refreshicon at top right to try again.</string>
     <string name="hazards_list_load_failure_dialog_positive_button">OK</string>
     <string name="data_licensing_msg">Based on data from Live Traffic NSW. The accuracy or suitability of the data is not verified and it is provided on an \'as is\' basis.</string>
+    <string name="hazard_list_item_date_previous">Yesterday</string>
 </resources>

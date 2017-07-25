@@ -1,6 +1,7 @@
 package rod.bailey.trafficatnsw.hazard.details
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
@@ -41,13 +42,13 @@ class HazardDetailsActivty : Activity() {
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
-		MLog.i("HI", "HazardDetailsActivity is being created ")
+		MLog.i(LOG_TAG, "HazardDetailsActivity is being created ")
 		super.onCreate(savedInstanceState)
+
 		val extras = intent.extras
-		val hazardId = extras.getInt("hazardId")
+		val hazardId = extras.getInt(EXTRA_HAZARD_ID_INT)
 
-		MLog.i(TAG, "Showing details of hazard id " + hazardId)
-
+		MLog.i(LOG_TAG, "Showing details of hazard id " + hazardId)
 		hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId)!!
 		createUI()
 	}
@@ -61,15 +62,10 @@ class HazardDetailsActivty : Activity() {
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		if (item != null) {
 			if (item.itemId == R.id.show_on_map) {
-				// Create intent then launch an activity with it.
-				// One arg = hazard id
-				val ctx = this
-
-				MLog.i(TAG, "Launching ShowHazardOnMapActivity")
-				val intent = Intent(ctx,
-									ShowHazardOnMapActivity::class.java)
+				MLog.i(LOG_TAG, "Launching ShowHazardOnMapActivity")
+				val intent = Intent(this, ShowHazardOnMapActivity::class.java)
 				intent.putExtra("hazardId", hazard.hazardId)
-				ctx.startActivity(intent)
+				this.startActivity(intent)
 			} else if (item.itemId == android.R.id.home) {
 				NavUtils.navigateUpFromSameTask(this)
 			}
@@ -78,7 +74,13 @@ class HazardDetailsActivty : Activity() {
 	}
 
 	companion object {
-		private val TAG = HazardDetailsActivty::class.java
-			.simpleName
+		private val LOG_TAG = HazardDetailsActivty::class.java.simpleName
+		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id"
+
+		fun start(ctx: Context, hazardId: Int) {
+			val hazardIntent = Intent(ctx, HazardDetailsActivty::class.java)
+			hazardIntent.putExtra(EXTRA_HAZARD_ID_INT, hazardId)
+			ctx.startActivity(hazardIntent)
+		}
 	}
 }
