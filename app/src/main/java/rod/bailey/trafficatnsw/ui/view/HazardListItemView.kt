@@ -1,15 +1,21 @@
 package rod.bailey.trafficatnsw.ui.view
 
+import android.app.LauncherActivity
 import android.content.Context
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.AppCompatTextView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RelativeLayout
+import android.widget.TextView
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty
 import rod.bailey.trafficatnsw.json.hazard.XHazard
+import rod.bailey.trafficatnsw.ui.LetterColorMapSingleton
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
@@ -41,7 +47,7 @@ class HazardListItemView(val ctx: Context,
 		val inflater: LayoutInflater = LayoutInflater.from(ctx)
 		val content: View = inflater.inflate(R.layout.list_item_hazard, this)
 		val rl: RelativeLayout = content.findViewById(R.id.rl_item_hazard) as RelativeLayout
-		val imageView: ImageView = content.findViewById(R.id.iv_hazard_list_item) as ImageView
+		val circleIcon: ListItemCircularIcon = content.findViewById(R.id.tv_hazard_list_item_circle) as ListItemCircularIcon
 		val line1TextView: AppCompatTextView = content.findViewById(
 			R.id.tv_hazard_list_item_line_1) as AppCompatTextView
 		val line2TextView: AppCompatTextView = content.findViewById(
@@ -52,14 +58,20 @@ class HazardListItemView(val ctx: Context,
 
 		if (!hazard.roads.isEmpty()) {
 			val road = hazard.roads[0]
-			val resId = if ((hazard.isInitialReport != null) && hazard.isInitialReport)
-				R.drawable.incident_initial_report
-			else
-				R.drawable.incident
+//			val resId = if ((hazard.isInitialReport != null) && hazard.isInitialReport)
+//				R.drawable.incident_initial_report
+//			else
+//				R.drawable.incident
 
-			imageView.setImageResource(resId)
 			line1TextView.text = road.suburb
 			line2TextView.text = road.mainStreet
+
+			val trimmedSuburb: String = road.suburb?.trim() ?: ""
+			val letter: Char =  if (trimmedSuburb.isEmpty()) ' ' else trimmedSuburb[0]
+			circleIcon.text = letter.toString()
+
+			val fillColor: Int =  LetterColorMapSingleton.instance.getColorForLetter(ctx, letter)
+
 		}
 
 		line3TextView.text = hazard.displayName

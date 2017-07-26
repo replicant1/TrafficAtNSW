@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="palette_rusty_red">#CB4F40</color>
+    <color name="palette_sky_blue">#6698EF</color>
+    <color name="palette_lawn_green">#A6C972</color>
+    <color name="palette_ghost_grey">#EEEEEE</color>
+    <color name="palette_aqua">#93A3AD</color>
+    <color name="palette_dark_green">#71B88E</color>
+    <color name="palette_light_orange">#F3A947</color>
+    <color name="palette_sea_green">#69B3AC</color>
+    <color name="palette_tawny_red">#D1675B</color>
+    <color name="palette_cyan">#71CEDE</color>
+    <color name="palette_dark_grey">#9E9E9E</color>
+    <color name="palette_light_mauve">#A0A9D6</color>
+    <color name="palette_white">#FFFFFF</color>
+    <color name="palette_black">#000000</color>
+</resources>

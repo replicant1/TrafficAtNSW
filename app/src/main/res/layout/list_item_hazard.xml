@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rl_item_hazard"
     android:layout_width="match_parent"
@@ -13,13 +14,18 @@
 
     <!-- Icon is vertically centered in parent -->
 
-    <ImageView
-        android:id="@+id/iv_hazard_list_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <rod.bailey.trafficatnsw.ui.view.ListItemCircularIcon
+        android:id="@+id/tv_hazard_list_item_circle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        tools:src="@drawable/incident"/>
+        android:layout_marginTop="@dimen/margin_std"
+        android:gravity="center"
+        android:textSize="24sp"
+        custom:circleColor="@color/palette_sky_blue"
+        custom:circleLetter="T"/>
 
     <!-- Line 1 is a fixed offset above line 2 -->
 
@@ -47,7 +53,7 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="56dp"
-        android:layout_toRightOf="@+id/iv_hazard_list_item"
+        android:layout_toRightOf="@+id/tv_hazard_list_item_circle"
         android:ellipsize="end"
         android:fontFamily="sans-serif"
         android:maxLines="1"
@@ -74,7 +80,7 @@
         android:textSize="14sp"
         tools:text="Line Three Twas Brillig and the slithy tove dyd gyre and gymbal"/>
 
-    <!-- Date is vertically centered about line 1 -->
+    <!-- Date is vertically centered about line 1 8A000000 -->
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_hazard_list_item_date"
@@ -84,7 +90,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/tv_hazard_list_item_line_1"
         android:layout_marginLeft="16dp"
-        android:textColor="#8A000000"
+        android:textColor="@color/palette_dark_grey"
         android:textSize="12sp"
         tools:text="Yesterday"/>
 </RelativeLayout>
