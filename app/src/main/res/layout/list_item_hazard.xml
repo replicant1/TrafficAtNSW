@@ -12,7 +12,7 @@
     android:paddingLeft="@dimen/margin_std"
     android:paddingRight="@dimen/margin_std">
 
-    <!-- Icon is vertically centered in parent -->
+    <!-- Icon that is a filled circle with a letter in the middle -->
 
     <rod.bailey.trafficatnsw.ui.view.ListItemCircularIcon
         android:id="@+id/tv_hazard_list_item_circle"
@@ -24,7 +24,8 @@
         android:layout_marginTop="@dimen/margin_std"
         android:gravity="center"
         android:textSize="24sp"
-        custom:circleColor="@color/palette_sky_blue"
+        android:textColor="@color/palette_white"
+        custom:circleColor="@color/palette_dark_green"
         custom:circleLetter="T"/>
 
     <!-- Line 1 is a fixed offset above line 2 -->

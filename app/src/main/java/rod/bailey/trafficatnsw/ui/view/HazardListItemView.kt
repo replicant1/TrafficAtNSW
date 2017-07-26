@@ -4,6 +4,7 @@ import android.app.LauncherActivity
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
 import android.util.Log
 import android.view.LayoutInflater
@@ -58,20 +59,15 @@ class HazardListItemView(val ctx: Context,
 
 		if (!hazard.roads.isEmpty()) {
 			val road = hazard.roads[0]
-//			val resId = if ((hazard.isInitialReport != null) && hazard.isInitialReport)
-//				R.drawable.incident_initial_report
-//			else
-//				R.drawable.incident
 
 			line1TextView.text = road.suburb
 			line2TextView.text = road.mainStreet
 
 			val trimmedSuburb: String = road.suburb?.trim() ?: ""
 			val letter: Char =  if (trimmedSuburb.isEmpty()) ' ' else trimmedSuburb[0]
-			circleIcon.text = letter.toString()
-
-			val fillColor: Int =  LetterColorMapSingleton.instance.getColorForLetter(ctx, letter)
-
+			circleIcon.circleLetter = letter.toString()
+			circleIcon.circleColor =  ContextCompat.getColor(
+				ctx, LetterColorMapSingleton.instance.getColorForLetter(ctx, letter))
 		}
 
 		line3TextView.text = hazard.displayName
