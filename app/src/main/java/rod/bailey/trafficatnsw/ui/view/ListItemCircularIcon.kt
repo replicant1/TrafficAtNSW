@@ -21,9 +21,7 @@ class ListItemCircularIcon : TextView {
 
 	var circleColor:Int
 		set(@ColorRes value) {
-			Log.d(LOG_TAG, "in setter: value=${value}")
 			field = value
-			setBackgroundColor(field)
 			invalidate()
 		}
 
@@ -49,22 +47,18 @@ class ListItemCircularIcon : TextView {
 	}
 
 	override fun onDraw(canvas: Canvas?) {
-//		if (canvas != null) {
-//			Log.d(LOG_TAG, "canvas.width=${canvas.width}, canvas.height=${canvas.height}, circleColor=${circleColor}")
-//			val rect: RectF = RectF(0f, 0f, canvas.width.toFloat(), canvas.height.toFloat())
-//			val paint: Paint = Paint()
-//			paint.color = ContextCompat.getColor(context, circleColor)
-//			paint.style = Paint.Style.FILL
-//			canvas.drawOval(rect, paint)
-//		}
+		if (canvas != null) {
+			Log.d(LOG_TAG, "canvas.width=${canvas.width}, canvas.height=${canvas.height}, circleColor=${circleColor}")
+			val rect: RectF = RectF(0f, 0f, canvas.width.toFloat(), canvas.height.toFloat())
+			val paint: Paint = Paint()
+			paint.color = circleColor
+			paint.style = Paint.Style.FILL
+			canvas.drawOval(rect, paint)
+		}
 
 		// Has to appear *after* the drawing of the circle background so that
 		// the text appears on top of the circle.
 		super.onDraw(canvas)
-	}
-
-	override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 	}
 
 	companion object {

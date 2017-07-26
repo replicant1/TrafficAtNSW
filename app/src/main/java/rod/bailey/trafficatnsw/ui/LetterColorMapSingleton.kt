@@ -7,7 +7,12 @@ import rod.bailey.trafficatnsw.R
 import java.util.*
 
 /**
- * Created by rodbailey on 26/7/17.
+ * Singleton that provides a mapping from a character to a color from an internally
+ * defined palette. If a character C results in a color R, then the next time
+ * you ask for the color of the same character C then you will once again get R. This
+ * ensures the same colored circle is used for the same character, as required by
+ * the Material Design guidelines for the circular row icons with a character in the
+ * middle of the circle. Case is not significant.
  */
 class LetterColorMapSingleton private constructor(){
 
