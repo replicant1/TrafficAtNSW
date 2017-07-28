@@ -3,6 +3,7 @@ package rod.bailey.trafficatnsw.hazard
 import android.app.Fragment
 import android.os.Bundle
 import android.view.*
+import kotlinx.android.synthetic.main.view_list.view.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
@@ -57,6 +58,9 @@ class HazardListFragment : Fragment() {
 		hazardListView = ListViewWithEmptyMessage(activity,
 												  emptyMessageForMode(mode),
 												  EmptyListEmptyMessagePredicate())
+		hazardListView.lv_list.divider = resources.getDrawable(R.drawable.line_list_divider_partial)
+		hazardListView.lv_list.dividerHeight = 2
+
 		setHasOptionsMenu(true)
 		activity.title = screenTitleForMode(mode)
 		refreshAsync()

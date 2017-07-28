@@ -2,12 +2,15 @@ package rod.bailey.trafficatnsw.hazard.details
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.NavUtils
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import kotlinx.android.synthetic.main.view_list.view.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.R.*
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
@@ -32,6 +35,9 @@ class HazardDetailsActivity : AppCompatActivity() {
 	private fun createUI() {
 		val listView = ListViewAutoHideFooter(this)
 		listView.setAdapter(HazardDetailsListAdapter(this, hazard))
+
+		listView.lv_list.divider = resources.getDrawable(R.drawable.line_list_divider_full)
+		listView.lv_list.dividerHeight = 2
 
 		setContentView(listView)
 		val actionBar = actionBar

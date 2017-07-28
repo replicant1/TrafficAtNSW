@@ -45,6 +45,14 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 	}
 
 	override fun isEnabled(position: Int): Boolean {
+		val result = when (cellRecs[position]) {
+			is HeadingCellRec -> false
+			else -> true
+		}
+		return result
+	}
+
+	override fun areAllItemsEnabled(): Boolean {
 		return false
 	}
 

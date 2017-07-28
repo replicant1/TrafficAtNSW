@@ -11,5 +11,4 @@
     android:paddingRight="@dimen/margin_std"
     android:paddingTop="@dimen/margin_half_std"
     android:text="@string/data_licensing_msg"
-    android:background="@color/White"
     android:textSize="10sp"/>

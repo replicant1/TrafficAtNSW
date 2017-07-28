@@ -5,7 +5,6 @@
     android:id="@+id/tv_hazard_detail_line"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@color/White"
     android:clickable="false"
     android:fontFamily="sans-serif"
     android:gravity="center_vertical"

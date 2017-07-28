@@ -67,8 +67,13 @@ class HazardListAdapter() : BaseAdapter(), ListAdapter {
 	}
 
 	override fun isEnabled(position: Int): Boolean {
-		val dataObj = listData[position]
-		return dataObj is XHazard
+//		val dataObj = listData[position]
+//		return dataObj is XHazard
+		return true
+	}
+
+	override fun areAllItemsEnabled(): Boolean {
+		return true
 	}
 
 	private fun sortedHazardRegions(): List<XRegion> {

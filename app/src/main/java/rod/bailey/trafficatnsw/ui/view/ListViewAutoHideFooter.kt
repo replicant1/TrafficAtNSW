@@ -25,10 +25,10 @@ class ListViewAutoHideFooter(ctx: Context) : FrameLayout(ctx) {
 		footerView = DataLicenceView(ctx)
 
 		val inflater: LayoutInflater = LayoutInflater.from(ctx)
-		val content = inflater.inflate(R.layout.view_list_hazard, this)
-		listView = content.findViewById(R.id.lv_list_hazard) as ListView
+		val content = inflater.inflate(R.layout.view_list, this)
+		listView = content.findViewById(R.id.lv_list) as ListView
 
-		setBackgroundColor(ContextCompat.getColor(ctx, R.color.White))
+		setBackgroundColor(ContextCompat.getColor(ctx, R.color.SkyBlue))
 	}
 
 	fun setAdapter(adapter: ListAdapter) {
