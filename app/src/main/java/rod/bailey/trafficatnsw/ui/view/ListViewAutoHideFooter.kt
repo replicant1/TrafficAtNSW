@@ -28,21 +28,6 @@ class ListViewAutoHideFooter(ctx: Context) : FrameLayout(ctx) {
 		val content = inflater.inflate(R.layout.view_list_hazard, this)
 		listView = content.findViewById(R.id.lv_list_hazard) as ListView
 
-//		listView.choiceMode = ListView.CHOICE_MODE_SINGLE
-//		listView.isEnabled = true
-
-//		setFooterDividersEnabled(false)
-//		setHeaderDividersEnabled(false)
-//		divider = ctx.resources.getDrawable(R.drawable.line_list_divider)
-
-//		val colors = intArrayOf(0, 0xFFFF0000.toInt(), 0) // red for the example
-//		val s:ShapeDrawable = ShapeDrawable()
-//		setDivider(GradientDrawable(GradientDrawable.Orientation.RIGHT_LEFT, colors))
-//		setDividerHeight(1)
-
-//		divider = ctx.resources.getDrawable(R.drawable.line_list_divider)
-//		dividerHeight = 4
-
 		setBackgroundColor(ContextCompat.getColor(ctx, R.color.White))
 	}
 

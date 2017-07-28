@@ -15,60 +15,58 @@
     <!--android:protectionLevel="signature" />-->
 
     <!--<uses-permission android:name="rod.bailey.trafficatnsw.permission.MAPS_RECEIVE" />-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
-        android:allowBackup="true"
         android:name=".app.TrafficAtNSWApplication"
+        android:allowBackup="true"
         android:icon="@drawable/tansw_icon_on_transparent"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name="rod.bailey.trafficatnsw.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.MainActivity" />
+                android:value="rod.bailey.trafficatnsw.MainActivity"/>
         </activity>
         <activity
-            android:name="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:name="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.MainActivity" />
+                android:value="rod.bailey.trafficatnsw.MainActivity"/>
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty" />
+                android:value="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity"/>
         </activity>
 
         <!--
@@ -79,8 +77,8 @@
         -->
         <!-- Maps API key for production -->
         <!--<meta-data-->
-            <!--android:name="com.google.android.maps.v2.API_KEY"-->
-            <!--android:value="AIzaSyC9Cj8GeSv5cTXKNP8DD5YQACBRsAfDin0" />-->
+        <!--android:name="com.google.android.maps.v2.API_KEY"-->
+        <!--android:value="AIzaSyC9Cj8GeSv5cTXKNP8DD5YQACBRsAfDin0" />-->
         <!--<meta-data-->
         <!--android:name="com.google.android.gms.version"-->
         <!--android:value="@integer/google_play_services_version" />-->

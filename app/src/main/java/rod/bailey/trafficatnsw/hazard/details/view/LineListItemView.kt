@@ -2,30 +2,18 @@ package rod.bailey.trafficatnsw.hazard.details.view
 
 import android.content.Context
 import android.support.v7.widget.AppCompatTextView
-import android.widget.TextView
-import android.graphics.Color.*
-import android.graphics.Typeface.*
-import android.text.TextUtils.TruncateAt.*
-import rod.bailey.trafficatnsw.util.DisplayUtils
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.FrameLayout
+import rod.bailey.trafficatnsw.R
 
-class LineListItemView(ctx: Context, text: String) : AppCompatTextView(ctx) {
+class LineListItemView(ctx: Context, lineOfText: String) : FrameLayout(ctx) {
 
 	init {
-		setText(text)
-		setTextColor(BLACK)
-		typeface = DEFAULT
-		// Note that setTextSize() takes an argument in SP, not PX
-		textSize = TEXT_SIZE_SP.toFloat()
-		setSingleLine()
-		ellipsize = END
-		setBackgroundColor(TRANSPARENT)
-		setBackgroundColor(WHITE)
-		val p = DisplayUtils.dp2Px(ctx, 5)
-		setPadding(p, p, p, p)
-	}
+		val inflater: LayoutInflater = LayoutInflater.from(ctx)
+		val content: View = inflater.inflate(R.layout.list_item_hazard_detail_line, this)
+		val textView: AppCompatTextView = content.findViewById(R.id.tv_hazard_detail_line) as AppCompatTextView
 
-	companion object {
-		private val TEXT_SIZE_SP = 12
-		private val TAG = LineListItemView::class.java.simpleName
+		textView.text = lineOfText
 	}
 }

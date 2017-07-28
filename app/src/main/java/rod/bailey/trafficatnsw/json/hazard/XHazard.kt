@@ -169,6 +169,13 @@ class XHazard(json: JSONObject) : Comparable<XHazard> {
 
 		private val TAG = XHazard::class.java.simpleName
 
+		val TOKEN_ROAD_CLOSURE: String = "ROAD_CLOSURE"
+		val TOKEN_LANE_CLOSURE: String = "LANE_CLOSURE"
+		val TOKEN_EXTENT: String = "Affected"
+		val TOKEN_EXTENT_BOTH: String = "Both directions"
+		val TOKEN_LANES_CLOSED: String = "Lanes closed"
+		val TOKEN_EXTENT_LANE_CLOSED: String = "Closed"
+
 		fun parseIncidentJson(
 			jsonContents: String?): List<XHazard> {
 			val result = LinkedList<XHazard>()

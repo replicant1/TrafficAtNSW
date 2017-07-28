@@ -14,7 +14,8 @@ import android.widget.TextView
 import rod.bailey.trafficatnsw.R
 
 /**
- * Created by rodbailey on 26/7/17.
+ * Custom component that is an icon of a filled circle with a single, upper case
+ * letter on top, as per Material Design guidelines.
  */
 class ListItemCircularIcon : TextView {
 

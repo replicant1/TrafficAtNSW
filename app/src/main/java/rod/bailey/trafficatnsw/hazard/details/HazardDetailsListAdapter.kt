@@ -1,60 +1,46 @@
 package rod.bailey.trafficatnsw.hazard.details
 
+import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
-import java.text.SimpleDateFormat
-import java.util.HashSet
-import java.util.LinkedList
-import rod.bailey.trafficatnsw.hazard.details.cellrec.CellRec
-import rod.bailey.trafficatnsw.hazard.details.cellrec.HeadingCellRec
-import rod.bailey.trafficatnsw.hazard.details.cellrec.HtmlFieldCellRec
-import rod.bailey.trafficatnsw.hazard.details.cellrec.LineCellRec
-import rod.bailey.trafficatnsw.hazard.details.cellrec.TextFieldCellRec
-import rod.bailey.trafficatnsw.hazard.details.cellrec.TitleCellRec
+import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.hazard.details.cellrec.*
 import rod.bailey.trafficatnsw.hazard.details.view.HtmlListItemView
 import rod.bailey.trafficatnsw.hazard.details.view.LineListItemView
 import rod.bailey.trafficatnsw.hazard.details.view.TextFieldListItemView
-import rod.bailey.trafficatnsw.ui.view.HazardListItemView
 import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.util.DateUtils
+import rod.bailey.trafficatnsw.json.hazard.XLane
+import rod.bailey.trafficatnsw.ui.view.HazardListItemView
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.util.DateUtils
+import java.text.SimpleDateFormat
+import java.util.*
 
-class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), ListAdapter {
-	private val cellRecs = LinkedList<CellRec>()
+class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHazard) : BaseAdapter(), ListAdapter {
+	private val cellRecs: MutableList<CellRec> = LinkedList<CellRec>()
 
 	init {
 		// Title cell (always appears)
 		addTitleCellRec()
-		// "WHEN" heading
-		addHeadingCellRec("WHEN")
-		// "Cretaed" and "Last update" cells
+		addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_times))
 		addCreateAndLastUpdatedCellRecs()
-		// "Duration"
 		addDurationCellRec()
-		// "GENERAL" heading
-		addHeadingCellRec("GENERAL")
-		// "Attending"
+		addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_general))
 		addAttendingCellRec()
-		// "RTA Advice" cell
 		addRtaAdviceCellRec()
-		// "Queues" celll
 		addQueueLengthCellRec()
-		// "Closures" cells
 		addClosureCellRecs()
-		// "XLane" cells (each is an instance of LineCellRec in the lineCellRec
-		// aray
 		addLaneCellRecs()
-		// "Traffic volume" and "Delay"
 		addTrafficVolumeAndDelayCellRec()
-		// "Public transport" hs HTML
+
+		// Cells containing HTML
 		addPublicTransportCellRec()
-		// "Arrangement elements" have HTML each one
 		addArrangementElementCellRecs()
-		// "Other advice" has HTML
 		addOtherAdviceCellRec()
 
+		// De-duplication of headings
 		removeFirstOfConsecutiveHeadings()
 	}
 
@@ -63,20 +49,19 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 	}
 
 	private fun addArrangementElementCellRecs() {
-			if (!isEmptyList(hazard.arrangementElements)) {
-				for (element in hazard.arrangementElements) {
-					if (element.title != null) {
-						addHeadingCellRec(element.title)
-					}
-					if (element.html != null) {
-						addHtmlFieldCellRec(element.html)
-					}
+		if (!isEmptyList(hazard.arrangementElements)) {
+			for (element in hazard.arrangementElements) {
+				if (element.title != null) {
+					addHeadingCellRec(element.title)
+				}
+				if (element.html != null) {
+					addHtmlFieldCellRec(element.html)
 				}
 			}
+		}
 	}
 
 	private fun addAttendingCellRec() {
-		// "Attending" row
 		if (!isEmptyList(hazard.attendingGroups)) {
 			val numAttendingGroups = hazard.attendingGroups.size
 			val str = StringBuffer()
@@ -92,56 +77,52 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 					str.append(", ")
 				}
 			} // for i
+
 			val strstr = str.toString()
 			if (!isEmptyStr(strstr)) {
-				val cellrec = TextFieldCellRec("Attending",
-											   strstr)
+				val cellrec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_attending), strstr)
 				cellRecs.add(cellrec)
 			}
 		}
 	}
 
 	private fun addClosureCellRecs() {
-			for (period in hazard.periods) {
-				if ("ROAD_CLOSURE" == period.closureType || "LANE_CLOSURE" == period.closureType) {
-					// Planned road closure of lane closure
-					val str = StringBuffer(period.fromDay)
+		for (period in hazard.periods) {
+			if ((XHazard.TOKEN_ROAD_CLOSURE == period.closureType) ||
+				(XHazard.TOKEN_LANE_CLOSURE == period.closureType)) {
+				val str = StringBuffer()
 
-					if (!isEmptyStr(period.toDay)) {
-						str.append(" to ")
-						str.append(period.toDay)
-					}
-
-					if (!isEmptyStr(period.startTime)) {
-						str.append(" (")
-						str.append(period.startTime)
-
-						if (!isEmptyStr(period.finishTime)) {
-							str.append(" to ")
-							str.append(period.finishTime)
-						}
-
-						str.append(")")
-					}
-
-					if (!isEmptyStr(period.direction)) {
-						str.append(". ")
-						str.append(period.direction)
-						str.append(" affected")
-					}
-					val fieldValue = str.toString()
-					var fieldName: String?
-
-					if ("ROAD_CLOSURE" == period.closureType) {
-						fieldName = "Roads closed"
-					} else {
-						fieldName = "Lanes closed"
-					}
-					val cellRec = TextFieldCellRec(fieldName,
-												   fieldValue)
-					cellRecs.add(cellRec)
+				if (!isEmptyStr(period.toDay)) {
+					str.append(ctx.getString(R.string.hazard_details_closure_from_date_to_date),
+							   period.fromDay, period.toDay)
+				} else {
+					str.append(period.fromDay)
 				}
+
+				if (!isEmptyStr(period.startTime)) {
+					str.append(" ")
+					if (!isEmptyStr(period.finishTime)) {
+						str.append(ctx.getString(R.string.hazard_details_closure_from_time_to_time),
+								   period.startTime, period.finishTime)
+					}
+				}
+
+				if (!isEmptyStr(period.direction)) {
+					str.append(ctx.getString(R.string.hazard_details_closure_direction_affected), period.direction)
+					str.append(" ")
+				}
+
+				val fieldValue = str.toString()
+				var fieldName: String =
+					if (XHazard.TOKEN_ROAD_CLOSURE == period.closureType) {
+						ctx.getString(R.string.hazard_details_field_label_roads_closed)
+					} else {
+						ctx.getString(R.string.hazard_details_field_label_lanes_closed)
+					}
+				val cellRec = TextFieldCellRec(fieldName, fieldValue)
+				cellRecs.add(cellRec)
 			}
+		}
 	}
 
 	private fun addCreateAndLastUpdatedCellRecs() {
@@ -149,10 +130,11 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 		if (hazard.created != null) {
 			val createdStr = DateUtils.relativeDateAndTime(
 				hazard.created, true)
-			val createdCellRec = TextFieldCellRec("Started",
+			val createdCellRec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_when_started),
 												  createdStr)
 			cellRecs.add(createdCellRec)
 		}
+
 		// Second CellRec is for "Last updated" date/time. But we only create a
 		// 'last updated' cellrec if it will show a different date to the
 		// 'created' date.
@@ -160,7 +142,7 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 			val lastUpdatedStr = DateUtils.relativeDateAndTime(
 				hazard.lastUpdated, true)
 			val lastUpdatedCellRec = TextFieldCellRec(
-				"Last checked", lastUpdatedStr)
+				ctx.getString(R.string.hazard_details_field_label_when_last_checked), lastUpdatedStr)
 			cellRecs.add(lastUpdatedCellRec)
 		}
 	}
@@ -168,14 +150,14 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 	private fun addDurationCellRec() {
 		if (hazard.start != null && hazard.end != null) {
 			val formatString = StringBuffer("EEE d MMM")
-			val sdf = SimpleDateFormat(formatString.toString())
+			val sdf = SimpleDateFormat(formatString.toString(), Locale.ENGLISH)
 			val startStr = sdf.format(hazard.start)
 			val endStr = sdf.format(hazard.end)
 			val startToEnd = StringBuffer()
 			startToEnd.append(startStr)
 			startToEnd.append(" - ")
 			startToEnd.append(endStr)
-			val cellrec = TextFieldCellRec("Duration",
+			val cellrec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_duration),
 										   startToEnd.toString())
 			cellRecs.add(cellrec)
 		}
@@ -190,69 +172,74 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 		cellRecs.add(rec)
 	}
 
+	private fun createLaneCellRecAffected(lane: XLane): CellRec {
+		val line: String =
+			if (XHazard.TOKEN_EXTENT_BOTH == lane.affectedDirection) {
+				ctx.getString(R.string.hazard_details_field_value_extent_both)
+			} else {
+				ctx.getString(R.string.hazard_details_field_value_extent_one,
+							  lane.affectedDirection)
+			}
+		return LineCellRec(line)
+	}
+
+	/**
+	 * Form a string of form "X of Y <DIR>bound lanes closed"
+	 * e.g. "2 of 3 eastbound lanes closed".
+	 * NOTE: Special case where X and Y are blank implies that both
+	 * X and Y are "1", but instead of saying "1 of 1 <DIR>bound lanes closed"
+	 * we say "<DIR>bound lane closed".
+	 */
+	private fun createLaneCellRecLanesClosed(lane: XLane): CellRec {
+		val str = StringBuffer()
+
+		if (isEmptyStr(lane.closedLanes) && isEmptyStr(lane.numberOfLanes)) {
+			str.append(ctx.getString(R.string.hazard_details_field_value_extent_one,
+									 lane.affectedDirection))
+		} else {
+			str.append(ctx.getString(R.string.hazard_details_field_value_one_of_n_lanes_closed,
+									 lane.closedLanes, lane.numberOfLanes,
+									 lane.affectedDirection?.toLowerCase() ?: ""))
+		}
+
+		// Suffix "(<description>)" e.g. "(right turn lane)"
+		if (!isEmptyStr(lane.description)) {
+			str.append(" ")
+			str.append(ctx.getString(R.string.hazard_details_parenthetical_lane_description,
+									 lane.description?.toLowerCase() ?: ""))
+		}
+
+		str.append(".")
+		return LineCellRec(str.toString())
+	}
+
+	private fun createLaneCellRecLaneClosed(lane: XLane): CellRec {
+		val str = StringBuffer()
+
+		if (XHazard.TOKEN_EXTENT_BOTH == lane.affectedDirection) {
+			str.append(ctx.getString(R.string.hazard_details_road_closed_in_both_directions,
+									 lane.roadType))
+		} else {
+			str.append(ctx.getString(R.string.hazard_details_road_closed_in_one_direction,
+									 lane.roadType,
+									 lane.affectedDirection?.toLowerCase() ?: ""))
+		}
+		return LineCellRec(str.toString())
+	}
+
 	private fun addLaneCellRecs() {
 		if (!isEmptyList(hazard.roads)) {
 			val firstRoad = hazard.roads[0]
 
 			if (!isEmptyList(firstRoad.impactedLanes)) {
-				for (lane in firstRoad.impactedLanes!!) {
-					if (!isEmptyStr(lane.extent)) {
-						if ("Affected" == lane.extent) {
-							var line: String =
-							if ("Both directions" == lane.affectedDirection) {
-								"Traffic in both directions is affected."
-							} else {
-								String.format("%s traffic is affected.", lane.affectedDirection)
+				if (firstRoad.impactedLanes != null) {
+					for (lane in firstRoad.impactedLanes) {
+						if (!isEmptyStr(lane.extent)) {
+							when (lane.extent) {
+								XHazard.TOKEN_EXTENT -> cellRecs.add(createLaneCellRecAffected(lane))
+								XHazard.TOKEN_LANES_CLOSED -> cellRecs.add(createLaneCellRecLanesClosed(lane))
+								XHazard.TOKEN_EXTENT_LANE_CLOSED -> cellRecs.add(createLaneCellRecLaneClosed(lane))
 							}
-							val rec = LineCellRec(line)
-							cellRecs.add(rec)
-						} else if ("Lanes closed" == lane.extent) {
-							val str = StringBuffer()
-							// Form a string of form
-							// "X of Y <DIR>bound lanes closed"
-							// e.g. "2 of 3 eastbound lanes closed".
-							// NOTE: Special case where X and Y are blank
-							// implies that both
-							// X and Y are "1", but instead of saying
-							// "1 of 1 <DIR>bound lanes closed"
-							// we say "<DIR>bound lane closed".
-							if (isEmptyStr(lane.closedLanes) && isEmptyStr(lane.numberOfLanes)) {
-								str.append(lane.affectedDirection)
-								str.append(" lane closed")
-							} else {
-								str.append(lane.closedLanes)
-								str.append(" of ")
-								str.append(lane.numberOfLanes)
-								str.append(" ")
-								str.append(lane.affectedDirection!!
-											   .toLowerCase())
-								str.append(" lanes closed")
-							}
-							// Suffix "(<description>)" e.g. "(right turn lane)"
-							if (!isEmptyStr(lane.description)) {
-								str.append(" (")
-								str.append(lane.description!!.toLowerCase())
-								str.append(")")
-							}
-
-							str.append(".")
-							val rec = LineCellRec(str.toString())
-							cellRecs.add(rec)
-						} else if ("Closed" == lane.extent) {
-							val str = StringBuffer()
-							str.append(lane.roadType)
-							str.append(" closed in ")
-
-							if ("Both directions" == lane
-								.affectedDirection) {
-								str.append("both directions.")
-							} else {
-								str.append(lane.affectedDirection!!
-											   .toLowerCase())
-								str.append(" direction.")
-							}
-							val rec = LineCellRec(str.toString())
-							cellRecs.add(rec)
 						}
 					}
 				}
@@ -262,7 +249,7 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 
 	private fun addOtherAdviceCellRec() {
 		if (!isEmptyStr(hazard.otherAdvice)) {
-			addHeadingCellRec("Other advice")
+			addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_other_advice))
 			if (hazard.otherAdvice != null) {
 				addHtmlFieldCellRec(hazard.otherAdvice)
 			}
@@ -271,7 +258,7 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 
 	private fun addPublicTransportCellRec() {
 		if (!isEmptyStr(hazard.publicTransport)) {
-			addHeadingCellRec("Public transport")
+			addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_public_transport))
 			if (hazard.publicTransport != null) {
 				addHtmlFieldCellRec(hazard.publicTransport)
 			}
@@ -283,15 +270,10 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 			val firstRoad = hazard.roads[0]
 
 			if ((firstRoad.queueLength != null) && (firstRoad.queueLength > 0)) {
-				val fieldName = "Queues"
-				val fieldValue: String? = null
-				val queueStr = StringBuffer()
-				val queueLengthNumber = firstRoad.queueLength
-
-				queueStr.append("" + queueLengthNumber)
-				queueStr.append("km")
-				val cellrec = TextFieldCellRec(fieldName,
-											   fieldValue!!)
+				val fieldName = ctx.getString(R.string.hazard_details_field_label_queues)
+				val fieldValue: String = ctx.getString(R.string.hazard_details_field_value_queues,
+													   firstRoad.queueLength)
+				val cellrec = TextFieldCellRec(fieldName, fieldValue)
 				cellRecs.add(cellrec)
 			}
 		}
@@ -300,7 +282,7 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 	private fun addRtaAdviceCellRec() {
 		if (!isEmptyStr(hazard.adviceA) || !isEmptyStr(hazard.adviceB)) {
 			val value = StringBuffer()
-			val fieldName = "Advice"
+			val fieldName = ctx.getString(R.string.hazard_details_rta_advice)
 
 			if (!isEmptyStr(hazard.adviceA)) {
 				value.append(hazard.adviceA)
@@ -334,8 +316,7 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 			val str = StringBuffer()
 
 			if (!isEmptyStr(firstRoad.trafficVolume)) {
-				str.append(firstRoad.trafficVolume)
-				str.append(" traffic.")
+				str.append(ctx.getString(R.string.hazard_details_traffic_volume, firstRoad.trafficVolume))
 			}
 
 			if (!isEmptyStr(firstRoad.delay)) {
@@ -343,8 +324,7 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 					str.append(" ")
 				}
 
-				str.append(firstRoad.delay)
-				str.append(" delays.")
+				str.append(ctx.getString(R.string.hazard_details_traffic_delays, firstRoad.delay))
 			}
 
 			if (str.length > 1) {
@@ -354,26 +334,9 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 		}
 	}
 
-//	private fun cellForHtmlCellRecAtIndex(i: Int): View? {
-//		return null
-//	}
-//
-//	private fun cellForNonHtmlCellRecAtIndex(cellRecIndex: Int): View? {
-//		return null
-//	}
-//
-//	private fun createHtmlFieldCellRec(fieldName: String,
-//									   fieldValue: String, tag: Int): HtmlFieldCellRec? {
-//		return null
-//	}
-
 	override fun getCount(): Int {
 		return cellRecs.size
 	}
-
-//	private fun getHeightForHtmlCellRecAtIndex(index: Int): Double {
-//		return 0.0
-//	}
 
 	override fun getItem(position: Int): Any {
 		return cellRecs[position]
@@ -386,15 +349,11 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		var result: View
 		val ctx = parent.context
-		val cellRec:CellRec = cellRecs[position]
+		val cellRec: CellRec = cellRecs[position]
 
 		result = when (cellRec) {
-			is TitleCellRec -> HazardListItemView(ctx,
-																				  cellRec.hazard,
-																				  false, false)
-			is HeadingCellRec -> ListHeadingView(ctx,
-																				 cellRec.heading,
-																				 false)
+			is TitleCellRec -> HazardListItemView(ctx, cellRec.hazard, false, false)
+			is HeadingCellRec -> ListHeadingView(ctx, cellRec.heading, false)
 			is LineCellRec -> LineListItemView(ctx, cellRec.line)
 			is TextFieldCellRec -> TextFieldListItemView(ctx, cellRec.fieldName, cellRec.fieldValue)
 			is HtmlFieldCellRec -> HtmlListItemView(ctx, cellRec.fieldHtml)
@@ -436,17 +395,6 @@ class HazardDetailsListAdapter(private val hazard: XHazard) : BaseAdapter(), Lis
 			return lastUpdated != null && created != null
 				&& lastUpdated == created
 		}
-
-	private fun numberOfRowsInGeneralSection(): Int {
-		val numRows = 0
-		return numRows
-	}
-
-	private fun numberOfRowsInWhenSection(): Int {
-		val numRows = 0
-
-		return numRows
-	}
 
 	private fun removeFirstOfConsecutiveHeadings() {
 		val cellRecsToRemove = HashSet<CellRec>()

@@ -44,7 +44,6 @@
         android:singleLine="true"
         android:textColor="#DE000000"
         android:textSize="16sp"
-        android:textStyle="bold"
         tools:text="Line One Twas Brillig and the slithy tove did gyre and gymbal"/>
 
     <!-- Line 2 is vertically centered in the parent -->
@@ -65,7 +64,6 @@
         android:singleLine="true"
         android:textColor="#DE000000"
         android:textSize="14sp"
-        android:textStyle="bold"
         tools:text="Line Two Twas Brillig and the slithy tove did gyre and gymbal"/>
 
     <!-- Line 3 is a fixed offset below line 2 -->

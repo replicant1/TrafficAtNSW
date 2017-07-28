@@ -1,20 +1,14 @@
 package rod.bailey.trafficatnsw.ui.view
 
-import android.app.LauncherActivity
 import android.content.Context
-import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.AppCompatTextView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.RelativeLayout
-import android.widget.TextView
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivty
+import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.ui.LetterColorMapSingleton
 import rod.bailey.trafficatnsw.util.ConfigSingleton
@@ -29,7 +23,7 @@ import java.util.*
  * @property ctx Application context
  * @property hazard The hazard displayed in this list item
  * @param showLastUpdatedDate True if date/time of last update appears at top right
- * @param clickable True if you can click on this to start a HazardDetailsActivty
+ * @param clickable True if you can click on this to start a HazardDetailsActivity
  */
 class HazardListItemView(val ctx: Context,
 						 val hazard: XHazard,
@@ -39,7 +33,7 @@ class HazardListItemView(val ctx: Context,
 	private inner class HazardListItemClickListener : View.OnClickListener {
 		override fun onClick(v: View) {
 			if (hazard.hazardId != null) {
-				HazardDetailsActivty.start(ctx, hazard.hazardId)
+				HazardDetailsActivity.start(ctx, hazard.hazardId)
 			}
 		}
 	}

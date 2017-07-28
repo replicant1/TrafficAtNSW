@@ -1,15 +1,15 @@
 package rod.bailey.trafficatnsw.hazard.details
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
+import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.ListView
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.R.*
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
@@ -17,23 +17,21 @@ import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
- * List has the following sections:
+ * Details list has the following sections:
  *
  *  1. Title
- *  1. WHEN
- *  1. GENERAL
- *  1. OTHER ADVICE
+ *  2. When
+ *  3. General
+ *  4. Other Advice
  *
-
  * @author rodbailey
  */
-class HazardDetailsActivty : Activity() {
+class HazardDetailsActivity : AppCompatActivity() {
 	private lateinit var hazard: XHazard
 
 	private fun createUI() {
 		val listView = ListViewAutoHideFooter(this)
-		listView.setAdapter(HazardDetailsListAdapter(hazard))
-
+		listView.setAdapter(HazardDetailsListAdapter(this, hazard))
 
 		setContentView(listView)
 		val actionBar = actionBar
@@ -43,6 +41,8 @@ class HazardDetailsActivty : Activity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		MLog.i(LOG_TAG, "HazardDetailsActivity is being created ")
 		super.onCreate(savedInstanceState)
+
+		overridePendingTransition(anim.slide_in_from_right, R.anim.slide_out_to_left)
 
 		val extras = intent.extras
 		val hazardId = extras.getInt(EXTRA_HAZARD_ID_INT)
@@ -60,7 +60,7 @@ class HazardDetailsActivty : Activity() {
 
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		if (item != null) {
-			if (item.itemId == R.id.show_on_map) {
+			if (item.itemId == id.show_on_map) {
 				MLog.i(LOG_TAG, "Launching ShowHazardOnMapActivity")
 				val intent = Intent(this, ShowHazardOnMapActivity::class.java)
 				intent.putExtra("hazardId", hazard.hazardId)
@@ -73,11 +73,11 @@ class HazardDetailsActivty : Activity() {
 	}
 
 	companion object {
-		private val LOG_TAG = HazardDetailsActivty::class.java.simpleName
+		private val LOG_TAG = HazardDetailsActivity::class.java.simpleName
 		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id"
 
 		fun start(ctx: Context, hazardId: Int) {
-			val hazardIntent = Intent(ctx, HazardDetailsActivty::class.java)
+			val hazardIntent = Intent(ctx, HazardDetailsActivity::class.java)
 			hazardIntent.putExtra(EXTRA_HAZARD_ID_INT, hazardId)
 			ctx.startActivity(hazardIntent)
 		}

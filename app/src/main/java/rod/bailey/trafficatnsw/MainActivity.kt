@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import android.view.View
+import kotlinx.android.synthetic.main.app_bar_main.*
 import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListMode
