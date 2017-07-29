@@ -5,15 +5,20 @@ import android.support.v7.widget.AppCompatTextView
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.EViewGroup
+import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
 
-class LineListItemView(ctx: Context, lineOfText: String) : FrameLayout(ctx) {
+@EViewGroup(R.layout.list_item_hazard_detail_line)
+open class LineListItemView(ctx: Context,  val lineOfText: String) : FrameLayout(ctx) {
 
-	init {
-		val inflater: LayoutInflater = LayoutInflater.from(ctx)
-		val content: View = inflater.inflate(R.layout.list_item_hazard_detail_line, this)
-		val textView: AppCompatTextView = content.findViewById(R.id.tv_hazard_detail_line) as AppCompatTextView
+	@ViewById(R.id.tv_hazard_detail_line)
+	@JvmField
+	var textView: AppCompatTextView? = null
 
-		textView.text = lineOfText
+	@AfterViews
+	fun afterViews() {
+		textView?.text = lineOfText
 	}
 }

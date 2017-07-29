@@ -7,10 +7,7 @@ import android.widget.BaseAdapter
 import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.details.cellrec.*
-import rod.bailey.trafficatnsw.hazard.details.view.HtmlListItemView
-import rod.bailey.trafficatnsw.hazard.details.view.HtmlListItemView_
-import rod.bailey.trafficatnsw.hazard.details.view.LineListItemView
-import rod.bailey.trafficatnsw.hazard.details.view.TextFieldListItemView
+import rod.bailey.trafficatnsw.hazard.details.view.*
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XLane
 import rod.bailey.trafficatnsw.ui.view.HazardListItemView_
@@ -341,8 +338,8 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		result = when (cellRec) {
 			is TitleCellRec -> HazardListItemView_.build(ctx, cellRec.hazard, false, false)
 			is HeadingCellRec -> ListHeadingView_.build(ctx, cellRec.heading)
-			is LineCellRec -> LineListItemView(ctx, cellRec.line)
-			is TextFieldCellRec -> TextFieldListItemView(ctx, cellRec.fieldName, cellRec.fieldValue)
+			is LineCellRec -> LineListItemView_.build(ctx, cellRec.line)
+			is TextFieldCellRec -> TextFieldListItemView_.build(ctx, cellRec.fieldName, cellRec.fieldValue)
 			is HtmlFieldCellRec -> HtmlListItemView_.build(ctx, cellRec.fieldHtml)
 			else -> View(ctx)
 		}
