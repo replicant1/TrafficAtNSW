@@ -67,10 +67,7 @@ class HazardDetailsActivity : AppCompatActivity() {
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 		if (item != null) {
 			if (item.itemId == id.show_on_map) {
-				MLog.i(LOG_TAG, "Launching ShowHazardOnMapActivity")
-				val intent = Intent(this, ShowHazardOnMapActivity::class.java)
-				intent.putExtra("hazardId", hazard.hazardId)
-				this.startActivity(intent)
+				ShowHazardOnMapActivity.start(this, hazard.hazardId)
 			} else if (item.itemId == android.R.id.home) {
 				NavUtils.navigateUpFromSameTask(this)
 			}

@@ -1,25 +1,20 @@
 package rod.bailey.trafficatnsw.hazard.map
 
-import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.MenuItem
-import android.view.ViewGroup.MarginLayoutParams
-import android.widget.RelativeLayout
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.json.hazard.XHazard
-import android.view.ViewGroup.LayoutParams.*
-import android.widget.RelativeLayout.*
-import com.google.android.gms.maps.*
-import rod.bailey.trafficatnsw.util.DisplayUtils
-import com.google.android.gms.maps.CameraUpdateFactory
-
-
 
 class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 	private var hazard: XHazard? = null
@@ -34,35 +29,13 @@ class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+
 		val extras = intent.extras
-		val hazardId = extras.getInt("hazardId")
+		val hazardId = extras.getInt(EXTRA_HAZARD_ID_INT)
+
 		hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId)
-
-		createUI()
-	}
-
-	private fun createUI() {
-		Log.d(LOG_TAG, "createUI: Into")
-
-		val mainLayout = RelativeLayout(this)
-		mainLayout.id = R.id.content_main
-		val mainLayoutMLP = MarginLayoutParams(MATCH_PARENT, MATCH_PARENT)
-		val marginPx = DisplayUtils.dp2Px(this, 5)
-		mainLayoutMLP.setMargins(marginPx, marginPx, marginPx, marginPx)
-		val mainLayoutRLP = RelativeLayout.LayoutParams(mainLayoutMLP)
-		mainLayoutRLP.addRule(ALIGN_PARENT_BOTTOM)
-		mainLayoutRLP.addRule(ALIGN_PARENT_TOP)
-		mainLayoutRLP.addRule(ALIGN_PARENT_LEFT)
-		mainLayoutRLP.addRule(ALIGN_PARENT_RIGHT)
-		mainLayout.layoutParams = mainLayoutRLP
-
-		fragment = SupportMapFragment()
-		
-		// Insert the fragment by replacing any existing fragment
-		val fragmentManager = supportFragmentManager
-		fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
-
-		setContentView(mainLayout)
+		setContentView(R.layout.activity_show_hazard_on_map)
+		fragment = supportFragmentManager.findFragmentById(R.id.fragment_map) as SupportMapFragment
 		val actionBar = actionBar
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 	}
@@ -72,6 +45,9 @@ class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 		fragment.getMapAsync(this)
 	}
 
+	/**
+	 * When map is ready, center map on hazard and put marker at hazard
+	 */
 	override fun onMapReady(googleMap: GoogleMap) {
 		googleMap.clear()
 
@@ -79,7 +55,7 @@ class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 							hazard?.latlng?.longitude ?: 0.0)
 		val markerOptions = MarkerOptions()
 			.position(latlng)
-			.title(hazard?.headline ?: "Incident")
+			.title(hazard?.headline ?: getString(R.string.hazard_map_screen_title))
 			.draggable(false)
 			.flat(false)
 
@@ -88,11 +64,19 @@ class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 		googleMap.isIndoorEnabled = false
 		googleMap.isTrafficEnabled = true
 
-		val update = CameraUpdateFactory.newLatLngZoom(latlng, 18f)
+		val update = CameraUpdateFactory.newLatLngZoom(latlng, MAP_ZOOM)
 		googleMap.moveCamera(update)
 	}
 
 	companion object {
 		private val LOG_TAG = ShowHazardOnMapActivity::class.java.simpleName
+		private val MAP_ZOOM: Float = 18f
+		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id.map"
+
+		fun start(ctx:Context, hazardId: Int?) {
+			val hazardIntent = Intent(ctx, ShowHazardOnMapActivity::class.java)
+			hazardIntent.putExtra(EXTRA_HAZARD_ID_INT, hazardId)
+			ctx.startActivity(hazardIntent)
+		}
 	}
 }

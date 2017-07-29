@@ -39,4 +39,5 @@
     <string name="hazard_details_closure_from_time_to_time">(%1$s to %2$s)</string>
     <string name="hazard_details_closure_direction_affected">%1$s affected.</string>
     <string name="hazard_details_rta_advice">Advice</string>
+    <string name="hazard_map_screen_title">Incident</string>
 </resources>
