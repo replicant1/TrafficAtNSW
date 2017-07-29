@@ -2,43 +2,22 @@ package rod.bailey.trafficatnsw.ui.view
 
 import android.content.Context
 import android.support.v7.widget.AppCompatTextView
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
 import android.widget.FrameLayout
-import org.androidannotations.annotations.*
+import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.EViewGroup
+import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
 
 @EViewGroup(R.layout.list_item_heading)
-open class ListHeadingView : FrameLayout {
+open class ListHeadingView(ctx: Context, val headingText: String?) : FrameLayout(ctx) {
 
+	// Without the @JvmField, the generated field is private in Java
 	@ViewById(R.id.tv_list_item)
 	@JvmField
-	var textView:AppCompatTextView? = null
-
-	private var headingText: String?
-
-	constructor(ctx: Context, headingText: String?) : super(ctx) {
-		Log.d(LOG_TAG, "constructor: ${headingText}, textView=${textView}")
-		this.headingText = headingText
-	}
-
-//	init {
-//		val inflater: LayoutInflater = LayoutInflater.from(ctx)
-//		val content: View = inflater.inflate(R.layout.list_item_heading, this)
-//		val textView: AppCompatTextView = content.findViewById(
-//			R.id.tv_list_item) as AppCompatTextView
-
-
-//	}
+	var textView: AppCompatTextView? = null
 
 	@AfterViews
 	fun afterViews() {
-		Log.d(LOG_TAG, "**** Into afterViews ****");
 		textView?.text = headingText ?: ""
-	}
-
-	companion object {
-		private val LOG_TAG: String = ListHeadingView::javaClass.name
 	}
 }
