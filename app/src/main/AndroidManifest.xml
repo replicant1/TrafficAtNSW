@@ -58,7 +58,7 @@
                 android:value="rod.bailey.trafficatnsw.MainActivity"/>
         </activity>
         <activity
-            android:name="rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity"
+            android:name="rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
 

@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 25
@@ -36,4 +37,7 @@ dependencies {
     compile 'com.android.support:multidex:1.0.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     compile "org.jetbrains.anko:anko-common:$anko_version"
+
+    compile "org.androidannotations:androidannotations-api:$aa_version"
+    kapt "org.androidannotations:androidannotations:$aa_version"
 }

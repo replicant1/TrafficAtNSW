@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.MenuItem
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -12,13 +13,16 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.EActivity
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 
-class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
+@EActivity(R.layout.activity_show_hazard_on_map)
+open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 	private var hazard: XHazard? = null
-	private lateinit var fragment: SupportMapFragment
+	private var fragment: SupportMapFragment? = null
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		if (item.itemId == android.R.id.home) {
@@ -29,12 +33,17 @@ class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		val hazardId: Int? = intent?.extras?.getInt(EXTRA_HAZARD_ID_INT)
+		Log.d(LOG_TAG, "onCreate: hazardId=${hazardId}")
+		if (hazardId != null) {
+			hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId)
+		}
+//		setContentView(R.layout.activity_show_hazard_on_map)
+	}
 
-		val extras = intent.extras
-		val hazardId = extras.getInt(EXTRA_HAZARD_ID_INT)
-
-		hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId)
-		setContentView(R.layout.activity_show_hazard_on_map)
+	@AfterViews
+	fun afterViews() {
+		Log.d(LOG_TAG, "Into afterViews")
 		fragment = supportFragmentManager.findFragmentById(R.id.fragment_map) as SupportMapFragment
 		val actionBar = actionBar
 		actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -42,7 +51,7 @@ class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 	override fun onResume() {
 		super.onResume()
-		fragment.getMapAsync(this)
+		fragment?.getMapAsync(this)
 	}
 
 	/**
@@ -74,7 +83,7 @@ class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id.map"
 
 		fun start(ctx:Context, hazardId: Int?) {
-			val hazardIntent = Intent(ctx, ShowHazardOnMapActivity::class.java)
+			val hazardIntent = Intent(ctx, ShowHazardOnMapActivity_::class.java)
 			hazardIntent.putExtra(EXTRA_HAZARD_ID_INT, hazardId)
 			ctx.startActivity(hazardIntent)
 		}
