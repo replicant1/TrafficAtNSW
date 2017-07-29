@@ -1,6 +1,5 @@
 package rod.bailey.trafficatnsw
 
-import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -8,12 +7,11 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
-import android.view.View
-import kotlinx.android.synthetic.main.app_bar_main.*
+import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.EActivity
 import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListMode
@@ -21,7 +19,8 @@ import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
 
-class MainActivity : AppCompatActivity() {
+@EActivity(R.layout.activity_main)
+open class MainActivity : AppCompatActivity() {
 	private lateinit var drawerToggle: ActionBarDrawerToggle
 
 	override fun onConfigurationChanged(newConfig: Configuration) {
@@ -38,10 +37,10 @@ class MainActivity : AppCompatActivity() {
 
 		// This logging facility needs initialization
 		MLog.init(config)
+	}
 
-		// Init screen with main layout
-		setContentView(R.layout.activity_main)
-
+	@AfterViews
+	fun afterViews() {
 		val toolbar = findViewById(R.id.toolbar) as Toolbar
 		setSupportActionBar(toolbar)
 
@@ -59,10 +58,6 @@ class MainActivity : AppCompatActivity() {
 		// Navigation
 		val navView = findViewById(R.id.navigation_drawer_view) as NavigationView
 		navView.setNavigationItemSelectedListener(DrawerItemClickListener(drawer))
-	}
-
-	override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-		return super.onCreateView(name, context, attrs)
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {

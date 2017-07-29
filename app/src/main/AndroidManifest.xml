@@ -21,13 +21,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
-        android:name=".app.TrafficAtNSWApplication"
+        android:name=".app.TrafficAtNSWApplication_"
         android:allowBackup="true"
         android:icon="@drawable/tansw_icon_on_transparent"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="rod.bailey.trafficatnsw.MainActivity"
+            android:name="rod.bailey.trafficatnsw.MainActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -45,17 +45,17 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.MainActivity"/>
+                android:value="rod.bailey.trafficatnsw.MainActivity_"/>
         </activity>
         <activity
-            android:name="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity"
+            android:name="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.MainActivity"/>
+                android:value="rod.bailey.trafficatnsw.MainActivity_"/>
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity_"
@@ -65,7 +65,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity"/>
+                android:value="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity_"/>
         </activity>
 
         <!-- Maps API key for debugging / development  -->

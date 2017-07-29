@@ -10,6 +10,7 @@ import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase
 import rod.bailey.trafficatnsw.traveltime.common.TravelTime
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
 
 class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), ListAdapter {
 	/** An Item that is simply a heading e.g. "Eastbound" or "Westbound"  */
@@ -157,12 +158,11 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 	}
 
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-		var result: View?
+		var result: View
 		val item = items[position]
 
 		if (item is HeadingItem) {
-			val heading = ListHeadingView(parent.context,
-										  item.text, false)
+			val heading = ListHeadingView_.build(parent.context, item.text)
 			result = heading
 		} else {
 			val ttItem = item as TravelTimeItem

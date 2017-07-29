@@ -11,6 +11,7 @@ import java.util.LinkedList
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.json.hazard.XRegion
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
 
 class TrafficCameraListAdapter(filter: ITrafficCameraFilter?) : BaseAdapter(), ListAdapter {
 	private val db: TrafficCameraCacheSingleton
@@ -37,8 +38,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter?) : BaseAdapter(), L
 	}
 
 	private fun createHeading(region: XRegion, parent: ViewGroup): View {
-		val heading = ListHeadingView(parent.context,
-									  region.description, false)
+		val heading = ListHeadingView_.build(parent.context, region.description)
 		return heading
 	}
 

@@ -14,6 +14,7 @@ import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XLane
 import rod.bailey.trafficatnsw.ui.view.HazardListItemView
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
@@ -338,7 +339,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 
 		result = when (cellRec) {
 			is TitleCellRec -> HazardListItemView(ctx, cellRec.hazard, showLastUpdatedDate = false, clickable = false)
-			is HeadingCellRec -> ListHeadingView(ctx, cellRec.heading, addDivider = false)
+			is HeadingCellRec -> ListHeadingView_.build(ctx, cellRec.heading)
 			is LineCellRec -> LineListItemView(ctx, cellRec.line)
 			is TextFieldCellRec -> TextFieldListItemView(ctx, cellRec.fieldName, cellRec.fieldValue)
 			is HtmlFieldCellRec -> HtmlListItemView(ctx, cellRec.fieldHtml)

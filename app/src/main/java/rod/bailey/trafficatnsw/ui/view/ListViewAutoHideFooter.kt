@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.ListAdapter
 import android.widget.ListView
+import org.androidannotations.annotations.EView
+import org.androidannotations.annotations.EViewGroup
+import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
 
 /**
@@ -22,14 +25,12 @@ class ListViewAutoHideFooter(ctx: Context) : FrameLayout(ctx) {
 	val listView: ListView
 
 	init {
-		footerView = DataLicenceView(ctx)
-
+		footerView = DataLicenceView_.build(ctx)
 		val inflater: LayoutInflater = LayoutInflater.from(ctx)
 		val content = inflater.inflate(R.layout.view_list, this)
 		listView = content.findViewById(R.id.lv_list) as ListView
-
-		setBackgroundColor(ContextCompat.getColor(ctx, R.color.SkyBlue))
 	}
+
 
 	fun setAdapter(adapter: ListAdapter) {
 		if (adapter.count == 0) {

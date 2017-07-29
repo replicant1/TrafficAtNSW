@@ -21,7 +21,9 @@ import rod.bailey.trafficatnsw.json.hazard.XHazard
 
 @EActivity(R.layout.activity_show_hazard_on_map)
 open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
+
 	private var hazard: XHazard? = null
+
 	private var fragment: SupportMapFragment? = null
 
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -34,16 +36,13 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		val hazardId: Int? = intent?.extras?.getInt(EXTRA_HAZARD_ID_INT)
-		Log.d(LOG_TAG, "onCreate: hazardId=${hazardId}")
 		if (hazardId != null) {
 			hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId)
 		}
-//		setContentView(R.layout.activity_show_hazard_on_map)
 	}
 
 	@AfterViews
 	fun afterViews() {
-		Log.d(LOG_TAG, "Into afterViews")
 		fragment = supportFragmentManager.findFragmentById(R.id.fragment_map) as SupportMapFragment
 		val actionBar = actionBar
 		actionBar?.setDisplayHomeAsUpEnabled(true)

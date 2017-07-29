@@ -9,6 +9,7 @@ import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XRegion
 import rod.bailey.trafficatnsw.ui.view.HazardListItemView
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
 import rod.bailey.trafficatnsw.util.MLog
 import java.util.*
 
@@ -37,7 +38,7 @@ class HazardListAdapter() : BaseAdapter(), ListAdapter {
 	}
 
 	private fun createHeading(ctx: Context, region: XRegion): View {
-		return ListHeadingView(ctx, region.description, false)
+		return ListHeadingView_.build(ctx, region.description)
 	}
 
 	override fun getCount(): Int {

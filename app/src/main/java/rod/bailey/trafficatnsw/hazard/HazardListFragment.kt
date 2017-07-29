@@ -4,6 +4,7 @@ import android.app.Fragment
 import android.os.Bundle
 import android.view.*
 import kotlinx.android.synthetic.main.view_list.view.*
+import org.androidannotations.annotations.EFragment
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
@@ -14,7 +15,8 @@ import rod.bailey.trafficatnsw.util.MLog
  * List of hazards is divided into groups per XRegion. The 'mode' construction arg
  * determines which list is displayed. Construct using static create() method.
  */
-class HazardListFragment : Fragment() {
+@EFragment
+open class HazardListFragment : Fragment() {
 	private lateinit var mode: HazardListMode
 	private lateinit var hazardListView: ListViewWithEmptyMessage
 
@@ -88,7 +90,7 @@ class HazardListFragment : Fragment() {
 		private val LOG_TAG = HazardListFragment::class.java.simpleName
 
 		fun create(mode: HazardListMode): HazardListFragment {
-			val result = HazardListFragment()
+			val result = HazardListFragment_()
 			val bundle = Bundle()
 			bundle.putInt(ARG_HAZARDS_FRAGMENT_MODE, mode.ordinal)
 			MLog.d(LOG_TAG, "Creating HazardListFragment,mode=${mode.ordinal}")

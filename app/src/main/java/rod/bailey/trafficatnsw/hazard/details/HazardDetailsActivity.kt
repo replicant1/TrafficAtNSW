@@ -11,6 +11,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.view_list.view.*
+import org.androidannotations.annotations.EActivity
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.R.*
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
@@ -29,7 +30,8 @@ import rod.bailey.trafficatnsw.util.MLog
  *
  * @author rodbailey
  */
-class HazardDetailsActivity : AppCompatActivity() {
+@EActivity
+open class HazardDetailsActivity : AppCompatActivity() {
 	private lateinit var hazard: XHazard
 
 	private fun createUI() {
@@ -45,7 +47,6 @@ class HazardDetailsActivity : AppCompatActivity() {
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
-		MLog.i(LOG_TAG, "HazardDetailsActivity is being created ")
 		super.onCreate(savedInstanceState)
 
 		overridePendingTransition(anim.slide_in_from_right, R.anim.slide_out_to_left)
@@ -80,7 +81,7 @@ class HazardDetailsActivity : AppCompatActivity() {
 		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id"
 
 		fun start(ctx: Context, hazardId: Int) {
-			val hazardIntent = Intent(ctx, HazardDetailsActivity::class.java)
+			val hazardIntent = Intent(ctx, HazardDetailsActivity_::class.java)
 			hazardIntent.putExtra(EXTRA_HAZARD_ID_INT, hazardId)
 			ctx.startActivity(hazardIntent)
 		}
