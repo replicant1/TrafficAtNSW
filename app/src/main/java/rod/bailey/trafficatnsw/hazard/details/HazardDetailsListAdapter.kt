@@ -14,6 +14,7 @@ import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XLane
 import rod.bailey.trafficatnsw.ui.view.HazardListItemView
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -44,17 +45,8 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		removeFirstOfConsecutiveHeadings()
 	}
 
-	override fun isEnabled(position: Int): Boolean {
-		val result = when (cellRecs[position]) {
-			is HeadingCellRec -> false
-			else -> true
-		}
-		return result
-	}
-
-	override fun areAllItemsEnabled(): Boolean {
-		return false
-	}
+	override fun isEnabled(position: Int): Boolean = !(cellRecs[position] is HeadingCellRec)
+	override fun areAllItemsEnabled(): Boolean = false
 
 	private fun addArrangementElementCellRecs() {
 		if (!isEmptyList(hazard.arrangementElements)) {
@@ -121,7 +113,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 				}
 
 				val fieldValue = str.toString()
-				var fieldName: String =
+				val fieldName: String =
 					if (XHazard.TOKEN_ROAD_CLOSURE == period.closureType) {
 						ctx.getString(R.string.hazard_details_field_label_roads_closed)
 					} else {
@@ -137,9 +129,10 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		// First CellRec is for "Created" date/time
 		if (hazard.created != null) {
 			val createdStr = DateUtils.relativeDateAndTime(
-				hazard.created, true)
-			val createdCellRec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_when_started),
-												  createdStr)
+				hazard.created, capitalize = true)
+			val createdCellRec = TextFieldCellRec(
+				fieldName = ctx.getString(R.string.hazard_details_field_label_when_started),
+				fieldValue = createdStr)
 			cellRecs.add(createdCellRec)
 		}
 
@@ -148,16 +141,17 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		// 'created' date.
 		if ((!isLastUpdatedSameAsCreated) && (hazard.lastUpdated != null)) {
 			val lastUpdatedStr = DateUtils.relativeDateAndTime(
-				hazard.lastUpdated, true)
+				hazard.lastUpdated, capitalize = true)
 			val lastUpdatedCellRec = TextFieldCellRec(
-				ctx.getString(R.string.hazard_details_field_label_when_last_checked), lastUpdatedStr)
+				fieldName = ctx.getString(R.string.hazard_details_field_label_when_last_checked),
+				fieldValue = lastUpdatedStr)
 			cellRecs.add(lastUpdatedCellRec)
 		}
 	}
 
 	private fun addDurationCellRec() {
 		if (hazard.start != null && hazard.end != null) {
-			val formatString = StringBuffer("EEE d MMM")
+			val formatString = StringBuffer(ConfigSingleton.instance.durationTimeFormat())
 			val sdf = SimpleDateFormat(formatString.toString(), Locale.ENGLISH)
 			val startStr = sdf.format(hazard.start)
 			val endStr = sdf.format(hazard.end)
@@ -171,14 +165,8 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		}
 	}
 
-	private fun addHeadingCellRec(heading: String) {
-		cellRecs.add(HeadingCellRec(heading))
-	}
-
-	private fun addHtmlFieldCellRec(html: String) {
-		val rec = HtmlFieldCellRec(html)
-		cellRecs.add(rec)
-	}
+	private fun addHeadingCellRec(heading: String) = cellRecs.add(HeadingCellRec(heading))
+	private fun addHtmlFieldCellRec(html: String) = cellRecs.add(HtmlFieldCellRec(html))
 
 	private fun createLaneCellRecAffected(lane: XLane): CellRec {
 		val line: String =
@@ -303,15 +291,12 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 			if (!isEmptyStr(hazard.adviceB)) {
 				value.append(hazard.adviceB)
 			}
-			val cellRec = TextFieldCellRec(fieldName,
-										   value.toString())
+			val cellRec = TextFieldCellRec(fieldName, fieldValue = value.toString())
 			cellRecs.add(cellRec)
 		}
 	}
 
-	private fun addTitleCellRec() {
-		cellRecs.add(TitleCellRec(hazard))
-	}
+	private fun addTitleCellRec() = cellRecs.add(TitleCellRec(hazard))
 
 	/**
 	 * "Traffic Volume" and "Delay" - adds a single LineCellRec containing a
@@ -342,26 +327,18 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		}
 	}
 
-	override fun getCount(): Int {
-		return cellRecs.size
-	}
-
-	override fun getItem(position: Int): Any {
-		return cellRecs[position]
-	}
-
-	override fun getItemId(position: Int): Long {
-		return position.toLong()
-	}
+	override fun getCount(): Int = cellRecs.size
+	override fun getItem(position: Int): Any = cellRecs[position]
+	override fun getItemId(position: Int): Long = position.toLong()
 
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-		var result: View
+		val result: View
 		val ctx = parent.context
 		val cellRec: CellRec = cellRecs[position]
 
 		result = when (cellRec) {
-			is TitleCellRec -> HazardListItemView(ctx, cellRec.hazard, false, false)
-			is HeadingCellRec -> ListHeadingView(ctx, cellRec.heading, false)
+			is TitleCellRec -> HazardListItemView(ctx, cellRec.hazard, showLastUpdatedDate = false, clickable = false)
+			is HeadingCellRec -> ListHeadingView(ctx, cellRec.heading, addDivider = false)
 			is LineCellRec -> LineListItemView(ctx, cellRec.line)
 			is TextFieldCellRec -> TextFieldListItemView(ctx, cellRec.fieldName, cellRec.fieldValue)
 			is HtmlFieldCellRec -> HtmlListItemView(ctx, cellRec.fieldHtml)

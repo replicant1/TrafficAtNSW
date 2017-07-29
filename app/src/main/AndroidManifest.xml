@@ -28,9 +28,9 @@
         android:theme="@style/AppTheme">
         <activity
             android:name="rod.bailey.trafficatnsw.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -60,8 +60,7 @@
         <activity
             android:name="rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -69,19 +68,18 @@
                 android:value="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity"/>
         </activity>
 
-        <!--
-        Maps API key for debugging / development
+        <!-- Maps API key for debugging / development  -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDioyITTw96GEDzQ4ROuEJu0LfSlMVq4KM" />
-        -->
+            android:value="AIzaSyDXcgqF7agwAK_Ey3V8MyS67zRRmYrKKIM" />
+
         <!-- Maps API key for production -->
         <!--<meta-data-->
-        <!--android:name="com.google.android.maps.v2.API_KEY"-->
-        <!--android:value="AIzaSyC9Cj8GeSv5cTXKNP8DD5YQACBRsAfDin0" />-->
-        <!--<meta-data-->
-        <!--android:name="com.google.android.gms.version"-->
-        <!--android:value="@integer/google_play_services_version" />-->
+            <!--android:name="com.google.android.maps.v2.API_KEY"-->
+            <!--android:value="AIzaSyC9Cj8GeSv5cTXKNP8DD5YQACBRsAfDin0"/>-->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
     </application>
 
 </manifest>
