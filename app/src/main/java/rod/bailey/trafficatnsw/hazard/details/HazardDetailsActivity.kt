@@ -1,8 +1,6 @@
 package rod.bailey.trafficatnsw.hazard.details
 
 import android.content.Context
-import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.content.ContextCompat
@@ -15,11 +13,11 @@ import org.androidannotations.annotations.AfterExtras
 import org.androidannotations.annotations.EActivity
 import org.androidannotations.annotations.Extra
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.R.*
+import rod.bailey.trafficatnsw.R.anim
+import rod.bailey.trafficatnsw.R.id
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter
 import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter_
 import rod.bailey.trafficatnsw.util.MLog
 
@@ -30,8 +28,6 @@ import rod.bailey.trafficatnsw.util.MLog
  *  2. When
  *  3. General
  *  4. Other Advice
- *
- * @author rodbailey
  */
 @EActivity
 open class HazardDetailsActivity : AppCompatActivity() {
@@ -50,10 +46,8 @@ open class HazardDetailsActivity : AppCompatActivity() {
 			hazard = tmpHazard
 			val listView = ListViewAutoHideFooter_.build(this)
 			listView.setAdapter(HazardDetailsListAdapter(this, hazard))
-
-			listView.lv_list.divider = resources.getDrawable(R.drawable.line_list_divider_full)
+			listView.lv_list.divider = ContextCompat.getDrawable(this, R.drawable.line_list_divider_full)
 			listView.lv_list.dividerHeight = 2
-
 			setContentView(listView)
 		}
 

@@ -8,6 +8,7 @@ import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.details.cellrec.*
 import rod.bailey.trafficatnsw.hazard.details.view.HtmlListItemView
+import rod.bailey.trafficatnsw.hazard.details.view.HtmlListItemView_
 import rod.bailey.trafficatnsw.hazard.details.view.LineListItemView
 import rod.bailey.trafficatnsw.hazard.details.view.TextFieldListItemView
 import rod.bailey.trafficatnsw.json.hazard.XHazard
@@ -19,7 +20,8 @@ import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHazard) : BaseAdapter(), ListAdapter {
+class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHazard) : BaseAdapter(),
+	ListAdapter {
 	private val cellRecs = LinkedList<CellRec>()
 
 	init {
@@ -341,7 +343,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 			is HeadingCellRec -> ListHeadingView_.build(ctx, cellRec.heading)
 			is LineCellRec -> LineListItemView(ctx, cellRec.line)
 			is TextFieldCellRec -> TextFieldListItemView(ctx, cellRec.fieldName, cellRec.fieldValue)
-			is HtmlFieldCellRec -> HtmlListItemView(ctx, cellRec.fieldHtml)
+			is HtmlFieldCellRec -> HtmlListItemView_.build(ctx, cellRec.fieldHtml)
 			else -> View(ctx)
 		}
 
