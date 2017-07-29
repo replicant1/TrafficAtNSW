@@ -13,8 +13,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.androidannotations.annotations.AfterExtras
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
+import org.androidannotations.annotations.Extra
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.json.hazard.XHazard
@@ -26,19 +28,20 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 	private var fragment: SupportMapFragment? = null
 
+	@Extra(ShowHazardOnMapActivity.EXTRA_HAZARD_ID_INT)
+	@JvmField
+	var hazardId: Int? = null
+
+	@AfterExtras
+	fun afterExtras() {
+		hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId ?: 0)
+	}
+
 	override fun onOptionsItemSelected(item: MenuItem): Boolean {
 		if (item.itemId == android.R.id.home) {
 			NavUtils.navigateUpFromSameTask(this)
 		}
 		return true
-	}
-
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		val hazardId: Int? = intent?.extras?.getInt(EXTRA_HAZARD_ID_INT)
-		if (hazardId != null) {
-			hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId)
-		}
 	}
 
 	@AfterViews
@@ -78,8 +81,8 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 	companion object {
 		private val LOG_TAG = ShowHazardOnMapActivity::class.java.simpleName
-		private val MAP_ZOOM: Float = 18f
-		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id.map"
+		private const val MAP_ZOOM: Float = 18f
+		private const val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id.map"
 
 		fun start(ctx:Context, hazardId: Int?) {
 			ShowHazardOnMapActivity_.intent(ctx).extra(EXTRA_HAZARD_ID_INT, hazardId).start()

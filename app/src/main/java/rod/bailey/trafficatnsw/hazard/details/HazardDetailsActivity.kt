@@ -11,7 +11,9 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.view_list.view.*
+import org.androidannotations.annotations.AfterExtras
 import org.androidannotations.annotations.EActivity
+import org.androidannotations.annotations.Extra
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.R.*
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
@@ -35,34 +37,36 @@ import rod.bailey.trafficatnsw.util.MLog
 open class HazardDetailsActivity : AppCompatActivity() {
 	private lateinit var hazard: XHazard
 
-	private fun createUI() {
-		val listView = ListViewAutoHideFooter_.build(this)
-		listView.setAdapter(HazardDetailsListAdapter(this, hazard))
+	@Extra(HazardDetailsActivity.EXTRA_HAZARD_ID_INT)
+	@JvmField
+	var hazardId: Int? = null
 
-		listView.lv_list.divider = resources.getDrawable(R.drawable.line_list_divider_full)
-		listView.lv_list.dividerHeight = 2
+	@AfterExtras
+	fun afterExtras() {
+		MLog.i(LOG_TAG, "Showing details of hazard id " + hazardId)
+		val tmpHazard: XHazard? = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId ?: 0)
 
-		setContentView(listView)
-		val actionBar = actionBar
+		if (tmpHazard != null) {
+			hazard = tmpHazard
+			val listView = ListViewAutoHideFooter_.build(this)
+			listView.setAdapter(HazardDetailsListAdapter(this, hazard))
+
+			listView.lv_list.divider = resources.getDrawable(R.drawable.line_list_divider_full)
+			listView.lv_list.dividerHeight = 2
+
+			setContentView(listView)
+		}
+
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-
 		overridePendingTransition(anim.slide_in_from_right, R.anim.slide_out_to_left)
-
-		val extras = intent.extras
-		val hazardId = extras.getInt(EXTRA_HAZARD_ID_INT)
-
-		MLog.i(LOG_TAG, "Showing details of hazard id " + hazardId)
-		hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId)!!
-		createUI()
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		val inflater = MenuInflater(this)
-		inflater.inflate(R.menu.hazard_details_options_menu, menu)
+		MenuInflater(this).inflate(R.menu.hazard_details_options_menu, menu)
 		return super.onCreateOptionsMenu(menu)
 	}
 
@@ -79,7 +83,7 @@ open class HazardDetailsActivity : AppCompatActivity() {
 
 	companion object {
 		private val LOG_TAG = HazardDetailsActivity::class.java.simpleName
-		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id"
+		private const val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id"
 
 		fun start(ctx: Context, hazardId: Int) {
 			HazardDetailsActivity_.intent(ctx).extra(EXTRA_HAZARD_ID_INT, hazardId).start()
