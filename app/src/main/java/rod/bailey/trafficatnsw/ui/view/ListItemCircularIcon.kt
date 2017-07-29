@@ -9,13 +9,15 @@ import android.support.annotation.ColorRes
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.TextView
+import org.androidannotations.annotations.EView
 import rod.bailey.trafficatnsw.R
 
 /**
  * Custom component that is an icon of a filled circle with a single, upper case
  * letter on top, as per Material Design guidelines.
  */
-class ListItemCircularIcon : TextView {
+@EView
+open class ListItemCircularIcon : TextView {
 
 	var circleColor: Int = android.R.color.transparent
 		set(@ColorRes value) {
