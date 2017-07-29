@@ -12,8 +12,7 @@ import rod.bailey.trafficatnsw.hazard.details.view.LineListItemView
 import rod.bailey.trafficatnsw.hazard.details.view.TextFieldListItemView
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XLane
-import rod.bailey.trafficatnsw.ui.view.HazardListItemView
-import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.HazardListItemView_
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
@@ -21,7 +20,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHazard) : BaseAdapter(), ListAdapter {
-	private val cellRecs: MutableList<CellRec> = LinkedList<CellRec>()
+	private val cellRecs = LinkedList<CellRec>()
 
 	init {
 		// Title cell (always appears)
@@ -46,7 +45,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		removeFirstOfConsecutiveHeadings()
 	}
 
-	override fun isEnabled(position: Int): Boolean = !(cellRecs[position] is HeadingCellRec)
+	override fun isEnabled(position: Int): Boolean = cellRecs[position] !is HeadingCellRec
 	override fun areAllItemsEnabled(): Boolean = false
 
 	private fun addArrangementElementCellRecs() {
@@ -338,7 +337,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		val cellRec: CellRec = cellRecs[position]
 
 		result = when (cellRec) {
-			is TitleCellRec -> HazardListItemView(ctx, cellRec.hazard, showLastUpdatedDate = false, clickable = false)
+			is TitleCellRec -> HazardListItemView_.build(ctx, cellRec.hazard, false, false)
 			is HeadingCellRec -> ListHeadingView_.build(ctx, cellRec.heading)
 			is LineCellRec -> LineListItemView(ctx, cellRec.line)
 			is TextFieldCellRec -> TextFieldListItemView(ctx, cellRec.fieldName, cellRec.fieldValue)

@@ -14,6 +14,7 @@ import rod.bailey.trafficatnsw.cameras.filter.AdmitSydneyTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
+import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
 import rod.bailey.trafficatnsw.util.MLog
 
 class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
@@ -37,8 +38,8 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		Log.i(LOG_TAG, "Into TrafficCameraListFragment.createUI")
 		val ctx = activity
 
-		cameraListView = ListViewWithEmptyMessage(ctx, EMPTY_MESSAGE,
-												  EmptyListEmptyMessagePredicate())
+		cameraListView = ListViewWithEmptyMessage_.build(ctx, EMPTY_MESSAGE,
+														 EmptyListEmptyMessagePredicate())
 		val adapter = TrafficCameraListAdapter(
 			mode!!.filter)
 		cameraListView!!.setAdapter(adapter)

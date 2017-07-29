@@ -5,9 +5,7 @@ import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
-import android.support.annotation.ColorInt
 import android.support.annotation.ColorRes
-import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
 import android.util.Log
 import android.widget.TextView
@@ -19,24 +17,20 @@ import rod.bailey.trafficatnsw.R
  */
 class ListItemCircularIcon : TextView {
 
-
-	var circleColor:Int
+	var circleColor: Int = android.R.color.transparent
 		set(@ColorRes value) {
 			field = value
 			invalidate()
 		}
 
-	var circleLetter: String
+	var circleLetter: String = ""
 		set(value) {
 			field = value
 			this.text = value
 			invalidate()
 		}
 
-	constructor(ctx: Context) : super(ctx) {
-		circleColor = android.R.color.transparent
-		circleLetter = ""
-	}
+	constructor(ctx: Context) : super(ctx)
 
 	constructor(ctx: Context, attrs: AttributeSet) : super(ctx, attrs) {
 		val a: TypedArray = ctx.obtainStyledAttributes(attrs, R.styleable.ListItemCircularIcon, 0, 0)

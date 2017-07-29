@@ -8,6 +8,7 @@ import org.androidannotations.annotations.EFragment
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
+import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
@@ -57,9 +58,9 @@ open class HazardListFragment : Fragment() {
 	override fun onCreateView(inflater: LayoutInflater,
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
-		hazardListView = ListViewWithEmptyMessage(activity,
-												  emptyMessageForMode(mode),
-												  EmptyListEmptyMessagePredicate())
+		hazardListView = ListViewWithEmptyMessage_.build(activity,
+														 emptyMessageForMode(mode),
+														 EmptyListEmptyMessagePredicate())
 		hazardListView.lv_list.divider = resources.getDrawable(R.drawable.line_list_divider_partial)
 		hazardListView.lv_list.dividerHeight = 2
 

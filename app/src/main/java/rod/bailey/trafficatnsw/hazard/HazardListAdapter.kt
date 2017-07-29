@@ -7,8 +7,7 @@ import android.widget.BaseAdapter
 import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XRegion
-import rod.bailey.trafficatnsw.ui.view.HazardListItemView
-import rod.bailey.trafficatnsw.ui.view.ListHeadingView
+import rod.bailey.trafficatnsw.ui.view.HazardListItemView_
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
 import rod.bailey.trafficatnsw.util.MLog
 import java.util.*
@@ -16,7 +15,7 @@ import java.util.*
 /**
  * Adapts data in the HazardCacheSingleton to a list of hazards
  */
-class HazardListAdapter() : BaseAdapter(), ListAdapter {
+class HazardListAdapter : BaseAdapter(), ListAdapter {
 
 	/** Each element is an instance of XRegion (sub-heading) or XHazard (list item) */
 	private val listData = ArrayList<Any>()
@@ -34,24 +33,15 @@ class HazardListAdapter() : BaseAdapter(), ListAdapter {
 	}
 
 	private fun createHazardListItem(ctx: Context, hazard: XHazard): View {
-		return HazardListItemView(ctx, hazard, true, true)
+		return HazardListItemView_.build(ctx, hazard, true, true)
 	}
 
-	private fun createHeading(ctx: Context, region: XRegion): View {
-		return ListHeadingView_.build(ctx, region.description)
-	}
+	private fun createHeading(ctx: Context, region: XRegion): View
+		= ListHeadingView_.build(ctx, region.description)
 
-	override fun getCount(): Int {
-		return listData.size
-	}
-
-	override fun getItem(position: Int): Any {
-		return listData[position]
-	}
-
-	override fun getItemId(position: Int): Long {
-		return position.toLong()
-	}
+	override fun getCount(): Int = listData.size
+	override fun getItem(position: Int): Any = listData[position]
+	override fun getItemId(position: Int): Long = position.toLong()
 
 	// TODO: Introduce ViewHolder pattern for efficiency
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -67,15 +57,8 @@ class HazardListAdapter() : BaseAdapter(), ListAdapter {
 		return result
 	}
 
-	override fun isEnabled(position: Int): Boolean {
-//		val dataObj = listData[position]
-//		return dataObj is XHazard
-		return true
-	}
-
-	override fun areAllItemsEnabled(): Boolean {
-		return true
-	}
+	override fun isEnabled(position: Int): Boolean = true
+	override fun areAllItemsEnabled(): Boolean = true
 
 	private fun sortedHazardRegions(): List<XRegion> {
 		val sortedRegions = LinkedList<XRegion>()

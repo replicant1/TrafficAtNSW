@@ -18,6 +18,7 @@ import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter
+import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter_
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
@@ -35,7 +36,7 @@ open class HazardDetailsActivity : AppCompatActivity() {
 	private lateinit var hazard: XHazard
 
 	private fun createUI() {
-		val listView = ListViewAutoHideFooter(this)
+		val listView = ListViewAutoHideFooter_.build(this)
 		listView.setAdapter(HazardDetailsListAdapter(this, hazard))
 
 		listView.lv_list.divider = resources.getDrawable(R.drawable.line_list_divider_full)
