@@ -82,9 +82,7 @@ open class HazardDetailsActivity : AppCompatActivity() {
 		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id"
 
 		fun start(ctx: Context, hazardId: Int) {
-			val hazardIntent = Intent(ctx, HazardDetailsActivity_::class.java)
-			hazardIntent.putExtra(EXTRA_HAZARD_ID_INT, hazardId)
-			ctx.startActivity(hazardIntent)
+			HazardDetailsActivity_.intent(ctx).extra(EXTRA_HAZARD_ID_INT, hazardId).start()
 		}
 	}
 }

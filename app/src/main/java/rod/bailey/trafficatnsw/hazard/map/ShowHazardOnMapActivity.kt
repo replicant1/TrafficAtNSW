@@ -82,9 +82,7 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 		private val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id.map"
 
 		fun start(ctx:Context, hazardId: Int?) {
-			val hazardIntent = Intent(ctx, ShowHazardOnMapActivity_::class.java)
-			hazardIntent.putExtra(EXTRA_HAZARD_ID_INT, hazardId)
-			ctx.startActivity(hazardIntent)
+			ShowHazardOnMapActivity_.intent(ctx).extra(EXTRA_HAZARD_ID_INT, hazardId).start()
 		}
 	}
 }
