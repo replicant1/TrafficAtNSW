@@ -77,7 +77,7 @@ class CaptionedImageComponent (ctx: Context,
 			frameView.setImageBitmap(scaledFrameBitmap)
 		}
 		// Work out what the top margin should be so that the combination of
-		// camera image
+		// camera imageView
 		// and titleTextView appears vertically centered.
 		val captionHeightPx = DisplayUtils.sp2Px(context, TEXT_SIZE_SP) * 3
 		val excessHeight = rawHeight - scaledImageHeight - captionHeightPx

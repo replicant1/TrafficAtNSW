@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="camera_image_loading_msg">Loading image&#8230;</string>
+    <string name="camera_image_load_failure_dialog_title">Could not load camera image</string>
+    <string name="camera_image_load_failure_dialog_msg">Tap the refresh icon at top right to try again.</string>
+    <string name="camera_image_load_failure_dialog_ok">OK</string>
+</resources>

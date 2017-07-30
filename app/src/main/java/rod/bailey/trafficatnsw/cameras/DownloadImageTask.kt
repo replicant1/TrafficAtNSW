@@ -1,44 +1,35 @@
 package rod.bailey.trafficatnsw.cameras
 
-import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.AsyncTask
+import android.support.v7.app.AlertDialog
+import android.util.Log
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.cameras.details.CaptionedImageComponent
-import rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
- * Created by rodbailey on 30/7/17.
+ * Task to download a given traffic camera imageView from the Live Traffic web site.
  */
 class DownloadImageTask(
-	private val ctx: Context?) : AsyncTask<String, Void, Bitmap>() {
+	private val context: Context,
+	private val displayer: ITrafficCameraImageDisplayer) : AsyncTask<String, Void, Bitmap>() {
+
 	private var dialog: ProgressDialog? = null
 
 	override fun onPreExecute() {
 		super.onPreExecute()
-//		val frameBitmap = BitmapFactory.decodeResource(resources, R.drawable.photo_frame_filled)
-
-//		mainLayout!!.removeAllViews()
-//		captionedImage = CaptionedImageComponent(
-//			this@TrafficCameraImageActivity,
-//			frameBitmap,
-//			null as Bitmap?,
-//			cameraDescription)
-//		mainLayout!!.addView(captionedImage, captionedImageLLP)
-
-		dialog = ProgressDialog(ctx)
-		dialog?.setMessage("Loading image...")
+		dialog = ProgressDialog(context)
+		dialog?.setMessage(context.getString(R.string.camera_image_loading_msg))
 		dialog?.setCancelable(false)
 		dialog?.isIndeterminate = true
 		dialog?.show()
 	}
 
 	override fun doInBackground(vararg urls: String): Bitmap? {
-//		MLog.i(TrafficCameraImageActivity.Companion.LOG_TAG, "Up to doInBackground")
+		Log.d(LOG_TAG, "Into doInBackground")
 		val urlToLoad = urls[0]
 		var result: Bitmap? = null
 
@@ -57,27 +48,19 @@ class DownloadImageTask(
 		dialog?.dismiss()
 
 		if (result == null) {
-			// Failed to load camera image - bad connection or just not
-			// available on server.
 			MLog.i(LOG_TAG, "Failed to load camera image - showing error dialog")
-			val builder = AlertDialog.Builder(ctx)
-			builder.setTitle("Could not load camera image")
-			builder.setMessage("Tap the refresh icon at top right to try again.")
-			builder.setPositiveButton("OK", null)
-			val dialog = builder.create()
-			dialog.show()
+			val builder = AlertDialog.Builder(context)
+			builder.setTitle(context.getString(R.string.camera_image_load_failure_dialog_title))
+			builder.setMessage(context.getString(R.string.camera_image_load_failure_dialog_msg))
+			builder.setPositiveButton(context.getString(R.string.camera_image_load_failure_dialog_ok), null)
+			builder.create().show()
 		} else {
-//			val frameBitmap = BitmapFactory.decodeResource(resources,
-//														   R.drawable.photo_frame_with_black_corners)
-//			mainLayout!!.removeAllViews()
-//			captionedImage = CaptionedImageComponent(
-//				this@TrafficCameraImageActivity, frameBitmap, result,
-//				cameraDescription)
-//			mainLayout!!.addView(captionedImage, captionedImageLLP)
+			MLog.i(LOG_TAG, "Loaded camera image OK - displaying")
+			displayer.displayImage(result)
 		}
 	}
 
 	companion object {
-		private val LOG_TAG:String = DownloadImageTask::class.java.simpleName
+		private val LOG_TAG: String = DownloadImageTask::class.java.simpleName
 	}
 }

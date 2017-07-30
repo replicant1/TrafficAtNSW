@@ -1,36 +1,37 @@
 package rod.bailey.trafficatnsw.cameras.details
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.NavUtils
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
 import org.androidannotations.annotations.Extra
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.cameras.DownloadImageTask
-import rod.bailey.trafficatnsw.cameras.FavouriteCameraDialogPresenter
-import rod.bailey.trafficatnsw.cameras.TrafficCamera
-import rod.bailey.trafficatnsw.cameras.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.cameras.*
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
- * Screen containing a single Card that has a traffic camera image at top
- * and a description of the image underneath. Image may be refreshed or
+ * Screen containing a single Card that has a traffic camera imageView at top
+ * and a description of the imageView underneath. Image may be refreshed or
  * marked as a favourite by the user.
  */
 @EActivity(R.layout.activity_camera_image)
-open class TrafficCameraImageActivity : AppCompatActivity() {
+open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImageDisplayer {
 
 	@ViewById(R.id.iv_camera_image)
 	@JvmField
-	var image: ImageView? = null
+	var imageView: ImageView? = null
 
 	@ViewById(R.id.tv_camera_title)
 	@JvmField
@@ -76,9 +77,13 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 		overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left)
 	}
 
+	override fun displayImage(image: Bitmap) {
+		imageView?.setImageBitmap(image)
+	}
+
 	@AfterViews
 	fun afterViews() {
-		// TODO Put camera title in action bar
+		// TODO Put camera title in action bar?
 		val actionBar = actionBar
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -91,18 +96,17 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	}
 
 	fun refresh() {
-		DownloadImageTask(this).execute(cameraUrl)
+		DownloadImageTask(context = this, displayer = this).execute(cameraUrl)
 	}
 
 	fun toggleFavourite() {
-		MLog.i(TAG, "Toggle favourite")
+		MLog.i(LOG_TAG, "Toggle favourite")
 		val camera: TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(cameraIndex ?: 0)
 		if (camera != null) {
 			val pres = FavouriteCameraDialogPresenter(camera)
 			val dialog = pres.build(this)
 			dialog.setOnDismissListener {
-				MLog.i(TAG,
-					   "On dismiss listener, camera.isFavourite=" + camera.isFavourite)
+				MLog.i(LOG_TAG, "On dismiss, camera.isFavourite=${camera.isFavourite}")
 				updateActionBarPerFavouriteStatus(camera.isFavourite)
 			}
 			dialog.show()
@@ -122,7 +126,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 		inflater.inflate(R.menu.traffic_camera_image_options_menu, menu)
 		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite)
 
-		MLog.i(TAG, "Found favouriteMenuItem=" + favouriteMenuItem!!)
+		MLog.i(LOG_TAG, "Found favouriteMenuItem=" + favouriteMenuItem!!)
 		updateActionBarPerFavouriteStatus(cameraFavourite)
 
 		return super.onCreateOptionsMenu(menu)
@@ -140,7 +144,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	}
 
 	companion object {
-		private val TAG = TrafficCameraImageActivity::class.java.simpleName
+		private val LOG_TAG = TrafficCameraImageActivity::class.java.simpleName
 
 		fun start(ctx: Context, camera: TrafficCamera) {
 			TrafficCameraImageActivity_.intent(ctx)

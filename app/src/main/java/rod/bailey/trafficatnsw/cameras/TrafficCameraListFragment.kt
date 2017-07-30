@@ -100,7 +100,7 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 
 	companion object {
 		private val EMPTY_MESSAGE: String = """You have no favourite cameras.\n\n
-		To make a camera one of your favourites, view the camera image and
+		To make a camera one of your favourites, view the camera imageView and
 		tap the star at the top right of the screen."""
 
 		/** Key for the sole argument passed to this fragment.  */
