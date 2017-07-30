@@ -15,8 +15,8 @@ import rod.bailey.trafficatnsw.ui.predicate.IEmptyMessagePredicate
 open class ListViewWithEmptyMessage(ctx: Context,
 									emptyMessage: String,
 									private val predicate: IEmptyMessagePredicate) : FrameLayout(ctx) {
-	private val listViewAutoHideFooter = ListViewAutoHideFooter_.build(ctx)
-	private val messageView = PlaceholderMessageView_.build(ctx, emptyMessage)
+	val listViewAutoHideFooter = ListViewAutoHideFooter_.build(ctx)
+	val messageView = PlaceholderMessageView_.build(ctx, emptyMessage)
 
 	@AfterViews
 	fun afterViews() {

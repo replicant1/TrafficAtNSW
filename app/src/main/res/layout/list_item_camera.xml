@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_item_camera"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/margin_std"
+    android:paddingRight="@dimen/margin_std">
+
+    <!-- Icon that is a star 'favourite' icon -->
+
+    <ImageView
+        android:id="@+id/iv_camera_favourite_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/star_grey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_std"
+        android:orientation="vertical">
+
+        <!-- Line 1  -->
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_camera_list_item_line_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textColor="#DE000000"
+            android:textSize="16sp"
+            tools:text="Line One Twas Brillig and the slithy tove did gyre and gymbal"/>
+
+        <!-- Line 2 is vertically centered in the parent -->
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_camera_list_item_line_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:maxLines="1"
+            android:paddingTop="3dp"
+            android:singleLine="true"
+            android:textColor="#8A000000"
+            android:textSize="14sp"
+            tools:text="Line Two Twas Brillig and the slithy tove did gyre and gymbal"/>
+
+    </LinearLayout>
+
+</LinearLayout>

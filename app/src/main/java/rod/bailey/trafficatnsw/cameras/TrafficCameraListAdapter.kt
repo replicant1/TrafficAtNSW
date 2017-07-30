@@ -44,8 +44,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter?) : BaseAdapter(), L
 
 	private fun createTrafficCameraListItem(ctx: Context,
 											camera: TrafficCamera): TrafficCameraListItemView {
-		val item = TrafficCameraListItemView(ctx,
-											 camera, camera.isFavourite)
+		val item = TrafficCameraListItemView_.build(ctx, camera, camera.isFavourite)
 		item.isFocusable = true
 		return item
 	}

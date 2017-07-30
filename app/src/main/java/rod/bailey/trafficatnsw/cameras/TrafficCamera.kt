@@ -7,7 +7,10 @@ import java.beans.PropertyChangeSupport
 class TrafficCamera(val street: String?, val suburb: String?, val description: String?,
 					val url: String?, val region: XRegion?,
 					val index: Int) : Comparable<TrafficCamera> {
+
+	/** True if this camera is one of the users favourites */
 	private var favourite: Boolean = false
+
 	private val support = PropertyChangeSupport(this)
 
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
@@ -48,6 +51,6 @@ class TrafficCamera(val street: String?, val suburb: String?, val description: S
 	}
 
 	companion object {
-		val PROPERTY_FAVOURITE = "favourite"
+		const val PROPERTY_FAVOURITE = "rod.bailey.trafficatnsw.favourite"
 	}
 }

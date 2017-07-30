@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.MenuItem
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
+import org.androidannotations.annotations.Trace
 import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListMode
@@ -78,9 +79,9 @@ open class MainActivity : AppCompatActivity() {
 	 */
 	inner class DrawerItemClickListener(
 		private val drawerLayout: DrawerLayout) : NavigationView.OnNavigationItemSelectedListener {
+
 		override fun onNavigationItemSelected(item: MenuItem): Boolean {
 			Log.d(LOG_TAG, "onNavigationItemSelected: item=" + item)
-
 			when (item.itemId) {
 				R.id.menu_item_sydney_incidents ->
 					navToHazards(HazardListMode.SYDNEY)

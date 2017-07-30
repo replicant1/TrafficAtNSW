@@ -16,7 +16,7 @@ class TrafficCameraCacheSingleton private constructor() : PropertyChangeListener
 	}
 
 	companion object {
-		val PROPERTY_FAVOURITE_SET = "favouriteSet"
+		const val PROPERTY_FAVOURITE_SET = "rod.bailey.trafficatnsw.favouriteSet"
 		private val FAVOURITE_CAMERAS_FILE_NAME = "favourite_cameras"
 		private val FAVOURITE_STATE_PREF_KEY = "FAVOURITE"
 		private val TAG = TrafficCameraCacheSingleton::class.java.simpleName

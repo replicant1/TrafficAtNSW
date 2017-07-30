@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.BitmapFactory.decodeResource
@@ -216,7 +217,17 @@ class TrafficCameraImageActivity : Activity() {
 	}
 
 	companion object {
-		private val TAG = TrafficCameraImageActivity::class.java
-			.simpleName
+		private val TAG = TrafficCameraImageActivity::class.java.simpleName
+
+		fun start(ctx: Context, camera: TrafficCamera) {
+			val imageIntent = Intent(ctx, TrafficCameraImageActivity::class.java)
+			imageIntent.putExtra("index", camera.index.toString())
+			imageIntent.putExtra("street", camera.street)
+			imageIntent.putExtra("suburb", camera.suburb)
+			imageIntent.putExtra("description", camera.description)
+			imageIntent.putExtra("url", camera.url)
+			imageIntent.putExtra("favourite", camera.isFavourite.toString())
+			ctx.startActivity(imageIntent)
+		}
 	}
 }

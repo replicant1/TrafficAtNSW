@@ -2,12 +2,13 @@ package rod.bailey.trafficatnsw.cameras
 
 import android.app.Fragment
 import android.os.Bundle
-import android.util.Log
+import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import java.beans.PropertyChangeEvent
-import java.beans.PropertyChangeListener
+import kotlinx.android.synthetic.main.view_list.view.*
+import org.androidannotations.annotations.Trace
+import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.filter.AdmitFavouritesTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.AdmitSydneyTrafficCameraFilter
@@ -16,6 +17,8 @@ import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
 import rod.bailey.trafficatnsw.util.MLog
+import java.beans.PropertyChangeEvent
+import java.beans.PropertyChangeListener
 
 class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	enum class TrafficCameraListMode private constructor(val displayName: String,
@@ -25,8 +28,9 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		REGIONAL("Regional", "Cameras in Regional NSW", AdmitRegionalTrafficCameraFilter()), //
 		SYDNEY("Sydney", "Cameras in Sydney", AdmitSydneyTrafficCameraFilter())
 	}
+
 	/** Top level layout has list with DataLicenceView in footer  */
-	private var cameraListView: ListViewWithEmptyMessage? = null
+	private lateinit var cameraListView: ListViewWithEmptyMessage
 
 	/**
 	 * Mode of display = what cameras appear in list. Derived from the value
@@ -35,15 +39,14 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	private var mode: TrafficCameraListMode? = TrafficCameraListMode.SYDNEY
 
 	private fun createUI() {
-		Log.i(LOG_TAG, "Into TrafficCameraListFragment.createUI")
-		val ctx = activity
-
-		cameraListView = ListViewWithEmptyMessage_.build(ctx, EMPTY_MESSAGE,
+		cameraListView = ListViewWithEmptyMessage_.build(activity,
+														 EMPTY_MESSAGE,
 														 EmptyListEmptyMessagePredicate())
-		val adapter = TrafficCameraListAdapter(
-			mode!!.filter)
-		cameraListView!!.setAdapter(adapter)
-
+		cameraListView.listViewAutoHideFooter.lv_list.divider =
+			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
+		cameraListView.listViewAutoHideFooter.lv_list.dividerHeight = 2
+		val adapter = TrafficCameraListAdapter(mode!!.filter)
+		cameraListView.setAdapter(adapter)
 		activity.title = mode!!.actionBarTitle
 	}
 
@@ -84,8 +87,7 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		if (TrafficCameraCacheSingleton.PROPERTY_FAVOURITE_SET == event
-			.propertyName) {
+//		if (TrafficCameraCacheSingleton.PROPERTY_FAVOURITE_SET == event.gpropertyName) {
 			if (cameraListView != null && mode != null) {
 				// TODO: WOuld be nice to save list's scroll pos here and them
 				// restore after setting the new adapter.
@@ -93,11 +95,11 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 					mode!!.filter)
 				cameraListView!!.setAdapter(adapter)
 			}
-		}
+//		}
 	}
 
 	companion object {
-		private val EMPTY_MESSAGE:String = """You have no favourite cameras.\n\n
+		private val EMPTY_MESSAGE: String = """You have no favourite cameras.\n\n
 		To make a camera one of your favourites, view the camera image and
 		tap the star at the top right of the screen."""
 
@@ -110,7 +112,6 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		private val LOG_TAG = TrafficCameraListFragment::class.java.simpleName
 
 		fun create(mode: Int): TrafficCameraListFragment {
-			MLog.d(LOG_TAG, "Creating TrafficCameraListFragment, mode=${mode}")
 			val result = TrafficCameraListFragment()
 			val bundle = Bundle()
 			bundle.putInt(ARG_MODE_KEY, mode)
