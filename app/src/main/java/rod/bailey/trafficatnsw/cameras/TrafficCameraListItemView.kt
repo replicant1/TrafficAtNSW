@@ -31,13 +31,13 @@ open class TrafficCameraListItemView(private val ctx: Context,
 	@JvmField
 	var imageView: ImageView? = null
 
-	@ViewById(R.id.tv_camera_list_item_line_2)
-	@JvmField
-	var subtitleTextView: TextView? = null
-
 	@ViewById(R.id.tv_camera_list_item_line_1)
 	@JvmField
 	var titleTextView: TextView? = null
+
+	@ViewById(R.id.tv_camera_list_item_line_2)
+	@JvmField
+	var subtitleTextView: TextView? = null
 
 	@AfterViews
 	fun afterViews() {

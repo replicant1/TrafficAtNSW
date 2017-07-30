@@ -34,7 +34,7 @@ class TrafficCameraTitleView(ctx: Context, title: String, subTitle: String) : Li
 		subTitleTextView.setTextColor(GRAY)
 		subTitleTextView.setSingleLine()
 		subTitleTextView.ellipsize = END
-		// Title on top, subtitle underneath, padding all around
+		// Title on top, subtitleTextView underneath, padding all around
 		val subTitleTextViewLP = LinearLayout.LayoutParams(
 			MATCH_PARENT, WRAP_CONTENT)
 		subTitleTextViewLP.gravity = TOP

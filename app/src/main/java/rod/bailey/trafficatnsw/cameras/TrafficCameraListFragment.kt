@@ -88,12 +88,12 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 
 	override fun propertyChange(event: PropertyChangeEvent) {
 //		if (TrafficCameraCacheSingleton.PROPERTY_FAVOURITE_SET == event.gpropertyName) {
-			if (cameraListView != null && mode != null) {
+			if (mode != null) {
 				// TODO: WOuld be nice to save list's scroll pos here and them
 				// restore after setting the new adapter.
 				val adapter = TrafficCameraListAdapter(
 					mode!!.filter)
-				cameraListView!!.setAdapter(adapter)
+				cameraListView.setAdapter(adapter)
 			}
 //		}
 	}

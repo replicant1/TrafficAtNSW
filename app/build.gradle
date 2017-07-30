@@ -45,4 +45,6 @@ dependencies {
 
     compile "org.androidannotations:androidannotations-api:$aa_version"
     kapt "org.androidannotations:androidannotations:$aa_version"
+
+    compile "com.android.support:cardview-v7:$support_version"
 }

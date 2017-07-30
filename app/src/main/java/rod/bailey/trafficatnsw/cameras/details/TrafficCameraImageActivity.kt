@@ -1,197 +1,120 @@
 package rod.bailey.trafficatnsw.cameras.details
 
-import android.app.ActionBar
-import android.app.Activity
-import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.BitmapFactory.decodeResource
-import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Bundle
 import android.support.v4.app.NavUtils
-import android.view.Gravity
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.AppCompatTextView
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.LinearLayout
-import android.widget.RelativeLayout.LayoutParams
+import android.widget.ImageView
+import org.androidannotations.annotations.AfterViews
+import org.androidannotations.annotations.EActivity
+import org.androidannotations.annotations.Extra
+import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.cameras.DownloadImageTask
 import rod.bailey.trafficatnsw.cameras.FavouriteCameraDialogPresenter
 import rod.bailey.trafficatnsw.cameras.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.util.MLog
 
-class TrafficCameraImageActivity : Activity() {
-	private var cameraIndex: Int = 0
-	private var cameraStreet: String? = null
-	private var cameraSuburb: String? = null
-	private var cameraDescription: String? = null
-	private var cameraUrl: String? = null
+/**
+ * Screen containing a single Card that has a traffic camera image at top
+ * and a description of the image underneath. Image may be refreshed or
+ * marked as a favourite by the user.
+ */
+@EActivity(R.layout.activity_camera_image)
+open class TrafficCameraImageActivity : AppCompatActivity() {
 
-	private inner class DownloadImageTask(
-		private val ctx: Context?) : AsyncTask<String, Void, Bitmap>() {
-		private var dialog: ProgressDialog? = null
+	@ViewById(R.id.iv_camera_image)
+	@JvmField
+	var image: ImageView? = null
 
-		override fun onPreExecute() {
-			super.onPreExecute()
-			val frameBitmap = decodeResource(resources,
-											 R.drawable.photo_frame_filled)
+	@ViewById(R.id.tv_camera_title)
+	@JvmField
+	var titleTextView: AppCompatTextView? = null
 
-			mainLayout!!.removeAllViews()
-			captionedImage = CaptionedImageComponent(
-				this@TrafficCameraImageActivity,
-				frameBitmap,
-				null as Bitmap?,
-				cameraDescription)
-			mainLayout!!.addView(captionedImage, captionedImageLLP)
+	@ViewById(R.id.tv_camera_subtitle)
+	@JvmField
+	var subtitleTextView: AppCompatTextView? = null
 
-			dialog = ProgressDialog(ctx)
-			dialog!!.setMessage("Loading image...")
-			dialog!!.setCancelable(false)
-			dialog!!.isIndeterminate = true
-			dialog!!.show()
-		}
+	@ViewById(R.id.tv_camera_description)
+	@JvmField
+	var descriptionTextView: AppCompatTextView? = null
 
-		override fun doInBackground(vararg urls: String): Bitmap? {
-			MLog.i(TAG, "Up to doInBackground")
-			val urlToLoad = urls[0]
-			var result: Bitmap? = null
+	@Extra("index")
+	@JvmField
+	var cameraIndex: Int? = null
 
-			try {
-				val stream = java.net.URL(urlToLoad).openStream()
-				result = BitmapFactory.decodeStream(stream)
-			}
-			catch (e: Exception) {
-				MLog.w(TAG, e)
-			}
+	@Extra("street")
+	@JvmField
+	var cameraStreet: String? = null
 
-			return result
-		}
+	@Extra("suburb")
+	@JvmField
+	var cameraSuburb: String? = null
 
-		override fun onPostExecute(result: Bitmap?) {
-			if (dialog != null) {
-				dialog!!.dismiss()
-			}
+	@Extra("description")
+	@JvmField
+	var cameraDescription: String? = null
 
-			if (result == null) {
-				// Failed to load camera image - bad connection or just not
-				// available on server.
-				MLog.i(TAG,
-					   "Failed to load camera image - showing error dialog")
-				val builder = AlertDialog.Builder(ctx)
-				builder.setTitle("Could not load camera image")
-				builder.setMessage("Tap the refresh icon at top right to try again.")
-				builder.setPositiveButton("OK", null)
-				val dialog = builder.create()
-				dialog.show()
-			} else {
-				val frameBitmap = decodeResource(resources,
-												 R.drawable.photo_frame_with_black_corners)
-				mainLayout!!.removeAllViews()
-				captionedImage = CaptionedImageComponent(
-					this@TrafficCameraImageActivity, frameBitmap, result,
-					cameraDescription)
-				mainLayout!!.addView(captionedImage, captionedImageLLP)
-			}
-		}
-	}
+	@Extra("url")
+	@JvmField
+	var cameraUrl: String? = null
+
+	@Extra("favourite")
+	@JvmField
+	var favourite: Boolean? = null
+
+	private var favouriteMenuItem: MenuItem? = null
+	private var cameraFavourite: Boolean = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		val extras = intent.extras
-		val strIndex = extras.getString("index")
-		val strStreet = extras.getString("street")
-		val strSuburb = extras.getString("suburb")
-		val strDescription = extras.getString("description")
-		val strUrl = extras.getString("url")
-		val strFavourite = extras.getString("favourite")
-
-		MLog.d(TAG, "index=" + strIndex!!)
-		MLog.d(TAG, "stree=" + strStreet!!)
-		MLog.d(TAG, "suburb=" + strSuburb!!)
-		MLog.d(TAG, "description=" + strDescription!!)
-		MLog.d(TAG, "url=" + strUrl!!)
-		MLog.d(TAG, "favourite=" + strFavourite!!)
-
-		cameraIndex = Integer.parseInt(strIndex)
-		cameraStreet = strStreet.trim { it <= ' ' }
-		cameraSuburb = strSuburb.trim { it <= ' ' }
-		cameraDescription = strDescription.trim { it <= ' ' }
-		cameraUrl = strUrl.trim { it <= ' ' }
-		cameraFavourite = java.lang.Boolean.parseBoolean(strFavourite)
-
-		createUI()
+		overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left)
 	}
 
-	// private final int IMAGE_VIEW_ID = 1000;
-	//
-	// private ImageView imageView;
-	private var favouriteMenuItem: MenuItem? = null
-	private var cameraFavourite: Boolean = false
-	// private ImageView photoFrameImageView;
-	private var mainLayout: LinearLayout? = null
-	private var captionedImage: CaptionedImageComponent? = null
-	private var captionedImageLLP: LinearLayout.LayoutParams? = null
-
-	private fun createUI() {
-		mainLayout = LinearLayout(this)
-		mainLayout!!.orientation = LinearLayout.VERTICAL
-		mainLayout!!.keepScreenOn = true
-		mainLayout!!.setBackgroundColor(Color.BLACK)
-		mainLayout!!.gravity = Gravity.CENTER
-
-		captionedImage = CaptionedImageComponent(this)
-		captionedImageLLP = LinearLayout.LayoutParams(
-			LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-		mainLayout!!.addView(captionedImage, captionedImageLLP)
-
-		setContentView(mainLayout)
-		// Put camera title in action bar
+	@AfterViews
+	fun afterViews() {
+		// TODO Put camera title in action bar
 		val actionBar = actionBar
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
-		val customView = TrafficCameraTitleView(this,
-												cameraStreet!!, cameraSuburb!!)
-		val customViewALP = ActionBar.LayoutParams(
-			LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-		actionBar?.setCustomView(customView, customViewALP)
+
+		titleTextView?.text = cameraStreet
+		subtitleTextView?.text = cameraSuburb
+		descriptionTextView?.text = cameraDescription
 
 		refresh()
 	}
 
 	fun refresh() {
-		MLog.i(TAG, "Refreshing")
-		val task = DownloadImageTask(this)
-		task.execute(cameraUrl)
+		DownloadImageTask(this).execute(cameraUrl)
 	}
 
 	fun toggleFavourite() {
 		MLog.i(TAG, "Toggle favourite")
-		// Raise dialog
-		val camera:TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(cameraIndex)
+		val camera: TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(cameraIndex ?: 0)
 		if (camera != null) {
 			val pres = FavouriteCameraDialogPresenter(camera)
 			val dialog = pres.build(this)
 			dialog.setOnDismissListener {
 				MLog.i(TAG,
 					   "On dismiss listener, camera.isFavourite=" + camera.isFavourite)
-				updateActionBarToReflectFavouriteStatus(camera.isFavourite)
+				updateActionBarPerFavouriteStatus(camera.isFavourite)
 			}
 			dialog.show()
 		}
-
-		MLog.i(TAG, "After dialog.show")
 	}
 
-	private fun updateActionBarToReflectFavouriteStatus(isFavourite: Boolean) {
-		favouriteMenuItem!!.setIcon(if (isFavourite)
-										R.drawable.ic_action_important
-									else
-										R.drawable.ic_action_not_important)
+	private fun updateActionBarPerFavouriteStatus(isFavourite: Boolean) {
+		favouriteMenuItem?.setIcon(
+			if (isFavourite)
+				R.drawable.ic_action_important
+			else
+				R.drawable.ic_action_not_important)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -200,7 +123,7 @@ class TrafficCameraImageActivity : Activity() {
 		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite)
 
 		MLog.i(TAG, "Found favouriteMenuItem=" + favouriteMenuItem!!)
-		updateActionBarToReflectFavouriteStatus(cameraFavourite)
+		updateActionBarPerFavouriteStatus(cameraFavourite)
 
 		return super.onCreateOptionsMenu(menu)
 	}
@@ -220,14 +143,14 @@ class TrafficCameraImageActivity : Activity() {
 		private val TAG = TrafficCameraImageActivity::class.java.simpleName
 
 		fun start(ctx: Context, camera: TrafficCamera) {
-			val imageIntent = Intent(ctx, TrafficCameraImageActivity::class.java)
-			imageIntent.putExtra("index", camera.index.toString())
-			imageIntent.putExtra("street", camera.street)
-			imageIntent.putExtra("suburb", camera.suburb)
-			imageIntent.putExtra("description", camera.description)
-			imageIntent.putExtra("url", camera.url)
-			imageIntent.putExtra("favourite", camera.isFavourite.toString())
-			ctx.startActivity(imageIntent)
+			TrafficCameraImageActivity_.intent(ctx)
+				.cameraIndex(camera.index)
+				.cameraStreet(camera.street)
+				.cameraSuburb(camera.suburb)
+				.cameraDescription(camera.description)
+				.cameraUrl(camera.url)
+				.favourite(camera.isFavourite)
+				.start()
 		}
 	}
 }

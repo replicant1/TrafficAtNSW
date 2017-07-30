@@ -37,10 +37,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity"
+            android:name="rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity_"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
