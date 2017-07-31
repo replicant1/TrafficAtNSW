@@ -3,43 +3,51 @@ package rod.bailey.trafficatnsw.cameras
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.util.MLog
 
+/**
+ * Presents the confirmation dialog shown when the user elects to add or remove
+ * the present camera from their set of favourite cameras.
+ */
 class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
-	/** Listens for button taps on the radio buttons  */
+
+	/**
+	 * Listens for button taps on the radio buttons
+	 */
 	private inner class AlertsDialogListener : DialogInterface.OnClickListener {
 		override fun onClick(arg0: DialogInterface, index: Int) {
 			when (index) {
 				DialogInterface.BUTTON_POSITIVE -> {
-					MLog.i(TAG,
-						   "*** About to toggle favourite state of camera " + camera.index)
+					MLog.i(LOG_TAG, "Toggle favourite state of camera " + camera.index)
 					camera.isFavourite = !camera.isFavourite
 				}
 				DialogInterface.BUTTON_NEGATIVE -> {
+					// Empty
 				}
 			}
 		}
 	}
 
 	init {
-		MLog.i(TAG,
-			   "Presenter created for a camera whose favourite status is " + camera.isFavourite)
+		MLog.i(LOG_TAG, "Presenter created for camera with favourite status " + camera.isFavourite)
 	}
 
-	fun build(ctx: Context?): AlertDialog {
+	fun build(ctx: Context): AlertDialog {
 		val listener = AlertsDialogListener()
 		val builder = AlertDialog.Builder(ctx)
-		builder.setTitle("Favourite")
+		builder.setTitle(ctx.getString(R.string.camera_image_load_failure_dialog_title))
 		builder.setPositiveButton(
 			if (camera.isFavourite)
-				"Remove from Favourites"
+				ctx.getString(R.string.camera_favourite_confirmation_dialog_remove_button)
 			else
-				"Make a Favourite", listener)
-		builder.setNegativeButton("No", listener)
-		builder.setMessage(if (camera.isFavourite)
-							   "Do you want to remove this camera from your list of favourite cameras?"
-						   else
-							   "Do you want to add this camera to your list of favourite cameras?")
+				ctx.getString(R.string.camera_favourite_confirmation_dialog_add_button), listener)
+		builder.setNegativeButton(ctx.getString(R.string.negative_dialog_button), listener)
+		builder.setMessage(
+			if (camera.isFavourite)
+				ctx.getString(R.string.camera_unfavourite_confirmation_dialog_msg)
+			else
+				ctx.getString(R.string.camera_favourite_confirmation_dialog_msg))
 		val alert = builder.create()
 		alert.setCanceledOnTouchOutside(true)
 
@@ -47,7 +55,6 @@ class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 	}
 
 	companion object {
-		private val TAG = FavouriteCameraDialogPresenter::class.java
-			.simpleName
+		private val LOG_TAG = FavouriteCameraDialogPresenter::class.java.simpleName
 	}
 }

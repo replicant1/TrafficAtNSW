@@ -42,7 +42,7 @@
         android:fontFamily="sans-serif"
         android:maxLines="1"
         android:singleLine="true"
-        android:textColor="#DE000000"
+        android:textColor="@color/text_87_percent_black"
         android:textSize="16sp"
         tools:text="Line One Twas Brillig and the slithy tove did gyre and gymbal"/>
 
@@ -62,7 +62,7 @@
         android:paddingBottom="3dp"
         android:paddingTop="3dp"
         android:singleLine="true"
-        android:textColor="#DE000000"
+        android:textColor="@color/text_87_percent_black"
         android:textSize="14sp"
         tools:text="Line Two Twas Brillig and the slithy tove did gyre and gymbal"/>
 
@@ -79,11 +79,11 @@
         android:textStyle="normal"
         android:maxLines="1"
         android:singleLine="true"
-        android:textColor="#8A000000"
+        android:textColor="@color/text_54_percent_black"
         android:textSize="14sp"
         tools:text="Line Three Twas Brillig and the slithy tove dyd gyre and gymbal"/>
 
-    <!-- Date is vertically centered about line 1 8A000000 -->
+    <!-- Date is vertically centered about line 1 -->
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/tv_hazard_list_item_date"

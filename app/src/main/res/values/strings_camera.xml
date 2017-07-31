@@ -4,4 +4,12 @@
     <string name="camera_image_load_failure_dialog_title">Could not load camera image</string>
     <string name="camera_image_load_failure_dialog_msg">Tap the refresh icon at top right to try again.</string>
     <string name="camera_image_load_failure_dialog_ok">OK</string>
+    <string name="camera_favourite_confirmation_dialog_msg">Do you want to add this camera to your list of
+        favourite cameras?</string>
+    <string name="camera_unfavourite_confirmation_dialog_msg">Do you want to remove this camera from your list
+        of favourite cameras?</string>
+    <string name="camera_favourite_confirmation_dialog_remove_button">Remove from Favourites</string>
+    <string name="camera_favourite_confirmation_dialog_add_button">Make a Favourite</string>
+    <string name="camera_favourite_confirmation_dialog_title">Favourite</string>
+    <string name="camera_image_screen_title">Camera</string>
 </resources>

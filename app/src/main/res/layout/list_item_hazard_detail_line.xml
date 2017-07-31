@@ -12,6 +12,6 @@
     android:paddingLeft="@dimen/margin_std"
     android:paddingRight="@dimen/margin_std"
     android:singleLine="true"
-    android:textColor="#DE000000"
+    android:textColor="@color/text_87_percent_black"
     android:textSize="13sp"
     tools:text="Twas brillig and the slithy tove did gyre and gymble in the wabe"/>

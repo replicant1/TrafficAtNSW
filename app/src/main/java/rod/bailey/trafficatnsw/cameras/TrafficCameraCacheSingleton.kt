@@ -10,6 +10,10 @@ import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
 import java.util.*
 
+/**
+ * Normally we would read this in from a JSON file, but the contents are hardcoded
+ * here for expediency.
+ */
 class TrafficCameraCacheSingleton private constructor() : PropertyChangeListener {
 	private object Holder {
 		val INSTANCE = TrafficCameraCacheSingleton()

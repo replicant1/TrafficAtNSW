@@ -36,7 +36,7 @@
             android:fontFamily="sans-serif"
             android:maxLines="1"
             android:singleLine="true"
-            android:textColor="#DE000000"
+            android:textColor="@color/text_87_percent_black"
             android:textSize="16sp"
             tools:text="Line One Twas Brillig and the slithy tove did gyre and gymbal"/>
 
@@ -51,7 +51,7 @@
             android:maxLines="1"
             android:paddingTop="3dp"
             android:singleLine="true"
-            android:textColor="#8A000000"
+            android:textColor="@color/text_54_percent_black"
             android:textSize="14sp"
             tools:text="Line Two Twas Brillig and the slithy tove did gyre and gymbal"/>
 

@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.view_list.view.*
-import org.androidannotations.annotations.Trace
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.filter.AdmitFavouritesTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter
@@ -21,9 +20,9 @@ import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 
 class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
-	enum class TrafficCameraListMode private constructor(val displayName: String,
-														 val actionBarTitle: String,
-														 val filter: ITrafficCameraFilter) {
+	enum class TrafficCameraListMode constructor(val displayName: String,
+												 val actionBarTitle: String,
+												 val filter: ITrafficCameraFilter) {
 		FAVOURITES("Favourites", "Favourite Cameras", AdmitFavouritesTrafficCameraFilter()), //
 		REGIONAL("Regional", "Cameras in Regional NSW", AdmitRegionalTrafficCameraFilter()), //
 		SYDNEY("Sydney", "Cameras in Sydney", AdmitSydneyTrafficCameraFilter())
@@ -87,15 +86,13 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-//		if (TrafficCameraCacheSingleton.PROPERTY_FAVOURITE_SET == event.gpropertyName) {
-			if (mode != null) {
-				// TODO: WOuld be nice to save list's scroll pos here and them
-				// restore after setting the new adapter.
-				val adapter = TrafficCameraListAdapter(
-					mode!!.filter)
-				cameraListView.setAdapter(adapter)
-			}
-//		}
+		if (mode != null) {
+			// TODO: WOuld be nice to save list's scroll pos here and them
+			// restore after setting the new adapter.
+			val adapter = TrafficCameraListAdapter(
+				mode!!.filter)
+			cameraListView.setAdapter(adapter)
+		}
 	}
 
 	companion object {

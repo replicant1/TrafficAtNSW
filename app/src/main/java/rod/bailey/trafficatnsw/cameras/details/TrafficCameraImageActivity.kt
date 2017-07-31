@@ -83,8 +83,8 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 
 	@AfterViews
 	fun afterViews() {
-		// TODO Put camera title in action bar?
 		val actionBar = actionBar
+		actionBar.title = getString(R.string.camera_image_screen_title)
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -100,13 +100,11 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	}
 
 	fun toggleFavourite() {
-		MLog.i(LOG_TAG, "Toggle favourite")
 		val camera: TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(cameraIndex ?: 0)
 		if (camera != null) {
 			val pres = FavouriteCameraDialogPresenter(camera)
 			val dialog = pres.build(this)
 			dialog.setOnDismissListener {
-				MLog.i(LOG_TAG, "On dismiss, camera.isFavourite=${camera.isFavourite}")
 				updateActionBarPerFavouriteStatus(camera.isFavourite)
 			}
 			dialog.show()
@@ -125,10 +123,7 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 		val inflater = MenuInflater(this)
 		inflater.inflate(R.menu.traffic_camera_image_options_menu, menu)
 		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite)
-
-		MLog.i(LOG_TAG, "Found favouriteMenuItem=" + favouriteMenuItem!!)
 		updateActionBarPerFavouriteStatus(cameraFavourite)
-
 		return super.onCreateOptionsMenu(menu)
 	}
 
@@ -144,8 +139,6 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	}
 
 	companion object {
-		private val LOG_TAG = TrafficCameraImageActivity::class.java.simpleName
-
 		fun start(ctx: Context, camera: TrafficCamera) {
 			TrafficCameraImageActivity_.intent(ctx)
 				.cameraIndex(camera.index)
