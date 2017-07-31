@@ -2,24 +2,20 @@ package rod.bailey.trafficatnsw.cameras.details
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.support.v4.app.NavUtils
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.Toast
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
 import org.androidannotations.annotations.Extra
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.*
-import rod.bailey.trafficatnsw.util.MLog
 
 /**
  * Screen containing a single Card that has a traffic camera imageView at top
@@ -114,14 +110,14 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	private fun updateActionBarPerFavouriteStatus(isFavourite: Boolean) {
 		favouriteMenuItem?.setIcon(
 			if (isFavourite)
-				R.drawable.ic_action_important
+				R.drawable.ic_action_favourite_dark
 			else
-				R.drawable.ic_action_not_important)
+				R.drawable.ic_action_not_favourite_dark)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
 		val inflater = MenuInflater(this)
-		inflater.inflate(R.menu.traffic_camera_image_options_menu, menu)
+		inflater.inflate(R.menu.menu_traffic_camera_image_options, menu)
 		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite)
 		updateActionBarPerFavouriteStatus(cameraFavourite)
 		return super.onCreateOptionsMenu(menu)

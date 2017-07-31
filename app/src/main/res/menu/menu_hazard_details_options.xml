@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/show_on_map"
-        android:icon="@drawable/ic_action_place"
+        android:icon="@drawable/ic_action_place_dark"
         android:orderInCategory="1"
         android:showAsAction="ifRoom"
         android:title="Show on Map">

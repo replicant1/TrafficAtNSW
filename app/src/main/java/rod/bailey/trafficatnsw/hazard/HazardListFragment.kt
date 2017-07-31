@@ -69,7 +69,7 @@ open class HazardListFragment : Fragment() {
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-		inflater.inflate(R.menu.hazards_fragment_options_menu, menu)
+		inflater.inflate(R.menu.menu_hazards_fragment_options, menu)
 		super.onCreateOptionsMenu(menu, inflater)
 	}
 

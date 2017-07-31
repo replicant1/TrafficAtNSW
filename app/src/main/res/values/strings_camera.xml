@@ -12,4 +12,7 @@
     <string name="camera_favourite_confirmation_dialog_add_button">Make a Favourite</string>
     <string name="camera_favourite_confirmation_dialog_title">Favourite</string>
     <string name="camera_image_screen_title">Camera</string>
+    <string name="camera_menu_item_refresh">Refresh</string>
+    <string name="camera_menu_item_favourite">Favourite</string>
+    <string name="camera_menu_item_unfavourite">Unfavourite</string>
 </resources>

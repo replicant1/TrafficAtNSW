@@ -51,9 +51,9 @@ open class TrafficCameraListItemView(private val ctx: Context,
 		this.favourite = favourite
 		imageView?.setImageResource(
 			if (favourite)
-				R.drawable.ic_action_important
+				R.drawable.ic_action_favourite_dark
 			else
-				R.drawable.ic_action_not_important)
+				R.drawable.ic_action_not_favourite_dark)
 		invalidate()
 	}
 

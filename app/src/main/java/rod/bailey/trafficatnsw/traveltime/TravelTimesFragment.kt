@@ -74,7 +74,7 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-		inflater.inflate(R.menu.travel_times_options_menu, menu)
+		inflater.inflate(R.menu.menu_travel_times_options, menu)
 		super.onCreateOptionsMenu(menu, inflater)
 	}
 

@@ -18,7 +18,7 @@
         android:id="@+id/iv_camera_favourite_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/star_grey"/>
+        android:src="@drawable/ic_action_not_favourite_dark"/>
 
     <LinearLayout
         android:layout_width="match_parent"

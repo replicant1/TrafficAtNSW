@@ -5,11 +5,11 @@
         <menu>
             <item
                 android:id="@+id/menu_item_sydney_incidents"
-                android:icon="@drawable/ic_action_warning"
+                android:icon="@drawable/ic_action_warning_dark"
                 android:title="Sydney"/>
             <item
                 android:id="@+id/menu_item_regional_nsw_incidents"
-                android:icon="@drawable/ic_action_warning"
+                android:icon="@drawable/ic_action_warning_dark"
                 android:title="Regional NSW"/>
         </menu>
     </item>
@@ -18,15 +18,15 @@
         <menu>
             <item
                 android:id="@+id/menu_item_favourite_cameras"
-                android:icon="@drawable/ic_action_important"
+                android:icon="@drawable/ic_action_favourite_dark"
                 android:title="Favourites"/>
             <item
                 android:id="@+id/menu_item_sydney_cameras"
-                android:icon="@drawable/ic_action_camera"
+                android:icon="@drawable/ic_action_camera_dark"
                 android:title="Sydney"/>
             <item
                 android:id="@+id/menu_item_regional_nsw_cameras"
-                android:icon="@drawable/ic_action_camera"
+                android:icon="@drawable/ic_action_camera_dark"
                 android:title="Regional NSW"/>
         </menu>
     </item>
@@ -35,19 +35,19 @@
         <menu>
             <item
                 android:id="@+id/menu_item_travel_times_m1"
-                android:icon="@drawable/ic_action_time"
+                android:icon="@drawable/ic_action_time_dark"
                 android:title="M1"/>
             <item
                 android:id="@+id/menu_item_travel_times_m2"
-                android:icon="@drawable/ic_action_time"
+                android:icon="@drawable/ic_action_time_dark"
                 android:title="M2"/>
             <item
                 android:id="@+id/menu_item_travel_times_m3"
-                android:icon="@drawable/ic_action_time"
+                android:icon="@drawable/ic_action_time_dark"
                 android:title="M3"/>
             <item
                 android:id="@+id/menu_item_travel_times_m4"
-                android:icon="@drawable/ic_action_time"
+                android:icon="@drawable/ic_action_time_dark"
                 android:title="M4"/>
         </menu>
     </item>
