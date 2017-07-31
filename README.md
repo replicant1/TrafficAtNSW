@@ -10,7 +10,5 @@ at the present time. I have converted it from Java to Kotlin as a learning exerc
 
 ## Screenshots
 
- ![Navigation Drawer](/doc/navigation_2_portrait.png)
- ![Hazard List](/doc/hazard_list.png)
- ![Camera List](/doc/cameras.png)
- ![Camera Image](/doc/camera_image.png)
+ ![Navigation Drawer](/doc/navigation.png) ![Hazard List](/doc/hazard_list.png)
+ ![Camera List](/doc/cameras.png) ![Camera Image](/doc/camera_image.png)
