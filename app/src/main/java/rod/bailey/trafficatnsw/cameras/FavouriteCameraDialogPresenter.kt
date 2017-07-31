@@ -8,7 +8,7 @@ import rod.bailey.trafficatnsw.util.MLog
 
 /**
  * Presents the confirmation dialog shown when the user elects to add or remove
- * the present camera from their set of favourite cameras.
+ * the present camera from their set of extraFavourite cameras.
  */
 class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 
@@ -19,7 +19,7 @@ class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 		override fun onClick(arg0: DialogInterface, index: Int) {
 			when (index) {
 				DialogInterface.BUTTON_POSITIVE -> {
-					MLog.i(LOG_TAG, "Toggle favourite state of camera " + camera.index)
+					MLog.i(LOG_TAG, "Toggle extraFavourite state of camera " + camera.index)
 					camera.isFavourite = !camera.isFavourite
 				}
 				DialogInterface.BUTTON_NEGATIVE -> {
@@ -30,7 +30,7 @@ class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 	}
 
 	init {
-		MLog.i(LOG_TAG, "Presenter created for camera with favourite status " + camera.isFavourite)
+		MLog.i(LOG_TAG, "Presenter created for camera with extraFavourite status " + camera.isFavourite)
 	}
 
 	fun build(ctx: Context): AlertDialog {

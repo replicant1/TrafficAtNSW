@@ -61,6 +61,6 @@ class TrafficCamera(val street: String?, val suburb: String?, val description: S
 	}
 
 	companion object {
-		const val PROPERTY_FAVOURITE = "rod.bailey.trafficatnsw.favourite"
+		const val PROPERTY_FAVOURITE = "rod.bailey.trafficatnsw.extraFavourite"
 	}
 }

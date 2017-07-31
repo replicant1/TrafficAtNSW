@@ -827,7 +827,7 @@ class TrafficCameraCacheSingleton private constructor() : PropertyChangeListener
 
 	private fun loadFavourites() {
 		MLog.i(TAG, "Loading favourites")
-		// To begin with, mark all as NOT favourite
+		// To begin with, mark all as NOT extraFavourite
 		for (camerasInRegion in unfilteredCamerasPerRegion.values) {
 			for (camera in camerasInRegion) {
 				camera.setFavouriteSilently(false)
@@ -860,7 +860,7 @@ class TrafficCameraCacheSingleton private constructor() : PropertyChangeListener
 	 * even those not admitted by the current filter.
 	 */
 	fun saveFavourites() {
-		MLog.d(TAG, "Saving favourite states for all cameras")
+		MLog.d(TAG, "Saving extraFavourite states for all cameras")
 		val favouriteCameraIds = HashSet<String>()
 
 		for (cameras in unfilteredCamerasPerRegion.values) {
@@ -879,7 +879,7 @@ class TrafficCameraCacheSingleton private constructor() : PropertyChangeListener
 
 	fun setCameraFavourite(cameraIndex: Int, isFavourite: Boolean) {
 		MLog.i(TAG, "Set in database: camera " + cameraIndex
-			+ " has favourite status = " + isFavourite)
+			+ " has extraFavourite status = " + isFavourite)
 	}
 
 	fun setFilter(newfilter: ITrafficCameraFilter) {
@@ -910,7 +910,7 @@ class TrafficCameraCacheSingleton private constructor() : PropertyChangeListener
 		MLog.d(TAG, "***TCDb " + hashCode() + " receives PCE for event " + event.propertyName)
 		// TODO Auto-generated method stub
 		if (TrafficCamera.PROPERTY_FAVOURITE == event.propertyName) {
-			MLog.d(TAG, "TCDb receives notice that favourite state of a camera has changed.")
+			MLog.d(TAG, "TCDb receives notice that extraFavourite state of a camera has changed.")
 			saveFavourites()
 			fireFavouritePropertyChangeEvent()
 		}

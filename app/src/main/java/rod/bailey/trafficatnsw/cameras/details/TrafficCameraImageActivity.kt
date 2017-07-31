@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
+import android.util.Log
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ImageView
 import org.androidannotations.annotations.AfterViews
@@ -20,7 +20,7 @@ import rod.bailey.trafficatnsw.cameras.*
 /**
  * Screen containing a single Card that has a traffic camera imageView at top
  * and a description of the imageView underneath. Image may be refreshed or
- * marked as a favourite by the user.
+ * marked as a extraFavourite by the user.
  */
 @EActivity(R.layout.activity_camera_image)
 open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImageDisplayer {
@@ -43,30 +43,29 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 
 	@Extra("index")
 	@JvmField
-	var cameraIndex: Int? = null
+	var extraIndex: Int? = null
 
 	@Extra("street")
 	@JvmField
-	var cameraStreet: String? = null
+	var extraStreet: String? = null
 
 	@Extra("suburb")
 	@JvmField
-	var cameraSuburb: String? = null
+	var extraSuburb: String? = null
 
 	@Extra("description")
 	@JvmField
-	var cameraDescription: String? = null
+	var extraDescription: String? = null
 
 	@Extra("url")
 	@JvmField
-	var cameraUrl: String? = null
+	var extraUrl: String? = null
 
-	@Extra("favourite")
+	@Extra("extraFavourite")
 	@JvmField
-	var favourite: Boolean? = null
+	var extraFavourite: Boolean? = null
 
 	private var favouriteMenuItem: MenuItem? = null
-	private var cameraFavourite: Boolean = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -84,19 +83,21 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 
-		titleTextView?.text = cameraStreet
-		subtitleTextView?.text = cameraSuburb
-		descriptionTextView?.text = cameraDescription
+		titleTextView?.text = extraStreet
+		subtitleTextView?.text = extraSuburb
+		descriptionTextView?.text = extraDescription
+
+		updateActionBarPerFavouriteStatus(extraFavourite ?: false)
 
 		refresh()
 	}
 
 	fun refresh() {
-		DownloadImageTask(context = this, displayer = this).execute(cameraUrl)
+		DownloadImageTask(context = this, displayer = this).execute(extraUrl)
 	}
 
 	fun toggleFavourite() {
-		val camera: TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(cameraIndex ?: 0)
+		val camera: TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(extraIndex ?: 0)
 		if (camera != null) {
 			val pres = FavouriteCameraDialogPresenter(camera)
 			val dialog = pres.build(this)
@@ -110,16 +111,16 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	private fun updateActionBarPerFavouriteStatus(isFavourite: Boolean) {
 		favouriteMenuItem?.setIcon(
 			if (isFavourite)
-				R.drawable.ic_action_favourite_dark
+				R.drawable.ic_star_white_24dp
 			else
-				R.drawable.ic_action_not_favourite_dark)
+				R.drawable.ic_star_border_white_24dp)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
 		val inflater = menuInflater
 		inflater.inflate(R.menu.menu_traffic_camera_image_options, menu)
 		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite)
-		updateActionBarPerFavouriteStatus(cameraFavourite)
+		updateActionBarPerFavouriteStatus(extraFavourite ?: false)
 		return true
 	}
 
@@ -135,14 +136,17 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	}
 
 	companion object {
+		private val LOG_TAG: String = TrafficCameraImageActivity::class.java.simpleName
+
 		fun start(ctx: Context, camera: TrafficCamera) {
+			Log.d(LOG_TAG, "******* At start time, favourite=${camera.isFavourite}")
 			TrafficCameraImageActivity_.intent(ctx)
-				.cameraIndex(camera.index)
-				.cameraStreet(camera.street)
-				.cameraSuburb(camera.suburb)
-				.cameraDescription(camera.description)
-				.cameraUrl(camera.url)
-				.favourite(camera.isFavourite)
+				.extraIndex(camera.index)
+				.extraStreet(camera.street)
+				.extraSuburb(camera.suburb)
+				.extraDescription(camera.description)
+				.extraUrl(camera.url)
+				.extraFavourite(camera.isFavourite)
 				.start()
 		}
 	}
