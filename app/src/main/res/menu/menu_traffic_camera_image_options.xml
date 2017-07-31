@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/refresh_camera_image"
-        android:icon="@drawable/ic_action_refresh_dark"
+        android:icon="@drawable/ic_sync_white_24dp"
         android:orderInCategory="20"
         app:showAsAction="always"
         android:title="@string/camera_menu_item_refresh">
