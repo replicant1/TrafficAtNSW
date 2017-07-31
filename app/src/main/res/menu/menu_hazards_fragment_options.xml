@@ -6,7 +6,7 @@ Options menu for the Hazards screen contains a single item - "Refresh"
 
     <item
         android:id="@+id/menu_item_refresh_hazard_list"
-        android:icon="@drawable/ic_action_refresh_dark"
+        android:icon="@drawable/ic_sync_white_24dp"
         android:orderInCategory="1"
         android:title="@string/hazards_list_menu_item_refresh"
         app:showAsAction="ifRoom"/>
