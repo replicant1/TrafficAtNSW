@@ -36,7 +36,7 @@ class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 	fun build(ctx: Context): AlertDialog {
 		val listener = AlertsDialogListener()
 		val builder = AlertDialog.Builder(ctx)
-		builder.setTitle(ctx.getString(R.string.camera_image_load_failure_dialog_title))
+		builder.setTitle(ctx.getString(R.string.camera_favourite_confirmation_dialog_title))
 		builder.setPositiveButton(
 			if (camera.isFavourite)
 				ctx.getString(R.string.camera_favourite_confirmation_dialog_remove_button)

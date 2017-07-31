@@ -79,8 +79,8 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 
 	@AfterViews
 	fun afterViews() {
-		val actionBar = actionBar
-		actionBar.title = getString(R.string.camera_image_screen_title)
+		val actionBar = supportActionBar
+		actionBar?.title = getString(R.string.camera_image_screen_title)
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -116,11 +116,11 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		val inflater = MenuInflater(this)
+		val inflater = menuInflater
 		inflater.inflate(R.menu.menu_traffic_camera_image_options, menu)
 		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite)
 		updateActionBarPerFavouriteStatus(cameraFavourite)
-		return super.onCreateOptionsMenu(menu)
+		return true
 	}
 
 	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
