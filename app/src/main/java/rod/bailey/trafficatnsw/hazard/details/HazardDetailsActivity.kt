@@ -60,7 +60,7 @@ open class HazardDetailsActivity : AppCompatActivity() {
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		MenuInflater(this).inflate(R.menu.menu_hazard_details_options, menu)
+		menuInflater.inflate(R.menu.menu_hazard_details_options, menu)
 		return super.onCreateOptionsMenu(menu)
 	}
 
