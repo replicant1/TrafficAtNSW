@@ -144,17 +144,9 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 		return result
 	}
 
-	override fun getCount(): Int {
-		return items.size
-	}
-
-	override fun getItem(position: Int): Any {
-		return items[position]
-	}
-
-	override fun getItemId(position: Int): Long {
-		return position.toLong()
-	}
+	override fun getCount(): Int = items.size
+	override fun getItem(position: Int): Any = items[position]
+	override fun getItemId(position: Int): Long = position.toLong()
 
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		var result: View
@@ -168,10 +160,5 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 		}
 
 		return result
-	}
-
-	companion object {
-		private val TAG = TravelTimesListAdapter::class.java
-			.simpleName
 	}
 }
