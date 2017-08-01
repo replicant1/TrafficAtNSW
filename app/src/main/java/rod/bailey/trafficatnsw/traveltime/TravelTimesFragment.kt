@@ -2,14 +2,10 @@ package rod.bailey.trafficatnsw.traveltime
 
 import android.app.Fragment
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import java.beans.PropertyChangeEvent
-import java.beans.PropertyChangeListener
+import android.util.Log
+import android.view.*
+import org.androidannotations.annotations.EFragment
+import org.androidannotations.annotations.FragmentArg
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase
 import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton
@@ -19,50 +15,47 @@ import rod.bailey.trafficatnsw.ui.predicate.InactiveTravelTimeEmptyMessagePredic
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
 import rod.bailey.trafficatnsw.util.MLog
+import java.beans.PropertyChangeEvent
+import java.beans.PropertyChangeListener
 
-class TravelTimesFragment : Fragment(), PropertyChangeListener {
-	private var mainLayout: ListViewWithEmptyMessage? = null
+@EFragment
+open class TravelTimesFragment : Fragment(), PropertyChangeListener {
+
+	private var listView: ListViewWithEmptyMessage? = null
+
 	/** Travel times for the motorway currently being displayed  */
 	var db: MotorwayTravelTimesDatabase? = null
+
 	/** Config for the motorway currently being display  */
 	private var travelTimeConfig: TravelTimeConfig? = null
 
-	private fun createUI() {
-		MLog.i(LOG_TAG, "Into TravelTimesFragment.createUI()")
-		val ctx = activity
-		mainLayout = ListViewWithEmptyMessage_.build(ctx, EMPTY_MESSAGE,
-													 InactiveTravelTimeEmptyMessagePredicate())
-		setHasOptionsMenu(true)
-
-		activity.title = travelTimeConfig!!.motorwayName + " Travel Times"
-
-		refreshAsync()
-	}
+	@FragmentArg(ARG_MWAY_KEY)
+	@JvmField
+	var motorwayKey: Int? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		if (arguments != null) {
-			if (arguments.containsKey(ARG_MWAY_KEY)) {
-				val value: Motorway = arguments.getSerializable(ARG_MWAY_KEY) as Motorway
-				val singleton = TravelTimesSingleton.singleton
-				singleton.init(activity)
+		val motorway = Motorway.values()[motorwayKey ?: 0]
+		TravelTimesSingleton.singleton.init(activity)
 
-				travelTimeConfig = when (value) {
-					Motorway.M1 -> singleton.m1Config
-					Motorway.M2 -> singleton.m2Config
-					Motorway.M4 -> singleton.m4Config
-					Motorway.M7 -> singleton.m7Config
-				}
-			}
+		travelTimeConfig = when (motorway) {
+			Motorway.M1 -> TravelTimesSingleton.singleton.m1Config
+			Motorway.M2 -> TravelTimesSingleton.singleton.m2Config
+			Motorway.M4 -> TravelTimesSingleton.singleton.m4Config
+			Motorway.M7 -> TravelTimesSingleton.singleton.m7Config
 		}
 	}
 
-	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-							  savedInstanceState: Bundle?): View? {
-		createUI()
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+		setHasOptionsMenu(true)
+		activity.title = getString(R.string.tt_screen_title,
+								   travelTimeConfig?.motorwayName ?: "")
+		listView = ListViewWithEmptyMessage_.build(activity,
+												   getString(R.string.tt_times_unavailable),
+												   InactiveTravelTimeEmptyMessagePredicate())
 		refreshAsync()
-		return mainLayout
+		return listView
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -80,34 +73,24 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	}
 
 	private fun refreshAsync() {
-		MLog.i(LOG_TAG, "Refreshing travel times")
-		val task = DownloadTravelTimesTask(activity, this, travelTimeConfig,
-																			  mainLayout)
-		task.execute()
+		DownloadTravelTimesTask(activity, this, travelTimeConfig, listView).execute()
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		MLog.i(LOG_TAG,
-			   "TravelTimesFragment gets notice that property "
-				   + event.propertyName + " has changed")
+		MLog.i(LOG_TAG, "Property ${event.propertyName} has changed")
 		if (event.propertyName == MotorwayTravelTimesDatabase.PROPERTY_TOTAL_TRAVEL_TIME) {
 			if (db != null) {
-				mainLayout!!.setAdapter(TravelTimesListAdapter(db))
+				listView!!.setAdapter(TravelTimesListAdapter(db))
 			}
 		}
 	}
 
 	companion object {
-		private val EMPTY_MESSAGE = "Travel Times for this motorway are unavailable at the moment."
-		const val ARG_MWAY_KEY = "MWAY"
+		private const val ARG_MWAY_KEY = "MWAY"
 		private val LOG_TAG = TravelTimesFragment::class.java.simpleName
 
 		fun create(mway: Motorway): TravelTimesFragment {
-			val result = TravelTimesFragment()
-			val bundle = Bundle()
-			bundle.putSerializable(ARG_MWAY_KEY, mway)
-			result.arguments = bundle
-			return result
+			return TravelTimesFragment_.builder().arg(ARG_MWAY_KEY, mway.ordinal).build()
 		}
 	}
 }
