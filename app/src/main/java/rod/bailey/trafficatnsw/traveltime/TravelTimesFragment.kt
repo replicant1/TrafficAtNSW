@@ -1,10 +1,6 @@
 package rod.bailey.trafficatnsw.traveltime
 
-import android.app.AlertDialog
 import android.app.Fragment
-import android.app.ProgressDialog
-import android.content.Context
-import android.os.AsyncTask
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
@@ -18,7 +14,6 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase
 import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
-import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.ui.predicate.InactiveTravelTimeEmptyMessagePredicate
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
@@ -27,7 +22,7 @@ import rod.bailey.trafficatnsw.util.MLog
 class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	private var mainLayout: ListViewWithEmptyMessage? = null
 	/** Travel times for the motorway currently being displayed  */
-	private var db: MotorwayTravelTimesDatabase? = null
+	var db: MotorwayTravelTimesDatabase? = null
 	/** Config for the motorway currently being display  */
 	private var travelTimeConfig: TravelTimeConfig? = null
 
@@ -89,76 +84,9 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 
 	private fun refreshAsync() {
 		MLog.i(LOG_TAG, "Refreshing travel times")
-		val task = DownloadTravelTimesTask(
-			activity)
+		val task = DownloadTravelTimesTask(activity, this, travelTimeConfig,
+																			  mainLayout)
 		task.execute()
-	}
-
-	private inner class DownloadTravelTimesTask(
-		private val ctx: Context) : AsyncTask<Void, Void, Boolean>() {
-		private var dialog: ProgressDialog? = null
-
-		override fun onPreExecute() {
-			super.onPreExecute()
-
-			dialog = ProgressDialog(ctx)
-			dialog!!.setMessage("Loading " + travelTimeConfig!!.motorwayName
-									+ " travel times...")
-			dialog!!.setCancelable(false)
-			dialog!!.isIndeterminate = true
-			dialog!!.show()
-		}
-
-		override fun doInBackground(vararg params: Void): Boolean {
-			var travelTimesLoadedOK: Boolean = java.lang.Boolean.TRUE
-			// Download the JSON file - local or remote
-			if (db != null) {
-				db!!.removePropertyChangeListener(this@TravelTimesFragment)
-			}
-
-			if (ConfigSingleton.instance
-				.loadTravelTimesFromLocalJSONFiles()) {
-				db = TravelTimesSingleton
-					.singleton
-					.loadTravelTimesFromLocalJSONFile(ctx, travelTimeConfig!!)
-			} else {
-				db = TravelTimesSingleton.singleton
-					.loadTravelTimesFromRemoteJSONFile(ctx,
-													   travelTimeConfig!!)
-			}
-
-			if (db == null) {
-				travelTimesLoadedOK = java.lang.Boolean.FALSE
-			} else {
-				db!!.addPropertyChangeListener(this@TravelTimesFragment)
-			}
-
-			MLog.i(LOG_TAG, "Result of loading is database " + db!!)
-
-			return travelTimesLoadedOK
-		}
-
-		override fun onPostExecute(result: Boolean) {
-			if (dialog != null) {
-				dialog!!.dismiss()
-			}
-
-			if (result) {
-				mainLayout!!.setAdapter(TravelTimesListAdapter(db))
-			} else {
-				// We don't all mainLayout.setAdapter, which means that the old (stale)
-				// data will still remain visible.
-				MLog.i(LOG_TAG,
-					   "Failed to load " + travelTimeConfig!!.motorwayName + " travel times - showing error dialog")
-				val builder = AlertDialog.Builder(ctx)
-				builder.setTitle(
-					String.format("No Travel Times for %s", travelTimeConfig!!.motorwayName))
-				builder.setMessage("Tap the refresh icon at top right to try again.")
-				builder.setPositiveButton("OK", null)
-				val dialog = builder.create()
-				dialog.show()
-			}
-		}
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {

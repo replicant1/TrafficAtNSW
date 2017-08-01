@@ -2,4 +2,5 @@
 <resources>
     <string name="negative_dialog_button">No</string>
     <string name="positive_dialog_button">Yes</string>
+    <string name="positive_dialog_button_alt">OK</string>
 </resources>
