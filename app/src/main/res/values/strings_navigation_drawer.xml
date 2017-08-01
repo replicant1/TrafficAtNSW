@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="nav_incidents_section">Incidents</string>
+    <string name="nav_incidents_sydney">Sydney</string>
+    <string name="nav_incidents_regional_nsw">Regional NSW</string>
+    <string name="nav_cameras_section">Cameras</string>
+    <string name="nav_cameras_favourites">Favourites</string>
+    <string name="nav_cameras_sydney">Sydney</string>
+    <string name="nav_cameras_regional_nsw">Regional NSW</string>
+    <string name="nav_tt_section">Travel Times</string>
+    <string name="nav_tt_m1">M1</string>
+    <string name="nav_tt_m2">M2</string>
+    <string name="nav_tt_m4">M4</string>
+    <string name="nav_tt_m7">M7</string>
+</resources>

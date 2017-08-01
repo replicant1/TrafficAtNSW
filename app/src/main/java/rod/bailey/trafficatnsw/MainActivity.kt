@@ -12,11 +12,11 @@ import android.view.Gravity
 import android.view.MenuItem
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
-import org.androidannotations.annotations.Trace
 import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListMode
 import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment
+import rod.bailey.trafficatnsw.traveltime.config.Motorway
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
 
@@ -93,14 +93,10 @@ open class MainActivity : AppCompatActivity() {
 					TrafficCameraListFragment.ARG_MODE_VALUE_SYDNEY)
 				R.id.menu_item_regional_nsw_cameras -> navToCameras(
 					TrafficCameraListFragment.ARG_MODE_VALUE_REGIONAL)
-				R.id.menu_item_travel_times_m1 -> navToTimes(
-					TravelTimesFragment.ARG_MWAY_VALUE_M1)
-				R.id.menu_item_travel_times_m2 -> navToTimes(
-					TravelTimesFragment.ARG_MWAY_VALUE_M2)
-				R.id.menu_item_travel_times_m3 -> navToTimes(
-					TravelTimesFragment.ARG_MWAY_VALUE_M4)
-				R.id.menu_item_travel_times_m4 -> navToTimes(
-					TravelTimesFragment.ARG_MWAY_VALUE_M7)
+				R.id.menu_item_travel_times_m1 -> navToTimes(Motorway.M1)
+				R.id.menu_item_travel_times_m2 -> navToTimes(Motorway.M2)
+				R.id.menu_item_travel_times_m4 -> navToTimes(Motorway.M4)
+				R.id.menu_item_travel_times_m7 -> navToTimes(Motorway.M7)
 			} // when
 
 			drawerLayout.closeDrawer(Gravity.START)
@@ -117,8 +113,8 @@ open class MainActivity : AppCompatActivity() {
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
 
-		private fun navToTimes(argTravelTimeValue: String) {
-			val fragment = TravelTimesFragment.create(argTravelTimeValue)
+		private fun navToTimes(motorway: Motorway) {
+			val fragment = TravelTimesFragment.create(motorway)
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
 	} // class DrawItemClickListener

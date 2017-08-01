@@ -13,6 +13,7 @@ import java.beans.PropertyChangeListener
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase
 import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton
+import rod.bailey.trafficatnsw.traveltime.config.Motorway
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
 import rod.bailey.trafficatnsw.ui.predicate.InactiveTravelTimeEmptyMessagePredicate
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
@@ -40,22 +41,18 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		val args = arguments
 
-		if (args != null) {
-			if (args.containsKey(ARG_MWAY_KEY)) {
-				val value = args.getString(ARG_MWAY_KEY)
+		if (arguments != null) {
+			if (arguments.containsKey(ARG_MWAY_KEY)) {
+				val value: Motorway = arguments.getSerializable(ARG_MWAY_KEY) as Motorway
 				val singleton = TravelTimesSingleton.singleton
 				singleton.init(activity)
 
-				if (ARG_MWAY_VALUE_M1 == value) {
-					travelTimeConfig = singleton.m1Config
-				} else if (ARG_MWAY_VALUE_M2 == value) {
-					travelTimeConfig = singleton.m2Config
-				} else if (ARG_MWAY_VALUE_M4 == value) {
-					travelTimeConfig = singleton.m4Config
-				} else if (ARG_MWAY_VALUE_M7 == value) {
-					travelTimeConfig = singleton.m7Config
+				travelTimeConfig = when (value) {
+					Motorway.M1 -> singleton.m1Config
+					Motorway.M2 -> singleton.m2Config
+					Motorway.M4 -> singleton.m4Config
+					Motorway.M7 -> singleton.m7Config
 				}
 			}
 		}
@@ -102,18 +99,13 @@ class TravelTimesFragment : Fragment(), PropertyChangeListener {
 
 	companion object {
 		private val EMPTY_MESSAGE = "Travel Times for this motorway are unavailable at the moment."
-		val ARG_MWAY_KEY = "MWAY"
-		val ARG_MWAY_VALUE_M1 = "M1"
-		val ARG_MWAY_VALUE_M2 = "M2"
-		val ARG_MWAY_VALUE_M4 = "M4"
-		val ARG_MWAY_VALUE_M7 = "M7"
+		const val ARG_MWAY_KEY = "MWAY"
 		private val LOG_TAG = TravelTimesFragment::class.java.simpleName
 
-		fun create(mwayKey: String): TravelTimesFragment {
+		fun create(mway: Motorway): TravelTimesFragment {
 			val result = TravelTimesFragment()
 			val bundle = Bundle()
-			bundle.putString(ARG_MWAY_KEY, mwayKey)
-			MLog.d(LOG_TAG, "Creating TravelTimesFragment,key=${mwayKey}")
+			bundle.putSerializable(ARG_MWAY_KEY, mway)
 			result.arguments = bundle
 			return result
 		}
