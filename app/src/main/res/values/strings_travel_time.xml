@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tt_load_failure_dialog_title">No Travel Times for %1$s</string>
+    <string name="tt_load_failure_dialog_msg">Tap the refresh icon at top right to try again.</string>
+    <string name="tt_load_progress_msg">Loading %1$s travel times &#8230;</string>
+    <string name="tt_times_unavailable">Travel Times for this motorway are unavailable at the moment.</string>
+    <string name="tt_screen_title">%1$s Travel Times</string>
+</resources>

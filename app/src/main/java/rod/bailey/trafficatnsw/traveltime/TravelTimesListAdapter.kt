@@ -162,12 +162,10 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 		val item = items[position]
 
 		if (item is HeadingItem) {
-			val heading = ListHeadingView_.build(parent.context, item.text)
-			result = heading
+			result = ListHeadingView_.build(parent.context, item.text)
 		} else {
 			val ttItem = item as TravelTimeItem
-			result = TravelTimesListItemView(parent.context,
-											 ttItem.travelTime)
+			result = TravelTimesListItemView_.build(parent.context, ttItem.travelTime)
 		}
 
 		return result
