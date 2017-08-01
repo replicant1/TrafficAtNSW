@@ -4,15 +4,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
-import java.util.Collections
-import java.util.LinkedList
 import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase
 import rod.bailey.trafficatnsw.traveltime.common.TravelTime
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
-import rod.bailey.trafficatnsw.ui.view.ListHeadingView
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
+import java.util.*
 
 class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), ListAdapter {
+
 	/** An Item that is simply a heading e.g. "Eastbound" or "Westbound"  */
 	inner class HeadingItem(val text: String) : Item
 
