@@ -20,11 +20,19 @@ import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.config.Motorway
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
+import javax.inject.Inject
 
 @EActivity(R.layout.activity_main)
 open class MainActivity : AppCompatActivity() {
 
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
 	private lateinit var drawerToggle: ActionBarDrawerToggle
+
+	@Inject
+	lateinit var config: ConfigSingleton
 
 	override fun onConfigurationChanged(newConfig: Configuration) {
 		super.onConfigurationChanged(newConfig)
@@ -34,10 +42,7 @@ open class MainActivity : AppCompatActivity() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 
-		TrafficAtNSWApplication.graph.inject(this)
-
 		// Initialize config facility
-		val config = ConfigSingleton.instance
 		config.init(CONFIG_PROPERTIES_FILE_NAME, this)
 
 		// This logging facility needs initialization

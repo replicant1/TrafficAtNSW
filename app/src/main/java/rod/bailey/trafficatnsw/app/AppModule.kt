@@ -6,6 +6,7 @@ import dagger.Provides
 import rod.bailey.trafficatnsw.cameras.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.traveltime.common.TravelTimesCacheSingleton
+import rod.bailey.trafficatnsw.util.ConfigSingleton
 import javax.inject.Singleton
 
 @Module
@@ -31,5 +32,11 @@ class AppModule(val app: Application) {
 	@Singleton
 	fun provideTravelTimesCacheSingleton(): TravelTimesCacheSingleton {
 		return TravelTimesCacheSingleton()
+	}
+
+	@Provides
+	@Singleton
+	fun provideConfigSingleton(): ConfigSingleton {
+		return ConfigSingleton()
 	}
 }

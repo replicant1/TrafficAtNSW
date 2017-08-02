@@ -1,6 +1,7 @@
 package rod.bailey.trafficatnsw.traveltime.common
 
 import android.content.Context
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -8,21 +9,21 @@ import java.net.URL
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
+import javax.inject.Inject
 
 class TravelTimesCacheSingleton {
+
 	var m1Config: TravelTimeConfig? = null
 		private set
-	val m1Database: MotorwayTravelTimesDatabase? = null
 	var m2Config: TravelTimeConfig? = null
 		private set
-	val m2Database: MotorwayTravelTimesDatabase? = null
 	var m4Config: TravelTimeConfig? = null
 		private set
-	val m4Database: MotorwayTravelTimesDatabase? = null
 	var m7Config: TravelTimeConfig? = null
 		private set
-	val m7Database: MotorwayTravelTimesDatabase? = null
-	private var configSingleton: ConfigSingleton? = null
+
+	@Inject
+	lateinit var config: ConfigSingleton
 
 	private fun createM1Config(): TravelTimeConfig {
 		return TravelTimeConfig("M1", //
@@ -31,8 +32,8 @@ class TravelTimesCacheSingleton {
 								"N", //
 								"S", //
 								"excluded_from_total_m1", //
-								configSingleton!!.remoteM1JSONFile(), //
-								configSingleton!!.localM1JSONFile())
+								config.remoteM1JSONFile(), //
+								config.localM1JSONFile())
 	}
 
 	private fun createM2Config(): TravelTimeConfig {
@@ -42,8 +43,8 @@ class TravelTimesCacheSingleton {
 								"E", //
 								"W", //
 								"excluded_from_total_m2", //
-								configSingleton!!.remoteM2JSONFile(), //
-								configSingleton!!.localM2JSONFile())
+								config.remoteM2JSONFile(), //
+								config.localM2JSONFile())
 	}
 
 	private fun createM4Config(): TravelTimeConfig {
@@ -53,8 +54,8 @@ class TravelTimesCacheSingleton {
 								"E", //
 								"W", //
 								"excluded_from_total_m4", //
-								configSingleton!!.remoteM4JSONFile(), //
-								configSingleton!!.localM4JSONFile())
+								config.remoteM4JSONFile(), //
+								config.localM4JSONFile())
 	}
 
 	private fun createM7Config(): TravelTimeConfig {
@@ -64,13 +65,12 @@ class TravelTimesCacheSingleton {
 								"N", //
 								"S", //
 								"excluded_from_total_m7", //
-								configSingleton!!.remoteM7JSONFile(), //
-								configSingleton!!.localM7JSONFile())
+								config.remoteM7JSONFile(), //
+								config.localM7JSONFile())
 	}
 
-	@Synchronized
 	fun init() {
-		configSingleton = ConfigSingleton.instance
+		TrafficAtNSWApplication.graph.inject(this)
 
 		if (m1Config == null || m2Config == null || m4Config == null || m7Config == null) {
 			m1Config = createM1Config()
@@ -156,10 +156,6 @@ class TravelTimesCacheSingleton {
 
 		return result
 	}
-
-	val isInitialised: Boolean
-		@Synchronized get() = m1Config != null && m2Config != null && m4Config != null
-			&& m7Config != null
 
 	companion object {
 		private val TAG = TravelTimesCacheSingleton::class.java.simpleName

@@ -10,6 +10,7 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EViewGroup
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.ui.LetterColorMapSingleton
@@ -17,6 +18,7 @@ import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 /**
  * An ordinary (non-header) list item in a Hazards list. Displays summary of properties
@@ -32,6 +34,13 @@ open class HazardListItemView(val ctx: Context,
 						 val hazard: XHazard,
 						 val showLastUpdatedDate: Boolean,
 						 val clickable: Boolean) : FrameLayout(ctx) {
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
+	@Inject
+	lateinit var config: ConfigSingleton
 
 	@ViewById(R.id.rl_item_hazard)
 	@JvmField
@@ -88,9 +97,9 @@ open class HazardListItemView(val ctx: Context,
 			val dateText: String = when {
 				DateUtils.isYesterday(hazard.lastUpdated) -> ctx.getString(R.string.hazard_list_item_date_previous)
 				DateUtils.isToday(hazard.lastUpdated) -> SimpleDateFormat(
-					ConfigSingleton.instance.hazardTimeFormat(), Locale.ENGLISH).format(
+					config.hazardTimeFormat(), Locale.ENGLISH).format(
 					hazard.lastUpdated).toLowerCase()
-				else -> SimpleDateFormat(ConfigSingleton.instance.hazardDateFormat(), Locale.ENGLISH).format(
+				else -> SimpleDateFormat(config.hazardDateFormat(), Locale.ENGLISH).format(
 					hazard.lastUpdated)
 			}
 

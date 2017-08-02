@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.hazard.details.cellrec.*
 import rod.bailey.trafficatnsw.hazard.details.view.*
 import rod.bailey.trafficatnsw.json.hazard.XHazard
@@ -16,12 +17,18 @@ import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
 class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHazard) : BaseAdapter(),
 	ListAdapter {
 	private val cellRecs = LinkedList<CellRec>()
 
+	@Inject
+	lateinit var config: ConfigSingleton
+
 	init {
+		TrafficAtNSWApplication.graph.inject(this)
+
 		// Title cell (always appears)
 		addTitleCellRec()
 		addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_times))
@@ -150,7 +157,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 
 	private fun addDurationCellRec() {
 		if (hazard.start != null && hazard.end != null) {
-			val formatString = StringBuffer(ConfigSingleton.instance.durationTimeFormat())
+			val formatString = StringBuffer(config.durationTimeFormat())
 			val sdf = SimpleDateFormat(formatString.toString(), Locale.ENGLISH)
 			val startStr = sdf.format(hazard.start)
 			val endStr = sdf.format(hazard.end)

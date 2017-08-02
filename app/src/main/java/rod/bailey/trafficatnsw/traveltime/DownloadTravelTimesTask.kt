@@ -26,6 +26,9 @@ class DownloadTravelTimesTask(
 	@Inject
 	lateinit var travelTimesCache: TravelTimesCacheSingleton
 
+	@Inject
+	lateinit var config: ConfigSingleton
+
 	private var dialog: ProgressDialog? = null
 
 	override fun onPreExecute() {
@@ -41,8 +44,7 @@ class DownloadTravelTimesTask(
 		var travelTimesLoadedOK: Boolean = java.lang.Boolean.TRUE
 		ttFrag.db?.removePropertyChangeListener(ttFrag)
 
-		if (ConfigSingleton.instance
-			.loadTravelTimesFromLocalJSONFiles()) {
+		if (config.loadTravelTimesFromLocalJSONFiles()) {
 			ttFrag.db = travelTimesCache.loadTravelTimesFromLocalJSONFile(ctx, travelTimeConfig!!)
 		} else {
 			ttFrag.db = travelTimesCache.loadTravelTimesFromRemoteJSONFile(ctx, travelTimeConfig!!)

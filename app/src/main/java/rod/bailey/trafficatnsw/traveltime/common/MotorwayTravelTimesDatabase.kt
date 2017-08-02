@@ -14,13 +14,7 @@ import java.util.*
  * specified. Also knows how to store those inclusion states to disk and restore
  * them from disk. Note:contains data for a single motorway only.
  */
-class MotorwayTravelTimesDatabase
-/**
- * @param Name
- * *            of file in which the exlusions are stored. This is the basic
- * *            name only, not the full path.
- */
-(ctx: Context, val config: TravelTimeConfig?) : PropertyChangeListener {
+class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig?) : PropertyChangeListener {
 	private val prefs: SharedPreferences
 	var isPrimed: Boolean = false
 		private set
@@ -28,8 +22,7 @@ class MotorwayTravelTimesDatabase
 	private val travelTimes: LinkedList<TravelTime> = LinkedList<TravelTime>()
 
 	init {
-		prefs = ctx.getSharedPreferences(config!!.preferencesFileName,
-										 Context.MODE_PRIVATE)
+		prefs = ctx.getSharedPreferences(config!!.preferencesFileName, Context.MODE_PRIVATE)
 	}
 
 	/**

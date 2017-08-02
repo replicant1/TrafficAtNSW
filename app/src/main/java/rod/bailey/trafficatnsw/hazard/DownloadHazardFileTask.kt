@@ -31,6 +31,9 @@ class DownloadHazardFileTask(private val ctx: Context,
 	@Inject
 	lateinit var hazardCacheSingleton: HazardCacheSingleton
 
+	@Inject
+	lateinit var config: ConfigSingleton
+
 	/**
 	 * Show a "loading incidents..." progress dialog
 	 */
@@ -46,7 +49,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 
 	private fun loadIncidentsFromLocalJSONFile(): String? {
 		MLog.d(LOG_TAG, "Loading incidents from local JSON file")
-		val assetFileName = ConfigSingleton.instance.localIncidentsJSONFile()
+		val assetFileName = config.localIncidentsJSONFile()
 		val input = ctx.assets.open(assetFileName)
 		val size = input.available()
 		val buffer = ByteArray(size)
@@ -62,7 +65,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 
 		try {
 			MLog.d(LOG_TAG, "Loading incidents from remote JSON file")
-			val url = URL(ConfigSingleton.instance.remoteIncidentsJSONFile())
+			val url = URL(config.remoteIncidentsJSONFile())
 			val inStreamReader = InputStreamReader(url.openStream())
 			bufferedReader = BufferedReader(inStreamReader)
 			var line: String?
@@ -98,7 +101,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 
 	override fun doInBackground(vararg params: Void): Boolean {
 		val jsonText: String? =
-			if (ConfigSingleton.instance.loadIncidentsFromLocalJSONFile()) {
+			if (config.loadIncidentsFromLocalJSONFile()) {
 				loadIncidentsFromLocalJSONFile()
 			} else {
 				loadIncidentsFromRemoteJSONFile()

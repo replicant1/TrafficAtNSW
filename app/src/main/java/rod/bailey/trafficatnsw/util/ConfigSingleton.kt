@@ -7,17 +7,12 @@ import java.io.InputStream
 import java.util.Properties
 
 /**
- * Provides global access to the config.properties file
+ * Provides global access to the config.properties file. Always inject this to make sure
+ * you get the singleton instance.
  */
-class ConfigSingleton private constructor() {
-	private object Holder {
-		val INSTANCE = ConfigSingleton()
-	}
-
+class ConfigSingleton {
 	companion object {
-		/**
-		 * The names of the properties in config.properties
-		 */
+		// The names of the properties in config.properties
 		private val DURATION_TIME_FORMAT = "DurationTimeFormat"
 		private val LOAD_INCIDENTS_FROM_LOCAL_JSON_FILE = "LoadIncidentsFromLocalJSONFile"
 		private val LOAD_TRAVEL_TIMES_FROM_LOCAL_JSON_FILES = "LoadTravelTimesFromLocalJSONFiles"
@@ -36,7 +31,6 @@ class ConfigSingleton private constructor() {
 		private val HAZARD_DATE_FORMAT = "HazardDateFormat"
 
 		private val LOG_TAG = ConfigSingleton::class.java.simpleName
-		val instance: ConfigSingleton by lazy { Holder.INSTANCE }
 	}
 
 	private val configProperties = Properties()
