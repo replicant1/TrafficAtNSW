@@ -22,11 +22,9 @@ open class TravelTimesListItemView(val ctx: Context, val travelTime: TravelTime)
 			// Clicking on a TT row should toggle it's 'includedInTotal' status.
 			// But neither TOTAL rows or any row that is currently inactive can
 			// be toggled.
-			if (travelTime != null) {
-				if (travelTime.isActive && !travelTime.isTotal) {
-					travelTime.isIncludedInTotal = !travelTime.isIncludedInTotal
-					updateAppearancePerExclusionState()
-				}
+			if (travelTime.isActive && !travelTime.isTotal) {
+				travelTime.isIncludedInTotal = !travelTime.isIncludedInTotal
+				updateAppearancePerExclusionState()
 			}
 		}
 	}

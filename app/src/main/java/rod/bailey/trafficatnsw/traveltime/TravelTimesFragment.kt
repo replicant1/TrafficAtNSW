@@ -40,7 +40,7 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 		super.onCreate(savedInstanceState)
 
 		val motorway = Motorway.values()[motorwayKey ?: 0]
-		TravelTimesSingleton.singleton.init(activity)
+		TravelTimesSingleton.singleton.init()
 
 		travelTimeConfig = when (motorway) {
 			Motorway.M1 -> TravelTimesSingleton.singleton.m1Config

@@ -3,6 +3,9 @@ package rod.bailey.trafficatnsw.app
 import android.app.Application
 import dagger.Component
 import rod.bailey.trafficatnsw.MainActivity
+import rod.bailey.trafficatnsw.cameras.TrafficCameraListAdapter
+import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment
+import rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.hazard.DownloadHazardFileTask
 import rod.bailey.trafficatnsw.hazard.HazardListAdapter
 import rod.bailey.trafficatnsw.hazard.HazardListFragment
@@ -27,4 +30,7 @@ interface AppComponent {
 	fun inject(fragment: HazardListFragment)
 	fun inject(activity: HazardDetailsActivity)
 	fun inject(activity: ShowHazardOnMapActivity)
+	fun inject(adapter: TrafficCameraListAdapter)
+	fun inject(fragment: TrafficCameraListFragment)
+	fun inject(activity: TrafficCameraImageActivity)
 }

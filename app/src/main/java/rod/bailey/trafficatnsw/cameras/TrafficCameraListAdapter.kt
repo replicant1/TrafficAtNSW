@@ -5,28 +5,32 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import java.util.ArrayList
 import java.util.Collections
 import java.util.LinkedList
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.json.hazard.XRegion
-import rod.bailey.trafficatnsw.ui.view.ListHeadingView
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
+import javax.inject.Inject
 
-class TrafficCameraListAdapter(filter: ITrafficCameraFilter?) : BaseAdapter(), ListAdapter {
-	private val db: TrafficCameraCacheSingleton
+class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), ListAdapter {
+
+	@Inject
+	lateinit var cameraCache: TrafficCameraCacheSingleton
+
 	private val listData = ArrayList<Any>()
 
 	init {
-		db = TrafficCameraCacheSingleton.instance
-		db.setFilter(filter!!)
+		TrafficAtNSWApplication.graph.inject(this)
+		cameraCache.setFilter(filter)
 		// Linearize the info in the TrafficCameraCacheSingleton. The resulting list
 		// has two sorts of entries. A XRegion instance if for the beginning of a
 		// region section, a TrafficCamera instance if a camera within a
 		// region section.
 		for (region in sortedCameraRegions()) {
 			listData.add(region)
-			val cameras = db.getCamerasForRegion(region)
+			val cameras = cameraCache.getCamerasForRegion(region)
 			Collections.sort(cameras!!)
 			listData.addAll(cameras)
 		}
@@ -79,7 +83,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter?) : BaseAdapter(), L
 		val sortedRegions = LinkedList<XRegion>()
 
 		for (region in XRegion.values()) {
-			if (db.getCamerasForRegion(region) != null && !db.getCamerasForRegion(
+			if (cameraCache.getCamerasForRegion(region) != null && !cameraCache.getCamerasForRegion(
 				region)!!.isEmpty()) {
 				sortedRegions.add(region)
 			}

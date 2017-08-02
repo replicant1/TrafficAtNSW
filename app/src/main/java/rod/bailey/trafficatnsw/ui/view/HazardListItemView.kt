@@ -78,7 +78,7 @@ open class HazardListItemView(val ctx: Context,
 
 			circleIcon?.circleLetter = letter.toString()
 			circleIcon?.circleColor = ContextCompat.getColor(
-				ctx, LetterColorMapSingleton.instance.getColorForLetter(ctx, letter))
+				ctx, LetterColorMapSingleton.instance.getColorForLetter(letter))
 		}
 
 		line3TextView?.text = hazard.displayName

@@ -91,7 +91,7 @@ class MotorwayTravelTimesDatabase
 			}
 
 			for (excludedSegmentId in excludedSegmentIds) {
-				// Find the TravelTime instance in the db with this segment id
+				// Find the TravelTime instance in the cameraCache with this segment id
 				// and mark it as excluded
 				for (travelTime in travelTimes) {
 					if (travelTime.segmentId == excludedSegmentId) {

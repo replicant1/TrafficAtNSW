@@ -12,19 +12,15 @@ import java.util.*
 
 /**
  * Normally we would read this in from a JSON file, but the contents are hardcoded
- * here for expediency.
+ * here for expediency. Always inject this so it remains a singleton.
  */
-class TrafficCameraCacheSingleton private constructor() : PropertyChangeListener {
-	private object Holder {
-		val INSTANCE = TrafficCameraCacheSingleton()
-	}
+class TrafficCameraCacheSingleton : PropertyChangeListener {
 
 	companion object {
 		const val PROPERTY_FAVOURITE_SET = "rod.bailey.trafficatnsw.favouriteSet"
 		private val FAVOURITE_CAMERAS_FILE_NAME = "favourite_cameras"
 		private val FAVOURITE_STATE_PREF_KEY = "FAVOURITE"
 		private val TAG = TrafficCameraCacheSingleton::class.java.simpleName
-		val instance: TrafficCameraCacheSingleton by lazy { Holder.INSTANCE }
 	}
 
 	private val support = PropertyChangeSupport(this)

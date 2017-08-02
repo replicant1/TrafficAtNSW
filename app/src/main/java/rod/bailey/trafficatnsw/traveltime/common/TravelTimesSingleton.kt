@@ -69,22 +69,14 @@ class TravelTimesSingleton {
 								configSingleton!!.localM7JSONFile())
 	}
 
-	@Synchronized fun init(ctx: Context) {
+	@Synchronized fun init() {
 		configSingleton = ConfigSingleton.instance
 
-		if (m1Config == null || m2Config == null || m4Config == null
-			|| m7Config == null) {
+		if (m1Config == null || m2Config == null || m4Config == null || m7Config == null) {
 			m1Config = createM1Config()
 			m2Config = createM2Config()
 			m4Config = createM4Config()
 			m7Config = createM7Config()
-			// TODO: initXXTravelTimes for other motorways - move to async
-			// activity. Switch on configSingleton to see if thsould be loaded
-			// // remotely or locally
-			// m1db = loadTravelTimesFromLocalJSONFile(ctx, m1Config);
-			// m2db = loadTravelTimesFromLocalJSONFile(ctx, m2Config);
-			// m4db = loadTravelTimesFromLocalJSONFile(ctx, m4Config);
-			// m7db = loadTravelTimesFromLocalJSONFile(ctx, m7Config);
 		}
 	}
 
