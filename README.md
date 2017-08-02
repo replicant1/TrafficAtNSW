@@ -9,7 +9,9 @@ This is the very first Android app I ever wrote, which I have converted from Jav
 as a learning exercise.
 
 ## Libraries
-The app makes use of the Android Annotations library extensively.
+The app makes use of these libraries:
+* Android Annotations 
+* Dagger
 
 ## Screenshots
 
