@@ -17,4 +17,5 @@ The app makes use of these libraries:
 
  ![Navigation Drawer](/doc/navigation.png) ![Hazard List](/doc/hazard_list.png)
  ![Camera List](/doc/cameras.png) ![Camera Image](/doc/camera_image.png)
- ![Travel Times](/doc/travel_times.png)
+ ![Travel Times](/doc/travel_times.png) ![Hazard Details](/doc/hazard_details.png)
+ ![Map](/doc/map.png)
