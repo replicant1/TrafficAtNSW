@@ -12,7 +12,9 @@ import android.view.MenuItem
 import android.widget.ImageView
 import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.*
+import javax.inject.Inject
 
 /**
  * Screen containing a single Card that has a traffic camera imageView at top
@@ -22,6 +24,13 @@ import rod.bailey.trafficatnsw.cameras.*
 @EActivity(R.layout.activity_camera_image)
 @OptionsMenu(R.menu.menu_traffic_camera_image_options)
 open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImageDisplayer {
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
+	@Inject
+	lateinit var cameraCache: TrafficCameraCacheSingleton
 
 	@ViewById(R.id.iv_camera_image)
 	@JvmField
@@ -99,7 +108,7 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 
 	@OptionsItem(R.id.toggle_camera_favourite)
 	fun toggleFavourite() {
-		val camera: TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(extraIndex ?: 0)
+		val camera: TrafficCamera? = cameraCache.getCamera(extraIndex ?: 0)
 		if (camera != null) {
 			val pres = FavouriteCameraDialogPresenter(camera)
 			val dialog = pres.build(this)

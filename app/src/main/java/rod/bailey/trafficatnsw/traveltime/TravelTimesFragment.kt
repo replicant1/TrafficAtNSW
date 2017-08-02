@@ -2,15 +2,15 @@ package rod.bailey.trafficatnsw.traveltime
 
 import android.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
 import org.androidannotations.annotations.OptionsItem
 import org.androidannotations.annotations.OptionsMenu
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase
-import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton
+import rod.bailey.trafficatnsw.traveltime.common.TravelTimesCacheSingleton
 import rod.bailey.trafficatnsw.traveltime.config.Motorway
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
 import rod.bailey.trafficatnsw.ui.predicate.InactiveTravelTimeEmptyMessagePredicate
@@ -19,10 +19,18 @@ import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
 import rod.bailey.trafficatnsw.util.MLog
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
+import javax.inject.Inject
 
 @EFragment
 @OptionsMenu(R.menu.menu_travel_times_options)
 open class TravelTimesFragment : Fragment(), PropertyChangeListener {
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
+	@Inject
+	lateinit var travelTimesCache: TravelTimesCacheSingleton
 
 	private var listView: ListViewWithEmptyMessage? = null
 
@@ -40,13 +48,13 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 		super.onCreate(savedInstanceState)
 
 		val motorway = Motorway.values()[motorwayKey ?: 0]
-		TravelTimesSingleton.singleton.init(activity)
+		travelTimesCache.init()
 
 		travelTimeConfig = when (motorway) {
-			Motorway.M1 -> TravelTimesSingleton.singleton.m1Config
-			Motorway.M2 -> TravelTimesSingleton.singleton.m2Config
-			Motorway.M4 -> TravelTimesSingleton.singleton.m4Config
-			Motorway.M7 -> TravelTimesSingleton.singleton.m7Config
+			Motorway.M1 -> travelTimesCache.m1Config
+			Motorway.M2 -> travelTimesCache.m2Config
+			Motorway.M4 -> travelTimesCache.m4Config
+			Motorway.M7 -> travelTimesCache.m7Config
 		}
 	}
 

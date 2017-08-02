@@ -11,6 +11,13 @@ import org.androidannotations.annotations.EApplication
  */
 @EApplication
 open class TrafficAtNSWApplication : Application() {
+
+//	val component: AppComponent by lazy {
+//		DaggerAppComponent.builder()
+//			.appModule(AppModule(this))
+//			.build()
+//	}
+
 	override fun attachBaseContext(base: Context) {
 		super.attachBaseContext(base)
 		MultiDex.install(this)
@@ -19,9 +26,12 @@ open class TrafficAtNSWApplication : Application() {
 
 	override fun onCreate() {
 		super.onCreate()
+		graph = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+		graph.inject(this)
 	}
 
 	companion object {
 		lateinit var context: Context
+		@JvmStatic lateinit var graph: AppComponent
 	}
 }

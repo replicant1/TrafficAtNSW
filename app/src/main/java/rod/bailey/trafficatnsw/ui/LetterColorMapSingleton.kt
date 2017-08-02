@@ -44,17 +44,17 @@ class LetterColorMapSingleton private constructor(){
 	}
 
 	@ColorRes
-	fun getColorForLetter(ctx: Context, ch: Char): Int {
+	fun getColorForLetter(ch: Char): Int {
 		val key:Char = ch.toUpperCase()
 		if (!letterToColorMap.containsKey(key)) {
-			val color:Int = nextColor(ctx)
+			val color:Int = nextColor()
 			Log.d(LOG_TAG, "key=${key}, color=${color}")
 			letterToColorMap.put(key, color)
 		}
 		return letterToColorMap.get(key) ?: R.color.palette_rusty_red
 	}
 
-	private fun nextColor(ctx: Context): Int {
+	private fun nextColor(): Int {
 		val nextListIndex: Int = if (colorListIndex == colorList.size) 0 else colorListIndex++
 		return colorList[nextListIndex]
 	}

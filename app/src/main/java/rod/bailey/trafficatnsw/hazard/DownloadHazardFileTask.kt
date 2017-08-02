@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
@@ -12,6 +13,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.net.URL
+import javax.inject.Inject
 
 /**
  * Async task for downloading the incident.json file from the Live Traffic web site.
@@ -20,7 +22,17 @@ import java.net.URL
  */
 class DownloadHazardFileTask(private val ctx: Context,
 							 private val hazardList: ListViewWithEmptyMessage) : AsyncTask<Void, Void, Boolean>() {
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
 	private var dialog: ProgressDialog? = null
+
+	@Inject
+	lateinit var hazardCacheSingleton: HazardCacheSingleton
+
+	@Inject
+	lateinit var config: ConfigSingleton
 
 	/**
 	 * Show a "loading incidents..." progress dialog
@@ -37,7 +49,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 
 	private fun loadIncidentsFromLocalJSONFile(): String? {
 		MLog.d(LOG_TAG, "Loading incidents from local JSON file")
-		val assetFileName = ConfigSingleton.instance.localIncidentsJSONFile()
+		val assetFileName = config.localIncidentsJSONFile()
 		val input = ctx.assets.open(assetFileName)
 		val size = input.available()
 		val buffer = ByteArray(size)
@@ -53,7 +65,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 
 		try {
 			MLog.d(LOG_TAG, "Loading incidents from remote JSON file")
-			val url = URL(ConfigSingleton.instance.remoteIncidentsJSONFile())
+			val url = URL(config.remoteIncidentsJSONFile())
 			val inStreamReader = InputStreamReader(url.openStream())
 			bufferedReader = BufferedReader(inStreamReader)
 			var line: String?
@@ -89,14 +101,14 @@ class DownloadHazardFileTask(private val ctx: Context,
 
 	override fun doInBackground(vararg params: Void): Boolean {
 		val jsonText: String? =
-			if (ConfigSingleton.instance.loadIncidentsFromLocalJSONFile()) {
+			if (config.loadIncidentsFromLocalJSONFile()) {
 				loadIncidentsFromLocalJSONFile()
 			} else {
 				loadIncidentsFromRemoteJSONFile()
 			}
 
 		if (jsonText != null) {
-			HazardCacheSingleton.instance.init(jsonText)
+			hazardCacheSingleton.init(jsonText)
 			return true
 		}
 		return false

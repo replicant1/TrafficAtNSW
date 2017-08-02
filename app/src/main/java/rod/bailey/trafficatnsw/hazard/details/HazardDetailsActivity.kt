@@ -5,20 +5,17 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.R.anim
-import rod.bailey.trafficatnsw.R.id
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter_
 import rod.bailey.trafficatnsw.util.MLog
+import javax.inject.Inject
 
 /**
  * Details list has the following sections:
@@ -37,10 +34,17 @@ open class HazardDetailsActivity : AppCompatActivity() {
 	@JvmField
 	var hazardId: Int? = null
 
+	@Inject
+	lateinit var hazardCacheSingleton: HazardCacheSingleton
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
 	@AfterExtras
 	fun afterExtras() {
 		MLog.i(LOG_TAG, "Showing details of hazard id " + hazardId)
-		val tmpHazard: XHazard? = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId ?: 0)
+		val tmpHazard: XHazard? = hazardCacheSingleton.getUnfilteredHazard(hazardId ?: 0)
 
 		if (tmpHazard != null) {
 			hazard = tmpHazard

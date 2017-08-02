@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.view_list.view.*
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.filter.AdmitFavouritesTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.AdmitSydneyTrafficCameraFilter
@@ -18,6 +19,7 @@ import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
 import rod.bailey.trafficatnsw.util.MLog
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
+import javax.inject.Inject
 
 class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	enum class TrafficCameraListMode constructor(val displayName: String,
@@ -27,6 +29,13 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		REGIONAL("Regional", "Cameras in Regional NSW", AdmitRegionalTrafficCameraFilter()), //
 		SYDNEY("Sydney", "Cameras in Sydney", AdmitSydneyTrafficCameraFilter())
 	}
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
+	@Inject
+	lateinit var cameraCache: TrafficCameraCacheSingleton
 
 	/** Top level layout has list with DataLicenceView in footer  */
 	private lateinit var cameraListView: ListViewWithEmptyMessage
@@ -71,11 +80,10 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		mode = newmode
 
 		// Initialize TrafficCameraCacheSingleton
-		val db = TrafficCameraCacheSingleton.instance
-		db.init(activity)
+		cameraCache.init(activity)
 
-		MLog.i(LOG_TAG, "TCLFragment add self as listener to TCDb " + db.hashCode())
-		db.addPropertyChangeListener(this)
+		MLog.i(LOG_TAG, "TCLFragment add self as listener to TCDb " + cameraCache.hashCode())
+		cameraCache.addPropertyChangeListener(this)
 	}
 
 	override fun onCreateView(inflater: LayoutInflater,
