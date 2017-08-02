@@ -10,10 +10,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.EActivity
-import org.androidannotations.annotations.Extra
-import org.androidannotations.annotations.ViewById
+import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.*
 
@@ -23,6 +20,7 @@ import rod.bailey.trafficatnsw.cameras.*
  * marked as a extraFavourite by the user.
  */
 @EActivity(R.layout.activity_camera_image)
+@OptionsMenu(R.menu.menu_traffic_camera_image_options)
 open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImageDisplayer {
 
 	@ViewById(R.id.iv_camera_image)
@@ -65,7 +63,9 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	@JvmField
 	var extraFavourite: Boolean? = null
 
-	private var favouriteMenuItem: MenuItem? = null
+	@OptionsMenuItem(R.id.toggle_camera_favourite)
+	@JvmField
+	var favouriteMenuItem: MenuItem? = null
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -92,10 +92,12 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 		refresh()
 	}
 
+	@OptionsItem(R.id.refresh_camera_image)
 	fun refresh() {
 		DownloadImageTask(context = this, displayer = this).execute(extraUrl)
 	}
 
+	@OptionsItem(R.id.toggle_camera_favourite)
 	fun toggleFavourite() {
 		val camera: TrafficCamera? = TrafficCameraCacheSingleton.instance.getCamera(extraIndex ?: 0)
 		if (camera != null) {
@@ -117,22 +119,13 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		val inflater = menuInflater
-		inflater.inflate(R.menu.menu_traffic_camera_image_options, menu)
-		favouriteMenuItem = menu.findItem(R.id.toggle_camera_favourite)
 		updateActionBarPerFavouriteStatus(extraFavourite ?: false)
 		return true
 	}
 
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		if (item != null) {
-			when (item.itemId) {
-				R.id.refresh_camera_image -> refresh()
-				R.id.toggle_camera_favourite -> toggleFavourite()
-				android.R.id.home -> NavUtils.navigateUpFromSameTask(this)
-			}
-		}
-		return true
+	@OptionsItem(android.R.id.home)
+	fun actionBarHome() {
+		NavUtils.navigateUpFromSameTask(this)
 	}
 
 	companion object {

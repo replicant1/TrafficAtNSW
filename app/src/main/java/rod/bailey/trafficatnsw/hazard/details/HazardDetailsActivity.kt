@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.view_list.view.*
-import org.androidannotations.annotations.AfterExtras
-import org.androidannotations.annotations.EActivity
-import org.androidannotations.annotations.Extra
+import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.R.anim
 import rod.bailey.trafficatnsw.R.id
@@ -30,6 +29,7 @@ import rod.bailey.trafficatnsw.util.MLog
  *  4. Other Advice
  */
 @EActivity
+@OptionsMenu(R.menu.menu_hazard_details_options)
 open class HazardDetailsActivity : AppCompatActivity() {
 	private lateinit var hazard: XHazard
 
@@ -59,20 +59,14 @@ open class HazardDetailsActivity : AppCompatActivity() {
 		overridePendingTransition(anim.slide_in_from_right, R.anim.slide_out_to_left)
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		menuInflater.inflate(R.menu.menu_hazard_details_options, menu)
-		return super.onCreateOptionsMenu(menu)
+	@OptionsItem(R.id.show_on_map)
+	fun menuItemShowOnMap() {
+		ShowHazardOnMapActivity.start(this, hazard.hazardId)
 	}
 
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		if (item != null) {
-			if (item.itemId == id.show_on_map) {
-				ShowHazardOnMapActivity.start(this, hazard.hazardId)
-			} else if (item.itemId == android.R.id.home) {
-				NavUtils.navigateUpFromSameTask(this)
-			}
-		}
-		return true
+	@OptionsItem(android.R.id.home)
+	fun menuItemHome() {
+		NavUtils.navigateUpFromSameTask(this)
 	}
 
 	companion object {

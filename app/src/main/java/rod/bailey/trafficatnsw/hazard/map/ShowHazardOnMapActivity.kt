@@ -13,10 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import org.androidannotations.annotations.AfterExtras
-import org.androidannotations.annotations.AfterViews
-import org.androidannotations.annotations.EActivity
-import org.androidannotations.annotations.Extra
+import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
 import rod.bailey.trafficatnsw.json.hazard.XHazard
@@ -37,11 +34,9 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 		hazard = HazardCacheSingleton.instance.getUnfilteredHazard(hazardId ?: 0)
 	}
 
-	override fun onOptionsItemSelected(item: MenuItem): Boolean {
-		if (item.itemId == android.R.id.home) {
-			NavUtils.navigateUpFromSameTask(this)
-		}
-		return true
+	@OptionsItem(android.R.id.home)
+	fun menuItemHome() {
+		NavUtils.navigateUpFromSameTask(this)
 	}
 
 	@AfterViews

@@ -6,6 +6,8 @@ import android.util.Log
 import android.view.*
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
+import org.androidannotations.annotations.OptionsItem
+import org.androidannotations.annotations.OptionsMenu
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.traveltime.common.MotorwayTravelTimesDatabase
 import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton
@@ -19,6 +21,7 @@ import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 
 @EFragment
+@OptionsMenu(R.menu.menu_travel_times_options)
 open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 
 	private var listView: ListViewWithEmptyMessage? = null
@@ -58,21 +61,8 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 		return listView
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-		inflater.inflate(R.menu.menu_travel_times_options, menu)
-		super.onCreateOptionsMenu(menu, inflater)
-	}
-
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		if (item != null) {
-			if (item.itemId == R.id.refresh_travel_times) {
-				refreshAsync()
-			}
-		}
-		return true
-	}
-
-	private fun refreshAsync() {
+	@OptionsItem(R.id.refresh_travel_times)
+	fun refreshAsync() {
 		DownloadTravelTimesTask(activity, this, travelTimeConfig, listView).execute()
 	}
 
@@ -86,7 +76,7 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	}
 
 	companion object {
-		private const val ARG_MWAY_KEY = "MWAY"
+		private const val ARG_MWAY_KEY = "rod.bailey.trafficatnsw.motorway"
 		private val LOG_TAG = TravelTimesFragment::class.java.simpleName
 
 		fun create(mway: Motorway): TravelTimesFragment {

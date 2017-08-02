@@ -3,10 +3,13 @@ package rod.bailey.trafficatnsw.hazard
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.*
 import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
+import org.androidannotations.annotations.OptionsItem
+import org.androidannotations.annotations.OptionsMenu
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
@@ -18,6 +21,7 @@ import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
  * determines which list is displayed. Construct using static create() method.
  */
 @EFragment
+@OptionsMenu(R.menu.menu_hazards_fragment_options)
 open class HazardListFragment : Fragment() {
 	private lateinit var mode: HazardListMode
 	private lateinit var hazardListView: ListViewWithEmptyMessage
@@ -68,19 +72,8 @@ open class HazardListFragment : Fragment() {
 		return hazardListView
 	}
 
-	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-		inflater.inflate(R.menu.menu_hazards_fragment_options, menu)
-		super.onCreateOptionsMenu(menu, inflater)
-	}
-
-	override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-		if ((item != null) && (item.itemId == R.id.menu_item_refresh_hazard_list)) {
-			refreshAsync()
-		}
-		return true
-	}
-
-	private fun refreshAsync() {
+	@OptionsItem(R.id.menu_item_refresh_hazard_list)
+	fun refreshAsync() {
 		DownloadHazardFileTask(activity, hazardListView).execute()
 	}
 

@@ -18,7 +18,7 @@ class ConfigSingleton private constructor() {
 		/**
 		 * The names of the properties in config.properties
 		 */
-		private val DURATION_TIME_FORMAT = "EEE d MMM"
+		private val DURATION_TIME_FORMAT = "DurationTimeFormat"
 		private val LOAD_INCIDENTS_FROM_LOCAL_JSON_FILE = "LoadIncidentsFromLocalJSONFile"
 		private val LOAD_TRAVEL_TIMES_FROM_LOCAL_JSON_FILES = "LoadTravelTimesFromLocalJSONFiles"
 		private val LOCAL_INCIDENTS_JSON_FILE = "LocalIncidentsJSONFile"
