@@ -1,20 +1,19 @@
 package rod.bailey.trafficatnsw.hazard
 
 import rod.bailey.trafficatnsw.hazard.filter.AdmitAllHazardFilter
-import java.util.HashMap
-import java.util.LinkedList
 import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XRegion
+import java.util.*
 
-class HazardCacheSingleton private constructor() {
-	private object Holder {
-		val INSTANCE = HazardCacheSingleton()
-	}
+/**
+ * Instances of this class should always be injected as we rely on Dagger to keep it a
+ * Singleton.
+ */
+class HazardCacheSingleton {
 
 	companion object {
 		private val LOG_TAG = HazardCacheSingleton::class.java.simpleName
-		val instance: HazardCacheSingleton by lazy { Holder.INSTANCE }
 	}
 
 	var filter: IHazardFilter = AdmitAllHazardFilter()
@@ -34,7 +33,7 @@ class HazardCacheSingleton private constructor() {
 		for (hazard in allHazards) {
 			if ((hazard.isEnded != null) && (!hazard.isEnded)) {
 				if (!hazard.roads.isEmpty()) {
-					val regionStr:String? = hazard.roads[0].region
+					val regionStr: String? = hazard.roads[0].region
 					if (regionStr != null) {
 						val region = XRegion.valueOf(regionStr)
 						// Add this hazard into the unfiltered map

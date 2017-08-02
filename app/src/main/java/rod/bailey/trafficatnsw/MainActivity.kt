@@ -12,16 +12,20 @@ import android.view.Gravity
 import android.view.MenuItem
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.HazardListMode
+import rod.bailey.trafficatnsw.hazard.TestThingy
 import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.config.Motorway
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
+import javax.inject.Inject
 
 @EActivity(R.layout.activity_main)
 open class MainActivity : AppCompatActivity() {
+
 	private lateinit var drawerToggle: ActionBarDrawerToggle
 
 	override fun onConfigurationChanged(newConfig: Configuration) {
@@ -31,6 +35,8 @@ open class MainActivity : AppCompatActivity() {
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+
+		TrafficAtNSWApplication.graph.inject(this)
 
 		// Initialize config facility
 		val config = ConfigSingleton.instance

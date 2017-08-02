@@ -3,17 +3,20 @@ package rod.bailey.trafficatnsw.hazard
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
 import org.androidannotations.annotations.OptionsItem
 import org.androidannotations.annotations.OptionsMenu
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.ui.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
+import javax.inject.Inject
 
 /**
  * Screen that displays a list of hazards for (a) All Sydney, or (b) Regional NSW.
@@ -23,12 +26,20 @@ import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage_
 @EFragment
 @OptionsMenu(R.menu.menu_hazards_fragment_options)
 open class HazardListFragment : Fragment() {
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
 	private lateinit var mode: HazardListMode
 	private lateinit var hazardListView: ListViewWithEmptyMessage
 
 	@FragmentArg(HazardListFragment.ARG_HAZARDS_FRAGMENT_MODE)
 	@JvmField
 	var modeKey: Int? = null
+
+	@Inject
+	lateinit var hazardCacheSingleton: HazardCacheSingleton
 
 	/**
 	 * @return The string to display in place of the hazard list when there are no hazards
@@ -53,7 +64,7 @@ open class HazardListFragment : Fragment() {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		mode = HazardListMode.values()[modeKey ?: 0]
-		HazardCacheSingleton.instance.filter = mode.filter
+		hazardCacheSingleton.filter = mode.filter
 	}
 
 	override fun onCreateView(inflater: LayoutInflater,

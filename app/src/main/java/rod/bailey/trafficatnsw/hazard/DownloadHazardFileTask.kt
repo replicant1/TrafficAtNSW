@@ -5,6 +5,7 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
@@ -12,6 +13,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.net.URL
+import javax.inject.Inject
 
 /**
  * Async task for downloading the incident.json file from the Live Traffic web site.
@@ -20,7 +22,14 @@ import java.net.URL
  */
 class DownloadHazardFileTask(private val ctx: Context,
 							 private val hazardList: ListViewWithEmptyMessage) : AsyncTask<Void, Void, Boolean>() {
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
 	private var dialog: ProgressDialog? = null
+
+	@Inject
+	lateinit var hazardCacheSingleton: HazardCacheSingleton
 
 	/**
 	 * Show a "loading incidents..." progress dialog
@@ -96,7 +105,7 @@ class DownloadHazardFileTask(private val ctx: Context,
 			}
 
 		if (jsonText != null) {
-			HazardCacheSingleton.instance.init(jsonText)
+			hazardCacheSingleton.init(jsonText)
 			return true
 		}
 		return false

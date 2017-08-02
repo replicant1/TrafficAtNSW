@@ -28,6 +28,7 @@ android {
 
 kapt {
     correctErrorTypes = true
+    generateStubs = true
 }
 
 dependencies {
@@ -47,4 +48,7 @@ dependencies {
     kapt "org.androidannotations:androidannotations:$aa_version"
 
     compile "com.android.support:cardview-v7:$support_version"
+
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    compile "com.google.dagger:dagger:$dagger_version"
 }

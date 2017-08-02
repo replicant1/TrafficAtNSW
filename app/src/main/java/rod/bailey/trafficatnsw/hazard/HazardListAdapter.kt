@@ -5,27 +5,34 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.json.hazard.XHazard
 import rod.bailey.trafficatnsw.json.hazard.XRegion
 import rod.bailey.trafficatnsw.ui.view.HazardListItemView_
 import rod.bailey.trafficatnsw.ui.view.ListHeadingView_
 import rod.bailey.trafficatnsw.util.MLog
 import java.util.*
+import javax.inject.Inject
 
 /**
  * Adapts data in the HazardCacheSingleton to a list of hazards
  */
 class HazardListAdapter : BaseAdapter(), ListAdapter {
 
+	@Inject
+	lateinit var hazardCacheSingleton: HazardCacheSingleton
+
 	/** Each element is an instance of XRegion (sub-heading) or XHazard (list item) */
 	private val listData = ArrayList<Any>()
 
 	init {
+		TrafficAtNSWApplication.graph.inject(this)
+
 		MLog.d(TAG, "About to collate the listData from HazardCacheSingleton contents")
 		for (region in sortedHazardRegions()) {
 			listData.add(region)
 			val hazards: List<XHazard>? =
-				HazardCacheSingleton.instance.getFilteredHazardsForRegion(region)
+				hazardCacheSingleton.getFilteredHazardsForRegion(region)
 			if (hazards != null) {
 				listData.addAll(hazards.sorted())
 			}
@@ -65,7 +72,7 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 
 		for (region in XRegion.values()) {
 			val hazardsForRegion =
-				HazardCacheSingleton.instance.getFilteredHazardsForRegion(region)
+				hazardCacheSingleton.getFilteredHazardsForRegion(region)
 
 			if (hazardsForRegion != null && !hazardsForRegion.isEmpty()) {
 				sortedRegions.add(region)
