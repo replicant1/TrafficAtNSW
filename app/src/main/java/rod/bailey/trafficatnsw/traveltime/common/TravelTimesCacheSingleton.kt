@@ -3,14 +3,13 @@ package rod.bailey.trafficatnsw.traveltime.common
 import android.content.Context
 import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.URL
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
 
-class TravelTimesSingleton {
+class TravelTimesCacheSingleton {
 	var m1Config: TravelTimeConfig? = null
 		private set
 	val m1Database: MotorwayTravelTimesDatabase? = null
@@ -69,7 +68,8 @@ class TravelTimesSingleton {
 								configSingleton!!.localM7JSONFile())
 	}
 
-	@Synchronized fun init() {
+	@Synchronized
+	fun init() {
 		configSingleton = ConfigSingleton.instance
 
 		if (m1Config == null || m2Config == null || m4Config == null || m7Config == null) {
@@ -110,13 +110,6 @@ class TravelTimesSingleton {
 		return null
 	}
 
-	/**
-	 * Blocking
-
-	 * @param jsonUrl
-	 * *
-	 * @return
-	 */
 	fun loadTravelTimesFromRemoteJSONFile(ctx: Context,
 										  config: TravelTimeConfig): MotorwayTravelTimesDatabase? {
 		MLog.i(TAG, "Beginning load of " + config.motorwayName + " travel times from remote file "
@@ -169,8 +162,6 @@ class TravelTimesSingleton {
 			&& m7Config != null
 
 	companion object {
-		@get:Synchronized val singleton = TravelTimesSingleton()
-		private val TAG = TravelTimesSingleton::class.java
-			.simpleName
+		private val TAG = TravelTimesCacheSingleton::class.java.simpleName
 	}
 }

@@ -5,17 +5,26 @@ import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.traveltime.common.TravelTimesSingleton
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.traveltime.common.TravelTimesCacheSingleton
 import rod.bailey.trafficatnsw.traveltime.config.TravelTimeConfig
 import rod.bailey.trafficatnsw.ui.view.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.util.ConfigSingleton
 import rod.bailey.trafficatnsw.util.MLog
+import javax.inject.Inject
 
 class DownloadTravelTimesTask(
 	private val ctx: Context,
 	private val ttFrag: TravelTimesFragment,
 	private val travelTimeConfig: TravelTimeConfig?,
 	private val mainLayout: ListViewWithEmptyMessage?) : AsyncTask<Void, Void, Boolean>() {
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
+	@Inject
+	lateinit var travelTimesCache: TravelTimesCacheSingleton
 
 	private var dialog: ProgressDialog? = null
 
@@ -34,12 +43,9 @@ class DownloadTravelTimesTask(
 
 		if (ConfigSingleton.instance
 			.loadTravelTimesFromLocalJSONFiles()) {
-			ttFrag.db = TravelTimesSingleton.singleton
-				.loadTravelTimesFromLocalJSONFile(ctx, travelTimeConfig!!)
+			ttFrag.db = travelTimesCache.loadTravelTimesFromLocalJSONFile(ctx, travelTimeConfig!!)
 		} else {
-			ttFrag.db = TravelTimesSingleton.singleton
-				.loadTravelTimesFromRemoteJSONFile(ctx,
-												   travelTimeConfig!!)
+			ttFrag.db = travelTimesCache.loadTravelTimesFromRemoteJSONFile(ctx, travelTimeConfig!!)
 		}
 
 		if (ttFrag.db == null) {

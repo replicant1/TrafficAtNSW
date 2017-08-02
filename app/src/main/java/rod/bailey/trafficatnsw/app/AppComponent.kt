@@ -11,6 +11,8 @@ import rod.bailey.trafficatnsw.hazard.HazardListAdapter
 import rod.bailey.trafficatnsw.hazard.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
+import rod.bailey.trafficatnsw.traveltime.DownloadTravelTimesTask
+import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment
 import javax.inject.Singleton
 
 /**
@@ -33,4 +35,6 @@ interface AppComponent {
 	fun inject(adapter: TrafficCameraListAdapter)
 	fun inject(fragment: TrafficCameraListFragment)
 	fun inject(activity: TrafficCameraImageActivity)
+	fun inject(task: DownloadTravelTimesTask)
+	fun inject(fragment: TravelTimesFragment)
 }
