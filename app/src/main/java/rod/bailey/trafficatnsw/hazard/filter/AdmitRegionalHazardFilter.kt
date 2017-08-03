@@ -1,8 +1,7 @@
 package rod.bailey.trafficatnsw.hazard.filter
 
-import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.json.hazard.XRegion
-import rod.bailey.trafficatnsw.util.MLog
+import rod.bailey.trafficatnsw.hazard.data.XHazard
+import rod.bailey.trafficatnsw.hazard.data.XRegion
 
 class AdmitRegionalHazardFilter : IHazardFilter {
 	override fun admit(hazard: XHazard): Boolean {
@@ -12,7 +11,7 @@ class AdmitRegionalHazardFilter : IHazardFilter {
 			val road = roads[0]
 			val roadRegionStr:String? = road.region
 			if (roadRegionStr != null) {
-				val roadRegion:XRegion? = XRegion.valueOf(roadRegionStr)
+				val roadRegion: XRegion? = XRegion.valueOf(roadRegionStr)
 				result = roadRegion?.isRegional ?: false
 			}
 		}

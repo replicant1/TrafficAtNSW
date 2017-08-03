@@ -12,8 +12,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
-import rod.bailey.trafficatnsw.json.hazard.XHazard
+import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
+import rod.bailey.trafficatnsw.hazard.data.XHazard
 import javax.inject.Inject
 
 @EActivity(R.layout.activity_show_hazard_on_map)

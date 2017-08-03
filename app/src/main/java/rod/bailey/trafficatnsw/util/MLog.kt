@@ -1,7 +1,7 @@
 package rod.bailey.trafficatnsw.util
 
-import android.content.Context
 import android.util.Log
+import rod.bailey.trafficatnsw.app.ConfigSingleton
 
 object MLog {
 	private val TAG = MLog::class.java.simpleName

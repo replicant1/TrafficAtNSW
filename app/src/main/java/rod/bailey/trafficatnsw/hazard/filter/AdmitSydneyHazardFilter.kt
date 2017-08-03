@@ -1,8 +1,7 @@
 package rod.bailey.trafficatnsw.hazard.filter
 
-import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.json.hazard.XRegion
-import rod.bailey.trafficatnsw.json.hazard.XRoad
+import rod.bailey.trafficatnsw.hazard.data.XHazard
+import rod.bailey.trafficatnsw.hazard.data.XRegion
 import rod.bailey.trafficatnsw.util.MLog
 
 class AdmitSydneyHazardFilter : IHazardFilter {

@@ -5,7 +5,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,7 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
 
+import rod.bailey.trafficatnsw.app.MainActivity;
 import rod.bailey.trafficatnsw.json.hazard.Hazard;
 import rod.bailey.trafficatnsw.json.hazard.HazardCollection;
 import rod.bailey.trafficatnsw.json.hazard.HazardGeometry;
