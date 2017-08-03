@@ -3,10 +3,9 @@ package rod.bailey.trafficatnsw.app
 import android.app.Application
 import dagger.Module
 import dagger.Provides
-import rod.bailey.trafficatnsw.cameras.TrafficCameraCacheSingleton
-import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
-import rod.bailey.trafficatnsw.traveltime.common.TravelTimesCacheSingleton
-import rod.bailey.trafficatnsw.util.ConfigSingleton
+import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
+import rod.bailey.trafficatnsw.traveltime.data.TravelTimesCacheSingleton
 import javax.inject.Singleton
 
 @Module

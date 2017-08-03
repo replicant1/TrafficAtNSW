@@ -1,6 +1,6 @@
 package rod.bailey.trafficatnsw.hazard.filter
 
-import rod.bailey.trafficatnsw.json.hazard.XHazard
+import rod.bailey.trafficatnsw.hazard.data.XHazard
 
 /**
  * Unconditionally admits all hazards

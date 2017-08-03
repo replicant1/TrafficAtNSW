@@ -2,20 +2,19 @@ package rod.bailey.trafficatnsw.app
 
 import android.app.Application
 import dagger.Component
-import rod.bailey.trafficatnsw.MainActivity
-import rod.bailey.trafficatnsw.cameras.TrafficCameraListAdapter
-import rod.bailey.trafficatnsw.cameras.TrafficCameraListFragment
-import rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity
-import rod.bailey.trafficatnsw.hazard.DownloadHazardFileTask
-import rod.bailey.trafficatnsw.hazard.HazardListAdapter
-import rod.bailey.trafficatnsw.hazard.HazardListFragment
+import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListAdapter
+import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
+import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
+import rod.bailey.trafficatnsw.hazard.data.DownloadHazardFileTask
+import rod.bailey.trafficatnsw.hazard.ui.HazardListAdapter
+import rod.bailey.trafficatnsw.hazard.ui.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsListAdapter
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
-import rod.bailey.trafficatnsw.traveltime.DownloadTravelTimesTask
-import rod.bailey.trafficatnsw.traveltime.TravelTimesFragment
-import rod.bailey.trafficatnsw.traveltime.common.TravelTimesCacheSingleton
-import rod.bailey.trafficatnsw.ui.view.HazardListItemView
+import rod.bailey.trafficatnsw.traveltime.data.DownloadTravelTimesTask
+import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
+import rod.bailey.trafficatnsw.traveltime.data.TravelTimesCacheSingleton
+import rod.bailey.trafficatnsw.hazard.ui.HazardListItemView
 import javax.inject.Singleton
 
 /**

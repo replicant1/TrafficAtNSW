@@ -1,6 +1,6 @@
 package rod.bailey.trafficatnsw.cameras.filter
 
-import rod.bailey.trafficatnsw.cameras.TrafficCamera
+import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 
 interface ITrafficCameraFilter {
 	/**

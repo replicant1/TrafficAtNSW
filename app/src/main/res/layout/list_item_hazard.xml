@@ -14,7 +14,7 @@
 
     <!-- Icon that is a filled circle with a letter in the middle -->
 
-    <rod.bailey.trafficatnsw.ui.view.ListItemCircularIcon_
+    <rod.bailey.trafficatnsw.common.ui.ListItemCircularIcon_
         android:id="@+id/tv_hazard_list_item_circle"
         android:layout_width="40dp"
         android:layout_height="40dp"

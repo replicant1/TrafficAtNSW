@@ -5,15 +5,14 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.R.anim
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.hazard.HazardCacheSingleton
+import rod.bailey.trafficatnsw.common.ui.ListViewAutoHideFooter_
+import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
+import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
-import rod.bailey.trafficatnsw.json.hazard.XHazard
-import rod.bailey.trafficatnsw.ui.view.ListViewAutoHideFooter_
 import rod.bailey.trafficatnsw.util.MLog
 import javax.inject.Inject
 
@@ -50,8 +49,8 @@ open class HazardDetailsActivity : AppCompatActivity() {
 			hazard = tmpHazard
 			val listView = ListViewAutoHideFooter_.build(this)
 			listView.setAdapter(HazardDetailsListAdapter(this, hazard))
-			listView.lv_list.divider = ContextCompat.getDrawable(this, R.drawable.line_list_divider_full)
-			listView.lv_list.dividerHeight = 2
+			listView.listView?.divider = ContextCompat.getDrawable(this, R.drawable.line_list_divider_full)
+			listView.listView?.dividerHeight = 2
 			setContentView(listView)
 		}
 

@@ -27,7 +27,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="rod.bailey.trafficatnsw.MainActivity_"
+            android:name="rod.bailey.trafficatnsw.app.MainActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -37,14 +37,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="rod.bailey.trafficatnsw.cameras.details.TrafficCameraImageActivity_"
+            android:name="rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity_"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.MainActivity_"/>
+                android:value="rod.bailey.trafficatnsw.app.MainActivity_"/>
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity_"
@@ -54,7 +54,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="rod.bailey.trafficatnsw.MainActivity_"/>
+                android:value="rod.bailey.trafficatnsw.app.MainActivity_"/>
         </activity>
         <activity
             android:name="rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity_"
