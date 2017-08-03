@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 import rod.bailey.trafficatnsw.app.MainActivity;
+import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.json.hazard.Hazard;
 import rod.bailey.trafficatnsw.json.hazard.HazardCollection;
 import rod.bailey.trafficatnsw.json.hazard.HazardGeometry;
@@ -32,7 +33,7 @@ import static org.junit.Assert.assertEquals;
 public class HazardCollectionInstrumentedTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule(MainActivity.class);
+    public ActivityTestRule<MainActivity_> mActivityRule = new ActivityTestRule(MainActivity_.class);
 
     /**
      * Sample json file 09jul2013 contains 29 hazards.
