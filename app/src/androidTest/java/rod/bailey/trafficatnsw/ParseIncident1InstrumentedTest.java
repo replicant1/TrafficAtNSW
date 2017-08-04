@@ -43,7 +43,7 @@ public class ParseIncident1InstrumentedTest {
 
 	@BeforeClass
 	public static void parseJsonFile() throws IOException {
-		Context appContext = InstrumentationRegistry.getTargetContext();
+		Context appContext = InstrumentationRegistry.getContext();
 		String jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
 		hazards = XHazard.Companion.parseIncidentJson(jsonString);
 		assertNotNull(hazards);
