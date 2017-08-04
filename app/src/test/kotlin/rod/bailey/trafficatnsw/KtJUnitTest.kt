@@ -1,19 +1,20 @@
 package rod.bailey.trafficatnsw
 
 import org.junit.Test
+import kotlin.test.assertTrue
 
 /**
- * Created by rodbailey on 4/8/17.
+ * Uninstrumented tests
  */
 class KtJUnitTest {
 
 	@Test
 	fun myTest() {
-		//assertTrue(2 == 2);
+		assertTrue(2 == 2);
 	}
 
 	@Test
 	fun myTest2() {
-		//assertTrue(3 == 3);
+		assertTrue(3 == 3);
 	}
 }
