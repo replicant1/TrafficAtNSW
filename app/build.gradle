@@ -24,7 +24,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
 }
+
 
 kapt {
     correctErrorTypes = true
@@ -34,22 +39,43 @@ kapt {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // For instrumented tests
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    // Play services required for showing hazard on Google Map
     compile 'com.google.android.gms:play-services:11.0.2'
+
+    // Material Design support
     compile "com.android.support:design:$support_version"
+
+    // Enable Kotlin instrumented tests
+    androidTestCompile 'junit:junit:4.12'
+    androidTestCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    androidTestCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
+    // Enable Kotlin un-instrumented tests
     testCompile 'junit:junit:4.12'
+    testCompile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+
     compile 'com.google.code.gson:gson:2.6.2'
     compile 'com.android.support:multidex:1.0.0'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    // Kotlin and Anko lib for main app source
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     compile "org.jetbrains.anko:anko-common:$anko_version"
 
+    // Android Annotations
     compile "org.androidannotations:androidannotations-api:$aa_version"
     kapt "org.androidannotations:androidannotations:$aa_version"
 
+    // Android support library - card UI widget
     compile "com.android.support:cardview-v7:$support_version"
 
+    // Dagger
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     compile "com.google.dagger:dagger:$dagger_version"
 }
