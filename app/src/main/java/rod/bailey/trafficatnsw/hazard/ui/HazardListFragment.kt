@@ -16,7 +16,7 @@ import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage_
-import rod.bailey.trafficatnsw.hazard.data.DownloadHazardFileTask
+import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
 import javax.inject.Inject
 
@@ -87,7 +87,7 @@ open class HazardListFragment : Fragment() {
 
 	@OptionsItem(R.id.menu_item_refresh_hazard_list)
 	fun refreshAsync() {
-		DownloadHazardFileTask(activity, hazardListView).execute()
+		DownloadHazardsTask(activity, hazardListView).execute()
 	}
 
 	companion object {

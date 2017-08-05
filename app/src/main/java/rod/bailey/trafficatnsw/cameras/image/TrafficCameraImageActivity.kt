@@ -105,7 +105,7 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 
 	@OptionsItem(R.id.refresh_camera_image)
 	fun refresh() {
-		DownloadImageTask(context = this, displayer = this).execute(extraUrl)
+		DownloadImageTask(context = this, displayer = this).execute(extraIndex)
 	}
 
 	@OptionsItem(R.id.toggle_camera_favourite)

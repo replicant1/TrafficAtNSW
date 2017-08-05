@@ -2,10 +2,13 @@ package rod.bailey.trafficatnsw.app
 
 import android.app.Application
 import dagger.Component
+import rod.bailey.trafficatnsw.cameras.data.DownloadImageTask
 import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListAdapter
 import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
-import rod.bailey.trafficatnsw.hazard.data.DownloadHazardFileTask
+import rod.bailey.trafficatnsw.common.service.RemoteDataService
+import rod.bailey.trafficatnsw.common.service.TestDataService
+import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
 import rod.bailey.trafficatnsw.hazard.ui.HazardListAdapter
 import rod.bailey.trafficatnsw.hazard.ui.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
@@ -29,7 +32,7 @@ import javax.inject.Singleton
 interface AppComponent {
 	fun inject(app: Application)
 	fun inject(activity: MainActivity)
-	fun inject(task: DownloadHazardFileTask)
+	fun inject(task: DownloadHazardsTask)
 	fun inject(adapter: HazardListAdapter)
 	fun inject(fragment: HazardListFragment)
 	fun inject(activity: HazardDetailsActivity)
@@ -42,4 +45,7 @@ interface AppComponent {
 	fun inject(adapter: HazardDetailsListAdapter)
 	fun inject(singleton: TravelTimesCacheSingleton)
 	fun inject(view: HazardListItemView)
+	fun inject(service: TestDataService)
+	fun inject(service: RemoteDataService)
+	fun inject(task: DownloadImageTask)
 }

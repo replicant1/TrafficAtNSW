@@ -8,15 +8,25 @@ import android.os.AsyncTask
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.image.ITrafficCameraImageDisplayer
+import rod.bailey.trafficatnsw.common.service.IDataService
 import rod.bailey.trafficatnsw.util.MLog
+import javax.inject.Inject
 
 /**
  * Task to download a given traffic camera imageView from the Live Traffic web site.
  */
 class DownloadImageTask(
 	private val context: Context,
-	private val displayer: ITrafficCameraImageDisplayer) : AsyncTask<String, Void, Bitmap>() {
+	private val displayer: ITrafficCameraImageDisplayer) : AsyncTask<Int, Void, Bitmap>() {
+
+	init {
+		TrafficAtNSWApplication.graph.inject(this)
+	}
+
+	@Inject
+	lateinit var dataService: IDataService
 
 	private var dialog: ProgressDialog? = null
 
@@ -29,21 +39,23 @@ class DownloadImageTask(
 		dialog?.show()
 	}
 
-	override fun doInBackground(vararg urls: String): Bitmap? {
-		Log.d(LOG_TAG, "Into doInBackground")
-		val urlToLoad = urls[0]
+	override fun doInBackground(vararg params: Int?): Bitmap? {
 		var result: Bitmap? = null
 
 		try {
-			val stream = java.net.URL(urlToLoad).openStream()
-			result = BitmapFactory.decodeStream(stream)
+			val param:Int? = params[0]
+			Log.d(LOG_TAG, "About to get image for ${param}")
+			if (param != null) {
+				result = dataService.getTrafficCameraImage(param)
+			}
 		}
 		catch (e: Exception) {
-			MLog.w(LOG_TAG, e)
+			Log.w(LOG_TAG, e)
 		}
 
 		return result
 	}
+
 
 	override fun onPostExecute(result: Bitmap?) {
 		dialog?.dismiss()

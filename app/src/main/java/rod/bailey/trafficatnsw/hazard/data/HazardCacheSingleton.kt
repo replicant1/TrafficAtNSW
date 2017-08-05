@@ -20,12 +20,17 @@ class HazardCacheSingleton {
 
 	@Synchronized
 	fun init(hazardsJSON: String) {
-		initUnfilteredHazards(hazardsJSON)
+		val allHazards = XHazard.parseIncidentJson(hazardsJSON)
+		init(allHazards)
+	}
+
+	@Synchronized
+	fun init(hazards: List<XHazard>) {
+		prime(hazards)
 		filter()
 	}
 
-	private fun initUnfilteredHazards(hazardsJSON: String) {
-		val allHazards = XHazard.parseIncidentJson(hazardsJSON)
+	private fun prime(allHazards: List<XHazard>) {
 		unfilteredHazardsPerRegion.clear()
 		// Put hazards into unfiltered hazards map
 		for (hazard in allHazards) {

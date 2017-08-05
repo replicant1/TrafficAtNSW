@@ -8,6 +8,7 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.app.ConfigSingleton
+import rod.bailey.trafficatnsw.common.service.IDataService
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter
 import rod.bailey.trafficatnsw.util.MLog
@@ -29,6 +30,9 @@ class DownloadTravelTimesTask(
 	@Inject
 	lateinit var config: ConfigSingleton
 
+	@Inject
+	lateinit var dataService: IDataService
+
 	private var dialog: ProgressDialog? = null
 
 	override fun onPreExecute() {
@@ -44,11 +48,7 @@ class DownloadTravelTimesTask(
 		var travelTimesLoadedOK: Boolean = java.lang.Boolean.TRUE
 		ttFrag.db?.removePropertyChangeListener(ttFrag)
 
-		if (config.loadTravelTimesFromLocalJSONFiles()) {
-			ttFrag.db = travelTimesCache.loadTravelTimesFromLocalJSONFile(ctx, travelTimeConfig!!)
-		} else {
-			ttFrag.db = travelTimesCache.loadTravelTimesFromRemoteJSONFile(ctx, travelTimeConfig!!)
-		}
+		ttFrag.db = dataService.getMotorwayTravelTimes(travelTimeConfig!!)
 
 		if (ttFrag.db == null) {
 			travelTimesLoadedOK = java.lang.Boolean.FALSE
