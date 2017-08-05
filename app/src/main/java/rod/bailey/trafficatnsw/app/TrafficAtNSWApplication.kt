@@ -12,12 +12,6 @@ import org.androidannotations.annotations.EApplication
 @EApplication
 open class TrafficAtNSWApplication : Application() {
 
-//	val component: AppComponent by lazy {
-//		DaggerAppComponent.builder()
-//			.appModule(AppModule(this))
-//			.build()
-//	}
-
 	override fun attachBaseContext(base: Context) {
 		super.attachBaseContext(base)
 		MultiDex.install(this)

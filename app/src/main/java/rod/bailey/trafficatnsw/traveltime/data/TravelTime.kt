@@ -2,10 +2,10 @@ package rod.bailey.trafficatnsw.traveltime.data
 
 import org.json.JSONException
 import org.json.JSONObject
+import rod.bailey.trafficatnsw.util.MLog
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
-import java.util.LinkedList
-import rod.bailey.trafficatnsw.util.MLog
+import java.util.*
 
 class TravelTime @Throws(JSONException::class)
 constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
@@ -90,10 +90,10 @@ constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
 			otherSegmentId!!.substring(0, 1))
 
 		if (firstCharCompare == 0) {
-			val thisEndChars:String = segmentId!!.substring(1)
-			val otherEndChars:String = otherSegmentId.substring(1)
-			val thisSecondCharIsNumber:Boolean = isNumber(thisEndChars)
-			val otherSecondCharIsNumber:Boolean = isNumber(otherEndChars)
+			val thisEndChars: String = segmentId!!.substring(1)
+			val otherEndChars: String = otherSegmentId.substring(1)
+			val thisSecondCharIsNumber: Boolean = isNumber(thisEndChars)
+			val otherSecondCharIsNumber: Boolean = isNumber(otherEndChars)
 
 			if (thisSecondCharIsNumber && otherSecondCharIsNumber) {
 				result = thisEndChars.toInt().compareTo(otherEndChars.toInt())
@@ -142,9 +142,7 @@ constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
 
 	fun setTravelTimeMinutes(travelTimeMinutes: Int) {
 		this.travelTimeMinutes = travelTimeMinutes
-		firePropertyChangeEvent(
-			PROPERTY_TRAVEL_TIME_IN_MINUTES,
-			travelTimeMinutes)
+		firePropertyChangeEvent(PROPERTY_TRAVEL_TIME_IN_MINUTES, travelTimeMinutes)
 	}
 
 	companion object {
@@ -161,13 +159,13 @@ constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
 		 * it down into an array of TravelTime instances.
 		 * jsonFileContents - textual contents of JSON file return - array of
 		 * TravelTime instances. Includes TOTAL features.
+		 *
 		 * @param jsonFileContents
-		 * *
 		 * @return List of TravelTIme instances filled out with data from the JSON
-		 * *         file. Order of list is same as order of JSON objects appearance
-		 * *         in the given jsonFileContents.
+		 *          file. Order of list is same as order of JSON objects appearance
+		 *          in the given jsonFileContents.
 		 */
-		fun parseTravelTimesFromJsonFile(
+		fun parseTravelTimesJson(
 			jsonFileContents: String?): List<TravelTime> {
 			val result = LinkedList<TravelTime>()
 

@@ -1,6 +1,7 @@
 package rod.bailey.trafficatnsw.app
 
 import android.app.Application
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
@@ -49,4 +50,8 @@ class AppModule(val app: Application) {
 		// Use TestDataService to fetch from files in the /assets directory
 		return TestDataService()
 	}
+
+	@Provides
+	fun provideContext(): Context = TrafficAtNSWApplication.context
+
 }

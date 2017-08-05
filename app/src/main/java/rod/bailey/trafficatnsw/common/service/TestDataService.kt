@@ -1,5 +1,6 @@
 package rod.bailey.trafficatnsw.common.service
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
@@ -7,10 +8,7 @@ import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 
 import rod.bailey.trafficatnsw.hazard.data.XHazard
-import rod.bailey.trafficatnsw.traveltime.data.Motorway
-import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesDatabase
-import rod.bailey.trafficatnsw.traveltime.data.TravelTimeConfig
-import rod.bailey.trafficatnsw.traveltime.data.TravelTimesCacheSingleton
+import rod.bailey.trafficatnsw.traveltime.data.*
 import rod.bailey.trafficatnsw.util.AssetUtils
 import javax.inject.Inject
 
@@ -30,6 +28,9 @@ class TestDataService : IDataService {
 	@Inject
 	lateinit var travelTimesCache: TravelTimesCacheSingleton
 
+	@Inject
+	lateinit var context: Context
+
 	companion object {
 		private val LOG_TAG: String = TestDataService::class.java.simpleName
 
@@ -39,15 +40,19 @@ class TestDataService : IDataService {
 	}
 
 	override fun getHazards(): List<XHazard>? {
-		val text:String = AssetUtils.loadAssetFileAsString(TrafficAtNSWApplication.context, LOCAL_INCIDENTS_JSON_FILE)
-		return XHazard.parseIncidentJson(text)
+		return XHazard.parseIncidentJson(
+			AssetUtils.loadAssetFileAsString(context, LOCAL_INCIDENTS_JSON_FILE))
 	}
 
 	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {
-		return AssetUtils.loadAssetFileAsImage(TrafficAtNSWApplication.context, LOCAL_TRAFFIC_CAMERA_IMAGE)
+		return AssetUtils.loadAssetFileAsImage(context, LOCAL_TRAFFIC_CAMERA_IMAGE)
 	}
 
 	override fun getMotorwayTravelTimes(motorway: TravelTimeConfig): MotorwayTravelTimesDatabase? {
-		return travelTimesCache.loadTravelTimesFromLocalJSONFile(TrafficAtNSWApplication.context, motorway)
+		val jsonStr:String = AssetUtils.loadAssetFileAsString(context, motorway.localJsonFileName)
+		val times: List<TravelTime> = TravelTime.Companion.parseTravelTimesJson(jsonStr)
+		val result = MotorwayTravelTimesDatabase(context, motorway)
+		result.primeWithTravelTimes(times)
+		return result
 	}
 }
