@@ -5,7 +5,7 @@ import android.support.test.runner.AndroidJUnit4
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import rod.bailey.trafficatnsw.app.TestMainActivity
+import rod.bailey.trafficatnsw.app.MainActivity_
 import kotlin.test.assertTrue
 
 /**
@@ -20,7 +20,7 @@ import kotlin.test.assertTrue
 class KtInstrumentedTest {
 
 	@Rule @JvmField
-	var activity: ActivityTestRule<TestMainActivity> = ActivityTestRule<TestMainActivity>(TestMainActivity::class.java)
+	var activity: ActivityTestRule<MainActivity_> = ActivityTestRule<MainActivity_>(MainActivity_::class.java)
 
 	@Test
 	fun testMe() {
