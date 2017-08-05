@@ -16,6 +16,7 @@ import rod.bailey.trafficatnsw.traveltime.data.TravelTimeConfig
 import rod.bailey.trafficatnsw.traveltime.data.TravelTimesCacheSingleton
 import rod.bailey.trafficatnsw.util.AssetUtils
 import rod.bailey.trafficatnsw.util.MLog
+import rod.bailey.trafficatnsw.util.NetUtils
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -23,7 +24,8 @@ import java.net.URL
 import javax.inject.Inject
 
 /**
- * Created by rodbailey on 5/8/17.
+ * Implementation of IDataService that should be used in production. Gets its data from
+ * the livetraffic.com web site.
  */
 class RemoteDataService : IDataService {
 
@@ -43,110 +45,22 @@ class RemoteDataService : IDataService {
 		TrafficAtNSWApplication.graph.inject(this)
 	}
 
-	companion object {
-		private val LOG_TAG: String = RemoteDataService::class.java.simpleName
-	}
-
 	override fun getHazards(): List<XHazard>? {
-		val jsonStr: String? = loadIncidentsFromRemoteJSONFile()
+		val jsonStr: String? = NetUtils.loadRemoteFileAsString(config.remoteIncidentsJSONFile())
 		return XHazard.parseIncidentJson(jsonStr)
 	}
 
 	override fun getMotorwayTravelTimes(motorway: TravelTimeConfig): MotorwayTravelTimesDatabase? {
-		return loadTravelTimesFromRemoteJSONFile(context, motorway)
+		val jsonStr: String? = NetUtils.loadRemoteFileAsString(motorway.remoteJsonUrl)
+		val tts = TravelTime.Companion.parseTravelTimesJson(jsonStr)
+		val result = MotorwayTravelTimesDatabase(context, motorway)
+		result.primeWithTravelTimes(tts)
+		return result
 	}
 
 	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {
 		val camera: TrafficCamera? = cameraCache.getCamera(trafficCameraId)
 		val urlToLoad:String? = camera?.url
-		val stream = java.net.URL(urlToLoad).openStream()
-		return BitmapFactory.decodeStream(stream)
-	}
-
-	fun loadTravelTimesFromRemoteJSONFile(ctx: Context,
-										  config: TravelTimeConfig): MotorwayTravelTimesDatabase? {
-		MLog.i(LOG_TAG, "Beginning load of " + config.motorwayName + " travel times from remote file "
-			+ config.remoteJsonUrl)
-		var result: MotorwayTravelTimesDatabase?
-		var bufferedReader: BufferedReader? = null
-
-		try {
-			val jsonUrl = URL(config.remoteJsonUrl)
-			val instreamReader = InputStreamReader(
-				jsonUrl.openStream())
-			bufferedReader = BufferedReader(instreamReader)
-			var line: String?
-			val lineBuffer:StringBuffer = StringBuffer()
-			var eof:Boolean = false
-
-			while (!eof) {
-				line = bufferedReader.readLine()
-				if (line == null) {
-					eof = true
-				} else {
-					lineBuffer.append(line)
-				}
-			}
-
-			val text = lineBuffer.toString()
-			val tts = TravelTime.Companion.parseTravelTimesJson(text)
-			result = MotorwayTravelTimesDatabase(ctx, config)
-			result.primeWithTravelTimes(tts)
-		}
-		catch (e: Exception) {
-			Log.e(LOG_TAG, "Failed to retrive and/or parse travel times for " + config.motorwayName, e)
-			result = null
-		}
-		finally {
-			if (bufferedReader != null) {
-				try {
-					bufferedReader.close()
-				}
-				catch (e: IOException) {
-				}
-			}
-		}
-
-		return result
-	}
-
-	private fun loadIncidentsFromRemoteJSONFile(): String? {
-		var bufferedReader: BufferedReader? = null
-		var result: String? = null
-
-		try {
-			MLog.d(LOG_TAG, "Loading incidents from remote JSON file")
-			val url = URL(config.remoteIncidentsJSONFile())
-			val inStreamReader = InputStreamReader(url.openStream())
-			bufferedReader = BufferedReader(inStreamReader)
-			var line: String?
-			val lineBuffer = StringBuffer()
-			var eof: Boolean = false
-
-			while (!eof) {
-				line = bufferedReader.readLine()
-				if (line == null) {
-					eof = true
-				} else {
-					lineBuffer.append(line)
-				}
-			}
-
-			bufferedReader.close()
-			result = lineBuffer.toString()
-		}
-		catch (e: Throwable) {
-			MLog.w(LOG_TAG, "Failed to load hazards JSON", e)
-		}
-		finally {
-			try {
-				bufferedReader?.close()
-			}
-			catch (e: IOException) {
-				MLog.w(LOG_TAG, e)
-			}
-		}
-
-		return result
+		return if (urlToLoad == null) null else NetUtils.loadRemoteFileAsImage(urlToLoad)
 	}
 }
