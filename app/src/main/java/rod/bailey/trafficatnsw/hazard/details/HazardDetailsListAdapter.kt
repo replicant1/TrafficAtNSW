@@ -11,6 +11,7 @@ import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.ui.ListHeadingView_
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XLane
+import rod.bailey.trafficatnsw.hazard.data.XProperties
 import rod.bailey.trafficatnsw.hazard.details.ui.cellrec.*
 import rod.bailey.trafficatnsw.hazard.details.ui.view.HtmlListItemView_
 import rod.bailey.trafficatnsw.hazard.details.ui.view.LineListItemView_
@@ -57,87 +58,103 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 	override fun areAllItemsEnabled(): Boolean = false
 
 	private fun addArrangementElementCellRecs() {
-		if (!isEmptyList(hazard.arrangementElements)) {
-			for (element in hazard.arrangementElements) {
-				if (element.title != null) {
-					addHeadingCellRec(element.title)
-				}
-				if (element.html != null) {
-					addHtmlFieldCellRec(element.html)
+		val props: XProperties? = hazard.properties
+		if (props != null) {
+			val elts = props.arrangementElements
+			if ((elts != null) && (elts != null) && (elts.size > 0)) {
+				for (element in elts) {
+					if (element.title != null) {
+						addHeadingCellRec(element.title)
+					}
+					if (element.html != null) {
+						addHtmlFieldCellRec(element.html)
+					}
 				}
 			}
 		}
 	}
 
 	private fun addAttendingCellRec() {
-		if (!isEmptyList(hazard.attendingGroups)) {
-			val numAttendingGroups = hazard.attendingGroups.size
-			val str = StringBuffer()
+		val props: XProperties? = hazard.properties
+		if (props != null) {
+			val groups = props.attendingGroups
+			if ((groups != null) && (groups.size > 0)) {
+				val numAttendingGroups = groups.size
+				val str = StringBuffer()
 
-			for (i in 0..numAttendingGroups - 1) {
-				val group = hazard.attendingGroups[i]
+				for (i in 0..numAttendingGroups - 1) {
+					val group = groups[i]
 
-				if (!isEmptyStr(group)) {
-					str.append(group)
+					if (!isEmptyStr(group)) {
+						str.append(group)
+					}
+
+					if (i < numAttendingGroups - 1) {
+						str.append(", ")
+					}
+				} // for i
+
+				val strstr = str.toString()
+				if (!isEmptyStr(strstr)) {
+					val cellrec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_attending), strstr)
+					cellRecs.add(cellrec)
 				}
-
-				if (i < numAttendingGroups - 1) {
-					str.append(", ")
-				}
-			} // for i
-
-			val strstr = str.toString()
-			if (!isEmptyStr(strstr)) {
-				val cellrec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_attending), strstr)
-				cellRecs.add(cellrec)
 			}
 		}
 	}
 
 	private fun addClosureCellRecs() {
-		for (period in hazard.periods) {
-			if ((XHazard.TOKEN_ROAD_CLOSURE == period.closureType) ||
-				(XHazard.TOKEN_LANE_CLOSURE == period.closureType)) {
-				val str = StringBuffer()
+		val props: XProperties? = hazard.properties
+		if (props != null) {
+			val periods = props.periods
+			if (periods != null) {
+				for (period in periods) {
+					if ((XHazard.TOKEN_ROAD_CLOSURE == period.closureType) ||
+						(XHazard.TOKEN_LANE_CLOSURE == period.closureType)) {
+						val str = StringBuffer()
 
-				if (!isEmptyStr(period.toDay)) {
-					str.append(ctx.getString(R.string.hazard_details_closure_from_date_to_date),
-							   period.fromDay, period.toDay)
-				} else {
-					str.append(period.fromDay)
-				}
+						if (!isEmptyStr(period.toDay)) {
+							str.append(ctx.getString(R.string.hazard_details_closure_from_date_to_date),
+									   period.fromDay, period.toDay)
+						} else {
+							str.append(period.fromDay)
+						}
 
-				if (!isEmptyStr(period.startTime)) {
-					str.append(" ")
-					if (!isEmptyStr(period.finishTime)) {
-						str.append(ctx.getString(R.string.hazard_details_closure_from_time_to_time),
-								   period.startTime, period.finishTime)
+						if (!isEmptyStr(period.startTime)) {
+							str.append(" ")
+							if (!isEmptyStr(period.finishTime)) {
+								str.append(ctx.getString(R.string.hazard_details_closure_from_time_to_time),
+										   period.startTime, period.finishTime)
+							}
+						}
+
+						if (!isEmptyStr(period.direction)) {
+							str.append(ctx.getString(R.string.hazard_details_closure_direction_affected),
+									   period.direction)
+							str.append(" ")
+						}
+
+						val fieldValue = str.toString()
+						val fieldName: String =
+							if (XHazard.TOKEN_ROAD_CLOSURE == period.closureType) {
+								ctx.getString(R.string.hazard_details_field_label_roads_closed)
+							} else {
+								ctx.getString(R.string.hazard_details_field_label_lanes_closed)
+							}
+						val cellRec = TextFieldCellRec(fieldName, fieldValue)
+						cellRecs.add(cellRec)
 					}
-				}
-
-				if (!isEmptyStr(period.direction)) {
-					str.append(ctx.getString(R.string.hazard_details_closure_direction_affected), period.direction)
-					str.append(" ")
-				}
-
-				val fieldValue = str.toString()
-				val fieldName: String =
-					if (XHazard.TOKEN_ROAD_CLOSURE == period.closureType) {
-						ctx.getString(R.string.hazard_details_field_label_roads_closed)
-					} else {
-						ctx.getString(R.string.hazard_details_field_label_lanes_closed)
-					}
-				val cellRec = TextFieldCellRec(fieldName, fieldValue)
-				cellRecs.add(cellRec)
+				} // for
 			}
 		}
 	}
 
 	private fun addCreateAndLastUpdatedCellRecs() {
 		// First CellRec is for "Created" date/time
-		if (hazard.created != null) {
+		val props: XProperties? = hazard.properties
+		if ((props != null) && (props.created != null)) {
 			val createdStr = DateUtils.relativeDateAndTime(
-				hazard.created, capitalize = true)
+				Date(props.created), capitalize = true)
 			val createdCellRec = TextFieldCellRec(
 				fieldName = ctx.getString(R.string.hazard_details_field_label_when_started),
 				fieldValue = createdStr)
@@ -147,9 +164,9 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		// Second CellRec is for "Last updated" date/time. But we only create a
 		// 'last updated' cellrec if it will show a different date to the
 		// 'created' date.
-		if ((!isLastUpdatedSameAsCreated) && (hazard.lastUpdated != null)) {
+		if ((props != null) && (!isLastUpdatedSameAsCreated) && (props.lastUpdated != null)) {
 			val lastUpdatedStr = DateUtils.relativeDateAndTime(
-				hazard.lastUpdated, capitalize = true)
+				Date(props.lastUpdated), capitalize = true)
 			val lastUpdatedCellRec = TextFieldCellRec(
 				fieldName = ctx.getString(R.string.hazard_details_field_label_when_last_checked),
 				fieldValue = lastUpdatedStr)
@@ -158,18 +175,21 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 	}
 
 	private fun addDurationCellRec() {
-		if (hazard.start != null && hazard.end != null) {
-			val formatString = StringBuffer(config.durationTimeFormat())
-			val sdf = SimpleDateFormat(formatString.toString(), Locale.ENGLISH)
-			val startStr = sdf.format(hazard.start)
-			val endStr = sdf.format(hazard.end)
-			val startToEnd = StringBuffer()
-			startToEnd.append(startStr)
-			startToEnd.append(" - ")
-			startToEnd.append(endStr)
-			val cellrec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_duration),
-										   startToEnd.toString())
-			cellRecs.add(cellrec)
+		val props: XProperties? = hazard.properties
+		if (props != null) {
+			if (props.start != null && props.end != null) {
+				val formatString = StringBuffer(config.durationTimeFormat())
+				val sdf = SimpleDateFormat(formatString.toString(), Locale.ENGLISH)
+				val startStr = sdf.format(props.start)
+				val endStr = sdf.format(props.end)
+				val startToEnd = StringBuffer()
+				startToEnd.append(startStr)
+				startToEnd.append(" - ")
+				startToEnd.append(endStr)
+				val cellrec = TextFieldCellRec(ctx.getString(R.string.hazard_details_field_label_duration),
+											   startToEnd.toString())
+				cellRecs.add(cellrec)
+			}
 		}
 	}
 
@@ -232,8 +252,9 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 	}
 
 	private fun addLaneCellRecs() {
-		if (!isEmptyList(hazard.roads)) {
-			val firstRoad = hazard.roads[0]
+		val props: XProperties? = hazard.properties
+		if ((props != null) && (props.roads != null) && (props.roads.size > 0)) {
+			val firstRoad = props.roads[0]
 
 			if (!isEmptyList(firstRoad.impactedLanes)) {
 				if (firstRoad.impactedLanes != null) {
@@ -252,26 +273,29 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 	}
 
 	private fun addOtherAdviceCellRec() {
-		if (!isEmptyStr(hazard.otherAdvice)) {
+		val props: XProperties? = hazard.properties
+		if ((props != null) && (props.otherAdvice != null) && (!isEmptyStr(props.otherAdvice))) {
 			addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_other_advice))
-			if (hazard.otherAdvice != null) {
-				addHtmlFieldCellRec(hazard.otherAdvice)
+			if (props.otherAdvice != null) {
+				addHtmlFieldCellRec(props.otherAdvice)
 			}
 		}
 	}
 
 	private fun addPublicTransportCellRec() {
-		if (!isEmptyStr(hazard.publicTransport)) {
+		val props: XProperties? = hazard.properties
+		if ((props != null) && !isEmptyStr(props.publicTransport)) {
 			addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_public_transport))
-			if (hazard.publicTransport != null) {
-				addHtmlFieldCellRec(hazard.publicTransport)
+			if (props.publicTransport != null) {
+				addHtmlFieldCellRec(props.publicTransport)
 			}
 		}
 	}
 
 	private fun addQueueLengthCellRec() {
-		if (!isEmptyList(hazard.roads)) {
-			val firstRoad = hazard.roads[0]
+		val props: XProperties? = hazard.properties
+		if ((props != null) && (props.roads != null) && !isEmptyList(props.roads)) {
+			val firstRoad = props.roads[0]
 
 			if ((firstRoad.queueLength != null) && (firstRoad.queueLength > 0)) {
 				val fieldName = ctx.getString(R.string.hazard_details_field_label_queues)
@@ -284,23 +308,26 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 	}
 
 	private fun addRtaAdviceCellRec() {
-		if (!isEmptyStr(hazard.adviceA) || !isEmptyStr(hazard.adviceB)) {
-			val value = StringBuffer()
-			val fieldName = ctx.getString(R.string.hazard_details_rta_advice)
+		val props: XProperties? = hazard.properties
+		if (props != null) {
+			if (!isEmptyStr(props.adviceA) || !isEmptyStr(props.adviceB)) {
+				val value = StringBuffer()
+				val fieldName = ctx.getString(R.string.hazard_details_rta_advice)
 
-			if (!isEmptyStr(hazard.adviceA)) {
-				value.append(hazard.adviceA)
+				if (!isEmptyStr(props.adviceA)) {
+					value.append(props.adviceA)
 
-				if (!isEmptyStr(hazard.adviceB)) {
-					value.append(", ")
+					if (!isEmptyStr(props.adviceB)) {
+						value.append(", ")
+					}
 				}
-			}
 
-			if (!isEmptyStr(hazard.adviceB)) {
-				value.append(hazard.adviceB)
+				if (!isEmptyStr(props.adviceB)) {
+					value.append(props.adviceB)
+				}
+				val cellRec = TextFieldCellRec(fieldName, fieldValue = value.toString())
+				cellRecs.add(cellRec)
 			}
-			val cellRec = TextFieldCellRec(fieldName, fieldValue = value.toString())
-			cellRecs.add(cellRec)
 		}
 	}
 
@@ -312,8 +339,9 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 	 * "Heavy" and "Significant" are taken from the JSON file.
 	 */
 	private fun addTrafficVolumeAndDelayCellRec() {
-		if (!isEmptyList(hazard.roads)) {
-			val firstRoad = hazard.roads[0]
+		val props: XProperties? = hazard.properties
+		if ((props != null) && (props.roads != null) && !isEmptyList(props.roads)) {
+			val firstRoad = props.roads[0]
 			val str = StringBuffer()
 
 			if (!isEmptyStr(firstRoad.trafficVolume)) {
@@ -382,11 +410,17 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 
 	private val isLastUpdatedSameAsCreated: Boolean
 		get() {
-			val lastUpdated = hazard.lastUpdated
-			val created = hazard.created
+			var result = false
+			val props: XProperties? = hazard.properties
 
-			return lastUpdated != null && created != null
-				&& lastUpdated == created
+			if (props != null) {
+				val lastUpdated: Long? = props.lastUpdated
+				val created: Long? = props.created
+
+				result = (lastUpdated != null) && (created != null)	&& (lastUpdated == created)
+			}
+
+			return result
 		}
 
 	private fun removeFirstOfConsecutiveHeadings() {

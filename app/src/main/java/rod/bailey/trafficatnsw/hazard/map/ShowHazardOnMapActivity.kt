@@ -62,11 +62,11 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 	override fun onMapReady(googleMap: GoogleMap) {
 		googleMap.clear()
 
-		val latlng = LatLng(hazard?.latlng?.latitude ?: 0.0,
-							hazard?.latlng?.longitude ?: 0.0)
+		val latlng = LatLng(hazard?.geometry?.latlng?.get(0) ?: 0.0,
+							hazard?.geometry?.latlng?.get(1) ?: 0.0)
 		val markerOptions = MarkerOptions()
 			.position(latlng)
-			.title(hazard?.headline ?: getString(R.string.hazard_map_screen_title))
+			.title(hazard?.properties?.headline ?: getString(R.string.hazard_map_screen_title))
 			.draggable(false)
 			.flat(false)
 

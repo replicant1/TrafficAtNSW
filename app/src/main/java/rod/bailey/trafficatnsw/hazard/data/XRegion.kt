@@ -1,5 +1,8 @@
 package rod.bailey.trafficatnsw.hazard.data
 
+/**
+ * RMS divides the state of NSW into these regions. Each incident is associated with one of these.
+ */
 enum class XRegion private constructor(val description: String?) {
 	SYD_MET("Inner Sydney"), //
 	SYD_NORTH("Sydney North"), //

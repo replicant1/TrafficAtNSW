@@ -15,6 +15,7 @@ import rod.bailey.trafficatnsw.common.ui.ListItemCircularIcon
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.app.ConfigSingleton
+import rod.bailey.trafficatnsw.hazard.data.XProperties
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*
@@ -76,38 +77,41 @@ open class HazardListItemView(val ctx: Context,
 
 	@AfterViews
 	fun afterViews() {
-		if (!hazard.roads.isEmpty()) {
-			val road = hazard.roads[0]
+		val props: XProperties? = hazard.properties
+		if (props != null) {
+			var roads = props.roads
+			if ((roads != null) && !roads.isEmpty()) {
+				val road = roads[0]
 
-			line1TextView?.text = road.suburb
-			line2TextView?.text = road.mainStreet
+				line1TextView?.text = road.suburb
+				line2TextView?.text = road.mainStreet
 
-			val trimmedSuburb: String = road.suburb?.trim() ?: ""
-			val letter: Char = if (trimmedSuburb.isEmpty()) ' ' else trimmedSuburb[0]
+				val trimmedSuburb: String = road.suburb?.trim() ?: ""
+				val letter: Char = if (trimmedSuburb.isEmpty()) ' ' else trimmedSuburb[0]
 
-			circleIcon?.circleLetter = letter.toString()
-			circleIcon?.circleColor = ContextCompat.getColor(
-				ctx, LetterColorMapSingleton.instance.getColorForLetter(letter))
-		}
-
-		line3TextView?.text = hazard.displayName
-		dateTextView?.visibility = if (showLastUpdatedDate) View.VISIBLE else View.GONE
-
-		if (hazard.lastUpdated != null) {
-			val dateText: String = when {
-				DateUtils.isYesterday(hazard.lastUpdated) -> ctx.getString(R.string.hazard_list_item_date_previous)
-				DateUtils.isToday(hazard.lastUpdated) -> SimpleDateFormat(
-					config.hazardTimeFormat(), Locale.ENGLISH).format(
-					hazard.lastUpdated).toLowerCase()
-				else -> SimpleDateFormat(config.hazardDateFormat(), Locale.ENGLISH).format(
-					hazard.lastUpdated)
+				circleIcon?.circleLetter = letter.toString()
+				circleIcon?.circleColor = ContextCompat.getColor(
+					ctx, LetterColorMapSingleton.instance.getColorForLetter(letter))
 			}
 
-			dateTextView?.text = dateText
-		}
+			line3TextView?.text = props.displayName
+			dateTextView?.visibility = if (showLastUpdatedDate) View.VISIBLE else View.GONE
 
-		if (clickable) {
-			rl?.setOnClickListener(HazardListItemClickListener())
+			val updated: Long? = props.lastUpdated
+			if (updated != null) {
+				val dateText: String = when {
+					DateUtils.isYesterday(Date(updated)) -> ctx.getString(R.string.hazard_list_item_date_previous)
+					DateUtils.isToday(Date(updated)) -> SimpleDateFormat(
+						config.hazardTimeFormat(), Locale.ENGLISH).format(updated).toLowerCase()
+					else -> SimpleDateFormat(config.hazardDateFormat(), Locale.ENGLISH).format(updated)
+				}
+
+				dateTextView?.text = dateText
+			}
+
+			if (clickable) {
+				rl?.setOnClickListener(HazardListItemClickListener())
+			}
 		}
 	}
 }

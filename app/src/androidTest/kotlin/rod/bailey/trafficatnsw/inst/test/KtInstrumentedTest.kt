@@ -16,13 +16,13 @@ import kotlin.test.assertTrue
  * Test : when I changed the launch activity from MainActivity to the empty non-@EActivity TestMainActivity,
  * it worked.
  */
-@RunWith(AndroidJUnit4::class)
+//@RunWith(AndroidJUnit4::class)
 class KtInstrumentedTest {
 
-	@Rule @JvmField
+	//@Rule @JvmField
 	var activity: ActivityTestRule<MainActivity_> = ActivityTestRule<MainActivity_>(MainActivity_::class.java)
 
-	@Test
+	//@Test
 	fun testMe() {
 		assertTrue(2 == 2)
 	}

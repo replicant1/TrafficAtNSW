@@ -48,7 +48,9 @@ dependencies {
     // Material Design support
     compile "com.android.support:design:$support_version"
 
+    // GSON used for deserializing JSON from data files
     compile 'com.google.code.gson:gson:2.6.2'
+
     compile 'com.android.support:multidex:1.0.0'
 
     // Enable Kotlin instrumented tests

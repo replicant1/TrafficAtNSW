@@ -10,6 +10,7 @@ import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
 import rod.bailey.trafficatnsw.hazard.data.XHazard
+import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesDatabase
 import rod.bailey.trafficatnsw.traveltime.data.TravelTime
 import rod.bailey.trafficatnsw.traveltime.data.TravelTimeConfig
@@ -47,7 +48,7 @@ class RemoteDataService : IDataService {
 
 	override fun getHazards(): List<XHazard>? {
 		val jsonStr: String? = NetUtils.loadRemoteFileAsString(config.remoteIncidentsJSONFile())
-		return XHazard.parseIncidentJson(jsonStr)
+		return if (jsonStr == null) null else  XHazardCollection.Companion.parseIncidentJson(jsonStr).hazards
 	}
 
 	override fun getMotorwayTravelTimes(motorway: TravelTimeConfig): MotorwayTravelTimesDatabase? {

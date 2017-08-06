@@ -1,24 +1,25 @@
 package rod.bailey.trafficatnsw.hazard.data
 
-import org.json.JSONObject
+import com.google.gson.annotations.SerializedName
 
-import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
+/**
+ * An 'impacted lane' contained by an XRoad on which a hazard is occurring.
+ */
+class XLane(
+	@SerializedName("affectedDirection")
+	val affectedDirection: String?,
 
-class XLane(json: JSONObject) {
+	@SerializedName("closedLanes")
+	val closedLanes: String?,
 
-	val affectedDirection: String?
-	val closedLanes: String?
-	val description: String?
-	val extent: String?
-	val numberOfLanes: String?
-	val roadType: String?
+	@SerializedName("description")
+	val description: String?,
 
-	init {
-		affectedDirection = safeGetString(json, "affectedDirection")
-		closedLanes = safeGetString(json, "closedLanes")
-		description = safeGetString(json, "description")
-		extent = safeGetString(json, "extent")
-		numberOfLanes = safeGetString(json, "numberOfLanes")
-		roadType = safeGetString(json, "roadType")
-	}
-}
+	@SerializedName("extent")
+	val extent: String?,
+
+	@SerializedName("numberOfLanes")
+	val numberOfLanes: String?,
+
+	@SerializedName("roadType")
+	val roadType: String?)

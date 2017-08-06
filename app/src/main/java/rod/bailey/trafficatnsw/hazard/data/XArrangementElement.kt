@@ -1,16 +1,10 @@
 package rod.bailey.trafficatnsw.hazard.data
 
-import org.json.JSONObject
+import com.google.gson.annotations.SerializedName
 
-import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
+class XArrangementElement(
+	@SerializedName("title")
+	val title: String?,
 
-class XArrangementElement(elementJSONObject: JSONObject) {
-
-	val title: String?
-	val html: String?
-
-	init {
-		title = safeGetString(elementJSONObject, "title")
-		html = safeGetString(elementJSONObject, "html")
-	}
-}
+	@SerializedName("html")
+	val html: String?)
