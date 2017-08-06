@@ -18,6 +18,8 @@ The app makes use of these libraries:
   * `@AfterViews` 
   * `@FragmentArg`
   * `@Extra` 
+  * `@OptionsMenu`
+  * `@OptionsItem`
 * *Dagger 2* - Used to `@Inject` dependencies
 * *GSON* - For parsing of JSON data files
 

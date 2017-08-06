@@ -21,7 +21,6 @@ import rod.bailey.trafficatnsw.hazard.data.XProperties;
 import rod.bailey.trafficatnsw.hazard.data.XRoad;
 import rod.bailey.trafficatnsw.util.AssetUtils;
 
-import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
