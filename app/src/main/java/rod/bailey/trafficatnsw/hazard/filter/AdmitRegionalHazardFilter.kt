@@ -6,7 +6,7 @@ import rod.bailey.trafficatnsw.hazard.data.XRegion
 class AdmitRegionalHazardFilter : IHazardFilter {
 	override fun admit(hazard: XHazard): Boolean {
 		var result = false
-		val roads = hazard.roads
+		val roads = hazard.properties.roads
 		if (!roads.isEmpty()) {
 			val road = roads[0]
 			val roadRegionStr:String? = road.region

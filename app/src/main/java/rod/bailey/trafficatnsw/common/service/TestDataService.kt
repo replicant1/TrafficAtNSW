@@ -8,6 +8,7 @@ import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 
 import rod.bailey.trafficatnsw.hazard.data.XHazard
+import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.traveltime.data.*
 import rod.bailey.trafficatnsw.util.AssetUtils
 import javax.inject.Inject
@@ -40,8 +41,8 @@ class TestDataService : IDataService {
 	}
 
 	override fun getHazards(): List<XHazard>? {
-		return XHazard.parseIncidentJson(
-			AssetUtils.loadAssetFileAsString(context, LOCAL_INCIDENTS_JSON_FILE))
+		return XHazardCollection.Companion.parseIncidentJson(
+			AssetUtils.loadAssetFileAsString(context, LOCAL_INCIDENTS_JSON_FILE)).hazards
 	}
 
 	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {

@@ -9,7 +9,10 @@ This is the very first Android app I ever wrote, which I have converted from Jav
 as a learning exercise.
 
 ## Libraries
-The app makes use of the Android Annotations library extensively.
+The app makes use of these libraries:
+
+* Android Annotations 
+* Dagger 2
 
 ## Screenshots
 
@@ -17,3 +20,13 @@ The app makes use of the Android Annotations library extensively.
  ![Camera List](/doc/cameras.png) ![Camera Image](/doc/camera_image.png)
  ![Travel Times](/doc/travel_times.png) ![Hazard Details](/doc/hazard_details.png)
  ![Map](/doc/map.png)
+ 
+ ## TODO
+ 
+ * Chane JSON parsing to use GSON
+ * Remove all occurrences of !! operator
+ * Increase coverage - add filters to inst tests
+ * Create AndroidTestModule and AndroidTestComponent
+ * Extend tests to cameras and TTs
+ * Don't provide context globally in TNSWApplication (interferes with testing. research
+ how to make app context available through Dagger)

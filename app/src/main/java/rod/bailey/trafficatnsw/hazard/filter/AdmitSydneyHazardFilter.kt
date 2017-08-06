@@ -7,7 +7,7 @@ import rod.bailey.trafficatnsw.util.MLog
 class AdmitSydneyHazardFilter : IHazardFilter {
 	override fun admit(hazard: XHazard): Boolean {
 		var result = false
-		val roads = hazard.roads
+		val roads = hazard.properties.roads
 
 		if (!roads.isEmpty()) {
 			val road = roads[0]

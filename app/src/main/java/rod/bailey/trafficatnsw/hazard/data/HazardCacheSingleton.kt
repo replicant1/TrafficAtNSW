@@ -20,8 +20,10 @@ class HazardCacheSingleton {
 
 	@Synchronized
 	fun init(hazardsJSON: String) {
-		val allHazards = XHazard.parseIncidentJson(hazardsJSON)
-		init(allHazards)
+		val allHazards: List<XHazard>? = XHazardCollection.Companion.parseIncidentJson(hazardsJSON).hazards
+		if (allHazards != null) {
+			init(allHazards)
+		}
 	}
 
 	@Synchronized
@@ -34,9 +36,9 @@ class HazardCacheSingleton {
 		unfilteredHazardsPerRegion.clear()
 		// Put hazards into unfiltered hazards map
 		for (hazard in allHazards) {
-			if ((hazard.isEnded != null) && (!hazard.isEnded)) {
-				if (!hazard.roads.isEmpty()) {
-					val regionStr: String? = hazard.roads[0].region
+			if ((hazard.properties.isEnded != null) && (!hazard.properties.isEnded)) {
+				if (!hazard.properties.roads.isEmpty()) {
+					val regionStr: String? = hazard.properties.roads[0].region
 					if (regionStr != null) {
 						val region = XRegion.valueOf(regionStr)
 						// Add this hazard into the unfiltered map

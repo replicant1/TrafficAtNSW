@@ -1,7 +1,6 @@
 package rod.bailey.trafficatnsw;
 
 import android.content.Context;
-import android.location.Location;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -16,6 +15,7 @@ import java.util.List;
 
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.hazard.data.XHazard;
+import rod.bailey.trafficatnsw.hazard.data.XHazardCollection;
 import rod.bailey.trafficatnsw.hazard.data.XLane;
 import rod.bailey.trafficatnsw.hazard.data.XRoad;
 import rod.bailey.trafficatnsw.util.AssetUtils;
@@ -44,7 +44,7 @@ public class ParseIncident2InstrumentedTest {
 	public static void parseJsonFile() throws IOException {
 		Context appContext = InstrumentationRegistry.getContext();
 		String jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
-		hazards = XHazard.Companion.parseIncidentJson(jsonString);
+		hazards = XHazardCollection.Companion.parseIncidentJson(jsonString).getHazards();
 		assertNotNull(hazards);
 		assertEquals(29, hazards.size());
 		hazard = TestUtils.findHazardById(hazards, HAZARD_ID);
@@ -53,36 +53,36 @@ public class ParseIncident2InstrumentedTest {
 	@Test
 	public void testLatLng() {
 		// Check geometry
-		Location loc = hazard.getLatlng();
+		double loc[] = hazard.getGeometry().getLatlng();
 
-		assertEquals(loc.getLongitude(), 147.59154, 0.0001);
-		assertEquals(loc.getLatitude(), -35.46987, 0.0001);
+		assertEquals(loc[0], 147.59154, 0.0001);
+		assertEquals(loc[1], -35.46987, 0.0001);
 	}
 
 	@Test
 	public void testDates() {
-		assertEquals(new Long(1373305277059L), (Long) hazard.getCreated().getTime());
-		assertEquals(new Long(1373324947947L), (Long) hazard.getLastUpdated().getTime());
+		assertEquals(new Long(1373305277059L), (Long) hazard.getProperties().getCreated().getTime());
+		assertEquals(new Long(1373324947947L), (Long) hazard.getProperties().getLastUpdated().getTime());
 	}
 
 	@Test
 	public void testArrays() {
-		assertTrue(hazard.getArrangementElements().isEmpty());
-		assertEquals(2, hazard.getAttendingGroups().size());
-		assertEquals("Emergency service(s)", hazard.getAttendingGroups().get(0));
-		assertEquals("RMS", hazard.getAttendingGroups().get(1));
+		assertTrue(hazard.getProperties().getArrangementElements().isEmpty());
+		assertEquals(2, hazard.getProperties().getAttendingGroups().size());
+		assertEquals("Emergency service(s)", hazard.getProperties().getAttendingGroups().get(0));
+		assertEquals("RMS", hazard.getProperties().getAttendingGroups().get(1));
 	}
 
 	@Test
 	public void testAdvice() {
-		assertEquals(" ", hazard.getAdviceB());
-		assertEquals("Exercise caution", hazard.getAdviceA());
-		assertEquals(" ", hazard.getOtherAdvice());
+		assertEquals(" ", hazard.getProperties().getAdviceB());
+		assertEquals("Exercise caution", hazard.getProperties().getAdviceA());
+		assertEquals(" ", hazard.getProperties().getOtherAdvice());
 	}
 
 	@Test
 	public void testRoad() {
-		XRoad road = hazard.getRoads().get(0);
+		XRoad road = hazard.getProperties().getRoads().get(0);
 		assertEquals("", road.getConditionTendency());
 		assertEquals("Tumbarumba Road", road.getCrossStreet());
 		assertEquals("", road.getDelay());
@@ -96,7 +96,7 @@ public class ParseIncident2InstrumentedTest {
 
 	@Test
 	public void testLane() {
-		XRoad road = hazard.getRoads().get(0);
+		XRoad road = hazard.getProperties().getRoads().get(0);
 		XLane lane = road.getImpactedLanes().get(0);
 		assertEquals("Northbound", lane.getAffectedDirection());
 		assertEquals("1", lane.getClosedLanes());
@@ -108,26 +108,26 @@ public class ParseIncident2InstrumentedTest {
 
 	@Test
 	public void testBasicProperties() {
-		assertNotNull(hazard.getHeadline());
-		assertEquals(" ", hazard.getSubCategoryB());
-		assertEquals("ACCIDENT Truck", hazard.getDisplayName());
-		assertEquals("Truck", hazard.getSubCategoryA());
-		assertEquals("Accident", hazard.getMainCategory());
+		assertNotNull(hazard.getProperties().getHeadline());
+		assertEquals(" ", hazard.getProperties().getSubCategoryB());
+		assertEquals("ACCIDENT Truck", hazard.getProperties().getDisplayName());
+		assertEquals("Truck", hazard.getProperties().getSubCategoryA());
+		assertEquals("Accident", hazard.getProperties().getMainCategory());
 	}
 
 	@Test
 	public void testWebLink() {
-		assertTrue("null".equals(hazard.getWebLinkName()));
-		assertTrue("null".equals(hazard.getWebLinkUrl()));
+		assertTrue("null".equals(hazard.getProperties().getWebLinkName()));
+		assertTrue("null".equals(hazard.getProperties().getWebLinkUrl()));
 	}
 
 	@Test
 	public void testBooleans() {
-		assertFalse(hazard.isEnded());
-		assertFalse(hazard.isImpactingNetwork());
-		assertFalse(hazard.isInitialReport());
-		assertTrue(hazard.getPeriods().isEmpty());
-		assertFalse(hazard.isMajor());
-		assertNull(hazard.getStart());
+		assertFalse(hazard.getProperties().isEnded());
+		assertFalse(hazard.getProperties().isImpactingNetwork());
+		assertFalse(hazard.getProperties().isInitialReport());
+		assertTrue(hazard.getProperties().getPeriods().isEmpty());
+		assertFalse(hazard.getProperties().isMajor());
+		assertNull(hazard.getProperties().getStart());
 	}
 }

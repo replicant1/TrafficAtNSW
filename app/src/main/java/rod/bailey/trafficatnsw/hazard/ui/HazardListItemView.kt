@@ -76,8 +76,8 @@ open class HazardListItemView(val ctx: Context,
 
 	@AfterViews
 	fun afterViews() {
-		if (!hazard.roads.isEmpty()) {
-			val road = hazard.roads[0]
+		if (!hazard.properties.roads.isEmpty()) {
+			val road = hazard.properties.roads[0]
 
 			line1TextView?.text = road.suburb
 			line2TextView?.text = road.mainStreet
@@ -90,17 +90,18 @@ open class HazardListItemView(val ctx: Context,
 				ctx, LetterColorMapSingleton.instance.getColorForLetter(letter))
 		}
 
-		line3TextView?.text = hazard.displayName
+		line3TextView?.text = hazard.properties.displayName
 		dateTextView?.visibility = if (showLastUpdatedDate) View.VISIBLE else View.GONE
 
-		if (hazard.lastUpdated != null) {
+		if (hazard.properties.lastUpdated != null) {
 			val dateText: String = when {
-				DateUtils.isYesterday(hazard.lastUpdated) -> ctx.getString(R.string.hazard_list_item_date_previous)
-				DateUtils.isToday(hazard.lastUpdated) -> SimpleDateFormat(
+				DateUtils.isYesterday(hazard.properties.lastUpdated) -> ctx.getString(R.string
+																						  .hazard_list_item_date_previous)
+				DateUtils.isToday(hazard.properties.lastUpdated) -> SimpleDateFormat(
 					config.hazardTimeFormat(), Locale.ENGLISH).format(
-					hazard.lastUpdated).toLowerCase()
+					hazard.properties.lastUpdated).toLowerCase()
 				else -> SimpleDateFormat(config.hazardDateFormat(), Locale.ENGLISH).format(
-					hazard.lastUpdated)
+					hazard.properties.lastUpdated)
 			}
 
 			dateTextView?.text = dateText
