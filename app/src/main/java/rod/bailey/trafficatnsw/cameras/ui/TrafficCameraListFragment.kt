@@ -43,9 +43,9 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 
 	/**
 	 * Mode of display = what cameras appear in list. Derived from the value
-	 * passed into this fragment for the ARG_HAZARDS_FRAGMENT_MODE argument.
+	 * passed into this fragment for the ARG_MODE_KEY argument.
 	 */
-	private var mode: TrafficCameraListMode? = TrafficCameraListMode.SYDNEY
+	private var mode: TrafficCameraListMode = TrafficCameraListMode.SYDNEY
 
 	private fun createUI() {
 		cameraListView = ListViewWithEmptyMessage_.build(activity,
@@ -54,9 +54,9 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 		cameraListView.listViewAutoHideFooter.lv_list.divider =
 			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
 		cameraListView.listViewAutoHideFooter.lv_list.dividerHeight = 2
-		val adapter = TrafficCameraListAdapter(mode!!.filter)
+		val adapter = TrafficCameraListAdapter(mode.filter)
 		cameraListView.setAdapter(adapter)
-		activity.title = mode!!.actionBarTitle
+		activity.title = mode.actionBarTitle
 	}
 
 	override fun onCreate(bundle: Bundle?) {
@@ -96,13 +96,8 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		if (mode != null) {
-			// TODO: WOuld be nice to save list's scroll pos here and them
-			// restore after setting the new adapter.
-			val adapter = TrafficCameraListAdapter(
-				mode!!.filter)
-			cameraListView.setAdapter(adapter)
-		}
+		val adapter = TrafficCameraListAdapter(mode.filter)
+		cameraListView.setAdapter(adapter)
 	}
 
 	companion object {

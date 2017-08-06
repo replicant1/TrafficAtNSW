@@ -48,7 +48,9 @@ class DownloadTravelTimesTask(
 		var travelTimesLoadedOK: Boolean = java.lang.Boolean.TRUE
 		ttFrag.db?.removePropertyChangeListener(ttFrag)
 
-		ttFrag.db = dataService.getMotorwayTravelTimes(travelTimeConfig!!)
+		if (travelTimeConfig != null) {
+			ttFrag.db = dataService.getMotorwayTravelTimes(travelTimeConfig)
+		}
 
 		if (ttFrag.db == null) {
 			travelTimesLoadedOK = java.lang.Boolean.FALSE
@@ -67,7 +69,7 @@ class DownloadTravelTimesTask(
 		} else {
 			// We don't all mainLayout.setAdapter, which means that the old (stale)
 			// data will still remain visible.
-			MLog.i(LOG_TAG, "Failed to load " + travelTimeConfig!!.motorwayName + " travel times")
+			MLog.i(LOG_TAG, "Failed to load " + travelTimeConfig?.motorwayName + " travel times")
 			val builder = AlertDialog.Builder(ctx)
 			builder.setTitle(ctx.getString(R.string.tt_download_dialog_title))
 			builder.setMessage(ctx.getString(R.string.tt_download_dialog_msg))

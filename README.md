@@ -20,20 +20,33 @@ The app makes use of these libraries:
   * `@Extra` 
   * `@OptionsMenu`
   * `@OptionsItem`
-* *Dagger 2* - Used to `@Inject` dependencies
+* *Dagger* - Dependency injection
 * *GSON* - For parsing of JSON data files
 
 ## Screenshots
 
- ![Navigation Drawer](/doc/navigation.png) ![Hazard List](/doc/hazard_list.png)
- ![Camera List](/doc/cameras.png) ![Camera Image](/doc/camera_image.png)
- ![Travel Times](/doc/travel_times.png) ![Hazard Details](/doc/hazard_details.png)
- ![Map](/doc/map.png)
+### Navigation
+
+ ![Navigation Drawer](/doc/navigation.png)
+  
+### Incidents
+
+  ![Hazard List](/doc/hazard_list.png)  ![Hazard Details](/doc/hazard_details.png)
+  ![Map](/doc/map.png)
+  
+### Traffic Cameras
+
+  ![Camera List](/doc/cameras.png) ![Camera Image](/doc/camera_image.png)
  
- ## TODO
+### Travel Times 
+
+  ![Travel Times](/doc/travel_times.png) 
+  
+## TODO
  
  * Chase up all uses of JSON data for exceptions - centralize common operations/formatting
- * Remove all occurrences of !! operator
+ * Migrate TravelTime parsing to be GSON-based
+ * Remove all occurrences of !! operator from TravelTime.kt
  * Increase coverage - add filters to inst tests when Kotlin allows it
  * Create AndroidTestModule and AndroidTestComponent
  * Extend tests to cameras and TTs

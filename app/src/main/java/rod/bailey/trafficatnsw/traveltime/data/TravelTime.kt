@@ -9,7 +9,62 @@ import java.util.*
 
 class TravelTime @Throws(JSONException::class)
 constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
+
 	private val support = PropertyChangeSupport(this)
+
+	var isActive: Boolean = false
+	var fromDisplayName: String? = null
+	var segmentId: String? = null
+	var toDisplayName: String? = null
+
+	private var includedInTotal: Boolean = false
+	private var travelTimeMinutes: Int = 0
+
+	init {
+		val properties = featureJSONObject!!.getJSONObject("properties")
+		// 'id' is mandatory
+		try {
+			segmentId = featureJSONObject.getString("id")
+		}
+		catch (e: JSONException) {
+			MLog.e(LOG_TAG, "Failed to parse 'id' property of travel time segment",
+				   e)
+		}
+		// 'fromDisplayName' is mandatory
+		try {
+			fromDisplayName = properties.getString("fromDisplayName")
+		}
+		catch (e: JSONException) {
+			MLog.d(LOG_TAG,
+				   "Failed to parse 'fromDisplayName' property of travel time segment")
+		}
+		// 'toDisplayName' is mandatory
+		try {
+			toDisplayName = properties.getString("toDisplayName")
+		}
+		catch (e: JSONException) {
+			MLog.d(LOG_TAG,
+				   "Failed to parse 'toDisplayName' property of travel time segment")
+		}
+		// 'isActive' is optional
+		try {
+			isActive = properties.getBoolean("isActive")
+		}
+		catch (e: JSONException) {
+			MLog.d(LOG_TAG,
+				   "Failed to parse 'isActive' property of travel time segment")
+		}
+
+		try {
+			travelTimeMinutes = properties.getInt("travelTimeMinutes")
+		}
+		catch (e: JSONException) {
+			MLog.d(LOG_TAG,
+				   "Failed to parse 'travelTimeMinutes' property of travel time segment")
+		}
+
+		includedInTotal = true
+	}
 
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
 		support.addPropertyChangeListener(listener)
@@ -21,59 +76,6 @@ constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
 
 	private fun firePropertyChangeEvent(propertyName: String, newValue: Any) {
 		support.firePropertyChange(propertyName, null, newValue)
-	}
-
-	var isActive: Boolean = false
-	var fromDisplayName: String? = null
-	private var includedInTotal: Boolean = false
-	var segmentId: String? = null
-	var toDisplayName: String? = null
-	private var travelTimeMinutes: Int = 0
-
-	init {
-		val properties = featureJSONObject!!.getJSONObject("properties")
-		// 'id' is mandatory
-		try {
-			segmentId = featureJSONObject.getString("id")
-		}
-		catch (e: JSONException) {
-			MLog.e(TAG, "Failed to parse 'id' property of travel time segment",
-				   e)
-		}
-		// 'fromDisplayName' is mandatory
-		try {
-			fromDisplayName = properties.getString("fromDisplayName")
-		}
-		catch (e: JSONException) {
-			MLog.d(TAG,
-				   "Failed to parse 'fromDisplayName' property of travel time segment")
-		}
-		// 'toDisplayName' is mandatory
-		try {
-			toDisplayName = properties.getString("toDisplayName")
-		}
-		catch (e: JSONException) {
-			MLog.d(TAG,
-				   "Failed to parse 'toDisplayName' property of travel time segment")
-		}
-		// 'isActive' is optional
-		try {
-			isActive = properties.getBoolean("isActive")
-		}
-		catch (e: JSONException) {
-			MLog.d(TAG,
-				   "Failed to parse 'isActive' property of travel time segment")
-		}
-
-		try {
-			travelTimeMinutes = properties.getInt("travelTimeMinutes")
-		}
-		catch (e: JSONException) {
-			MLog.d(TAG,
-				   "Failed to parse 'travelTimeMinutes' property of travel time segment")
-		}
-
-		includedInTotal = true
 	}
 
 	/**
@@ -152,7 +154,7 @@ constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
 		 */
 		val PROPERTY_INCLUDED_IN_TOTAL = "includedInTotal"
 		val PROPERTY_TRAVEL_TIME_IN_MINUTES = "travelTimesInMinutes"
-		private val TAG = TravelTime::class.java.simpleName
+		private val LOG_TAG = TravelTime::class.java.simpleName
 
 		/**
 		 * Takes the contents of the remote JSON file as a single string and breaks
@@ -170,27 +172,27 @@ constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
 			val result = LinkedList<TravelTime>()
 
 			try {
-				MLog.d(TAG, "Parsing top level object")
+				MLog.d(LOG_TAG, "Parsing top level object")
 				val topLevelObject = JSONObject(jsonFileContents)
 
-				MLog.d(TAG, "Parsed top level object OK")
+				MLog.d(LOG_TAG, "Parsed top level object OK")
 				val features = topLevelObject.getJSONArray("features")
 
-				MLog.d(TAG, "Number of features in JSON file: " + features.length())
+				MLog.d(LOG_TAG, "Number of features in JSON file: " + features.length())
 				for (i in 0..features.length() - 1) {
 					val featureJSONObject = features.getJSONObject(i)
 					val featureId = featureJSONObject.getString("id")
 
-					MLog.d(TAG,
+					MLog.d(LOG_TAG,
 						   String.format("Hazard[%d] has id %s", i, featureId))
-					MLog.d(TAG, String.format(
+					MLog.d(LOG_TAG, String.format(
 						"Creating a TravelTime object with id %s", featureId))
 					val travelTime = TravelTime(featureJSONObject)
 					result.add(travelTime)
 				}
 			}
 			catch (e: JSONException) {
-				MLog.e(TAG, "Failed to parse JSON", e)
+				MLog.e(LOG_TAG, "Failed to parse JSON", e)
 			}
 
 			return result
