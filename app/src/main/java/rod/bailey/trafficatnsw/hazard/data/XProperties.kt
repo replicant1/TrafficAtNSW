@@ -6,7 +6,7 @@ import org.json.JSONObject
 import java.util.*
 
 /**
- * Created by rodbailey on 6/8/17.
+ * Wraps the value of the "properties" property of an XHazard.
  */
 data class XProperties (
 	@SerializedName("adviceA")

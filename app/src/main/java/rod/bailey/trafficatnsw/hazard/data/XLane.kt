@@ -1,10 +1,10 @@
 package rod.bailey.trafficatnsw.hazard.data
 
 import com.google.gson.annotations.SerializedName
-import org.json.JSONObject
 
-import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
-
+/**
+ * An 'impacted lane' contained by an XRoad on which a hazard is occurring.
+ */
 class XLane(
 	@SerializedName("affectedDirection")
 	val affectedDirection: String?,

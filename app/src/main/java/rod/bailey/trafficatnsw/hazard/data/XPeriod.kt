@@ -1,25 +1,22 @@
 package rod.bailey.trafficatnsw.hazard.data
 
-import org.json.JSONObject
+import com.google.gson.annotations.SerializedName
 
-import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
+data class XPeriod(
+	@SerializedName("closureType")
+	val closureType: String?,
 
-class XPeriod(json: JSONObject) {
+	@SerializedName("direction")
+	val direction: String?,
 
-	val closureType: String?
-	val direction: String?
-	val finishTime: String?
-	val fromDay: String?
-	val startTime: String?
-	val toDay: String?
+	@SerializedName("finishTime")
+	val finishTime: String?,
 
-	init {
-		closureType = safeGetString(json, "closureType")
-		direction = safeGetString(json, "direction")
-		finishTime = safeGetString(json, "finishTime")
-		fromDay = safeGetString(json, "fromDay")
-		startTime = safeGetString(json, "startTime")
-		toDay = safeGetString(json, "toDay")
-	}
+	@SerializedName("fromDay")
+	val fromDay: String?,
 
-}
+	@SerializedName("startTime")
+	val startTime: String?,
+
+	@SerializedName("toDay")
+	val toDay: String?)

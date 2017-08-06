@@ -2,6 +2,10 @@ package rod.bailey.trafficatnsw.hazard.data
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * A Hazard (incident) as represented in a JSON file from the live traffic
+ * web site.
+ */
 data class XHazard(
 	@SerializedName("id")
 	val hazardId: Int?,
@@ -13,9 +17,12 @@ data class XHazard(
 	val properties: XProperties?) : Comparable<XHazard> {
 
 	/**
-	 * @return a negative integer if this < another
-	 * a positive integer if this > another
-	 * 0 if this .equals another
+	 * Hazards are sorted by [lastUpdated] date/time with the most recently
+	 * updated appearing first.
+	 *
+	 * @return (1) a negative integer if this < another
+	 * (2) a positive integer if this > another
+	 * (3) 0 if this .equals another
 	 */
 	override fun compareTo(other: XHazard): Int {
 		val thisLastUpdate: Long = properties?.lastUpdated ?: 0

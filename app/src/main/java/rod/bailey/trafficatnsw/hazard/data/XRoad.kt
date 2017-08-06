@@ -1,19 +1,12 @@
 package rod.bailey.trafficatnsw.hazard.data
 
 import com.google.gson.annotations.SerializedName
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
 
-import java.util.LinkedList
-
-import rod.bailey.trafficatnsw.util.JSONUtils
-import rod.bailey.trafficatnsw.util.MLog
-
-import rod.bailey.trafficatnsw.util.JSONUtils.safeGetString
-import rod.bailey.trafficatnsw.util.JSONUtils.safeGetInt
-import rod.bailey.trafficatnsw.util.JSONUtils.isNonEmpty
-
+/**
+ * Encapsulates an element of the "roads" property of a Hazard. There is
+ * only ever one XRoad in practice, which is the road the hazard is
+ * occurring on.
+ */
 data class XRoad(
 	@SerializedName("conditionTendency")
 	val conditionTendency: String?,
@@ -45,7 +38,7 @@ data class XRoad(
 	@SerializedName("queueLength")
 	val queueLength: Int?,
 
-//	val fullStreetAddress: String?,
+	//	val fullStreetAddress: String?,
 
 	@SerializedName("impactedLanes")
 	val impactedLanes: List<XLane>?)
