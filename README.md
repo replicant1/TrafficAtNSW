@@ -11,8 +11,15 @@ as a learning exercise.
 ## Libraries
 The app makes use of these libraries:
 
-* Android Annotations 
-* Dagger 2
+* *Android Annotations* - I mainly use these annotations:
+  * `@EActivity`
+  * `@EFragment` 
+  * `@ViewById` 
+  * `@AfterViews` 
+  * `@FragmentArg`
+  * `@Extra` 
+* *Dagger 2* - Used to `@Inject` dependencies
+* *GSON* - For parsing of JSON data files
 
 ## Screenshots
 
@@ -23,9 +30,9 @@ The app makes use of these libraries:
  
  ## TODO
  
- * Chane JSON parsing to use GSON
+ * Chase up all uses of JSON data for exceptions - centralize common operations/formatting
  * Remove all occurrences of !! operator
- * Increase coverage - add filters to inst tests
+ * Increase coverage - add filters to inst tests when Kotlin allows it
  * Create AndroidTestModule and AndroidTestComponent
  * Extend tests to cameras and TTs
  * Don't provide context globally in TNSWApplication (interferes with testing. research
