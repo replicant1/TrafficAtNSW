@@ -6,9 +6,11 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,6 +19,7 @@ import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.hazard.data.XHazard;
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection;
 import rod.bailey.trafficatnsw.hazard.data.XLane;
+import rod.bailey.trafficatnsw.hazard.data.XProperties;
 import rod.bailey.trafficatnsw.hazard.data.XRoad;
 import rod.bailey.trafficatnsw.util.AssetUtils;
 
@@ -30,6 +33,7 @@ import static org.junit.Assert.assertNotNull;
  * Created by rodbailey on 4/8/17.
  */
 @RunWith(AndroidJUnit4.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParseIncident2InstrumentedTest {
 
 	@Rule
@@ -39,13 +43,23 @@ public class ParseIncident2InstrumentedTest {
 	private static XHazard hazard;
 	private static final String JSON_FILE = "09jul2013.json";
 	private static final int HAZARD_ID = 440361;
+	private static String jsonString;
 
-	@BeforeClass
-	public static void parseJsonFile() throws IOException {
+	@Test
+	public void setup00() throws IOException {
 		Context appContext = InstrumentationRegistry.getContext();
-		String jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
+		jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
+	}
+
+	@Test
+	public void setup01() {
+		assertNotNull(jsonString);
 		hazards = XHazardCollection.Companion.parseIncidentJson(jsonString).getHazards();
 		assertNotNull(hazards);
+	}
+
+	@Test
+	public void setup02() {
 		assertEquals(29, hazards.size());
 		hazard = TestUtils.findHazardById(hazards, HAZARD_ID);
 	}
@@ -61,16 +75,18 @@ public class ParseIncident2InstrumentedTest {
 
 	@Test
 	public void testDates() {
-		assertEquals(new Long(1373305277059L), (Long) hazard.getProperties().getCreated().getTime());
-		assertEquals(new Long(1373324947947L), (Long) hazard.getProperties().getLastUpdated().getTime());
+		assertEquals(new Long(1373305277059L), (Long) hazard.getProperties().getCreated());
+		assertEquals(new Long(1373324947947L), (Long) hazard.getProperties().getLastUpdated());
 	}
 
 	@Test
 	public void testArrays() {
-		assertTrue(hazard.getProperties().getArrangementElements().isEmpty());
-		assertEquals(2, hazard.getProperties().getAttendingGroups().size());
-		assertEquals("Emergency service(s)", hazard.getProperties().getAttendingGroups().get(0));
-		assertEquals("RMS", hazard.getProperties().getAttendingGroups().get(1));
+		XProperties props = hazard.getProperties();
+		assertNotNull(props);
+		assertNull(props.getArrangementElements());
+		assertEquals(2, props.getAttendingGroups().size());
+		assertEquals("Emergency service(s)", props.getAttendingGroups().get(0));
+		assertEquals("RMS", props.getAttendingGroups().get(1));
 	}
 
 	@Test
@@ -117,8 +133,8 @@ public class ParseIncident2InstrumentedTest {
 
 	@Test
 	public void testWebLink() {
-		assertTrue("null".equals(hazard.getProperties().getWebLinkName()));
-		assertTrue("null".equals(hazard.getProperties().getWebLinkUrl()));
+		assertNull(hazard.getProperties().getWebLinkName());
+		assertNull(hazard.getProperties().getWebLinkUrl());
 	}
 
 	@Test

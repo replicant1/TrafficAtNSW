@@ -16,27 +16,27 @@ data class XProperties (
 	val adviceB: String?,
 
 	@SerializedName("arrangedElements")
-	val arrangementElements: LinkedList<XArrangementElement>,
+	val arrangementElements: LinkedList<XArrangementElement>?,
 
 	@SerializedName("attendingGroups")
-	val attendingGroups: LinkedList<String>,
+	val attendingGroups: LinkedList<String>?,
 
 	@SerializedName("created")
-	val created: Date?,
+	val created: Long?,
 
 	@SerializedName("displayName")
 	val displayName: String?,
 
 	@SerializedName("end")
-	val end: Date?,
+	val end: Long?,
 
-	@SerializedName("isEnded")
+	@SerializedName("ended")
 	val isEnded: Boolean?,
 
 	@SerializedName("headline")
 	val headline: String?,
 
-	@SerializedName("isImpacingNetwork")
+	@SerializedName("impactingNetwork")
 	val isImpactingNetwork: Boolean?,
 
 	@SerializedName("isInitialReport")
@@ -46,7 +46,7 @@ data class XProperties (
 	val isMajor: Boolean?,
 
 	@SerializedName("lastUpdated")
-	val lastUpdated: Date?,
+	val lastUpdated: Long?,
 
 	@SerializedName("latlng")
 	val latlng: Location?,
@@ -58,7 +58,7 @@ data class XProperties (
 	val otherAdvice: String?,
 
 	@SerializedName("periods")
-	val periods: LinkedList<XPeriod>,
+	val periods: LinkedList<XPeriod>?,
 
 	@SerializedName("properties")
 	val properties: JSONObject?,
@@ -67,10 +67,10 @@ data class XProperties (
 	val publicTransport: String?,
 
 	@SerializedName("roads")
-	val roads: LinkedList<XRoad>,
+	val roads: LinkedList<XRoad>?,
 
 	@SerializedName("start")
-	val start: Date?,
+	val start: Long?,
 
 	@SerializedName("subCategoryA")
 	val subCategoryA: String?,

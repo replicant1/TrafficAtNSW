@@ -1,17 +1,16 @@
 package rod.bailey.trafficatnsw.hazard.data
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
 
 data class XHazard(
 	@SerializedName("id")
 	val hazardId: Int?,
 
 	@SerializedName("geometry")
-	val geometry: XGeometry,
+	val geometry: XGeometry?,
 
 	@SerializedName("properties")
-	val properties: XProperties) : Comparable<XHazard> {
+	val properties: XProperties?) : Comparable<XHazard> {
 
 	/**
 	 * @return a negative integer if this < another
@@ -19,8 +18,8 @@ data class XHazard(
 	 * 0 if this .equals another
 	 */
 	override fun compareTo(other: XHazard): Int {
-		val thisLastUpdate: Date = properties.lastUpdated ?: Date()
-		val otherLastUpdate: Date = other.properties.lastUpdated ?: Date()
+		val thisLastUpdate: Long = properties?.lastUpdated ?: 0
+		val otherLastUpdate: Long = other.properties?.lastUpdated ?: 0
 		return thisLastUpdate.compareTo(otherLastUpdate) * -1
 	}
 

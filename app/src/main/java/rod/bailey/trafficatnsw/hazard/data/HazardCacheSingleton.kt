@@ -36,9 +36,10 @@ class HazardCacheSingleton {
 		unfilteredHazardsPerRegion.clear()
 		// Put hazards into unfiltered hazards map
 		for (hazard in allHazards) {
-			if ((hazard.properties.isEnded != null) && (!hazard.properties.isEnded)) {
-				if (!hazard.properties.roads.isEmpty()) {
-					val regionStr: String? = hazard.properties.roads[0].region
+			val props: XProperties? = hazard.properties
+			if ((props != null) && (props.isEnded != null) && (!props.isEnded)) {
+				if ((props.roads != null) && (props.roads.size > 0)) {
+					val regionStr: String? = props.roads[0].region
 					if (regionStr != null) {
 						val region = XRegion.valueOf(regionStr)
 						// Add this hazard into the unfiltered map

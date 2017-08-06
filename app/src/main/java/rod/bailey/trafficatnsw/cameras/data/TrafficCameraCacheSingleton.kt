@@ -189,7 +189,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		val general_holmes_dr = TrafficCamera(
 			"General Holmes Drive",
 			"Botany",
-			"General Holmes Drive at the east end of the Airport Tunnel looking east towards Botany.",
+			"General Holmes Drive at the east ended of the Airport Tunnel looking east towards Botany.",
 			"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/ghd_airport.jpg",
 			XRegion.SYD_MET, 2)
 		general_holmes_dr.isFavourite = false
@@ -234,7 +234,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		val eastern_dist = TrafficCamera(
 			"Eastern Distributor",
 			"Kensington",
-			"Southern end of the Eastern Distributor tunnel near the Link XRoad on-ramp looking north towards Sydney",
+			"Southern ended of the Eastern Distributor tunnel near the Link XRoad on-ramp looking north towards Sydney",
 			"http://www.rms.nsw.gov.au/trafficreports/cameras/camera_images/easterndist.jpg",
 			XRegion.SYD_MET, 8)
 		data.add(eastern_dist)

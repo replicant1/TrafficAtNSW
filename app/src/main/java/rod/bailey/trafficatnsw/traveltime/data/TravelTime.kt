@@ -82,7 +82,7 @@ constructor(featureJSONObject: JSONObject?) : Comparable<TravelTime> {
 	override fun compareTo(other: TravelTime): Int {
 		// Primary sort order is by first character in id
 		// Secondary sort order is by remaining characters, with 'TOTAL'
-		// appearing at end
+		// appearing at ended
 		// eg. E1, E2, E3, ETOTAL, W1, W2, W3, WTOTAL
 		var result = 0
 		val otherSegmentId = other.segmentId

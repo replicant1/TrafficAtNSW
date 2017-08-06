@@ -7,4 +7,4 @@ import com.google.gson.annotations.SerializedName
  */
 data class XGeometry(
 	@SerializedName("coordinates")
-	val latlng: DoubleArray)
+	val latlng: DoubleArray?)
