@@ -31,7 +31,7 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	@Inject
 	lateinit var travelTimesCache: TravelTimesCacheSingleton
 
-	private var listView: ListViewWithEmptyMessage? = null
+	private lateinit var listView: ListViewWithEmptyMessage
 
 	/** Travel times for the motorway currently being displayed  */
 	var db: MotorwayTravelTimesDatabase? = null
@@ -59,8 +59,7 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		setHasOptionsMenu(true)
-		activity.title = getString(R.string.tt_screen_title,
-								   travelTimeConfig?.motorwayName ?: "")
+		activity.title = getString(R.string.tt_screen_title, travelTimeConfig?.motorwayName ?: "")
 		listView = ListViewWithEmptyMessage_.build(activity,
 												   getString(R.string.tt_times_unavailable),
 												   InactiveTravelTimeEmptyMessagePredicate())
@@ -77,7 +76,7 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 		MLog.i(LOG_TAG, "Property ${event.propertyName} has changed")
 		if (event.propertyName == MotorwayTravelTimesDatabase.PROPERTY_TOTAL_TRAVEL_TIME) {
 			if (db != null) {
-				listView!!.setAdapter(TravelTimesListAdapter(db))
+				listView.setAdapter(TravelTimesListAdapter(db))
 			}
 		}
 	}

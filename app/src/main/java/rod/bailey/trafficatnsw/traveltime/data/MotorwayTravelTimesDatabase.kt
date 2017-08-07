@@ -13,7 +13,7 @@ import java.util.*
  * specified. Also knows how to store those inclusion states to disk and restore
  * them from disk. Note:contains data for a single motorway only.
  */
-class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig?) : PropertyChangeListener {
+class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : PropertyChangeListener {
 	private val prefs: SharedPreferences
 	var isPrimed: Boolean = false
 		private set
@@ -21,7 +21,7 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig?) :
 	private val travelTimes: LinkedList<TravelTime> = LinkedList<TravelTime>()
 
 	init {
-		prefs = ctx.getSharedPreferences(config!!.preferencesFileName, Context.MODE_PRIVATE)
+		prefs = ctx.getSharedPreferences(config.preferencesFileName, Context.MODE_PRIVATE)
 	}
 
 	/**
@@ -51,11 +51,10 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig?) :
 	private fun fireExclusionStatePropertyChangedEvent(travelTime: TravelTime) {
 		MLog.i(TAG, "Firing a PCE on property name "
 			+ PROPERTY_TOTAL_TRAVEL_TIME + " with value " + travelTime)
-		support.firePropertyChange(
-			PROPERTY_TOTAL_TRAVEL_TIME, null, this)
+		support.firePropertyChange(PROPERTY_TOTAL_TRAVEL_TIME, null, this)
 	}
 
-	fun getTravelTimes(): List<TravelTime> {
+	fun getTravelTimes(): LinkedList<TravelTime> {
 		return travelTimes
 	}
 

@@ -8,6 +8,7 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.service.IDataService
+import rod.bailey.trafficatnsw.common.ui.IndeterminateProgressDialog
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.hazard.ui.HazardListAdapter
 import rod.bailey.trafficatnsw.util.MLog
@@ -29,7 +30,7 @@ class DownloadHazardsTask(private val ctx: Context,
 		TrafficAtNSWApplication.graph.inject(this)
 	}
 
-	private var dialog: ProgressDialog? = null
+	private lateinit var dialog: IndeterminateProgressDialog
 
 	@Inject
 	lateinit var hazardCacheSingleton: HazardCacheSingleton
@@ -46,11 +47,8 @@ class DownloadHazardsTask(private val ctx: Context,
 	override fun onPreExecute() {
 		super.onPreExecute()
 
-		dialog = ProgressDialog(ctx)
-		dialog?.setMessage(ctx.getString(R.string.hazards_list_load_progress_msg))
-		dialog?.setCancelable(true)
-		dialog?.isIndeterminate = true
-		dialog?.show()
+		dialog = IndeterminateProgressDialog(ctx, ctx.getString(R.string.hazards_list_load_progress_msg))
+		dialog.show()
 	}
 
 	override fun doInBackground(vararg params: Void): Boolean {
@@ -66,8 +64,7 @@ class DownloadHazardsTask(private val ctx: Context,
 	}
 
 	override fun onPostExecute(result: Boolean) {
-		// Hide the progress dialog
-		dialog?.dismiss()
+		dialog.dismiss()
 
 		if (result) {
 			hazardList.setAdapter(HazardListAdapter())

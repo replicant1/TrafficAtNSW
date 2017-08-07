@@ -27,7 +27,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 	private var filter: ITrafficCameraFilter? = null
 	private val filteredCamerasPerRegion = HashMap<XRegion, List<TrafficCamera>>()
 	private val unfilteredCamerasPerRegion = HashMap<XRegion, List<TrafficCamera>>()
-	private var ctx: Context? = null
+	private lateinit var ctx: Context
 
 	init {
 		initUnfiltered()
@@ -42,8 +42,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 	}
 
 	private fun fireFavouritePropertyChangeEvent() {
-		support.firePropertyChange(
-			PROPERTY_FAVOURITE_SET, null, this)
+		support.firePropertyChange(PROPERTY_FAVOURITE_SET, null, this)
 	}
 
 	fun init(ctx: Context) {
@@ -824,17 +823,16 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 
 	private fun loadFavourites() {
 		MLog.i(TAG, "Loading favourites")
+
 		// To begin with, mark all as NOT extraFavourite
 		for (camerasInRegion in unfilteredCamerasPerRegion.values) {
 			for (camera in camerasInRegion) {
 				camera.setFavouriteSilently(false)
 			}
 		}
-		val prefs: SharedPreferences? = ctx!!.getSharedPreferences(
-			FAVOURITE_CAMERAS_FILE_NAME,
-			Context.MODE_PRIVATE)
-		val favouriteCameraIds = prefs?.getStringSet(
-			FAVOURITE_STATE_PREF_KEY, null)
+
+		val prefs: SharedPreferences? = ctx.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
+		val favouriteCameraIds = prefs?.getStringSet(FAVOURITE_STATE_PREF_KEY, null)
 
 		MLog.i(TAG, "Favourite cameras as loaded from prefs is: " + favouriteCameraIds)
 
@@ -869,11 +867,9 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 				}
 			}
 		}
-		val prefs = ctx!!.getSharedPreferences(
-			FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
+		val prefs = ctx.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
 		val editor = prefs.edit()
-		editor.putStringSet(
-			FAVOURITE_STATE_PREF_KEY, favouriteCameraIds)
+		editor.putStringSet(FAVOURITE_STATE_PREF_KEY, favouriteCameraIds)
 		editor.commit()
 	}
 
@@ -894,7 +890,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 				val filteredCameras = LinkedList<TrafficCamera>()
 
 				for (camera in unfilteredCameras) {
-					if (filter!!.admit(camera)) {
+					if (newfilter.admit(camera)) {
 						filteredCameras.add(camera)
 					}
 				}

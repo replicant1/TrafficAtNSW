@@ -113,32 +113,40 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 		// The first heading identifies the direction of travel for the
 		// first road segments
 		val firstTT = travelTimes[0]
-		val firstTTIdPrefix = firstTT.segmentId!!.substring(0, 1)
-		var topHeadingText: String?
-		var bottomHeadingText: String?
+		val segmentId: String? = firstTT.segmentId
 
-		if (firstTTIdPrefix == config?.forwardSegmentIdPrefix) {
-			topHeadingText = config.forwardName
-			bottomHeadingText = config.backwardName
-		} else {
-			topHeadingText = config?.backwardName
-			bottomHeadingText = config?.forwardName
-		}
-		// Insert the top heading at the beginning of the item list
-		result.add(HeadingItem(topHeadingText ?: ""))
-		// Insert the bottom heading after the last travel time with
-		// the same segmentId prefix as the firstTTIdPrefix
-		var bottomHeadingAdded = false
+		if (segmentId != null) {
+			val firstTTIdPrefix = segmentId.substring(0, 1)
+			var topHeadingText: String?
+			var bottomHeadingText: String?
 
-		for (travelTime in travelTimes) {
-			val segmentIdPrefix = travelTime.segmentId!!.substring(0, 1)
-
-			if (segmentIdPrefix != firstTTIdPrefix && !bottomHeadingAdded) {
-				result.add(HeadingItem(bottomHeadingText ?: ""))
-				bottomHeadingAdded = true
+			if (firstTTIdPrefix == config?.forwardSegmentIdPrefix) {
+				topHeadingText = config.forwardName
+				bottomHeadingText = config.backwardName
+			} else {
+				topHeadingText = config?.backwardName
+				bottomHeadingText = config?.forwardName
 			}
+			// Insert the top heading at the beginning of the item list
+			result.add(HeadingItem(topHeadingText ?: ""))
 
-			result.add(TravelTimeItem(travelTime))
+			// Insert the bottom heading after the last travel time with
+			// the same segmentId prefix as the firstTTIdPrefix
+			var bottomHeadingAdded = false
+
+			for (travelTime in travelTimes) {
+				val aTT = travelTime.segmentId
+				if (aTT != null) {
+					val segmentIdPrefix = aTT.substring(0, 1)
+
+					if (segmentIdPrefix != firstTTIdPrefix && !bottomHeadingAdded) {
+						result.add(HeadingItem(bottomHeadingText ?: ""))
+						bottomHeadingAdded = true
+					}
+				}
+
+				result.add(TravelTimeItem(travelTime))
+			}
 		}
 
 		return result
