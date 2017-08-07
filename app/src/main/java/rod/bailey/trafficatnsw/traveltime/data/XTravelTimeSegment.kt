@@ -18,45 +18,16 @@ data class XTravelTimeSegment(
 	@SerializedName("properties")
 	val properties: XTravelTimeProperties?) : Comparable<XTravelTimeSegment> {
 
+	private var support: PropertyChangeSupport? = null
+
 	/**
 	 * @return negative if 'this' is < 'other', positive if 'this' is > 'other', zero if 'this' is equal to 'other'
 	 */
 	override fun compareTo(other: XTravelTimeSegment): Int {
-		// Primary sort order is by first character in id
-		// Secondary sort order is by remaining characters, with 'TOTAL'
-		// appearing at ended
-		// eg. E1, E2, E3, ETOTAL, W1, W2, W3, WTOTAL
-		var result = 0
-		val firstCharCompare = segmentId?.substring(0, 1)?.compareTo(other.segmentId?.substring(0, 1) ?: "")
+		var result: Int = 0
 
-		if (firstCharCompare == 0) {
-			val thisEndChars: String = segmentId!!.substring(1)
-			val otherEndChars: String = other.segmentId?.substring(1) ?: ""
-			val thisSecondCharIsNumber: Boolean = isNumber(thisEndChars)
-			val otherSecondCharIsNumber: Boolean = isNumber(otherEndChars)
-
-			if (thisSecondCharIsNumber && otherSecondCharIsNumber) {
-				result = thisEndChars.toInt().compareTo(otherEndChars.toInt())
-			} else if (thisSecondCharIsNumber && !otherSecondCharIsNumber) {
-				result = -1
-			} else if (!thisSecondCharIsNumber && otherSecondCharIsNumber) {
-				result = 1
-			}
-		} else {
-			result = firstCharCompare ?: 0
-		}
-
-		return result
-	}
-
-	private fun isNumber(str: String): Boolean {
-		var result = true
-
-		try {
-			Integer.parseInt(str)
-		}
-		catch (nfe: NumberFormatException) {
-			result = false
+		if ((segmentId != null) && (other.segmentId != null)) {
+			result = segmentId.compareTo(other.segmentId)
 		}
 
 		return result
@@ -73,8 +44,6 @@ data class XTravelTimeSegment(
 	fun setIncludedInTotalSilently(includedInTotal: Boolean) {
 		this.includedInTotal = includedInTotal
 	}
-
-	private var support: PropertyChangeSupport? = null
 
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
 		if (support == null) {
