@@ -101,4 +101,18 @@ class SegmentIdTest {
 		assertEquals(3, id?.ordinal)
 	}
 
+	@Test
+	fun testParseNTOTAL() {
+		val id: SegmentId? = SegmentId.parse("NTOTAL")
+		assertNotNull(id)
+		assertEquals(SegmentDirection.N, id?.direction)
+		assertEquals(true, id?.isTotalSegment)
+	}
+
+	@Test
+	fun testParsentotalIsNull() {
+		val id: SegmentId? = SegmentId.parse("ntotal")
+		assertNull(id)
+	}
+
 }
