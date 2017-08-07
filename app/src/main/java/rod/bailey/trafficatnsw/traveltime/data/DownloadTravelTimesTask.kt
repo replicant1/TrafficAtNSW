@@ -9,6 +9,7 @@ import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.common.service.IDataService
+import rod.bailey.trafficatnsw.common.ui.IndeterminateProgressDialog
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter
 import rod.bailey.trafficatnsw.util.MLog
@@ -33,19 +34,17 @@ class DownloadTravelTimesTask(
 	@Inject
 	lateinit var dataService: IDataService
 
-	private var dialog: ProgressDialog? = null
+	private lateinit var dialog: IndeterminateProgressDialog
 
 	override fun onPreExecute() {
 		super.onPreExecute()
-		dialog = ProgressDialog(ctx)
-		dialog?.setMessage(ctx.getString(R.string.tt_load_progress_msg, travelTimeConfig?.motorwayName))
-		dialog?.setCancelable(false)
-		dialog?.isIndeterminate = true
-		dialog?.show()
+		dialog = IndeterminateProgressDialog(
+			ctx, ctx.getString(R.string.tt_load_progress_msg, travelTimeConfig?.motorwayName))
+		dialog.show()
 	}
 
 	override fun doInBackground(vararg params: Void): Boolean {
-		var travelTimesLoadedOK: Boolean = java.lang.Boolean.TRUE
+		var travelTimesLoadedOK: Boolean = true
 		ttFrag.db?.removePropertyChangeListener(ttFrag)
 
 		if (travelTimeConfig != null) {
@@ -53,7 +52,7 @@ class DownloadTravelTimesTask(
 		}
 
 		if (ttFrag.db == null) {
-			travelTimesLoadedOK = java.lang.Boolean.FALSE
+			travelTimesLoadedOK = false
 		} else {
 			ttFrag.db?.addPropertyChangeListener(ttFrag)
 		}
@@ -62,12 +61,12 @@ class DownloadTravelTimesTask(
 	}
 
 	override fun onPostExecute(result: Boolean) {
-		dialog?.dismiss()
+		dialog.dismiss()
 
 		if (result) {
 			mainLayout?.setAdapter(TravelTimesListAdapter(ttFrag.db))
 		} else {
-			// We don't all mainLayout.setAdapter, which means that the old (stale)
+			// We don't call mainLayout.setAdapter, which means that the old (stale)
 			// data will still remain visible.
 			MLog.i(LOG_TAG, "Failed to load " + travelTimeConfig?.motorwayName + " travel times")
 			val builder = AlertDialog.Builder(ctx)

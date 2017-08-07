@@ -11,6 +11,7 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.image.ITrafficCameraImageDisplayer
 import rod.bailey.trafficatnsw.common.service.IDataService
+import rod.bailey.trafficatnsw.common.ui.IndeterminateProgressDialog
 import rod.bailey.trafficatnsw.util.MLog
 import javax.inject.Inject
 
@@ -28,15 +29,12 @@ class DownloadImageTask(
 	@Inject
 	lateinit var dataService: IDataService
 
-	private var dialog: ProgressDialog? = null
+	private lateinit var dialog: IndeterminateProgressDialog
 
 	override fun onPreExecute() {
 		super.onPreExecute()
-		dialog = ProgressDialog(context)
-		dialog?.setMessage(context.getString(R.string.camera_image_loading_msg))
-		dialog?.setCancelable(false)
-		dialog?.isIndeterminate = true
-		dialog?.show()
+		dialog = IndeterminateProgressDialog(context, context.getString(R.string.camera_image_loading_msg))
+		dialog.show()
 	}
 
 	override fun doInBackground(vararg params: Int?): Bitmap? {
@@ -58,7 +56,7 @@ class DownloadImageTask(
 
 
 	override fun onPostExecute(result: Bitmap?) {
-		dialog?.dismiss()
+		dialog.dismiss()
 
 		if (result == null) {
 			MLog.i(LOG_TAG, "Failed to load camera image - showing error dialog")
