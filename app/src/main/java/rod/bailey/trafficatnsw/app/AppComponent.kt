@@ -16,7 +16,7 @@ import rod.bailey.trafficatnsw.hazard.details.HazardDetailsListAdapter
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.traveltime.data.DownloadTravelTimesTask
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
-import rod.bailey.trafficatnsw.traveltime.data.TravelTimesCacheSingleton
+import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry
 import rod.bailey.trafficatnsw.hazard.ui.HazardListItemView
 import javax.inject.Singleton
 
@@ -43,7 +43,7 @@ interface AppComponent {
 	fun inject(task: DownloadTravelTimesTask)
 	fun inject(fragment: TravelTimesFragment)
 	fun inject(adapter: HazardDetailsListAdapter)
-	fun inject(singleton: TravelTimesCacheSingleton)
+	fun inject(singleton: MotorwayConfigRegistry)
 	fun inject(view: HazardListItemView)
 	fun inject(service: TestDataService)
 	fun inject(service: RemoteDataService)

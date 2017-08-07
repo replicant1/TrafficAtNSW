@@ -1,7 +1,6 @@
 package rod.bailey.trafficatnsw.traveltime.data
 
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
 import rod.bailey.trafficatnsw.R
@@ -18,15 +17,12 @@ import javax.inject.Inject
 class DownloadTravelTimesTask(
 	private val ctx: Context,
 	private val ttFrag: TravelTimesFragment,
-	private val travelTimeConfig: TravelTimeConfig?,
+	private val travelTimeConfig: MotorwayConfig?,
 	private val mainLayout: ListViewWithEmptyMessage?) : AsyncTask<Void, Void, Boolean>() {
 
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
 	}
-
-	@Inject
-	lateinit var travelTimesCache: TravelTimesCacheSingleton
 
 	@Inject
 	lateinit var config: ConfigSingleton

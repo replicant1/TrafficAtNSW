@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.common.ui.ListHeadingView_
-import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesDatabase
-import rod.bailey.trafficatnsw.traveltime.data.TravelTime
-import rod.bailey.trafficatnsw.traveltime.data.TravelTimeConfig
+import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore
+import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment
+import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig
 import java.util.*
 
-class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), ListAdapter {
+class TravelTimesListAdapter(db: MotorwayTravelTimesStore?) : BaseAdapter(), ListAdapter {
 
 	/** An Item that is simply a heading e.g. "Eastbound" or "Westbound"  */
 	inner class HeadingItem(val text: String) : Item
@@ -23,11 +23,11 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 	interface Item
 
 	/** An Item that is not a heading but a travel time road segment  */
-	inner class TravelTimeItem(val travelTime: TravelTime) : Item
+	inner class TravelTimeItem(val travelTime: XTravelTimeSegment) : Item
 
 	private val items: List<Item>
-	private val travelTimes: LinkedList<TravelTime> = LinkedList<TravelTime>()
-	private val config: TravelTimeConfig?
+	private val travelTimes: LinkedList<XTravelTimeSegment> = LinkedList<XTravelTimeSegment>()
+	private val config: MotorwayConfig?
 
 	init {
 		if (db?.getTravelTimes() != null) {
@@ -70,11 +70,11 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 			val tt = ttItem.travelTime
 
 			if (tt.isTotal) {
-				tt.setTravelTimeMinutes(topTotal)
+				tt.properties?.travelTimeMinutes = topTotal
 				break
 			} else {
-				if (tt.isIncludedInTotal && tt.isActive) {
-					topTotal += tt.getTravelTimeMinutes()
+				if ((tt.includedInTotal == true) && (tt.properties?.isActive == true)) {
+					topTotal += tt.properties?.travelTimeMinutes ?: 0
 				}
 			}
 		}
@@ -84,11 +84,11 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 			val tt = ttItem.travelTime
 
 			if (tt.isTotal) {
-				tt.setTravelTimeMinutes(bottomTotal)
+				tt.properties?.travelTimeMinutes = bottomTotal
 				break
 			} else {
-				if (tt.isIncludedInTotal && tt.isActive) {
-					bottomTotal += tt.getTravelTimeMinutes()
+				if ((tt.includedInTotal == true) && (tt.properties?.isActive == true)) {
+					bottomTotal += tt.properties?.travelTimeMinutes ?: 0
 				}
 			}
 		}
@@ -102,7 +102,7 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesDatabase?) : BaseAdapter(), 
 			val dataObj = item.travelTime
 			// The row in the travel time can only be selected by the user iff
 			// it is not a TOTAL row AND if the corresponding segment is active.
-			result = !dataObj.isTotal && dataObj.isActive
+			result = !dataObj.isTotal && (dataObj.properties?.isActive == true)
 		}
 
 		return result

@@ -29,15 +29,15 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	}
 
 	@Inject
-	lateinit var travelTimesCache: TravelTimesCacheSingleton
+	lateinit var motorwayRegistry: MotorwayConfigRegistry
 
 	private lateinit var listView: ListViewWithEmptyMessage
 
 	/** Travel times for the motorway currently being displayed  */
-	var db: MotorwayTravelTimesDatabase? = null
+	var db: MotorwayTravelTimesStore? = null
 
 	/** Config for the motorway currently being display  */
-	private var travelTimeConfig: TravelTimeConfig? = null
+	private var travelTimeConfig: MotorwayConfig? = null
 
 	@FragmentArg(ARG_MWAY_KEY)
 	@JvmField
@@ -47,13 +47,12 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 		super.onCreate(savedInstanceState)
 
 		val motorway = Motorway.values()[motorwayKey ?: 0]
-		travelTimesCache.init()
 
 		travelTimeConfig = when (motorway) {
-			Motorway.M1 -> travelTimesCache.m1Config
-			Motorway.M2 -> travelTimesCache.m2Config
-			Motorway.M4 -> travelTimesCache.m4Config
-			Motorway.M7 -> travelTimesCache.m7Config
+			Motorway.M1 -> motorwayRegistry.m1Config
+			Motorway.M2 -> motorwayRegistry.m2Config
+			Motorway.M4 -> motorwayRegistry.m4Config
+			Motorway.M7 -> motorwayRegistry.m7Config
 		}
 	}
 
@@ -74,7 +73,7 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 
 	override fun propertyChange(event: PropertyChangeEvent) {
 		MLog.i(LOG_TAG, "Property ${event.propertyName} has changed")
-		if (event.propertyName == MotorwayTravelTimesDatabase.PROPERTY_TOTAL_TRAVEL_TIME) {
+		if (event.propertyName == MotorwayTravelTimesStore.PROPERTY_TOTAL_TRAVEL_TIME) {
 			if (db != null) {
 				listView.setAdapter(TravelTimesListAdapter(db))
 			}

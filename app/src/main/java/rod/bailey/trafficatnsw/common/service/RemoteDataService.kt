@@ -2,26 +2,14 @@ package rod.bailey.trafficatnsw.common.service
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Log
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
-import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
-import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesDatabase
-import rod.bailey.trafficatnsw.traveltime.data.TravelTime
-import rod.bailey.trafficatnsw.traveltime.data.TravelTimeConfig
-import rod.bailey.trafficatnsw.traveltime.data.TravelTimesCacheSingleton
-import rod.bailey.trafficatnsw.util.AssetUtils
-import rod.bailey.trafficatnsw.util.MLog
+import rod.bailey.trafficatnsw.traveltime.data.*
 import rod.bailey.trafficatnsw.util.NetUtils
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.net.URL
 import javax.inject.Inject
 
 /**
@@ -39,9 +27,6 @@ class RemoteDataService : IDataService {
 	@Inject
 	lateinit var cameraCache: TrafficCameraCacheSingleton
 
-	@Inject
-	lateinit var ttCache: TravelTimesCacheSingleton
-
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
 	}
@@ -51,11 +36,15 @@ class RemoteDataService : IDataService {
 		return if (jsonStr == null) null else  XHazardCollection.Companion.parseIncidentJson(jsonStr).hazards
 	}
 
-	override fun getMotorwayTravelTimes(motorway: TravelTimeConfig): MotorwayTravelTimesDatabase? {
+	override fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore? {
+		var result: MotorwayTravelTimesStore? = null
 		val jsonStr: String? = NetUtils.loadRemoteFileAsString(motorway.remoteJsonUrl)
-		val tts = TravelTime.Companion.parseTravelTimesJson(jsonStr)
-		val result = MotorwayTravelTimesDatabase(context, motorway)
-		result.primeWithTravelTimes(tts)
+
+		if (jsonStr != null) {
+			val tts = XTravelTimeCollection.Companion.parseTravelTimesJson(jsonStr)
+			result = MotorwayTravelTimesStore(context, motorway)
+			result.primeWithTravelTimes(tts.travelTimes)
+		}
 		return result
 	}
 
