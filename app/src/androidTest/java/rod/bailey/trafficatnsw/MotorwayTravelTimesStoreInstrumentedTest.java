@@ -121,6 +121,7 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 
 	@Test
 	public void testGetExcludedSegmentIdsNotEmpty() {
+		resetStoreToAllSegsIncluded();
 		XTravelTimeSegment segN7 = TestUtils.findSegmentById(store.getTravelTimes(), SEGMENT_ID);
 		segN7.setIncludedInTotal(false);
 
@@ -131,12 +132,23 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 
 	@Test
 	public void testGetExcludedSegmentIdsEmpty() {
+		resetStoreToAllSegsIncluded();
 		XTravelTimeSegment segN7 = TestUtils.findSegmentById(store.getTravelTimes(), SEGMENT_ID);
 		segN7.setIncludedInTotal(true);
 
 		Set<SegmentId> excludedIds = store.getSavedExcludedSegmentIds();
 		assertNotNull(excludedIds);
 		assertTrue(excludedIds.isEmpty());
+	}
+
+	private void resetStoreToAllSegsIncluded() {
+		for (XTravelTimeSegment segment : store.getTravelTimes()) {
+			segment.setIncludedInTotalSilently(true);
+		}
+
+		if (!store.getTravelTimes().isEmpty()) {
+			store.getTravelTimes().get(0).setIncludedInTotal(true);
+		}
 	}
 
 	@Test
