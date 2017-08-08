@@ -2,8 +2,8 @@ package rod.bailey.trafficatnsw.common.predicate
 
 import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter.Item
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter.TravelTimeItem
+import rod.bailey.trafficatnsw.traveltime.item.ITTListItem
+import rod.bailey.trafficatnsw.traveltime.item.SimpleTTListItem
 
 /**
  * Determines that the 'empty' message should only be shown if the given
@@ -17,8 +17,8 @@ class InactiveTravelTimeEmptyMessagePredicate : IEmptyMessagePredicate {
 		var foundAnInctiveSegment: Boolean = false
 
 		for (i in 0..ttadapter.count - 1) {
-			val item = ttadapter.getItem(i) as Item
-			if (item is TravelTimeItem) {
+			val item = ttadapter.getItem(i) as ITTListItem
+			if (item is SimpleTTListItem) {
 				val travelTime = item.travelTime
 
 				if (!travelTime.isTotal && (travelTime.properties?.isActive == false)) {

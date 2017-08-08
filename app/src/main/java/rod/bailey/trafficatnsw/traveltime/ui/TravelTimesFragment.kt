@@ -74,9 +74,9 @@ open class TravelTimesFragment : Fragment(), PropertyChangeListener {
 	override fun propertyChange(event: PropertyChangeEvent) {
 		MLog.i(LOG_TAG, "Property ${event.propertyName} has changed")
 		if (event.propertyName == MotorwayTravelTimesStore.PROPERTY_TOTAL_TRAVEL_TIME) {
-			if (db != null) {
-				listView.setAdapter(TravelTimesListAdapter(db))
-			}
+			val dbVal: MotorwayTravelTimesStore = db ?:
+				MotorwayTravelTimesStore(activity, MotorwayConfigRegistry().m1Config)
+			listView.setAdapter(TravelTimesListAdapter(dbVal))
 		}
 	}
 

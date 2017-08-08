@@ -42,21 +42,21 @@ class SegmentId : Comparable<SegmentId> {
 	 * @return Negative if this segmentId is less than o ; Positive if this
 	 * segmentId is greater than 0; Zero if they are equal
 	 */
-	override fun compareTo(o: SegmentId): Int {
-		var result = 0
-		val directionCompare = direction.compareTo(o.direction)
+	override fun compareTo(other: SegmentId): Int {
+		var result: Int
+		val directionCompare = direction.compareTo(other.direction)
 
 		if (directionCompare == 0) {
 			if (this.isTotalSegment) {
-				if (o.isTotalSegment) {
+				if (other.isTotalSegment) {
 					result = 0
 				} else {
 					result = 1
 				}
-			} else if (o.isTotalSegment) {
+			} else if (other.isTotalSegment) {
 				result = -1
 			} else {
-				result = this.ordinal.compareTo(o.ordinal)
+				result = this.ordinal.compareTo(other.ordinal)
 			}
 		} else {
 			result = directionCompare

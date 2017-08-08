@@ -1,6 +1,5 @@
 package rod.bailey.trafficatnsw
 
-import android.test.ViewAsserts
 import org.junit.Test
 import rod.bailey.trafficatnsw.traveltime.data.SegmentDirection
 import rod.bailey.trafficatnsw.traveltime.data.SegmentId

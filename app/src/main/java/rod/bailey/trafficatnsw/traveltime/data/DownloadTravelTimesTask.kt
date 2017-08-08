@@ -60,7 +60,8 @@ class DownloadTravelTimesTask(
 		dialog.dismiss()
 
 		if (result) {
-			mainLayout?.setAdapter(TravelTimesListAdapter(ttFrag.db))
+			val dbVal: MotorwayTravelTimesStore = ttFrag.db ?: MotorwayTravelTimesStore(ctx, MotorwayConfigRegistry().m1Config)
+			mainLayout?.setAdapter(TravelTimesListAdapter(dbVal))
 		} else {
 			// We don't call mainLayout.setAdapter, which means that the old (stale)
 			// data will still remain visible.
