@@ -25,7 +25,7 @@ public class TestUtils {
 		XTravelTimeSegment result = null;
 
 		for (XTravelTimeSegment segment : segments) {
-			if (segmentId .equals(segment.getSegmentId())) {
+			if (segmentId.equals(segment.getSegmentId())) {
 				result = segment;
 				break;
 			}

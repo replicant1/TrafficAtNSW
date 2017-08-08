@@ -69,8 +69,7 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 		for (travelTime in travelTimes) {
 			travelTime.setIncludedInTotalSilently(true)
 		}
-		val excludedSegmentIds = prefs.getStringSet(
-			EXCLUSION_STATE_PREFS_KEY, null)
+		val excludedSegmentIds = prefs.getStringSet(EXCLUSION_STATE_PREFS_KEY, null)
 
 		MLog.i(LOG_TAG, "Exclusion set as loaded from prefs is:")
 		MLog.i(LOG_TAG, "excludedSegmentIds = " + excludedSegmentIds)
@@ -90,6 +89,18 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 				}
 			}
 		}
+	}
+
+	fun getSavedExcludedSegmentIds(): Set<SegmentId> {
+		val result = HashSet<SegmentId>()
+		val excludedSegmentIds : Set<String> = prefs.getStringSet(EXCLUSION_STATE_PREFS_KEY, null)
+		for (excludedSegmentIdStr in excludedSegmentIds) {
+			val segmentId: SegmentId? = SegmentId.parse(excludedSegmentIdStr)
+			if (segmentId != null) {
+				result.add(segmentId)
+			}
+		}
+		return result
 	}
 
 	/**

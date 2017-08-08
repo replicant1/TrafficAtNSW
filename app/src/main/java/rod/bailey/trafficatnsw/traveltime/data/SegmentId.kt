@@ -69,6 +69,18 @@ class SegmentId : Comparable<SegmentId> {
 		return "direction=${direction}, ordinal=${ordinal}, isTotalSegment=${isTotalSegment}"
 	}
 
+	override fun equals(other: Any?): Boolean {
+		var result: Boolean = false
+		if (other is SegmentId) {
+			result = (this.compareTo(other) == 0)
+		}
+		return result
+	}
+
+	override fun hashCode(): Int {
+		return 17 + direction.hashCode() + ordinal.hashCode() + isTotalSegment.hashCode();
+	}
+
 	companion object {
 		fun parse(str: String): SegmentId? {
 			var result: SegmentId? = null

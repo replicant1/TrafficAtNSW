@@ -40,9 +40,25 @@ data class XTravelTimeSegment(
 			firePropertyChangeEvent(PROPERTY_INCLUDED_IN_TOTAL, includedInTotal)
 		}
 
-	// TODO: This won't do anything silently
 	fun setIncludedInTotalSilently(includedInTotal: Boolean) {
+		val listeners = support?.getPropertyChangeListeners()
+
+		// By detaching any existing listeners, we ensure that the
+		// change occurs silently
+		if (listeners != null) {
+			for (listener in listeners) {
+				support?.removePropertyChangeListener(listener)
+			}
+		}
+
 		this.includedInTotal = includedInTotal
+
+		// Re-instate any previously detached listeners
+		if (listeners != null) {
+			for (listener in listeners) {
+				support?.addPropertyChangeListener(listener)
+			}
+		}
 	}
 
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
