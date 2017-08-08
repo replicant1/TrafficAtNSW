@@ -42,6 +42,7 @@ import static junit.framework.Assert.assertTrue;
 public class MotorwayTravelTimesStoreInstrumentedTest {
 
 	public static final String SEGMENT_ID = "N7";
+
 	@Rule
 	public ActivityTestRule<MainActivity_> mActivityRule  = new ActivityTestRule(MainActivity_.class);
 
