@@ -35,7 +35,10 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Created by rodbailey on 8/8/17.
+ * The MotorwayTravelTimesStore class stores a sorted list of {@link XTravelTimeSegment}
+ * instances that correspond to the travel times data for a series of measured
+ * segments that connect end-to-end to form a complete traversal of the motorway in both
+ * directions.
  */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
