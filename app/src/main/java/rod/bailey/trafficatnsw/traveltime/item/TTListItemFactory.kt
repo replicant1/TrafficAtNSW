@@ -1,8 +1,6 @@
 package rod.bailey.trafficatnsw.traveltime.item
 
-import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig
-import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore
-import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment
+import rod.bailey.trafficatnsw.traveltime.data.*
 import java.util.*
 
 /**
@@ -10,10 +8,18 @@ import java.util.*
  */
 class TTListItemFactory(store: MotorwayTravelTimesStore) {
 
-	private val travelTimes: LinkedList<XTravelTimeSegment> = store.getTravelTimes()
-	private val motorwayConfig: MotorwayConfig? = store.config
+	init {
+		System.out.println("** At time of init, store= **")
+		for (segment in store.getTravelTimes()) {
+			System.out.println(segment.toString());
+		}
+		System.out.println("** ------------------------ **");
+	}
 
-	fun createTTListItems() : List<ITTListItem> {
+	private val travelTimes: LinkedList<XTravelTimeSegment> = store.getTravelTimes()
+	private val motorwayConfig: MotorwayConfig = store.config
+
+	fun createTTListItems(): List<ITTListItem> {
 		val result: LinkedList<ITTListItem> = createItemList()
 		updateTotalsItems(result)
 		return result
@@ -22,42 +28,52 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 	private fun createItemList(): LinkedList<ITTListItem> {
 		val result = LinkedList<ITTListItem>()
 
-		// The first heading identifies the direction of travel for the first road segments
-		val firstTT = travelTimes[0]
-		val segmentId: String? = firstTT.segmentId
+		if (!travelTimes.isEmpty()) {
+			// The first heading identifies the direction of travel for the first road segments
+			val firstSeg: XTravelTimeSegment = travelTimes[0]
+			val firstSegId: SegmentId? = SegmentId.parse(firstSeg.segmentId ?: "")
 
-		if (segmentId != null) {
-			val firstTTIdPrefix = segmentId.substring(0, 1)
-			val topHeadingText: String?
-			val bottomHeadingText: String?
+			if (firstSegId != null) {
+				val firstSegDir = firstSegId.direction
+				val mwayFwdDir = SegmentDirection.Companion.findDirectionByApiToken(
+					motorwayConfig.forwardSegmentIdPrefix)
 
-			if (firstTTIdPrefix == motorwayConfig?.forwardSegmentIdPrefix) {
-				topHeadingText = motorwayConfig.forwardName
-				bottomHeadingText = motorwayConfig.backwardName
-			} else {
-				topHeadingText = motorwayConfig?.backwardName
-				bottomHeadingText = motorwayConfig?.forwardName
-			}
+				val topHeadingText: String
+				val bottomHeadingText: String
 
-			// Insert the top heading at the beginning of the item list
-			result.add(HeadingTTListItem(topHeadingText ?: ""))
+				if (firstSegDir == mwayFwdDir) {
+					topHeadingText = motorwayConfig.forwardName
+					bottomHeadingText = motorwayConfig.backwardName
+				} else {
+					topHeadingText = motorwayConfig.backwardName
+					bottomHeadingText = motorwayConfig.forwardName
+				}
 
-			// Insert the bottom heading after the last travel time with
-			// the same segmentId prefix as the firstTTIdPrefix
-			var bottomHeadingAdded = false
+				System.out.println("** firstSegDir=${firstSegDir}")
+				System.out.println("** mwayFwdDir=${mwayFwdDir}")
+				System.out.println("** topHeadingText=${topHeadingText}")
+				System.out.println("** bottomHeadingText=${bottomHeadingText}")
 
-			for (travelTime in travelTimes) {
-				val aTT = travelTime.segmentId
-				if (aTT != null) {
-					val segmentIdPrefix = aTT.substring(0, 1)
+				// Insert the top heading at the beginning of the item list
+				result.add(HeadingTTListItem(topHeadingText))
 
-					if (segmentIdPrefix != firstTTIdPrefix && !bottomHeadingAdded) {
+				// Insert the bottom heading after the last travel time with
+				// the same direction as the first seg.
+				var bottomHeadingAdded = false
+
+				for (travelTime in travelTimes) {
+					val thisSegId: SegmentId? = SegmentId.parse(travelTime.segmentId ?: "")
+					val thisSegDir: SegmentDirection? = thisSegId?.direction
+
+					System.out.println("** thisSegId=${thisSegId} , thisSegDir=${thisSegDir}")
+
+					if ((thisSegDir != firstSegDir) && !bottomHeadingAdded) {
 						result.add(HeadingTTListItem(bottomHeadingText ?: ""))
 						bottomHeadingAdded = true
 					}
-				}
 
-				result.add(SimpleTTListItem(travelTime))
+					result.add(SimpleTTListItem(travelTime))
+				}
 			}
 		}
 

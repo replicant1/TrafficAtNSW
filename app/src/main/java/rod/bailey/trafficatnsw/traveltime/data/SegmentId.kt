@@ -82,23 +82,33 @@ class SegmentId : Comparable<SegmentId> {
 	}
 
 	companion object {
+		private const val TOTAL_SUFFIX: String = "TOTAL"
+		private const val MIN_ID_CHARS: Int = 2
+
 		fun parse(str: String): SegmentId? {
 			var result: SegmentId? = null
 
-			if ((str.length == 2) || (str.length == 6)) {
+			if (str.length >= MIN_ID_CHARS) {
+				val firstChar: String = str.first().toString()
+				val remaining: String = str.substring(1)
 
-				if (str.length == 2) {
-					val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(str.first().toString())
+				if (TOTAL_SUFFIX.equals(remaining)) {
+					val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(firstChar)
 					if (dir != null) {
-						if (str.last().isDigit()) {
-							result = SegmentId(dir, str.last().toString().toInt())
-						}
+						result = SegmentId(dir)
 					}
 				} else {
-					if (str.endsWith("TOTAL")) {
-						val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(str.first().toString())
-						if (dir != null) {
-							result = SegmentId(dir)
+					val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(firstChar)
+					if (dir != null) {
+						var remainingInt: Int = -1
+						try {
+							remainingInt = Integer.parseInt(remaining)
+						}
+						catch (e: NumberFormatException) {
+							// Empty
+						}
+						if (remainingInt >= 0) {
+							result = SegmentId(dir, remainingInt)
 						}
 					}
 				}
