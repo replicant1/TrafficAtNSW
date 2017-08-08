@@ -28,7 +28,7 @@ import javax.inject.Singleton
  * </pre>
  */
 @Singleton
-@Component(modules = arrayOf(AppModule::class))
+@Component(modules = arrayOf(AppModule::class, RemoteDataServiceModule::class))
 interface AppComponent {
 	fun inject(app: Application)
 	fun inject(activity: MainActivity)
