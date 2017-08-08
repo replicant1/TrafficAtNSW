@@ -14,6 +14,9 @@ import org.junit.runners.MethodSorters;
 import rod.bailey.trafficatnsw.app.AppModule;
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication_;
+import rod.bailey.trafficatnsw.common.service.TestDataService;
+
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Created by rodbailey on 9/8/17.
@@ -25,8 +28,20 @@ public class IDataServiceInstrumentedTest {
 	private TestComponent testComponent;
 
 	@Rule
-	public ActivityTestRule<MainActivity_> mActivityRule = new DaggerActivityTestRule<MainActivity_>(MainActivity_
-			.class, new DaggerActivityTestRule.OnBeforeActivityLaunchedListener<MainActivity_>() {
+	public ActivityTestRule<MainActivity_> mActivityRule = new DaggerActivityTestRule<MainActivity_>(
+			MainActivity_.class, new BeforeActivityLaunchedListener());
+
+	/**
+	 * Checks that an @Inject results in an instance of TestDataService rather than RemoteDataService.
+	 */
+	@Test
+	public void testIDataService() {
+		TestDataServiceHolder holder = new TestDataServiceHolder();
+		System.out.println("** holder.dataService=" + holder.dataService);
+		assertTrue(holder.dataService instanceof TestDataService);
+	}
+
+	private class BeforeActivityLaunchedListener implements DaggerActivityTestRule.OnBeforeActivityLaunchedListener<MainActivity_> {
 		@Override
 		public void beforeActivityLaunched(@NonNull Application application, @NonNull MainActivity_ activity) {
 			testComponent = DaggerTestComponent.builder()
@@ -35,12 +50,5 @@ public class IDataServiceInstrumentedTest {
 					.build();
 			((TrafficAtNSWApplication_) application).Companion.setGraph(testComponent);
 		}
-	});
-
-	@Test
-	public void testIDataService() {
-		TestDataServiceHolder holder = new TestDataServiceHolder();
-		System.out.println("** holder.dataService=" + holder.dataService);
 	}
-
 }
