@@ -1,7 +1,9 @@
 package rod.bailey.trafficatnsw.traveltime.data
 
 /**
- * Constructs an immutable TravelTimeConfig for a single motorway.
+ * Constructs an immutable MotorwayConfig for a single motorway.
+ *
+ * @param motorway Enum element that identifies this motorway
  * @param motorwayName
  *            Abbreviated name of the motorway eg. "M1"
  *
@@ -42,11 +44,12 @@ package rod.bailey.trafficatnsw.traveltime.data
  *            local copy of the file previously returned from
  *            'remoteJsonUrl'.
  */
-data class TravelTimeConfig(val motorwayName: String,
-							val forwardName: String,
-							val backwardName: String,
-							val forwardSegmentIdPrefix: String,
-							val backwardSegmentIdPrefix: String,
-							val preferencesFileName: String,
-							val remoteJsonUrl: String,
-							val localJsonFileName: String)
+data class MotorwayConfig(val motorway: Motorway,
+						  val motorwayName: String,
+						  val forwardName: String,
+						  val backwardName: String,
+						  val forwardSegmentIdPrefix: String,
+						  val backwardSegmentIdPrefix: String,
+						  val preferencesFileName: String,
+						  val remoteJsonUrl: String,
+						  val localJsonFileName: String)

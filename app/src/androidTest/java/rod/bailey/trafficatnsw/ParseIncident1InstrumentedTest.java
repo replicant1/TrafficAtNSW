@@ -33,7 +33,7 @@ import static org.junit.Assert.assertNotNull;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParseIncident1InstrumentedTest {
 
-	private static final String JSON_FILE = "09jul2013.json";
+	private static final String JSON_FILE = "incidents_09jul2013.json";
 	private static final int HAZARD_ID = 440375;
 	private static XHazardCollection hazards;
 	private static XHazard hazard;

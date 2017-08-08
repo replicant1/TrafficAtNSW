@@ -12,18 +12,18 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EViewGroup
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.traveltime.data.TravelTime
+import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment
 
 @EViewGroup(R.layout.list_item_travel_time)
-open class TravelTimesListItemView(val ctx: Context, val travelTime: TravelTime) : FrameLayout(ctx) {
+open class TravelTimesListItemView(val ctx: Context, val travelTime: XTravelTimeSegment) : FrameLayout(ctx) {
 
 	private inner class ItemOnClickListener : View.OnClickListener {
 		override fun onClick(view: View) {
 			// Clicking on a TT row should toggle it's 'includedInTotal' status.
 			// But neither TOTAL rows or any row that is currently inactive can
 			// be toggled.
-			if (travelTime.isActive && !travelTime.isTotal) {
-				travelTime.isIncludedInTotal = !travelTime.isIncludedInTotal
+			if ((travelTime.properties?.isActive == true) && !travelTime.isTotal) {
+				travelTime.includedInTotal = !(travelTime.includedInTotal == true)
 				updateAppearancePerExclusionState()
 			}
 		}
@@ -43,8 +43,8 @@ open class TravelTimesListItemView(val ctx: Context, val travelTime: TravelTime)
 
 	@AfterViews
 	fun afterViews() {
-		leftColView?.text = "${travelTime.fromDisplayName} - ${travelTime.toDisplayName}"
-		rightColView?.text = "${travelTime.getTravelTimeMinutes()} mins"
+		leftColView?.text = "${travelTime.properties?.fromDisplayName} - ${travelTime.properties?.toDisplayName}"
+		rightColView?.text = "${travelTime.properties?.travelTimeMinutes} mins"
 		updateAppearancePerExclusionState()
 		updateAppearancePerIsTotal()
 		background?.setOnClickListener(ItemOnClickListener())
@@ -52,7 +52,7 @@ open class TravelTimesListItemView(val ctx: Context, val travelTime: TravelTime)
 
 	fun updateAppearancePerExclusionState() {
 		if (!travelTime.isTotal) {
-			if (!travelTime.isActive || !travelTime.isIncludedInTotal) {
+			if ((travelTime.properties?.isActive == false)|| (travelTime.includedInTotal == false)) {
 				leftColView?.setTextColor(LTGRAY)
 				rightColView?.setTextColor(LTGRAY)
 			} else {

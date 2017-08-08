@@ -21,7 +21,7 @@ class InactiveTravelTimeEmptyMessagePredicate : IEmptyMessagePredicate {
 			if (item is TravelTimeItem) {
 				val travelTime = item.travelTime
 
-				if (!travelTime.isTotal && !travelTime.isActive) {
+				if (!travelTime.isTotal && (travelTime.properties?.isActive == false)) {
 					foundAnInctiveSegment = true
 					break
 				}

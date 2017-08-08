@@ -2,8 +2,6 @@ package rod.bailey.trafficatnsw.common.service
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Log
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 
@@ -27,9 +25,6 @@ class TestDataService : IDataService {
 	lateinit var config: ConfigSingleton
 
 	@Inject
-	lateinit var travelTimesCache: TravelTimesCacheSingleton
-
-	@Inject
 	lateinit var context: Context
 
 	companion object {
@@ -49,10 +44,10 @@ class TestDataService : IDataService {
 		return AssetUtils.loadAssetFileAsImage(context, LOCAL_TRAFFIC_CAMERA_IMAGE)
 	}
 
-	override fun getMotorwayTravelTimes(motorway: TravelTimeConfig): MotorwayTravelTimesDatabase? {
+	override fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore? {
 		val jsonStr:String = AssetUtils.loadAssetFileAsString(context, motorway.localJsonFileName)
-		val times: List<TravelTime> = TravelTime.Companion.parseTravelTimesJson(jsonStr)
-		val result = MotorwayTravelTimesDatabase(context, motorway)
+		val times: List<XTravelTimeSegment> = XTravelTimeCollection.Companion.parseTravelTimesJson(jsonStr).travelTimes
+		val result = MotorwayTravelTimesStore(context, motorway)
 		result.primeWithTravelTimes(times)
 		return result
 	}

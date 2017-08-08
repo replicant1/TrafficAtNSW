@@ -9,16 +9,16 @@ import java.beans.PropertyChangeSupport
 import java.util.*
 
 /**
- * Knows the 'isIncludedInTotal' state of each F3TravelTime that the user has
- * specified. Also knows how to store those inclusion states to disk and restore
- * them from disk. Note:contains data for a single motorway only.
+ * Stores all XTravelTimeSegment instances for a single motorway. Knows how to
+ * persist the the 'included in total' state (as set by the user) to disk and restore
+ * them from disk.
  */
-class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : PropertyChangeListener {
+class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : PropertyChangeListener {
 	private val prefs: SharedPreferences
 	var isPrimed: Boolean = false
 		private set
 	private val support = PropertyChangeSupport(this)
-	private val travelTimes: LinkedList<TravelTime> = LinkedList<TravelTime>()
+	private val travelTimes: LinkedList<XTravelTimeSegment> = LinkedList<XTravelTimeSegment>()
 
 	init {
 		prefs = ctx.getSharedPreferences(config.preferencesFileName, Context.MODE_PRIVATE)
@@ -26,8 +26,7 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 
 	/**
 	 * @param listener
-	 * *            Listener will be notified whenever PROPERTY_TOTAL_TRAVEL_TIME
-	 * *            changes.
+	 *            Listener will be notified whenever PROPERTY_TOTAL_TRAVEL_TIME changes.
 	 */
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
 		support.addPropertyChangeListener(listener)
@@ -35,7 +34,7 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 
 	/**
 	 * Add this database as a listener for changes in any property of any of the
-	 * TravelTImes in the database.
+	 * TravelTimes in the store.
 	 */
 	private fun addSelfAsPropertyChangeListener() {
 		for (seg in travelTimes) {
@@ -45,16 +44,15 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 
 	/**
 	 * Notifies all registered listeners that the value of the
-	 * 'isIncludedInTotal' property of the given TravelTime instance has
+	 * 'isIncludedInTotal' property of the given XTravelTimeSegment instance has
 	 * changed.
 	 */
-	private fun fireExclusionStatePropertyChangedEvent(travelTime: TravelTime) {
-		MLog.i(TAG, "Firing a PCE on property name "
-			+ PROPERTY_TOTAL_TRAVEL_TIME + " with value " + travelTime)
+	private fun fireExclusionStatePropertyChangedEvent(travelTime: XTravelTimeSegment) {
+		MLog.i(LOG_TAG, "Firing a PCE on property ${PROPERTY_TOTAL_TRAVEL_TIME} with value ${travelTime}")
 		support.firePropertyChange(PROPERTY_TOTAL_TRAVEL_TIME, null, this)
 	}
 
-	fun getTravelTimes(): LinkedList<TravelTime> {
+	fun getTravelTimes(): LinkedList<XTravelTimeSegment> {
 		return travelTimes
 	}
 
@@ -66,24 +64,23 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 	 * prior to this.
 	 */
 	private fun loadExclusionStates() {
-		MLog.i(TAG, "Loading exclusion states")
+		MLog.i(LOG_TAG, "Loading exclusion states")
 		// To begin with mark all as included
 		for (travelTime in travelTimes) {
 			travelTime.setIncludedInTotalSilently(true)
 		}
-		val excludedSegmentIds = prefs.getStringSet(
-			EXCLUSION_STATE_PREFS_KEY, null)
+		val excludedSegmentIds = prefs.getStringSet(EXCLUSION_STATE_PREFS_KEY, null)
 
-		MLog.i(TAG, "Exclusion set as loaded from prefs is:")
-		MLog.i(TAG, "excludedSegmentIds = " + excludedSegmentIds)
+		MLog.i(LOG_TAG, "Exclusion set as loaded from prefs is:")
+		MLog.i(LOG_TAG, "excludedSegmentIds = " + excludedSegmentIds)
 
 		if (excludedSegmentIds != null) {
 			for (segId in excludedSegmentIds) {
-				MLog.i(TAG, segId + ",")
+				MLog.i(LOG_TAG, segId + ",")
 			}
 
 			for (excludedSegmentId in excludedSegmentIds) {
-				// Find the TravelTime instance in the cameraCache with this segment id
+				// Find the XTravelTimeSegment instance in the cameraCache with this segment id
 				// and mark it as excluded
 				for (travelTime in travelTimes) {
 					if (travelTime.segmentId == excludedSegmentId) {
@@ -94,20 +91,24 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 		}
 	}
 
-	/**
-	 * segmentId - segment id of the TravelTime that is to be marked as
-	 * 'excluded' travelTImes - all known TravelTime instances for the parent
-	 * motorway
-	 */
-//	fun markTravelTimeAsExcluded(segmentId: String, fromTimes: List<*>) {
-//	}
+	fun getSavedExcludedSegmentIds(): Set<SegmentId> {
+		val result = HashSet<SegmentId>()
+		val excludedSegmentIds : Set<String> = prefs.getStringSet(EXCLUSION_STATE_PREFS_KEY, null)
+		for (excludedSegmentIdStr in excludedSegmentIds) {
+			val segmentId: SegmentId? = SegmentId.parse(excludedSegmentIdStr)
+			if (segmentId != null) {
+				result.add(segmentId)
+			}
+		}
+		return result
+	}
 
 	/**
 	 * Initializes the database with an array of travel times. The are the
 	 * 'subject' of any subsequent 'save' and 'load' operations. times -
-	 * Instances of F3TravelTime in no particular order
+	 * @param times Instances of XTravelTimeSegment in no particular order
 	 */
-	fun primeWithTravelTimes(times: List<TravelTime>?) {
+	fun primeWithTravelTimes(times: List<XTravelTimeSegment>?) {
 		removeSelfAsPropertyChangeListener()
 
 		travelTimes.clear()
@@ -117,16 +118,15 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 		isPrimed = true
 
 		addSelfAsPropertyChangeListener()
-
 		loadExclusionStates()
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		val source = event.source as TravelTime
+		val source = event.source as XTravelTimeSegment
 
-		if (event.propertyName == TravelTime.PROPERTY_INCLUDED_IN_TOTAL) {
+		if (event.propertyName == XTravelTimeSegment.PROPERTY_INCLUDED_IN_TOTAL) {
 			if (!source.isTotal) {
-				MLog.i(TAG,
+				MLog.i(LOG_TAG,
 					   "MotorwayTTDb gets notices that property "
 						   + event.propertyName
 						   + " has changed for segment id "
@@ -142,9 +142,9 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 	}
 
 	private fun removeSelfAsPropertyChangeListener() {
-			for (seg in travelTimes) {
-				seg.removePropertyChangeListener(this)
-			}
+		for (seg in travelTimes) {
+			seg.removePropertyChangeListener(this)
+		}
 	}
 
 	/**
@@ -153,13 +153,12 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 	 * this.Order is not important.
 	 */
 	private fun saveExclusionStates() {
-		MLog.d(TAG, "Saving exclusion states for motorway " + config?.motorwayName)
+		MLog.d(LOG_TAG, "Saving exclusion states for motorway " + config.motorwayName)
 		val excludedSegmentIds = HashSet<String>()
 
 		for (travelTime in travelTimes) {
-			if (!travelTime.isIncludedInTotal) {
-				MLog.d(TAG, "Segment " + travelTime.segmentId
-					+ " is excluded so save to prefs")
+			if (travelTime.includedInTotal == false) {
+				MLog.d(LOG_TAG, "Segment${travelTime.segmentId} is excluded so save to prefs")
 				val segmentIdStr: String = travelTime.segmentId ?: ""
 				if (!segmentIdStr.isEmpty()) {
 					excludedSegmentIds.add(segmentIdStr)
@@ -174,16 +173,17 @@ class MotorwayTravelTimesDatabase(ctx: Context, val config: TravelTimeConfig) : 
 
 	companion object {
 		private val EXCLUSION_STATE_PREFS_KEY = "EXCLUDED"
+
 		/**
 		 * This database supports only this property. A PropertyChangeEvent is
 		 * broadcast every time one of the TravelTimes currently in the database
-		 * experiences a change in the value of its 'isIncludedInTotal' property.
-		 * The new value of the property is the TravelTimeinstance that changed.
-		 * This signals to listeners that the current total traveltime for some
+		 * experiences a change in the value of its [includedInTotal] property.
+		 * The new value of the property is the TravelTime instance that changed.
+		 * This signals to listeners that the current total travel time for some
 		 * direction of travel on this motorway will need recalculating.
 		 */
 		val PROPERTY_TOTAL_TRAVEL_TIME = "totalTravelTime"
-		private val TAG = MotorwayTravelTimesDatabase::class.java
-			.simpleName
+
+		private val LOG_TAG = MotorwayTravelTimesStore::class.java.simpleName
 	}
 }

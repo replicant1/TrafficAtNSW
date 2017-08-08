@@ -5,7 +5,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,7 +40,7 @@ public class ParseIncident2InstrumentedTest {
 
 	private static List<XHazard> hazards;
 	private static XHazard hazard;
-	private static final String JSON_FILE = "09jul2013.json";
+	private static final String JSON_FILE = "incidents_09jul2013.json";
 	private static final int HAZARD_ID = 440361;
 	private static String jsonString;
 
