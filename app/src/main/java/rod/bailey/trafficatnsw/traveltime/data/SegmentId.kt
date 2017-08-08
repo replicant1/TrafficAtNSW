@@ -42,21 +42,21 @@ class SegmentId : Comparable<SegmentId> {
 	 * @return Negative if this segmentId is less than o ; Positive if this
 	 * segmentId is greater than 0; Zero if they are equal
 	 */
-	override fun compareTo(o: SegmentId): Int {
-		var result = 0
-		val directionCompare = direction.compareTo(o.direction)
+	override fun compareTo(other: SegmentId): Int {
+		var result: Int
+		val directionCompare = direction.compareTo(other.direction)
 
 		if (directionCompare == 0) {
 			if (this.isTotalSegment) {
-				if (o.isTotalSegment) {
+				if (other.isTotalSegment) {
 					result = 0
 				} else {
 					result = 1
 				}
-			} else if (o.isTotalSegment) {
+			} else if (other.isTotalSegment) {
 				result = -1
 			} else {
-				result = this.ordinal.compareTo(o.ordinal)
+				result = this.ordinal.compareTo(other.ordinal)
 			}
 		} else {
 			result = directionCompare
@@ -82,23 +82,33 @@ class SegmentId : Comparable<SegmentId> {
 	}
 
 	companion object {
+		private const val TOTAL_SUFFIX: String = "TOTAL"
+		private const val MIN_ID_CHARS: Int = 2
+
 		fun parse(str: String): SegmentId? {
 			var result: SegmentId? = null
 
-			if ((str.length == 2) || (str.length == 6)) {
+			if (str.length >= MIN_ID_CHARS) {
+				val firstChar: String = str.first().toString()
+				val remaining: String = str.substring(1)
 
-				if (str.length == 2) {
-					val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(str.first().toString())
+				if (TOTAL_SUFFIX.equals(remaining)) {
+					val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(firstChar)
 					if (dir != null) {
-						if (str.last().isDigit()) {
-							result = SegmentId(dir, str.last().toString().toInt())
-						}
+						result = SegmentId(dir)
 					}
 				} else {
-					if (str.endsWith("TOTAL")) {
-						val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(str.first().toString())
-						if (dir != null) {
-							result = SegmentId(dir)
+					val dir: SegmentDirection? = SegmentDirection.findDirectionByApiToken(firstChar)
+					if (dir != null) {
+						var remainingInt: Int = -1
+						try {
+							remainingInt = Integer.parseInt(remaining)
+						}
+						catch (e: NumberFormatException) {
+							// Empty
+						}
+						if (remainingInt >= 0) {
+							result = SegmentId(dir, remainingInt)
 						}
 					}
 				}

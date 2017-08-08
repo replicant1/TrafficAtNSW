@@ -61,7 +61,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		val props: XProperties? = hazard.properties
 		if (props != null) {
 			val elts = props.arrangementElements
-			if ((elts != null) && (elts != null) && (elts.size > 0)) {
+			if ((elts != null) && (elts.size > 0)) {
 				for (element in elts) {
 					if (element.title != null) {
 						addHeadingCellRec(element.title)
@@ -276,9 +276,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		val props: XProperties? = hazard.properties
 		if ((props != null) && (props.otherAdvice != null) && (!isEmptyStr(props.otherAdvice))) {
 			addHeadingCellRec(ctx.getString(R.string.hazard_details_heading_other_advice))
-			if (props.otherAdvice != null) {
-				addHtmlFieldCellRec(props.otherAdvice)
-			}
+			addHtmlFieldCellRec(props.otherAdvice)
 		}
 	}
 
@@ -417,7 +415,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 				val lastUpdated: Long? = props.lastUpdated
 				val created: Long? = props.created
 
-				result = (lastUpdated != null) && (created != null)	&& (lastUpdated == created)
+				result = (lastUpdated != null) && (created != null) && (lastUpdated == created)
 			}
 
 			return result

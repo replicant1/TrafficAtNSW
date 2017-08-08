@@ -1,6 +1,5 @@
 package rod.bailey.trafficatnsw
 
-import android.test.ViewAsserts
 import org.junit.Test
 import rod.bailey.trafficatnsw.traveltime.data.SegmentDirection
 import rod.bailey.trafficatnsw.traveltime.data.SegmentId
@@ -201,10 +200,45 @@ class SegmentIdTest {
 
 		val set: Set<SegmentId> = setOf(id1, id2, id3)
 
-		assertEquals(4, set.size)
+		assertEquals(3, set.size)
 		assertTrue(set.contains(id1))
 		assertTrue(set.contains(id2))
 		assertTrue(set.contains(id3))
 		assertFalse(set.contains(id4))
+	}
+
+	@Test
+	fun testParseDoubleDigitN() {
+		val id1: SegmentId? = SegmentId.parse("N10")
+		assertNotNull(id1)
+		assertEquals(SegmentDirection.N, id1?.direction)
+		assertEquals(10, id1?.ordinal)
+	}
+
+	@Test
+	fun testParseDoubleDigitS() {
+		val id1: SegmentId? = SegmentId.parse("S11")
+		assertNotNull(id1)
+		assertEquals(SegmentDirection.S, id1?.direction)
+		assertEquals(11, id1?.ordinal)
+	}
+
+	@Test
+	fun testCompareDoubleDigitLess() {
+		val id1: SegmentId? = SegmentId.parse("N10")
+		val id2: SegmentId = SegmentId(SegmentDirection.N, 11)
+		assertNotNull(id1)
+		assertNotNull(id2)
+		assertEquals(-1, id1?.compareTo(id2))
+	}
+
+	@Test
+	fun testCompareDoubleDigitMore() {
+		val id1: SegmentId? = SegmentId.parse("S10")
+		val id2: SegmentId = SegmentId(SegmentDirection.N, 11)
+		assertNotNull(id1)
+		assertNotNull(id2)
+		assertEquals(1, id1?.compareTo(id2))
+
 	}
 }

@@ -35,7 +35,10 @@ import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Created by rodbailey on 8/8/17.
+ * The MotorwayTravelTimesStore class stores a sorted list of {@link XTravelTimeSegment}
+ * instances that correspond to the travel times data for a series of measured
+ * segments that connect end-to-end to form a complete traversal of the motorway in both
+ * directions.
  */
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -121,6 +124,7 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 
 	@Test
 	public void testGetExcludedSegmentIdsNotEmpty() {
+		resetStoreToAllSegsIncluded();
 		XTravelTimeSegment segN7 = TestUtils.findSegmentById(store.getTravelTimes(), SEGMENT_ID);
 		segN7.setIncludedInTotal(false);
 
@@ -131,12 +135,23 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 
 	@Test
 	public void testGetExcludedSegmentIdsEmpty() {
+		resetStoreToAllSegsIncluded();
 		XTravelTimeSegment segN7 = TestUtils.findSegmentById(store.getTravelTimes(), SEGMENT_ID);
 		segN7.setIncludedInTotal(true);
 
 		Set<SegmentId> excludedIds = store.getSavedExcludedSegmentIds();
 		assertNotNull(excludedIds);
 		assertTrue(excludedIds.isEmpty());
+	}
+
+	private void resetStoreToAllSegsIncluded() {
+		for (XTravelTimeSegment segment : store.getTravelTimes()) {
+			segment.setIncludedInTotalSilently(true);
+		}
+
+		if (!store.getTravelTimes().isEmpty()) {
+			store.getTravelTimes().get(0).setIncludedInTotal(true);
+		}
 	}
 
 	@Test

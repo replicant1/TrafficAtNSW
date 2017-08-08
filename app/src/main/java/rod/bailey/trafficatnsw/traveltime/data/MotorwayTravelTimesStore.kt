@@ -117,6 +117,7 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 		}
 		isPrimed = true
 
+		Collections.sort(travelTimes)
 		addSelfAsPropertyChangeListener()
 		loadExclusionStates()
 	}
