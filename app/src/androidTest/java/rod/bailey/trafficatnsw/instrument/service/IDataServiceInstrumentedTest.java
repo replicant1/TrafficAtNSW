@@ -40,7 +40,6 @@ public class IDataServiceInstrumentedTest {
 	@Test
 	public void testIDataService() {
 		TestDataServiceHolder holder = new TestDataServiceHolder();
-		System.out.println("** holder.dataService=" + holder.getDataService());
 		assertTrue(holder.getDataService() instanceof TestDataService);
 	}
 
