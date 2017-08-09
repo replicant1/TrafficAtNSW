@@ -5,7 +5,7 @@ import android.support.test.espresso.core.deps.dagger.Provides;
 import javax.inject.Singleton;
 
 import dagger.Module;
-import rod.bailey.trafficatnsw.common.service.IDataService;
+import rod.bailey.trafficatnsw.service.IDataService;
 import rod.bailey.trafficatnsw.instrument.service.TestDataService;
 
 /**

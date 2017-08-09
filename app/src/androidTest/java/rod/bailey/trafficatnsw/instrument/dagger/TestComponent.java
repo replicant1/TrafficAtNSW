@@ -5,8 +5,8 @@ import javax.inject.Singleton;
 import dagger.Component;
 import rod.bailey.trafficatnsw.instrument.service.TestDataService;
 import rod.bailey.trafficatnsw.instrument.service.TestDataServiceHolder;
-import rod.bailey.trafficatnsw.app.AppComponent;
-import rod.bailey.trafficatnsw.app.AppModule;
+import rod.bailey.trafficatnsw.dagger.AppComponent;
+import rod.bailey.trafficatnsw.dagger.AppModule;
 
 /**
  * Created by rodbailey on 8/8/17.

@@ -7,7 +7,7 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.app.ConfigSingleton
-import rod.bailey.trafficatnsw.common.service.IDataService
+import rod.bailey.trafficatnsw.service.IDataService
 import rod.bailey.trafficatnsw.common.ui.IndeterminateProgressDialog
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter

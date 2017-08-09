@@ -2,7 +2,6 @@ package rod.bailey.trafficatnsw.util
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import rod.bailey.trafficatnsw.common.service.RemoteDataService
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader

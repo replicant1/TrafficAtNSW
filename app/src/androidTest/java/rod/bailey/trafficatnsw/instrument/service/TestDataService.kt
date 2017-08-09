@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.common.service.IDataService
+import rod.bailey.trafficatnsw.service.IDataService
 
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection

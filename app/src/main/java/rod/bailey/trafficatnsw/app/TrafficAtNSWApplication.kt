@@ -3,9 +3,11 @@ package rod.bailey.trafficatnsw.app
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
-import dagger.Component
 import org.androidannotations.annotations.EApplication
-import javax.inject.Singleton
+import rod.bailey.trafficatnsw.dagger.AppComponent
+import rod.bailey.trafficatnsw.dagger.AppModule
+import rod.bailey.trafficatnsw.dagger.DaggerAppComponent
+import rod.bailey.trafficatnsw.dagger.RemoteDataServiceModule
 
 /**
  * Application class represents Traffic@NSW and exists solely to provide
