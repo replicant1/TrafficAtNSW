@@ -68,7 +68,7 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 					System.out.println("** thisSegId=${thisSegId} , thisSegDir=${thisSegDir}")
 
 					if ((thisSegDir != firstSegDir) && !bottomHeadingAdded) {
-						result.add(HeadingTTListItem(bottomHeadingText ?: ""))
+						result.add(HeadingTTListItem(bottomHeadingText))
 						bottomHeadingAdded = true
 					}
 

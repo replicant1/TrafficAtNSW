@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw;
+package rod.bailey.trafficatnsw.instrument.traveltime;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -13,6 +13,7 @@ import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
 
+import rod.bailey.trafficatnsw.instrument.util.TestUtils;
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.hazard.data.XGeometry;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeCollection;

@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw;
+package rod.bailey.trafficatnsw.instrument.dagger;
 
 /*
  * Copyright (C) 2015 Tomasz Rozbicki

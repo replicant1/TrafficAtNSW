@@ -1,12 +1,14 @@
-package rod.bailey.trafficatnsw.common.service
+package rod.bailey.trafficatnsw.instrument.service
 
 import android.content.Context
 import android.graphics.Bitmap
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.common.service.IDataService
 
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
+import rod.bailey.trafficatnsw.instrument.dagger.TestComponent
 import rod.bailey.trafficatnsw.traveltime.data.*
 import rod.bailey.trafficatnsw.util.AssetUtils
 import javax.inject.Inject
@@ -18,7 +20,7 @@ import javax.inject.Inject
 class TestDataService : IDataService {
 
 	init {
-		TrafficAtNSWApplication.graph.inject(this)
+		(TrafficAtNSWApplication.graph as TestComponent).inject(this)
 	}
 
 	@Inject
@@ -37,11 +39,13 @@ class TestDataService : IDataService {
 
 	override fun getHazards(): List<XHazard>? {
 		return XHazardCollection.Companion.parseIncidentJson(
-			AssetUtils.loadAssetFileAsString(context, LOCAL_INCIDENTS_JSON_FILE)).hazards
+			AssetUtils.loadAssetFileAsString(context,
+											 LOCAL_INCIDENTS_JSON_FILE)).hazards
 	}
 
 	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {
-		return AssetUtils.loadAssetFileAsImage(context, LOCAL_TRAFFIC_CAMERA_IMAGE)
+		return AssetUtils.loadAssetFileAsImage(context,
+											   LOCAL_TRAFFIC_CAMERA_IMAGE)
 	}
 
 	override fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore? {
