@@ -9,7 +9,7 @@ import java.util.*
 class TTListItemFactory(store: MotorwayTravelTimesStore) {
 
 	init {
-		System.out.println("** At time of init, store= **")
+		System.out.println("** At time of setMode, store= **")
 		for (segment in store.getTravelTimes()) {
 			System.out.println(segment.toString());
 		}

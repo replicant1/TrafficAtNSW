@@ -14,8 +14,8 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
-import rod.bailey.trafficatnsw.hazard.ui.HazardListFragment
-import rod.bailey.trafficatnsw.hazard.ui.HazardListMode
+import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
+import rod.bailey.trafficatnsw.hazard.overview.HazardOverviewMode
 import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.data.Motorway
 import rod.bailey.trafficatnsw.util.MLog
@@ -92,9 +92,9 @@ open class MainActivity : AppCompatActivity() {
 			Log.d(LOG_TAG, "onNavigationItemSelected: item=" + item)
 			when (item.itemId) {
 				R.id.menu_item_sydney_incidents ->
-					navToHazards(HazardListMode.SYDNEY)
+					navToHazards(HazardOverviewMode.SYDNEY)
 				R.id.menu_item_regional_nsw_incidents ->
-					navToHazards(HazardListMode.REGIONAL)
+					navToHazards(HazardOverviewMode.REGIONAL)
 				R.id.menu_item_favourite_cameras ->
 					navToCameras(TrafficCameraListFragment.ARG_MODE_VALUE_FAVOURITES)
 				R.id.menu_item_sydney_cameras -> navToCameras(
@@ -111,7 +111,7 @@ open class MainActivity : AppCompatActivity() {
 			return true
 		} // onNavigationItemSelected()
 
-		private fun navToHazards(mode: HazardListMode) {
+		private fun navToHazards(mode: HazardOverviewMode) {
 			val fragment = HazardListFragment.create(mode)
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}

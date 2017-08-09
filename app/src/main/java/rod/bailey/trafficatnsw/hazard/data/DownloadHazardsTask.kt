@@ -9,7 +9,7 @@ import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.service.IDataService
 import rod.bailey.trafficatnsw.common.ui.IndeterminateProgressDialog
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
-import rod.bailey.trafficatnsw.hazard.ui.HazardListAdapter
+import rod.bailey.trafficatnsw.hazard.overview.HazardListAdapter
 import rod.bailey.trafficatnsw.util.MLog
 import javax.inject.Inject
 

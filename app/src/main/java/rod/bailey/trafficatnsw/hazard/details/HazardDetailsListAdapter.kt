@@ -16,7 +16,7 @@ import rod.bailey.trafficatnsw.hazard.details.ui.cellrec.*
 import rod.bailey.trafficatnsw.hazard.details.ui.view.HtmlListItemView_
 import rod.bailey.trafficatnsw.hazard.details.ui.view.LineListItemView_
 import rod.bailey.trafficatnsw.hazard.details.ui.view.TextFieldListItemView_
-import rod.bailey.trafficatnsw.hazard.ui.HazardListItemView_
+import rod.bailey.trafficatnsw.hazard.overview.HazardListItemView_
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*

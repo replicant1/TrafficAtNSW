@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.hazard.ui
+package rod.bailey.trafficatnsw.hazard.overview
 
 import android.app.Fragment
 import android.os.Bundle
@@ -16,8 +16,8 @@ import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage_
-import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
+import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment_
 import javax.inject.Inject
 
 /**
@@ -27,13 +27,14 @@ import javax.inject.Inject
  */
 @EFragment
 @OptionsMenu(R.menu.menu_hazards_fragment_options)
-open class HazardListFragment : Fragment() {
+open class HazardListFragment : Fragment(), IHazardOverviewView {
 
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
 	}
 
-	private lateinit var mode: HazardListMode
+	private lateinit var mode: HazardOverviewMode
+
 	private lateinit var hazardListView: ListViewWithEmptyMessage
 
 	@FragmentArg(ARG_HAZARDS_FRAGMENT_MODE)
@@ -43,29 +44,11 @@ open class HazardListFragment : Fragment() {
 	@Inject
 	lateinit var hazardCacheSingleton: HazardCacheSingleton
 
-	/**
-	 * @return The string to display in place of the hazard list when there are no hazards
-	 */
-	private fun emptyMessageForMode(mode: HazardListMode?): String {
-		return if (mode === HazardListMode.SYDNEY)
-			getString(R.string.hazards_list_screen_empty_sydney)
-		else
-			getString(R.string.hazards_list_screen_empty_regional_nsw)
-	}
-
-	/**
-	 * @return The title for the screen, depending on mode
-	 */
-	private fun screenTitleForMode(mode: HazardListMode?): String {
-		return if (mode === HazardListMode.SYDNEY)
-			getString(R.string.hazards_list_screen_title_sydney)
-		else
-			getString(R.string.hazards_list_screen_title_regional_nsw)
-	}
+	val presenter: IHazardOverviewPresenter = HazardOverviewPresenter()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
-		mode = HazardListMode.values()[modeKey ?: 0]
+		mode = HazardOverviewMode.values()[modeKey ?: 0]
 		hazardCacheSingleton.filter = mode.filter
 	}
 
@@ -73,27 +56,39 @@ open class HazardListFragment : Fragment() {
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
 		hazardListView = ListViewWithEmptyMessage_.build(activity,
-														 emptyMessageForMode(mode),
+														 getString(presenter.getEmptyMessageForMode(mode)),
 														 EmptyListEmptyMessagePredicate())
 		hazardListView.lv_list.divider =
 			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
 		hazardListView.lv_list.dividerHeight = 2
 
 		setHasOptionsMenu(true)
-		activity.title = screenTitleForMode(mode)
-		refreshAsync()
+		activity.title = getString(presenter.getScreenTitleForMode(mode))
+
+		loadHazardsAsync()
+
 		return hazardListView
 	}
 
+	override fun onResume() {
+		super.onResume()
+		presenter.resumePresenting(this)
+	}
+
+	override fun onPause() {
+		super.onPause()
+		presenter.pausePresenting()
+	}
+
 	@OptionsItem(R.id.menu_item_refresh_hazard_list)
-	fun refreshAsync() {
-		DownloadHazardsTask(activity, hazardListView).execute()
+	fun loadHazardsAsync() {
+		presenter.loadHazardsAsync(activity, hazardListView)
 	}
 
 	companion object {
 		private const val ARG_HAZARDS_FRAGMENT_MODE: String = "rod.bailey.trafficatnsw.hazards.fragment.mode"
 
-		fun create(mode: HazardListMode): HazardListFragment {
+		fun create(mode: HazardOverviewMode): HazardListFragment {
 			return HazardListFragment_.builder().arg(
 				ARG_HAZARDS_FRAGMENT_MODE, mode.ordinal).build()
 		}

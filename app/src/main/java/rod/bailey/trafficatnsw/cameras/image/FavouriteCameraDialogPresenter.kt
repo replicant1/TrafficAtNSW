@@ -31,7 +31,7 @@ class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 	}
 
 	init {
-		MLog.i(LOG_TAG, "Presenter created for camera with extraFavourite status " + camera.isFavourite)
+		MLog.i(LOG_TAG, "IPresenter created for camera with extraFavourite status " + camera.isFavourite)
 	}
 
 	fun build(ctx: Context): AlertDialog {
