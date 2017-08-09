@@ -11,7 +11,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
-import rod.bailey.trafficatnsw.app.AppModule;
+import rod.bailey.trafficatnsw.dagger.AppModule;
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication_;
 import rod.bailey.trafficatnsw.instrument.dagger.DaggerActivityTestRule;

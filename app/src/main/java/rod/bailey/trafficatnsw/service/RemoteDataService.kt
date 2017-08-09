@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.common.service
+package rod.bailey.trafficatnsw.service
 
 import android.content.Context
 import android.graphics.Bitmap

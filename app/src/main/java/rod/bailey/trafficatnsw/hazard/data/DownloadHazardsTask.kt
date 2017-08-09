@@ -1,21 +1,16 @@
 package rod.bailey.trafficatnsw.hazard.data
 
 import android.app.AlertDialog
-import android.app.ProgressDialog
 import android.content.Context
 import android.os.AsyncTask
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.common.service.IDataService
+import rod.bailey.trafficatnsw.service.IDataService
 import rod.bailey.trafficatnsw.common.ui.IndeterminateProgressDialog
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.hazard.ui.HazardListAdapter
 import rod.bailey.trafficatnsw.util.MLog
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.net.URL
 import javax.inject.Inject
 
 /**

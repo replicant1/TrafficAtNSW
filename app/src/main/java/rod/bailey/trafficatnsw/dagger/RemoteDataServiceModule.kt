@@ -1,10 +1,10 @@
-package rod.bailey.trafficatnsw.app
+package rod.bailey.trafficatnsw.dagger
 
 import android.app.Application
 import dagger.Module
 import dagger.Provides
-import rod.bailey.trafficatnsw.common.service.IDataService
-import rod.bailey.trafficatnsw.common.service.RemoteDataService
+import rod.bailey.trafficatnsw.service.IDataService
+import rod.bailey.trafficatnsw.service.RemoteDataService
 import javax.inject.Singleton
 
 /**
