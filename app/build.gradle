@@ -61,6 +61,10 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile "com.google.dagger:dagger:$dagger_version"
+    androidTestCompile "com.google.dagger:dagger-compiler:$dagger_version"
+
+    kaptAndroidTest "com.google.dagger:dagger-compiler:$dagger_version"
 
     // Enable Kotlin un-instrumented tests
     testCompile 'junit:junit:4.12'
@@ -81,4 +85,5 @@ dependencies {
     // Dagger
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     compile "com.google.dagger:dagger:$dagger_version"
+
 }

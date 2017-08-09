@@ -3,7 +3,9 @@ package rod.bailey.trafficatnsw.app
 import android.app.Application
 import android.content.Context
 import android.support.multidex.MultiDex
+import dagger.Component
 import org.androidannotations.annotations.EApplication
+import javax.inject.Singleton
 
 /**
  * Application class represents Traffic@NSW and exists solely to provide
@@ -20,8 +22,15 @@ open class TrafficAtNSWApplication : Application() {
 
 	override fun onCreate() {
 		super.onCreate()
-		graph = DaggerAppComponent.builder().appModule(AppModule(this)).build()
+		graph = createComponent()
 		graph.inject(this)
+	}
+
+	open fun createComponent() : AppComponent {
+		return DaggerAppComponent.builder()
+			.appModule(AppModule(this))
+			.remoteDataServiceModule(RemoteDataServiceModule(this))
+			.build();
 	}
 
 	companion object {

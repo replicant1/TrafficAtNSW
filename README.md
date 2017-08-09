@@ -45,10 +45,5 @@ The app makes use of these libraries:
 ## TODO
  
  * Chase up all uses of JSON data for exceptions - centralize common operations/formatting
- * Migrate TravelTime parsing to be GSON-based
- * Remove all occurrences of !! operator from XTravelTimeSegment.kt
- * Increase coverage - add filters to inst tests when Kotlin allows it
- * Create AndroidTestModule and AndroidTestComponent
  * Extend tests to cameras and TTs
- * Don't provide context globally in TNSWApplication (interferes with testing. research
- how to make app context available through Dagger)
+ * Get "empty list placeholders" showing for Favourites, TTs, Hazards.
