@@ -41,7 +41,7 @@ public class ParseIncident2InstrumentedTest {
 
 	private static List<XHazard> hazards;
 	private static XHazard hazard;
-	private static final String JSON_FILE = "incidents_09jul2013.json";
+	private static final String JSON_FILE = "hazard/test_hazards_09jul2013.json";
 	private static final int HAZARD_ID = 440361;
 	private static String jsonString;
 

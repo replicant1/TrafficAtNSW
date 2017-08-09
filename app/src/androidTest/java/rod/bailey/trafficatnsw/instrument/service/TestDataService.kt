@@ -33,8 +33,8 @@ class TestDataService : IDataService {
 		private val LOG_TAG: String = TestDataService::class.java.simpleName
 
 		// These files are expected to be found in the assets folder
-		private val LOCAL_INCIDENTS_JSON_FILE ="12jun2013.json"
-		private val LOCAL_TRAFFIC_CAMERA_IMAGE = "sample_traffic_camera_image.jpg"
+		private val LOCAL_INCIDENTS_JSON_FILE ="hazard/test_hazards_12jun2013.json"
+		private val LOCAL_TRAFFIC_CAMERA_IMAGE = "camera/test_traffic_camera_image.jpg"
 	}
 
 	override fun getHazards(): List<XHazard>? {
