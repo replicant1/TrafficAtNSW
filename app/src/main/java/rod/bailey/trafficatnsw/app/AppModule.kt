@@ -6,7 +6,6 @@ import dagger.Module
 import dagger.Provides
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.common.service.IDataService
-import rod.bailey.trafficatnsw.common.service.TestDataService
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry
 import javax.inject.Singleton

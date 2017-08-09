@@ -7,7 +7,6 @@ import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListAdapter
 import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.common.service.RemoteDataService
-import rod.bailey.trafficatnsw.common.service.TestDataService
 import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
 import rod.bailey.trafficatnsw.hazard.ui.HazardListAdapter
 import rod.bailey.trafficatnsw.hazard.ui.HazardListFragment
@@ -45,7 +44,7 @@ interface AppComponent {
 	fun inject(adapter: HazardDetailsListAdapter)
 	fun inject(singleton: MotorwayConfigRegistry)
 	fun inject(view: HazardListItemView)
-	fun inject(service: TestDataService)
+//	fun inject(service: TestDataService)
 	fun inject(service: RemoteDataService)
 	fun inject(task: DownloadImageTask)
 }

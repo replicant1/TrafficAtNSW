@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw;
+package rod.bailey.trafficatnsw.instrument.service;
 
 import android.app.Application;
 import android.support.annotation.NonNull;
@@ -14,7 +14,10 @@ import org.junit.runners.MethodSorters;
 import rod.bailey.trafficatnsw.app.AppModule;
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication_;
-import rod.bailey.trafficatnsw.common.service.TestDataService;
+import rod.bailey.trafficatnsw.instrument.dagger.DaggerActivityTestRule;
+import rod.bailey.trafficatnsw.instrument.dagger.DaggerTestComponent;
+import rod.bailey.trafficatnsw.instrument.dagger.TestComponent;
+import rod.bailey.trafficatnsw.instrument.dagger.TestDataServiceModule;
 
 import static junit.framework.Assert.assertTrue;
 
@@ -37,8 +40,7 @@ public class IDataServiceInstrumentedTest {
 	@Test
 	public void testIDataService() {
 		TestDataServiceHolder holder = new TestDataServiceHolder();
-		System.out.println("** holder.dataService=" + holder.dataService);
-		assertTrue(holder.dataService instanceof TestDataService);
+		assertTrue(holder.getDataService() instanceof TestDataService);
 	}
 
 	private class BeforeActivityLaunchedListener implements DaggerActivityTestRule.OnBeforeActivityLaunchedListener<MainActivity_> {

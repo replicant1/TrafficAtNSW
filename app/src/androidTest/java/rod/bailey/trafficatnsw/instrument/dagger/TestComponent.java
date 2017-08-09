@@ -1,19 +1,19 @@
-package rod.bailey.trafficatnsw;
+package rod.bailey.trafficatnsw.instrument.dagger;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
+import rod.bailey.trafficatnsw.instrument.service.TestDataService;
+import rod.bailey.trafficatnsw.instrument.service.TestDataServiceHolder;
 import rod.bailey.trafficatnsw.app.AppComponent;
 import rod.bailey.trafficatnsw.app.AppModule;
-import rod.bailey.trafficatnsw.app.MainActivity;
-import rod.bailey.trafficatnsw.app.RemoteDataServiceModule;
 
 /**
  * Created by rodbailey on 8/8/17.
  */
 @Singleton
 @Component(modules = {AppModule.class, TestDataServiceModule.class})
-interface TestComponent extends AppComponent {
-
+public interface TestComponent extends AppComponent {
+	void inject(TestDataService service);
 	void inject(TestDataServiceHolder obj);
 }

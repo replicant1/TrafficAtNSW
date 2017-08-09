@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw;
+package rod.bailey.trafficatnsw.instrument.traveltime;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -16,9 +16,9 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import rod.bailey.trafficatnsw.instrument.util.TestUtils;
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry;

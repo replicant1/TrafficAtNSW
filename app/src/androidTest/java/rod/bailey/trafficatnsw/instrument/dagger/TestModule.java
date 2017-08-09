@@ -1,20 +1,18 @@
-package rod.bailey.trafficatnsw;
+package rod.bailey.trafficatnsw.instrument.dagger;
 
-import android.app.Application;
 import android.support.test.espresso.core.deps.dagger.Provides;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
-import rod.bailey.trafficatnsw.app.AppModule;
 import rod.bailey.trafficatnsw.common.service.IDataService;
-import rod.bailey.trafficatnsw.common.service.TestDataService;
+import rod.bailey.trafficatnsw.instrument.service.TestDataService;
 
 /**
  * Created by rodbailey on 8/8/17.
  */
 @Module
-public class TestModule  {
+public class TestModule {
 
 	@Singleton
 	@Provides
