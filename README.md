@@ -20,7 +20,7 @@ The app makes use of these libraries:
   * `@Extra` 
   * `@OptionsMenu`
   * `@OptionsItem`
-* *Dagger* - Dependency injection
+* *Dagger* - Dependency injection, switching between test and real implementations of `IDataService`
 * *GSON* - For parsing of JSON data files
 
 ## Screenshots
@@ -41,9 +41,3 @@ The app makes use of these libraries:
 ### Travel Times 
 
   ![Travel Times](/doc/travel_times.png) 
-  
-## TODO
- 
- * Chase up all uses of JSON data for exceptions - centralize common operations/formatting
- * Extend tests to cameras and TTs
- * Get "empty list placeholders" showing for Favourites, TTs, Hazards.
