@@ -32,7 +32,7 @@ import static junit.framework.Assert.assertTrue;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ParseTravelTimes1InstrumentedTest {
 
-	private static final String JSON_FILE = "travel_times_m1.json";
+	private static final String JSON_FILE = "traveltime/test_travel_times_m1.json";
 	private static final String SEGMENT_ID = "N7";
 	private static XTravelTimeCollection travelTimes;
 	private static XTravelTimeSegment n7;

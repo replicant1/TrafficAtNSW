@@ -49,7 +49,7 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 	@Rule
 	public ActivityTestRule<MainActivity_> mActivityRule  = new ActivityTestRule(MainActivity_.class);
 
-	private static String JSON_FILE = "travel_times_m1.json";
+	private static String JSON_FILE = "traveltime/test_travel_times_m1.json";
 	private static MotorwayTravelTimesStore store;
 
 	@Test
