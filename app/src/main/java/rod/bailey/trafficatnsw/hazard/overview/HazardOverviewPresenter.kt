@@ -11,9 +11,6 @@ class HazardOverviewPresenter: IHazardOverviewPresenter {
 
 	private lateinit var view: IHazardOverviewView
 
-	@Inject
-	lateinit var hazardCacheSingleton: HazardCacheSingleton
-
 	override fun getScreenTitleForMode(mode: HazardOverviewMode?): Int {
 		return if (mode === HazardOverviewMode.SYDNEY)
 			R.string.hazards_list_screen_title_sydney
@@ -32,11 +29,11 @@ class HazardOverviewPresenter: IHazardOverviewPresenter {
 		 DownloadHazardsTask(ctx, listView).execute()
 	}
 
-	override fun resumePresenting(view: IHazardOverviewView) {
+	override fun onIViewCreated(view: IHazardOverviewView, vararg initData: Any?) {
 		this.view = view
 	}
 
-	override fun pausePresenting() {
+	override fun onIViewDestroyed() {
 	}
 
 	companion object {

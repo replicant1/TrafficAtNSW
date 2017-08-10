@@ -3,22 +3,20 @@ package rod.bailey.trafficatnsw.traveltime.data
 import android.app.AlertDialog
 import android.content.Context
 import android.os.AsyncTask
+import android.util.Log
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.service.IDataService
 import rod.bailey.trafficatnsw.common.ui.IndeterminateProgressDialog
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter
+import rod.bailey.trafficatnsw.traveltime.ui.ITravelTimesOverviewPresenter
 import rod.bailey.trafficatnsw.util.MLog
 import javax.inject.Inject
 
 class DownloadTravelTimesTask(
 	private val ctx: Context,
-	private val ttFrag: TravelTimesFragment,
-	private val travelTimeConfig: MotorwayConfig?,
-	private val mainLayout: ListViewWithEmptyMessage?) : AsyncTask<Void, Void, Boolean>() {
+	private val overviewPresenter: ITravelTimesOverviewPresenter,
+	private val motorwayConfig: MotorwayConfig) : AsyncTask<Void, Void, Boolean>() {
 
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
@@ -32,40 +30,35 @@ class DownloadTravelTimesTask(
 
 	private lateinit var dialog: IndeterminateProgressDialog
 
+	private var loadedData: MotorwayTravelTimesStore? = null
+
 	override fun onPreExecute() {
 		super.onPreExecute()
 		dialog = IndeterminateProgressDialog(
-			ctx, ctx.getString(R.string.tt_load_progress_msg, travelTimeConfig?.motorwayName))
+			ctx, ctx.getString(R.string.tt_load_progress_msg, motorwayConfig?.motorwayName))
 		dialog.show()
 	}
 
 	override fun doInBackground(vararg params: Void): Boolean {
-		var travelTimesLoadedOK: Boolean = true
-		ttFrag.db?.removePropertyChangeListener(ttFrag)
-
-		if (travelTimeConfig != null) {
-			ttFrag.db = dataService.getMotorwayTravelTimes(travelTimeConfig)
+		var dataLoadedOK: Boolean = true
+		loadedData = dataService.getMotorwayTravelTimes(motorwayConfig)
+		if (loadedData == null) {
+			dataLoadedOK = false
 		}
-
-		if (ttFrag.db == null) {
-			travelTimesLoadedOK = false
-		} else {
-			ttFrag.db?.addPropertyChangeListener(ttFrag)
-		}
-
-		return travelTimesLoadedOK
+		return dataLoadedOK
 	}
 
 	override fun onPostExecute(result: Boolean) {
+		Log.d(LOG_TAG, "Into onPostExecute with result ${result}")
 		dialog.dismiss()
 
 		if (result) {
-			val dbVal: MotorwayTravelTimesStore = ttFrag.db ?: MotorwayTravelTimesStore(ctx, MotorwayConfigRegistry().m1Config)
-			mainLayout?.setAdapter(TravelTimesListAdapter(dbVal))
+			Log.d(LOG_TAG, "loadedData.size=${loadedData?.getTravelTimes()?.size}")
+			overviewPresenter.onMotorwayDataLoaded(loadedData)
 		} else {
-			// We don't call mainLayout.setAdapter, which means that the old (stale)
+			// We don't refresh the list, which means that the old (stale)
 			// data will still remain visible.
-			MLog.i(LOG_TAG, "Failed to load " + travelTimeConfig?.motorwayName + " travel times")
+			MLog.i(LOG_TAG, "Failed to load " + motorwayConfig.motorwayName + " travel times")
 			val builder = AlertDialog.Builder(ctx)
 			builder.setTitle(ctx.getString(R.string.tt_download_dialog_title))
 			builder.setMessage(ctx.getString(R.string.tt_download_dialog_msg))

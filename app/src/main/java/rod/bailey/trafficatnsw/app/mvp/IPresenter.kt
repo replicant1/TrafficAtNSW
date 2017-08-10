@@ -1,11 +1,24 @@
 package rod.bailey.trafficatnsw.app.mvp
 
 /**
- * Created by rodbailey on 9/8/17.
+ * This interface is used throughout the app to identify the Presenter
+ * for each screen. Each screen is an IView.
+ *
+ * @see IView
  */
 interface IPresenter<V : IView> {
 
-	fun resumePresenting(view: V)
+	/**
+	 * Call this from then end of your views' onIViewCreated() method.
+	 *
+	 * @param view The IView to be presented
+	 * @param initData Initialization initData the presenter needs to parameterize its' operation.
+	 */
+	fun onIViewCreated(view: V, vararg initData: Any?)
 
-	fun pausePresenting()
+	/**
+	 * Call this from your views' onDestroyView() method. This will terminate
+	 * any outstanding async server requests this presenter has initiated.
+	 */
+	fun onIViewDestroyed()
 }

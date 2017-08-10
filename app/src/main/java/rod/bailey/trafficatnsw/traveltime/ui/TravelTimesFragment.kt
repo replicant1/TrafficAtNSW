@@ -2,82 +2,66 @@ package rod.bailey.trafficatnsw.traveltime.ui
 
 import android.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import org.androidannotations.annotations.EFragment
-import org.androidannotations.annotations.FragmentArg
-import org.androidannotations.annotations.OptionsItem
-import org.androidannotations.annotations.OptionsMenu
+import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.predicate.InactiveTravelTimeEmptyMessagePredicate
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage_
-import rod.bailey.trafficatnsw.traveltime.data.*
-import rod.bailey.trafficatnsw.util.MLog
-import java.beans.PropertyChangeEvent
-import java.beans.PropertyChangeListener
+import rod.bailey.trafficatnsw.traveltime.data.Motorway
+import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore
 import javax.inject.Inject
 
 @EFragment
 @OptionsMenu(R.menu.menu_travel_times_options)
-open class TravelTimesFragment : Fragment(), PropertyChangeListener {
+open class TravelTimesFragment : Fragment(), ITravelTimesOverviewView {
 
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
 	}
 
-	@Inject
-	lateinit var motorwayRegistry: MotorwayConfigRegistry
-
-	private lateinit var listView: ListViewWithEmptyMessage
-
-	/** Travel times for the motorway currently being displayed  */
-	var db: MotorwayTravelTimesStore? = null
-
-	/** Config for the motorway currently being display  */
-	private var travelTimeConfig: MotorwayConfig? = null
-
 	@FragmentArg(ARG_MWAY_KEY)
 	@JvmField
 	var motorwayKey: Int? = null
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
+	private lateinit var listView: ListViewWithEmptyMessage
 
-		val motorway = Motorway.values()[motorwayKey ?: 0]
+	@Inject
+	lateinit var presenter: TravelTimesOverviewPresenter
 
-		travelTimeConfig = when (motorway) {
-			Motorway.M1 -> motorwayRegistry.m1Config
-			Motorway.M2 -> motorwayRegistry.m2Config
-			Motorway.M4 -> motorwayRegistry.m4Config
-			Motorway.M7 -> motorwayRegistry.m7Config
-		}
+	override fun onDestroyView() {
+		super.onDestroyView()
+		presenter.onIViewDestroyed()
+	}
+
+	override fun setScreenTitle(title: String) {
+		Log.d(LOG_TAG, "Setting screen title to $title")
+		activity.title = title
 	}
 
 	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 		setHasOptionsMenu(true)
-		activity.title = getString(R.string.tt_screen_title, travelTimeConfig?.motorwayName ?: "")
 		listView = ListViewWithEmptyMessage_.build(activity,
 												   getString(R.string.tt_times_unavailable),
 												   InactiveTravelTimeEmptyMessagePredicate())
-		refreshAsync()
+		presenter.onIViewCreated(this, motorwayKey)
 		return listView
 	}
 
+	@AfterViews
 	@OptionsItem(R.id.refresh_travel_times)
-	fun refreshAsync() {
-		DownloadTravelTimesTask(activity, this, travelTimeConfig, listView).execute()
+	fun refreshTravelTimesAsync() {
+		presenter.onFreshMotorwayDataRequested(activity)
 	}
 
-	override fun propertyChange(event: PropertyChangeEvent) {
-		MLog.i(LOG_TAG, "Property ${event.propertyName} has changed")
-		if (event.propertyName == MotorwayTravelTimesStore.PROPERTY_TOTAL_TRAVEL_TIME) {
-			val dbVal: MotorwayTravelTimesStore = db ?:
-				MotorwayTravelTimesStore(activity, MotorwayConfigRegistry().m1Config)
-			listView.setAdapter(TravelTimesListAdapter(dbVal))
-		}
+	override fun setMotorwayData(db: MotorwayTravelTimesStore?) {
+		Log.d(LOG_TAG, "Into setMotorwayData with db=$db")
+		if (db != null)
+			listView.setAdapter(TravelTimesListAdapter(db))
 	}
 
 	companion object {

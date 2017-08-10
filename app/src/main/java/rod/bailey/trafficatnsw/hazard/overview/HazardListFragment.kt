@@ -17,7 +17,6 @@ import rod.bailey.trafficatnsw.common.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage_
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
-import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment_
 import javax.inject.Inject
 
 /**
@@ -72,18 +71,20 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 
 	override fun onResume() {
 		super.onResume()
-		presenter.resumePresenting(this)
+		presenter.onIViewCreated(this)
 	}
 
 	override fun onPause() {
 		super.onPause()
-		presenter.pausePresenting()
+		presenter.onIViewDestroyed()
 	}
 
 	@OptionsItem(R.id.menu_item_refresh_hazard_list)
 	fun loadHazardsAsync() {
 		presenter.loadHazardsAsync(activity, hazardListView)
 	}
+
+
 
 	companion object {
 		private const val ARG_HAZARDS_FRAGMENT_MODE: String = "rod.bailey.trafficatnsw.hazards.fragment.mode"

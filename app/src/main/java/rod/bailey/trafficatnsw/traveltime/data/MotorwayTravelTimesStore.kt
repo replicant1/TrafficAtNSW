@@ -47,7 +47,7 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 	 * 'isIncludedInTotal' property of the given XTravelTimeSegment instance has
 	 * changed.
 	 */
-	private fun fireExclusionStatePropertyChangedEvent(travelTime: XTravelTimeSegment) {
+	private fun fireTotalTravelTimePropertyChangedEvent(travelTime: XTravelTimeSegment) {
 		MLog.i(LOG_TAG, "Firing a PCE on property ${PROPERTY_TOTAL_TRAVEL_TIME} with value ${travelTime}")
 		support.firePropertyChange(PROPERTY_TOTAL_TRAVEL_TIME, null, this)
 	}
@@ -125,15 +125,15 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 	override fun propertyChange(event: PropertyChangeEvent) {
 		val source = event.source as XTravelTimeSegment
 
-		if (event.propertyName == XTravelTimeSegment.PROPERTY_INCLUDED_IN_TOTAL) {
+		if (event.propertyName == XTravelTimeSegment.PROPERTY_SEGMENT_INCLUDED_IN_TOTAL) {
 			if (!source.isTotal) {
 				MLog.i(LOG_TAG,
-					   "MotorwayTTDb gets notices that property "
+					   "MotorwayTTStore gets notices that property "
 						   + event.propertyName
 						   + " has changed for segment id "
 						   + source.segmentId)
 				saveExclusionStates()
-				fireExclusionStatePropertyChangedEvent(source)
+				fireTotalTravelTimePropertyChangedEvent(source)
 			}
 		}
 	}

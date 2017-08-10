@@ -1,7 +1,10 @@
 package rod.bailey.trafficatnsw.app.mvp
 
 /**
- * Created by rodbailey on 9/8/17.
+ * This interface is used throughout the app to identify a screen
+ * that has a counterpart Presenter behind it.
+ *
+ * @see IPresenter
  */
 interface IView {
 

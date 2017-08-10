@@ -37,7 +37,7 @@ data class XTravelTimeSegment(
 		get() = field
 		set(includedInTotal) {
 			field = includedInTotal
-			firePropertyChangeEvent(PROPERTY_INCLUDED_IN_TOTAL, includedInTotal)
+			firePropertyChangeEvent(PROPERTY_SEGMENT_INCLUDED_IN_TOTAL, includedInTotal)
 		}
 
 	fun setIncludedInTotalSilently(includedInTotal: Boolean) {
@@ -81,6 +81,6 @@ data class XTravelTimeSegment(
 
 	companion object {
 		private val LOG_TAG = XTravelTimeSegment::class.java.simpleName
-		val PROPERTY_INCLUDED_IN_TOTAL = "includedInTotal"
+		val PROPERTY_SEGMENT_INCLUDED_IN_TOTAL = "includedInTotal"
 	}
 }
