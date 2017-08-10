@@ -16,7 +16,7 @@ import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.overview.HazardOverviewMode
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
+import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.data.Motorway
 import rod.bailey.trafficatnsw.util.MLog
 import javax.inject.Inject

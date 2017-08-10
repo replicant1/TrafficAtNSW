@@ -15,7 +15,7 @@ import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsListAdapter
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.traveltime.data.DownloadTravelTimesTask
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
+import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry
 import rod.bailey.trafficatnsw.hazard.overview.HazardListItemView
 import javax.inject.Singleton

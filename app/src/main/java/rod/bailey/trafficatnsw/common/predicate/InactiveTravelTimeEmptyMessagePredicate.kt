@@ -1,7 +1,7 @@
 package rod.bailey.trafficatnsw.common.predicate
 
 import android.widget.ListAdapter
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesListAdapter
+import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesListAdapter
 import rod.bailey.trafficatnsw.traveltime.item.ITTListItem
 import rod.bailey.trafficatnsw.traveltime.item.SimpleTTListItem
 

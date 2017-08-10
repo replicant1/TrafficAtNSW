@@ -1,8 +1,7 @@
-package rod.bailey.trafficatnsw.traveltime.ui
+package rod.bailey.trafficatnsw.traveltime.overview
 
 import android.app.Fragment
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,11 +15,15 @@ import rod.bailey.trafficatnsw.traveltime.data.Motorway
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore
 import javax.inject.Inject
 
+/**
+ * Always use the static create() method for new instances.
+ */
 @EFragment
 @OptionsMenu(R.menu.menu_travel_times_options)
 open class TravelTimesFragment : Fragment(), ITravelTimesOverviewView {
 
 	init {
+		// Enables field injection
 		TrafficAtNSWApplication.graph.inject(this)
 	}
 
@@ -39,7 +42,6 @@ open class TravelTimesFragment : Fragment(), ITravelTimesOverviewView {
 	}
 
 	override fun setScreenTitle(title: String) {
-		Log.d(LOG_TAG, "Setting screen title to $title")
 		activity.title = title
 	}
 
@@ -59,9 +61,10 @@ open class TravelTimesFragment : Fragment(), ITravelTimesOverviewView {
 	}
 
 	override fun setMotorwayData(db: MotorwayTravelTimesStore?) {
-		Log.d(LOG_TAG, "Into setMotorwayData with db=$db")
-		if (db != null)
+		if (db != null) {
 			listView.setAdapter(TravelTimesListAdapter(db))
+		}
+		// TODO: Display list empty message
 	}
 
 	companion object {
