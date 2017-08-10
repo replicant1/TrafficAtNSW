@@ -30,7 +30,7 @@ class DownloadTravelTimesTask(
 
 	private lateinit var dialog: IndeterminateProgressDialog
 
-	private var loadedData: MotorwayTravelTimesStore? = null
+	private lateinit var loadedData: MotorwayTravelTimesStore
 
 	override fun onPreExecute() {
 		super.onPreExecute()
@@ -41,10 +41,15 @@ class DownloadTravelTimesTask(
 
 	override fun doInBackground(vararg params: Void): Boolean {
 		var dataLoadedOK: Boolean = true
-		loadedData = dataService.getMotorwayTravelTimes(motorwayConfig)
-		if (loadedData == null) {
+		val newdb: MotorwayTravelTimesStore? = dataService.getMotorwayTravelTimes(motorwayConfig)
+
+		if (newdb == null) {
+			loadedData = MotorwayTravelTimesStore(ctx, motorwayConfig);
 			dataLoadedOK = false
+		} else {
+			loadedData = newdb
 		}
+
 		return dataLoadedOK
 	}
 
@@ -53,7 +58,7 @@ class DownloadTravelTimesTask(
 		dialog.dismiss()
 
 		if (result) {
-			Log.d(LOG_TAG, "loadedData.size=${loadedData?.getTravelTimes()?.size}")
+			Log.d(LOG_TAG, "loadedData.size=${loadedData.getTravelTimes().size}")
 			overviewPresenter.onMotorwayDataLoaded(loadedData)
 		} else {
 			// We don't refresh the list, which means that the old (stale)

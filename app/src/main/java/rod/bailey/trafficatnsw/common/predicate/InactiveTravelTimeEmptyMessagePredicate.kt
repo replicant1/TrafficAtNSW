@@ -28,6 +28,6 @@ class InactiveTravelTimeEmptyMessagePredicate : IEmptyMessagePredicate {
 			}
 		}
 
-		return foundAnInctiveSegment
+		return foundAnInctiveSegment || (adapter.count == 0)
 	}
 }

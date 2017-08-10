@@ -148,10 +148,7 @@ public class ParseIncident1InstrumentedTest {
 	@Test
 	public void testWebLink() {
 		XProperties props = hazard.getProperties();
-		System.out.println("***** props.getWebLinkUrl=" + props.getWebLinkUrl() + "*****");
 		assertNull(props.getWebLinkUrl());
-
-		System.out.println("**** props.getWebLinkName=" + props.getWebLinkName() + "***");
 		assertNull(props.getWebLinkName());
 	}
 }

@@ -1,6 +1,7 @@
 package rod.bailey.trafficatnsw.common.ui
 
 import android.content.Context
+import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ListAdapter
 import org.androidannotations.annotations.AfterViews
@@ -25,11 +26,18 @@ open class ListViewWithEmptyMessage(ctx: Context,
 	}
 
 	fun setAdapter(adapter: ListAdapter) {
+		Log.d(LOG_TAG, "** setAdapter **")
 		if (predicate.showEmptyMessage(adapter)) {
+			Log.d(LOG_TAG, "** Bring empty msg to front **")
 			bringChildToFront(messageView)
 		} else {
+			Log.d(LOG_TAG, "** Bring list to front **")
 			bringChildToFront(listViewAutoHideFooter)
 		}
 		listViewAutoHideFooter.setAdapter(adapter)
+	}
+
+	companion object {
+		private val LOG_TAG: String = ListViewWithEmptyMessage::class.java.simpleName
 	}
 }

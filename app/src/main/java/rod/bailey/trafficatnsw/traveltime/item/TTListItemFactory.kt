@@ -52,8 +52,6 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 					val thisSegId: SegmentId? = SegmentId.parse(travelTime.segmentId ?: "")
 					val thisSegDir: SegmentDirection? = thisSegId?.direction
 
-					System.out.println("** thisSegId=${thisSegId} , thisSegDir=${thisSegDir}")
-
 					if ((thisSegDir != firstSegDir) && !bottomHeadingAdded) {
 						result.add(HeadingTTListItem(bottomHeadingText))
 						bottomHeadingAdded = true

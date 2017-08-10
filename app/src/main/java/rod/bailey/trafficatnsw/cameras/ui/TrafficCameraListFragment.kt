@@ -32,6 +32,7 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	}
 
 	init {
+		// Enable field injection
 		TrafficAtNSWApplication.graph.inject(this)
 	}
 
@@ -49,7 +50,7 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 
 	private fun createUI() {
 		cameraListView = ListViewWithEmptyMessage_.build(activity,
-														 EMPTY_MESSAGE,
+														 getString(R.string.camera_no_favourites),
 														 EmptyListEmptyMessagePredicate())
 		cameraListView.listViewAutoHideFooter.lv_list.divider =
 			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
@@ -75,7 +76,7 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 				}
 			}
 		} else {
-			MLog.i(LOG_TAG, "args was null")
+			MLog.w(LOG_TAG, "args was null")
 		}
 
 		MLog.i(LOG_TAG, "Setting camera mode to " + newmode.name)
@@ -101,10 +102,6 @@ class TrafficCameraListFragment : Fragment(), PropertyChangeListener {
 	}
 
 	companion object {
-		private val EMPTY_MESSAGE: String = """You have no extraFavourite cameras.\n\n
-		To make a camera one of your favourites, view the camera imageView and
-		tap the star at the top right of the screen."""
-
 		/** Key for the sole argument passed to this fragment.  */
 		val ARG_MODE_KEY = "MODE"
 		val ARG_MODE_VALUE_SYDNEY = 1

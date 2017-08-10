@@ -24,5 +24,5 @@ interface ITravelTimesOverviewPresenter : IPresenter<ITravelTimesOverviewView>, 
 	 *
 	 * @param Null means we couldn't load the motorway data e.g. outside of operating hours
 	 */
-	fun onMotorwayDataLoaded(store: MotorwayTravelTimesStore?)
+	fun onMotorwayDataLoaded(store: MotorwayTravelTimesStore)
 }

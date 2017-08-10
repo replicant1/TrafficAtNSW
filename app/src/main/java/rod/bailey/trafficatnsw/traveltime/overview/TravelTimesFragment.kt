@@ -60,11 +60,8 @@ open class TravelTimesFragment : Fragment(), ITravelTimesOverviewView {
 		presenter.onFreshMotorwayDataRequested(activity)
 	}
 
-	override fun setMotorwayData(db: MotorwayTravelTimesStore?) {
-		if (db != null) {
-			listView.setAdapter(TravelTimesListAdapter(db))
-		}
-		// TODO: Display list empty message
+	override fun setMotorwayData(db: MotorwayTravelTimesStore) {
+		listView.setAdapter(TravelTimesListAdapter(db))
 	}
 
 	companion object {
