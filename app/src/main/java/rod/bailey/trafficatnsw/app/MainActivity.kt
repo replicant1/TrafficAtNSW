@@ -13,8 +13,8 @@ import android.view.MenuItem
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
-import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListMode
+import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListFragment
+import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListMode
 import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.overview.HazardOverviewMode
 import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment

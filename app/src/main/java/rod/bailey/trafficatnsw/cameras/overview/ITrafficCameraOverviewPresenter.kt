@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.cameras.ui
+package rod.bailey.trafficatnsw.cameras.overview
 
 import rod.bailey.trafficatnsw.app.mvp.IPresenter
 

@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.cameras.ui
+package rod.bailey.trafficatnsw.cameras.overview
 
 import android.content.Context
 import android.view.View

@@ -90,6 +90,8 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 	public void testAdmitFavouritesFilter() {
 		cache.setFilter(new AdmitFavouritesTrafficCameraFilter());
 		List<TrafficCamera> cameras = cache.getCamerasForRegion(XRegion.SYD_MET);
+
+		// Set the first camera in SYD_MET to a favouritd
 		boolean favouriteSet = false;
 		for (TrafficCamera camera : cameras) {
 			if (!favouriteSet) {
@@ -98,10 +100,10 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 			}
 		}
 
-
+		// We now know there is at least 1 favourite in SYD_MET
 		List<TrafficCamera> favouriteCameras = cache.getCamerasForRegion(XRegion.SYD_MET);
 		assertNotNull(favouriteCameras);
-		assertEquals(1, favouriteCameras.size());
+		assertTrue(favouriteCameras.size() >= 1);
 	}
 
 	@Test

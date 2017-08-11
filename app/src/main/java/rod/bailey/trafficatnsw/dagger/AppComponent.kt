@@ -4,8 +4,8 @@ import android.app.Application
 import dagger.Component
 import rod.bailey.trafficatnsw.app.MainActivity
 import rod.bailey.trafficatnsw.cameras.data.DownloadImageTask
-import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListAdapter
-import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
+import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListAdapter
+import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.service.RemoteDataService
 import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
