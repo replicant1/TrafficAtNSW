@@ -167,4 +167,5 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 		seg.setIncludedInTotalSilently(false);
 		assertFalse(semaphore.get());
 	}
+
 }

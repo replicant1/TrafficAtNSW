@@ -14,6 +14,7 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
+import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListMode
 import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.overview.HazardOverviewMode
 import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
@@ -96,11 +97,11 @@ open class MainActivity : AppCompatActivity() {
 				R.id.menu_item_regional_nsw_incidents ->
 					navToHazards(HazardOverviewMode.REGIONAL)
 				R.id.menu_item_favourite_cameras ->
-					navToCameras(TrafficCameraListFragment.ARG_MODE_VALUE_FAVOURITES)
+					navToCameras(TrafficCameraListMode.FAVOURITES)
 				R.id.menu_item_sydney_cameras -> navToCameras(
-					TrafficCameraListFragment.ARG_MODE_VALUE_SYDNEY)
+					TrafficCameraListMode.SYDNEY)
 				R.id.menu_item_regional_nsw_cameras -> navToCameras(
-					TrafficCameraListFragment.ARG_MODE_VALUE_REGIONAL)
+					TrafficCameraListMode.REGIONAL)
 				R.id.menu_item_travel_times_m1 -> navToTimes(Motorway.M1)
 				R.id.menu_item_travel_times_m2 -> navToTimes(Motorway.M2)
 				R.id.menu_item_travel_times_m4 -> navToTimes(Motorway.M4)
@@ -116,7 +117,7 @@ open class MainActivity : AppCompatActivity() {
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
 
-		private fun navToCameras(argCameraModeValue: Int) {
+		private fun navToCameras(argCameraModeValue: TrafficCameraListMode) {
 			val fragment = TrafficCameraListFragment.create(argCameraModeValue)
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}

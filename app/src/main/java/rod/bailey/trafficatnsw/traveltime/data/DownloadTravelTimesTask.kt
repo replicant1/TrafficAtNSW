@@ -35,7 +35,7 @@ class DownloadTravelTimesTask(
 	override fun onPreExecute() {
 		super.onPreExecute()
 		dialog = IndeterminateProgressDialog(
-			ctx, ctx.getString(R.string.tt_load_progress_msg, motorwayConfig?.motorwayName))
+			ctx, ctx.getString(R.string.tt_load_progress_msg, motorwayConfig.motorwayName))
 		dialog.show()
 	}
 
