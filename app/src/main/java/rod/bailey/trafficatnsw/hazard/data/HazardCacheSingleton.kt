@@ -1,6 +1,6 @@
 package rod.bailey.trafficatnsw.hazard.data
 
-import rod.bailey.trafficatnsw.hazard.filter.AdmitAllHazardFilter
+import rod.bailey.trafficatnsw.hazard.filter.AdmitAnyHazardFilter
 import rod.bailey.trafficatnsw.hazard.filter.IHazardFilter
 import java.util.*
 
@@ -14,7 +14,12 @@ class HazardCacheSingleton {
 		private val LOG_TAG = HazardCacheSingleton::class.java.simpleName
 	}
 
-	var filter: IHazardFilter = AdmitAllHazardFilter()
+	var filter: IHazardFilter = AdmitAnyHazardFilter()
+		get() = field
+		set(value) {
+			field = value
+			applyFilter(field)
+		}
 	private val unfilteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
 	private val filteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
 
@@ -29,7 +34,7 @@ class HazardCacheSingleton {
 	@Synchronized
 	fun init(hazards: List<XHazard>) {
 		prime(hazards)
-		filter()
+		applyFilter(filter)
 	}
 
 	private fun prime(allHazards: List<XHazard>) {
@@ -55,7 +60,7 @@ class HazardCacheSingleton {
 	}
 
 	fun getFilteredHazardsForRegion(region: XRegion): List<XHazard>? {
-		return filteredHazardsPerRegion.get(region)
+		return filteredHazardsPerRegion.get(region) ?: LinkedList()
 	}
 
 	fun getUnfilteredHazard(hazardId: Int): XHazard? {
@@ -72,7 +77,7 @@ class HazardCacheSingleton {
 		return result
 	}
 
-	private fun filter() {
+	private fun applyFilter(f: IHazardFilter) {
 		filteredHazardsPerRegion.clear()
 
 		for (region in unfilteredHazardsPerRegion.keys) {
