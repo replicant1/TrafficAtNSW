@@ -8,14 +8,6 @@ import java.util.*
  */
 class TTListItemFactory(store: MotorwayTravelTimesStore) {
 
-	init {
-		System.out.println("** At time of init, store= **")
-		for (segment in store.getTravelTimes()) {
-			System.out.println(segment.toString());
-		}
-		System.out.println("** ------------------------ **");
-	}
-
 	private val travelTimes: LinkedList<XTravelTimeSegment> = store.getTravelTimes()
 	private val motorwayConfig: MotorwayConfig = store.config
 
@@ -49,11 +41,6 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 					bottomHeadingText = motorwayConfig.forwardName
 				}
 
-				System.out.println("** firstSegDir=${firstSegDir}")
-				System.out.println("** mwayFwdDir=${mwayFwdDir}")
-				System.out.println("** topHeadingText=${topHeadingText}")
-				System.out.println("** bottomHeadingText=${bottomHeadingText}")
-
 				// Insert the top heading at the beginning of the item list
 				result.add(HeadingTTListItem(topHeadingText))
 
@@ -64,8 +51,6 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 				for (travelTime in travelTimes) {
 					val thisSegId: SegmentId? = SegmentId.parse(travelTime.segmentId ?: "")
 					val thisSegDir: SegmentDirection? = thisSegId?.direction
-
-					System.out.println("** thisSegId=${thisSegId} , thisSegDir=${thisSegDir}")
 
 					if ((thisSegDir != firstSegDir) && !bottomHeadingAdded) {
 						result.add(HeadingTTListItem(bottomHeadingText))

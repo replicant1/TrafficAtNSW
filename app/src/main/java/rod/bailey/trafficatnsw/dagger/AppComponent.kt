@@ -9,15 +9,15 @@ import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.service.RemoteDataService
 import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
-import rod.bailey.trafficatnsw.hazard.ui.HazardListAdapter
-import rod.bailey.trafficatnsw.hazard.ui.HazardListFragment
+import rod.bailey.trafficatnsw.hazard.overview.HazardListAdapter
+import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsListAdapter
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
 import rod.bailey.trafficatnsw.traveltime.data.DownloadTravelTimesTask
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
+import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry
-import rod.bailey.trafficatnsw.hazard.ui.HazardListItemView
+import rod.bailey.trafficatnsw.hazard.overview.HazardListItemView
 import javax.inject.Singleton
 
 /**
@@ -45,7 +45,6 @@ interface AppComponent {
 	fun inject(adapter: HazardDetailsListAdapter)
 	fun inject(singleton: MotorwayConfigRegistry)
 	fun inject(view: HazardListItemView)
-//	fun inject(service: TestDataService)
 	fun inject(service: RemoteDataService)
 	fun inject(task: DownloadImageTask)
 }

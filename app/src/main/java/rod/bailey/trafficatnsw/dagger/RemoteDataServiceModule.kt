@@ -3,6 +3,7 @@ package rod.bailey.trafficatnsw.dagger
 import android.app.Application
 import dagger.Module
 import dagger.Provides
+import junit.framework.Test
 import rod.bailey.trafficatnsw.service.IDataService
 import rod.bailey.trafficatnsw.service.RemoteDataService
 import javax.inject.Singleton

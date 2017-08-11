@@ -14,9 +14,10 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListFragment
-import rod.bailey.trafficatnsw.hazard.ui.HazardListFragment
-import rod.bailey.trafficatnsw.hazard.ui.HazardListMode
-import rod.bailey.trafficatnsw.traveltime.ui.TravelTimesFragment
+import rod.bailey.trafficatnsw.cameras.ui.TrafficCameraListMode
+import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
+import rod.bailey.trafficatnsw.hazard.overview.HazardOverviewMode
+import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
 import rod.bailey.trafficatnsw.traveltime.data.Motorway
 import rod.bailey.trafficatnsw.util.MLog
 import javax.inject.Inject
@@ -92,15 +93,15 @@ open class MainActivity : AppCompatActivity() {
 			Log.d(LOG_TAG, "onNavigationItemSelected: item=" + item)
 			when (item.itemId) {
 				R.id.menu_item_sydney_incidents ->
-					navToHazards(HazardListMode.SYDNEY)
+					navToHazards(HazardOverviewMode.SYDNEY)
 				R.id.menu_item_regional_nsw_incidents ->
-					navToHazards(HazardListMode.REGIONAL)
+					navToHazards(HazardOverviewMode.REGIONAL)
 				R.id.menu_item_favourite_cameras ->
-					navToCameras(TrafficCameraListFragment.ARG_MODE_VALUE_FAVOURITES)
+					navToCameras(TrafficCameraListMode.FAVOURITES)
 				R.id.menu_item_sydney_cameras -> navToCameras(
-					TrafficCameraListFragment.ARG_MODE_VALUE_SYDNEY)
+					TrafficCameraListMode.SYDNEY)
 				R.id.menu_item_regional_nsw_cameras -> navToCameras(
-					TrafficCameraListFragment.ARG_MODE_VALUE_REGIONAL)
+					TrafficCameraListMode.REGIONAL)
 				R.id.menu_item_travel_times_m1 -> navToTimes(Motorway.M1)
 				R.id.menu_item_travel_times_m2 -> navToTimes(Motorway.M2)
 				R.id.menu_item_travel_times_m4 -> navToTimes(Motorway.M4)
@@ -111,12 +112,12 @@ open class MainActivity : AppCompatActivity() {
 			return true
 		} // onNavigationItemSelected()
 
-		private fun navToHazards(mode: HazardListMode) {
+		private fun navToHazards(mode: HazardOverviewMode) {
 			val fragment = HazardListFragment.create(mode)
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}
 
-		private fun navToCameras(argCameraModeValue: Int) {
+		private fun navToCameras(argCameraModeValue: TrafficCameraListMode) {
 			val fragment = TrafficCameraListFragment.create(argCameraModeValue)
 			fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit()
 		}

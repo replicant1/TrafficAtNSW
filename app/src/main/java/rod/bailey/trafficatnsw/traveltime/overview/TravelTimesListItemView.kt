@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.traveltime.ui
+package rod.bailey.trafficatnsw.traveltime.overview
 
 import android.content.Context
 import android.graphics.Color.BLACK

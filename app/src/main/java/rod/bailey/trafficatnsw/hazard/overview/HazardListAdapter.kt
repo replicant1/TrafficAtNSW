@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.hazard.ui
+package rod.bailey.trafficatnsw.hazard.overview
 
 import android.content.Context
 import android.view.View
@@ -10,6 +10,7 @@ import rod.bailey.trafficatnsw.common.ui.ListHeadingView_
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XRegion
+import rod.bailey.trafficatnsw.hazard.overview.HazardListItemView_
 import rod.bailey.trafficatnsw.util.MLog
 import java.util.*
 import javax.inject.Inject

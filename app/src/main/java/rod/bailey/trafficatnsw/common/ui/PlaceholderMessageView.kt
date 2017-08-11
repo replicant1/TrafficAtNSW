@@ -3,6 +3,7 @@ package rod.bailey.trafficatnsw.common.ui
 import android.content.Context
 import android.support.v7.widget.AppCompatTextView
 import android.widget.FrameLayout
+import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EViewGroup
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
@@ -14,6 +15,7 @@ open class PlaceholderMessageView(ctx: Context, val message: String) : FrameLayo
 	@JvmField
 	var textView: AppCompatTextView? = null
 
+	@AfterViews
 	fun afterViews() {
 		textView?.text = message
 	}

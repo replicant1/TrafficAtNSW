@@ -1,4 +1,4 @@
-package rod.bailey.trafficatnsw.hazard.ui
+package rod.bailey.trafficatnsw.hazard.overview
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -16,6 +16,7 @@ import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.hazard.data.XProperties
+import rod.bailey.trafficatnsw.hazard.ui.LetterColorMapSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
 import java.util.*

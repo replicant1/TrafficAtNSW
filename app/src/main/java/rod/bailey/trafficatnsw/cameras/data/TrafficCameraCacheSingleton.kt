@@ -903,8 +903,6 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		MLog.d(TAG, "***TCDb " + hashCode() + " receives PCE for event " + event.propertyName)
-		// TODO Auto-generated method stub
 		if (TrafficCamera.PROPERTY_FAVOURITE == event.propertyName) {
 			MLog.d(TAG, "TCDb receives notice that extraFavourite state of a camera has changed.")
 			saveFavourites()
