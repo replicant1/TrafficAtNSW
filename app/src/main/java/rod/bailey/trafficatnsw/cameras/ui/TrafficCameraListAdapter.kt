@@ -23,7 +23,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
-		cameraCache.setFilter(filter)
+		cameraCache.filter = filter
 		// Linearize the info in the TrafficCameraCacheSingleton. The resulting list
 		// has two sorts of entries. A XRegion instance if for the beginning of a
 		// region section, a TrafficCamera instance if a camera within a
