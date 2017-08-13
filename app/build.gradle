@@ -33,7 +33,6 @@ android {
     }
 }
 
-
 kapt {
     correctErrorTypes = true
     generateStubs = true
@@ -86,4 +85,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     compile "com.google.dagger:dagger:$dagger_version"
 
+    // RxAndroid and RxJava
+    compile "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
 }

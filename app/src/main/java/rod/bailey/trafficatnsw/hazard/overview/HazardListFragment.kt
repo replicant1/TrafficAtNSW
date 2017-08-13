@@ -6,6 +6,7 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
@@ -43,7 +44,8 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 	@Inject
 	lateinit var hazardCacheSingleton: HazardCacheSingleton
 
-	val presenter: IHazardOverviewPresenter = HazardOverviewPresenter()
+	@Inject
+	lateinit var presenter: HazardOverviewPresenter;
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -67,6 +69,10 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 		loadHazardsAsync()
 
 		return hazardListView
+	}
+
+	override fun refreshHazardList() {
+		hazardListView.setAdapter(HazardListAdapter())
 	}
 
 	override fun onResume() {
