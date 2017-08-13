@@ -90,8 +90,6 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 		presenter.loadHazardsAsync(activity, hazardListView)
 	}
 
-
-
 	companion object {
 		private const val ARG_HAZARDS_FRAGMENT_MODE: String = "rod.bailey.trafficatnsw.hazards.fragment.mode"
 

@@ -8,5 +8,9 @@ import rod.bailey.trafficatnsw.app.mvp.IView
  */
 interface IHazardOverviewView : IView {
 
+	/**
+	 * Invoked when new data has been placed in the HazardCacheSingleton ready for
+	 * this view to access and refresh its display.
+	 */
 	fun refreshHazardList()
 }
