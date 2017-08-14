@@ -8,7 +8,6 @@ import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListAdapter
 import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.service.RemoteDataService
-import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
 import rod.bailey.trafficatnsw.hazard.overview.HazardListAdapter
 import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
@@ -32,7 +31,6 @@ import javax.inject.Singleton
 interface AppComponent {
 	fun inject(app: Application)
 	fun inject(activity: MainActivity)
-	fun inject(task: DownloadHazardsTask)
 	fun inject(adapter: HazardListAdapter)
 	fun inject(fragment: HazardListFragment)
 	fun inject(activity: HazardDetailsActivity)
