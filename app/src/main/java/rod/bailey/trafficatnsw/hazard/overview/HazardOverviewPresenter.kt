@@ -2,11 +2,7 @@ package rod.bailey.trafficatnsw.hazard.overview
 
 import android.content.Context
 import android.util.Log
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
-import io.reactivex.schedulers.Schedulers
 import org.androidannotations.annotations.Trace
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.ConfigSingleton
@@ -20,8 +16,6 @@ import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.service.IDataService
-import java.util.*
-import java.util.concurrent.Callable
 import javax.inject.Inject
 
 class HazardOverviewPresenter : IHazardOverviewPresenter {
@@ -59,15 +53,20 @@ class HazardOverviewPresenter : IHazardOverviewPresenter {
 			R.string.hazards_list_screen_empty_regional_nsw
 	}
 
-	@Trace
 	override fun loadHazardsAsync(ctx: Context, listView: ListViewWithEmptyMessage) {
-		Log.d(LOG_TAG, "*** Into loadHazardsAsync ***")
-
-		CommandEngine.execute(
+		disposable = CommandEngine.execute(
 			DownloadHazardsCommand(dataService),
-			DefaultProgressMonitor(),
-			DownloadHazardsSuccessHandler(),
-			DefaultErrorHandler())
+			DefaultProgressMonitor(ctx, ctx.getString(R.string.hazards_list_load_progress_msg)),
+			SuccessHandler(),
+			DefaultErrorHandler(ctx, ctx.getString(R.string.hazards_list_load_progress_msg)))
+	}
+
+	inner class SuccessHandler : ICommandSuccessHandler {
+		override fun onSuccess(result: Any) {
+			val allHazards: XHazardCollection = result as XHazardCollection
+			hazardCacheSingleton.init(allHazards.hazards as List<XHazard> )
+			view.refreshHazardList()
+		}
 	}
 
 	override fun onIViewCreated(view: IHazardOverviewView, vararg initData: Any?) {

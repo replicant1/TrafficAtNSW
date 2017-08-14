@@ -8,10 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.view_list.view.*
-import org.androidannotations.annotations.EFragment
-import org.androidannotations.annotations.FragmentArg
-import org.androidannotations.annotations.OptionsItem
-import org.androidannotations.annotations.OptionsMenu
+import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.predicate.EmptyListEmptyMessagePredicate
@@ -62,12 +59,7 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 		hazardListView.lv_list.divider =
 			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
 		hazardListView.lv_list.dividerHeight = 2
-
-		setHasOptionsMenu(true)
 		activity.title = getString(presenter.getScreenTitleForMode(mode))
-
-		loadHazardsAsync()
-
 		return hazardListView
 	}
 
@@ -78,6 +70,7 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 	override fun onResume() {
 		super.onResume()
 		presenter.onIViewCreated(this)
+		loadHazardsAsync()
 	}
 
 	override fun onPause() {

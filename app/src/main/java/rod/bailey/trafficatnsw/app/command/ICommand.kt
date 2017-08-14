@@ -1,7 +1,10 @@
 package rod.bailey.trafficatnsw.app.command
 
 /**
- * Created by rodbailey on 13/8/17.
+ * A command to be asynchronously executed by the [CommandEngine]. An ICommand is
+ * given to the [CommandEngine], along with an [ICommandSuccessHandler],
+ * [ICommandProgressMonitor] and [ICommandErrorHandler]. The [execute] method is
+ * called on a non-UI thread when passed into the [CommandEngine]
  */
 interface ICommand<out T : Any> {
 

@@ -1,9 +1,13 @@
 package rod.bailey.trafficatnsw.app.command
 
 /**
- * Created by rodbailey on 13/8/17.
+ * Invoked by the [CommandEngine] when an [ICommand] experiences an error while executing
+ * or handling a returned result.
  */
 interface ICommandErrorHandler {
 
+	/**
+	 * @param ex The original cause of the error.
+	 */
 	fun onError(ex: Throwable)
 }

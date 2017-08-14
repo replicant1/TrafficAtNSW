@@ -6,7 +6,7 @@ import rod.bailey.trafficatnsw.service.RemoteDataService
 import javax.inject.Inject
 
 /**
- * Created by rodbailey on 13/8/17.
+ * Command to download all known incidents (hazards) from the data service.
  */
 class DownloadHazardsCommand : ICommand<XHazardCollection> {
 

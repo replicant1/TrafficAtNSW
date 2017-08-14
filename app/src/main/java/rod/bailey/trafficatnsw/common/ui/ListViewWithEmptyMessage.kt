@@ -26,12 +26,9 @@ open class ListViewWithEmptyMessage(ctx: Context,
 	}
 
 	fun setAdapter(adapter: ListAdapter) {
-		Log.d(LOG_TAG, "** setAdapter **")
 		if (predicate.showEmptyMessage(adapter)) {
-			Log.d(LOG_TAG, "** Bring empty msg to front **")
 			bringChildToFront(messageView)
 		} else {
-			Log.d(LOG_TAG, "** Bring list to front **")
 			bringChildToFront(listViewAutoHideFooter)
 		}
 		listViewAutoHideFooter.setAdapter(adapter)
