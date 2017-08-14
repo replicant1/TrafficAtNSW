@@ -30,7 +30,7 @@ import javax.inject.Inject
  */
 @EActivity(R.layout.activity_camera_image)
 @OptionsMenu(R.menu.menu_traffic_camera_image_options)
-open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImageDisplayer {
+open class TrafficCameraImageActivity : AppCompatActivity() {
 
 	init {
 		// Enable field injection
@@ -92,10 +92,6 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left)
-	}
-
-	override fun displayImage(image: Bitmap) {
-		imageView?.setImageBitmap(image)
 	}
 
 	@AfterViews
