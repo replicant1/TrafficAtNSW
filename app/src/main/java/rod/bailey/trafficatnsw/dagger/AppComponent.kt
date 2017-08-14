@@ -3,7 +3,6 @@ package rod.bailey.trafficatnsw.dagger
 import android.app.Application
 import dagger.Component
 import rod.bailey.trafficatnsw.app.MainActivity
-import rod.bailey.trafficatnsw.cameras.data.DownloadImageTask
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListAdapter
 import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListFragment
@@ -42,5 +41,4 @@ interface AppComponent {
 	fun inject(singleton: MotorwayConfigRegistry)
 	fun inject(view: HazardListItemView)
 	fun inject(service: RemoteDataService)
-	fun inject(task: DownloadImageTask)
 }

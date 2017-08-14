@@ -11,5 +11,5 @@ interface ICommandSuccessHandler {
 	 * Invoked when an [ICommand] has successfully executed and returned a result.
 	 * @param result The result from the [ICommand]
 	 */
-	fun onSuccess(result: Any)
+	fun onSuccess(result: Any?)
 }

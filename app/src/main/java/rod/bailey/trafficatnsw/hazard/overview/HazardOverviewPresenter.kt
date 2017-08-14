@@ -60,7 +60,7 @@ class HazardOverviewPresenter : IHazardOverviewPresenter {
 	}
 
 	inner class SuccessHandler : ICommandSuccessHandler {
-		override fun onSuccess(result: Any) {
+		override fun onSuccess(result: Any?) {
 			val allHazards: XHazardCollection = result as XHazardCollection
 			hazardCacheSingleton.init(allHazards.hazards as List<XHazard>)
 			view.refreshHazardList()

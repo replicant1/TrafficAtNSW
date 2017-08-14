@@ -37,7 +37,7 @@ object CommandEngine {
 
 		val disposable = Observable.fromCallable(
 			object : Callable<Any> {
-				override fun call(): Any {
+				override fun call(): Any? {
 					return command.execute()
 				}
 			})

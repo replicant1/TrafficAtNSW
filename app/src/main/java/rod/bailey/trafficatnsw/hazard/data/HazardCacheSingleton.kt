@@ -18,7 +18,7 @@ class HazardCacheSingleton {
 		get() = field
 		set(value) {
 			field = value
-			applyFilter(field)
+			applyFilter()
 		}
 	private val unfilteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
 	private val filteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
@@ -34,7 +34,7 @@ class HazardCacheSingleton {
 	@Synchronized
 	fun init(hazards: List<XHazard>) {
 		prime(hazards)
-		applyFilter(filter)
+		applyFilter()
 	}
 
 	private fun prime(allHazards: List<XHazard>) {
@@ -77,7 +77,7 @@ class HazardCacheSingleton {
 		return result
 	}
 
-	private fun applyFilter(f: IHazardFilter) {
+	private fun applyFilter() {
 		filteredHazardsPerRegion.clear()
 
 		for (region in unfilteredHazardsPerRegion.keys) {
