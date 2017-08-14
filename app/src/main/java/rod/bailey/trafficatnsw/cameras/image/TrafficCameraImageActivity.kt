@@ -6,16 +6,21 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import io.reactivex.disposables.Disposable
 import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.cameras.data.DownloadImageTask
+import rod.bailey.trafficatnsw.app.command.CommandEngine
+import rod.bailey.trafficatnsw.app.command.DefaultErrorHandler
+import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
+import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
+import rod.bailey.trafficatnsw.cameras.data.DownloadCameraImageCommand
 import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.service.IDataService
 import javax.inject.Inject
 
 /**
@@ -28,8 +33,12 @@ import javax.inject.Inject
 open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImageDisplayer {
 
 	init {
+		// Enable field injection
 		TrafficAtNSWApplication.graph.inject(this)
 	}
+
+	@Inject
+	lateinit var dataService: IDataService
 
 	@Inject
 	lateinit var cameraCache: TrafficCameraCacheSingleton
@@ -78,6 +87,8 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 	@JvmField
 	var favouriteMenuItem: MenuItem? = null
 
+	private var disposable: Disposable? = null
+
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		overridePendingTransition(R.anim.slide_in_from_right, R.anim.slide_out_to_left)
@@ -105,7 +116,25 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 
 	@OptionsItem(R.id.refresh_camera_image)
 	fun refresh() {
-		DownloadImageTask(context = this, displayer = this).execute(extraIndex)
+		loadCameraImageAsync()
+	}
+
+	private fun loadCameraImageAsync() {
+		disposable = CommandEngine.execute(
+			DownloadCameraImageCommand(dataService, extraIndex ?: 0),
+			DefaultProgressMonitor(this, getString(R.string.camera_image_loading_msg)),
+			SuccessHandler(),
+			DefaultErrorHandler(this, getString(R.string.camera_image_load_failure_dialog_msg))
+		)
+	}
+
+	inner class SuccessHandler : ICommandSuccessHandler {
+		override fun onSuccess(result: Any?) {
+			result?.let {
+				val image: Bitmap = result as Bitmap
+				imageView?.setImageBitmap(image)
+			}
+		}
 	}
 
 	@OptionsItem(R.id.toggle_camera_favourite)
@@ -134,6 +163,11 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 		return true
 	}
 
+	override fun onPause() {
+		super.onPause()
+		disposable?.dispose()
+	}
+
 	@OptionsItem(android.R.id.home)
 	fun actionBarHome() {
 		NavUtils.navigateUpFromSameTask(this)
@@ -143,7 +177,6 @@ open class TrafficCameraImageActivity : AppCompatActivity(), ITrafficCameraImage
 		private val LOG_TAG: String = TrafficCameraImageActivity::class.java.simpleName
 
 		fun start(ctx: Context, camera: TrafficCamera) {
-			Log.d(LOG_TAG, "******* At start time, favourite=${camera.isFavourite}")
 			TrafficCameraImageActivity_.intent(ctx)
 				.extraIndex(camera.index)
 				.extraStreet(camera.street)

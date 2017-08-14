@@ -74,7 +74,7 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 	}
 
 	inner class SuccessHandler : ICommandSuccessHandler {
-		override fun onSuccess(result: Any) {
+		override fun onSuccess(result: Any?) {
 			val store: MotorwayTravelTimesStore = result as MotorwayTravelTimesStore
 			mwayStore = store
 			notifyViewOfNewData(store)

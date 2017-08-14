@@ -6,7 +6,7 @@ package rod.bailey.trafficatnsw.app.command
  * [ICommandProgressMonitor] and [ICommandErrorHandler]. The [execute] method is
  * called on a non-UI thread when passed into the [CommandEngine]
  */
-interface ICommand<out T : Any> {
+interface ICommand<out T : Any?> {
 
-	fun execute(): T
+	fun execute(): T?
 }

@@ -6,10 +6,11 @@ import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig
 
 /**
- * Created by rodbailey on 5/8/17.
+ * Interface between this app and the remote data sources it relies upon. There are
+ * two implementations of this interface provided - [RemoteDataService] and [TestDataService].
+ * The latter is only used for unit testing.
  */
 interface IDataService {
-
 	fun getHazards(): List<XHazard>?
 	fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore?
 	fun getTrafficCameraImage(trafficCameraId: Int): Bitmap?
