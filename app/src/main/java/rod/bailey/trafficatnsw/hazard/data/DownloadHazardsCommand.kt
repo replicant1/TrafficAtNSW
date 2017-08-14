@@ -2,7 +2,6 @@ package rod.bailey.trafficatnsw.hazard.data
 
 import rod.bailey.trafficatnsw.app.command.ICommand
 import rod.bailey.trafficatnsw.service.IDataService
-import rod.bailey.trafficatnsw.service.RemoteDataService
 import javax.inject.Inject
 
 /**

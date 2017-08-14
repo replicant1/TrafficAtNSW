@@ -1,9 +1,7 @@
 package rod.bailey.trafficatnsw.hazard.overview
 
 import android.content.Context
-import android.util.Log
 import io.reactivex.disposables.Disposable
-import org.androidannotations.annotations.Trace
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.command.CommandEngine
@@ -64,7 +62,7 @@ class HazardOverviewPresenter : IHazardOverviewPresenter {
 	inner class SuccessHandler : ICommandSuccessHandler {
 		override fun onSuccess(result: Any) {
 			val allHazards: XHazardCollection = result as XHazardCollection
-			hazardCacheSingleton.init(allHazards.hazards as List<XHazard> )
+			hazardCacheSingleton.init(allHazards.hazards as List<XHazard>)
 			view.refreshHazardList()
 		}
 	}
