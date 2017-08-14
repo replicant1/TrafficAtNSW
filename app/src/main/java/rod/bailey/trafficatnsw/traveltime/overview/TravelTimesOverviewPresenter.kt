@@ -1,9 +1,13 @@
 package rod.bailey.trafficatnsw.traveltime.overview
 
 import android.content.Context
-import android.util.Log
+import io.reactivex.disposables.Disposable
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.app.command.CommandEngine
+import rod.bailey.trafficatnsw.app.command.DefaultErrorHandler
+import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
+import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
+import rod.bailey.trafficatnsw.service.IDataService
 import rod.bailey.trafficatnsw.traveltime.data.*
 import rod.bailey.trafficatnsw.util.MLog
 import java.beans.PropertyChangeEvent
@@ -16,10 +20,15 @@ import javax.inject.Inject
 class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 
 	@Inject
-	constructor(ctx: Context, motorwayRegistry: MotorwayConfigRegistry) {
+	constructor(ctx: Context,
+				motorwayRegistry: MotorwayConfigRegistry,
+				dataService: IDataService) {
 		this.ctx = ctx
 		this.motorwayRegistry = motorwayRegistry
+		this.dataService = dataService
 	}
+
+	val dataService: IDataService
 
 	val ctx: Context
 
@@ -36,6 +45,8 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 
 	/** View being presented */
 	private lateinit var view: ITravelTimesOverviewView
+
+	var disposable: Disposable? = null
 
 	private fun lazyInitMotorwayConfig() {
 		motorwayConfig = when (motorway) {
@@ -55,11 +66,23 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 	}
 
 	override fun onFreshMotorwayDataRequested(ctx: Context) {
-		DownloadTravelTimesTask(ctx, this, motorwayConfig).execute()
+		disposable = CommandEngine.execute(
+			DownloadTravelTimesCommand(ctx, motorwayConfig, dataService),
+			DefaultProgressMonitor(ctx, ctx.getString(R.string.tt_load_progress_msg, motorwayConfig.motorwayName)),
+			SuccessHandler(),
+			DefaultErrorHandler(ctx, ctx.getString(R.string.tt_download_dialog_msg)))
+	}
+
+	inner class SuccessHandler : ICommandSuccessHandler {
+		override fun onSuccess(result: Any) {
+			val store: MotorwayTravelTimesStore = result as MotorwayTravelTimesStore
+			mwayStore = store
+			notifyViewOfNewData(store)
+		}
 	}
 
 	override fun onIViewDestroyed() {
-		// Empty
+		disposable?.dispose()
 	}
 
 	/**
@@ -71,14 +94,6 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 		val motorwayKey: Int = initData[0] as Int
 		motorway = Motorway.values()[motorwayKey]
 		lazyInitMotorwayConfig()
-	}
-
-	/**
-	 * Invoked async when previous request to load motoway data has completed.
-	 */
-	override fun onMotorwayDataLoaded(store: MotorwayTravelTimesStore) {
-		mwayStore = store
-		notifyViewOfNewData(store)
 	}
 
 	/**

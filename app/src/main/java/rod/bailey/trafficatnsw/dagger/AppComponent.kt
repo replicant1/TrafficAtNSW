@@ -4,20 +4,18 @@ import android.app.Application
 import dagger.Component
 import rod.bailey.trafficatnsw.app.MainActivity
 import rod.bailey.trafficatnsw.cameras.data.DownloadImageTask
+import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListAdapter
 import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListFragment
-import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
-import rod.bailey.trafficatnsw.service.RemoteDataService
-import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
-import rod.bailey.trafficatnsw.hazard.overview.HazardListAdapter
-import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsListAdapter
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
-import rod.bailey.trafficatnsw.traveltime.data.DownloadTravelTimesTask
-import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
-import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry
+import rod.bailey.trafficatnsw.hazard.overview.HazardListAdapter
+import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.overview.HazardListItemView
+import rod.bailey.trafficatnsw.service.RemoteDataService
+import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry
+import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
 import javax.inject.Singleton
 
 /**
@@ -32,7 +30,6 @@ import javax.inject.Singleton
 interface AppComponent {
 	fun inject(app: Application)
 	fun inject(activity: MainActivity)
-	fun inject(task: DownloadHazardsTask)
 	fun inject(adapter: HazardListAdapter)
 	fun inject(fragment: HazardListFragment)
 	fun inject(activity: HazardDetailsActivity)
@@ -40,7 +37,6 @@ interface AppComponent {
 	fun inject(adapter: TrafficCameraListAdapter)
 	fun inject(fragment: TrafficCameraListFragment)
 	fun inject(activity: TrafficCameraImageActivity)
-	fun inject(task: DownloadTravelTimesTask)
 	fun inject(fragment: TravelTimesFragment)
 	fun inject(adapter: HazardDetailsListAdapter)
 	fun inject(singleton: MotorwayConfigRegistry)

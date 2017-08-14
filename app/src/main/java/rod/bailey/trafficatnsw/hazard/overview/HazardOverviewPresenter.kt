@@ -1,15 +1,41 @@
 package rod.bailey.trafficatnsw.hazard.overview
 
 import android.content.Context
+import io.reactivex.disposables.Disposable
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.app.ConfigSingleton
+import rod.bailey.trafficatnsw.app.command.CommandEngine
+import rod.bailey.trafficatnsw.app.command.DefaultErrorHandler
+import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
+import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
-import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsTask
+import rod.bailey.trafficatnsw.hazard.data.DownloadHazardsCommand
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
+import rod.bailey.trafficatnsw.hazard.data.XHazard
+import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
+import rod.bailey.trafficatnsw.service.IDataService
 import javax.inject.Inject
 
-class HazardOverviewPresenter: IHazardOverviewPresenter {
+class HazardOverviewPresenter : IHazardOverviewPresenter {
 
 	private lateinit var view: IHazardOverviewView
+
+	private val dataService: IDataService
+
+	private val config: ConfigSingleton
+
+	private val hazardCacheSingleton: HazardCacheSingleton
+
+	private var disposable: Disposable? = null
+
+	@Inject
+	constructor(hazardCacheSingleton: HazardCacheSingleton,
+				dataService: IDataService,
+				config: ConfigSingleton) {
+		this.hazardCacheSingleton = hazardCacheSingleton
+		this.dataService = dataService
+		this.config = config
+	}
 
 	override fun getScreenTitleForMode(mode: HazardOverviewMode?): Int {
 		return if (mode === HazardOverviewMode.SYDNEY)
@@ -26,7 +52,19 @@ class HazardOverviewPresenter: IHazardOverviewPresenter {
 	}
 
 	override fun loadHazardsAsync(ctx: Context, listView: ListViewWithEmptyMessage) {
-		 DownloadHazardsTask(ctx, listView).execute()
+		disposable = CommandEngine.execute(
+			DownloadHazardsCommand(dataService),
+			DefaultProgressMonitor(ctx, ctx.getString(R.string.hazards_list_load_progress_msg)),
+			SuccessHandler(),
+			DefaultErrorHandler(ctx, ctx.getString(R.string.hazards_list_load_progress_msg)))
+	}
+
+	inner class SuccessHandler : ICommandSuccessHandler {
+		override fun onSuccess(result: Any) {
+			val allHazards: XHazardCollection = result as XHazardCollection
+			hazardCacheSingleton.init(allHazards.hazards as List<XHazard>)
+			view.refreshHazardList()
+		}
 	}
 
 	override fun onIViewCreated(view: IHazardOverviewView, vararg initData: Any?) {
@@ -34,6 +72,7 @@ class HazardOverviewPresenter: IHazardOverviewPresenter {
 	}
 
 	override fun onIViewDestroyed() {
+		disposable?.dispose()
 	}
 
 	companion object {

@@ -6,11 +6,9 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.view_list.view.*
-import org.androidannotations.annotations.EFragment
-import org.androidannotations.annotations.FragmentArg
-import org.androidannotations.annotations.OptionsItem
-import org.androidannotations.annotations.OptionsMenu
+import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.common.predicate.EmptyListEmptyMessagePredicate
@@ -43,7 +41,8 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 	@Inject
 	lateinit var hazardCacheSingleton: HazardCacheSingleton
 
-	val presenter: IHazardOverviewPresenter = HazardOverviewPresenter()
+	@Inject
+	lateinit var presenter: HazardOverviewPresenter;
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -60,18 +59,18 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 		hazardListView.lv_list.divider =
 			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
 		hazardListView.lv_list.dividerHeight = 2
-
-		setHasOptionsMenu(true)
 		activity.title = getString(presenter.getScreenTitleForMode(mode))
-
-		loadHazardsAsync()
-
 		return hazardListView
+	}
+
+	override fun refreshHazardList() {
+		hazardListView.setAdapter(HazardListAdapter())
 	}
 
 	override fun onResume() {
 		super.onResume()
 		presenter.onIViewCreated(this)
+		loadHazardsAsync()
 	}
 
 	override fun onPause() {
@@ -83,8 +82,6 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 	fun loadHazardsAsync() {
 		presenter.loadHazardsAsync(activity, hazardListView)
 	}
-
-
 
 	companion object {
 		private const val ARG_HAZARDS_FRAGMENT_MODE: String = "rod.bailey.trafficatnsw.hazards.fragment.mode"

@@ -31,10 +31,8 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 		for (region in sortedCameraRegions()) {
 			listData.add(region)
 			val cameras = cameraCache.getCamerasForRegion(region)
-			if (cameras != null) {
-				Collections.sort(cameras)
-				listData.addAll(cameras)
-			}
+			Collections.sort(cameras)
+			listData.addAll(cameras)
 		}
 	}
 
@@ -86,7 +84,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 
 		for (region in XRegion.values()) {
 			val camerasForRegion = cameraCache.getCamerasForRegion(region)
-			if ((camerasForRegion != null) && !camerasForRegion.isEmpty()) {
+			if (!camerasForRegion.isEmpty()) {
 				sortedRegions.add(region)
 			}
 		}
