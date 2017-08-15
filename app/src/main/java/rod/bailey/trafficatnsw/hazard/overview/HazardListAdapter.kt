@@ -10,7 +10,6 @@ import rod.bailey.trafficatnsw.common.ui.ListHeadingView_
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XRegion
-import rod.bailey.trafficatnsw.hazard.overview.HazardListItemView_
 import rod.bailey.trafficatnsw.util.MLog
 import java.util.*
 import javax.inject.Inject
@@ -50,27 +49,26 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 	override fun getCount(): Int = listData.size
 	override fun getItem(position: Int): Any = listData[position]
 	override fun getItemId(position: Int): Long = position.toLong()
+
 	override fun getItemViewType(position: Int): Int =
 		if (listData[position] is XRegion) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_HAZARD
 
+	override fun getViewTypeCount(): Int = 2
+
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-		val result: View
 		val listItem: Any = listData[position]
 
-		if (convertView == null) {
-			result = when (listItem)  {
+		return if (convertView == null) {
+			when (listItem) {
 				is XRegion -> createHeading(parent.context, listItem)
 				else -> createHazardListItem(parent.context, listItem as XHazard)
 			}
-		}
-		else {
-			result = when(listItem) {
+		} else {
+			when (listItem) {
 				is XRegion -> convertHeadingListItem(convertView, listItem)
 				else -> convertHazardListItem(convertView, listItem as XHazard)
 			}
 		}
-
-		return result
 	}
 
 	private fun convertHeadingListItem(convertView: View, newHeadingData: XRegion): View {
@@ -103,7 +101,7 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 
 	companion object {
 		private val TAG = HazardListAdapter::class.java.simpleName
-		private const val ITEM_VIEW_TYPE_HEADING: Int = 1;
-		private const val ITEM_VIEW_TYPE_HAZARD: Int = 2;
+		private const val ITEM_VIEW_TYPE_HEADING: Int = 0;
+		private const val ITEM_VIEW_TYPE_HAZARD: Int = 1;
 	}
 }

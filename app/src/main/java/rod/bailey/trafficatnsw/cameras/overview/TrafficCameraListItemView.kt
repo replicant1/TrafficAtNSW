@@ -15,7 +15,7 @@ import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 
 @EViewGroup(R.layout.list_item_camera)
 open class TrafficCameraListItemView(private val ctx: Context,
-									 private val camera: TrafficCamera,
+									 var camera: TrafficCamera,
 									 private var favourite: Boolean) : FrameLayout(ctx) {
 
 	private inner class ItemClickListener : View.OnClickListener {
