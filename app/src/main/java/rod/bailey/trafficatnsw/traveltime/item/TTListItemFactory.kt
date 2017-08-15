@@ -1,5 +1,6 @@
 package rod.bailey.trafficatnsw.traveltime.item
 
+import android.support.annotation.VisibleForTesting
 import rod.bailey.trafficatnsw.traveltime.data.*
 import java.util.*
 
@@ -17,7 +18,8 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 		return result
 	}
 
-	private fun createItemList(): LinkedList<ITTListItem> {
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun createItemList(): LinkedList<ITTListItem> {
 		val result = LinkedList<ITTListItem>()
 
 		if (!travelTimes.isEmpty()) {
@@ -73,7 +75,8 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 	 * calculation by the user, and for some segments being inactive due to
 	 * sensor faults etc.
 	 */
-	private fun updateTotalsItems(items: LinkedList<ITTListItem>) {
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun updateTotalsItems(items: LinkedList<ITTListItem>) {
 		// Total up the times in the forward direction
 		var topHeadingItemIndex = -1
 		var bottomHeadingItemIndex = -1

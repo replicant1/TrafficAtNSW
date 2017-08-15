@@ -1,6 +1,7 @@
 package rod.bailey.trafficatnsw.cameras.overview
 
 import android.content.Context
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -41,7 +42,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 		return dataObj is TrafficCamera
 	}
 
-	private fun createHeading(region: XRegion, parent: ViewGroup): View {
+	private fun createHeadingListItem(region: XRegion, parent: ViewGroup): View {
 		val heading = ListHeadingView_.build(parent.context, region.description)
 		return heading
 	}
@@ -53,30 +54,38 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 		return item
 	}
 
-	override fun getCount(): Int {
-		return listData.size
-	}
+	override fun getCount(): Int = listData.size
+	override fun getItem(position: Int): Any = listData[position]
+	override fun getItemId(position: Int): Long = position.toLong()
+	override fun getItemViewType(position: Int): Int =
+		if (listData[position] is XRegion) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_TRAFFIC_CAMERA
 
-	override fun getItem(position: Int): Any {
-		return listData[position]
-	}
-
-	override fun getItemId(position: Int): Long {
-		return position.toLong()
-	}
+	override fun getViewTypeCount(): Int = 2
 
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-		var result: View?
 		val listItem = listData[position]
 
-		if (listItem is XRegion) {
-			result = createHeading(listItem, parent)
+		return if (convertView == null) {
+			when (listItem) {
+				is XRegion -> createHeadingListItem(listItem, parent)
+				else -> createTrafficCameraListItem(parent.context, listItem as TrafficCamera)
+			}
 		} else {
-			result = createTrafficCameraListItem(parent.context,
-												 listItem as TrafficCamera)
+			when (listItem) {
+				is XRegion -> convertHeadingListItem(convertView, listItem)
+				else -> convertTrafficCameraListItem(convertView, listItem as TrafficCamera)
+			}
 		}
+	}
 
-		return result
+	private fun convertHeadingListItem(convertView: View, newHeadingData: XRegion): View {
+		(convertView as ListHeadingView_).headingText = newHeadingData.description
+		return convertView
+	}
+
+	private fun convertTrafficCameraListItem(convertView: View, newCameraData: TrafficCamera): View {
+		(convertView as TrafficCameraListItemView_).camera = newCameraData
+		return convertView
 	}
 
 	private fun sortedCameraRegions(): List<XRegion> {
@@ -93,6 +102,8 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	}
 
 	companion object {
-		private val TAG = TrafficCameraListAdapter::class.java.simpleName
+		private val LOG_TAG = TrafficCameraListAdapter::class.java.simpleName
+		private const val ITEM_VIEW_TYPE_HEADING = 0
+		private const val ITEM_VIEW_TYPE_TRAFFIC_CAMERA = 1
 	}
 }
