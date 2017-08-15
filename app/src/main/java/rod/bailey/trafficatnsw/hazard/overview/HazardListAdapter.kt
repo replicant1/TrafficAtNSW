@@ -50,19 +50,37 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 	override fun getCount(): Int = listData.size
 	override fun getItem(position: Int): Any = listData[position]
 	override fun getItemId(position: Int): Long = position.toLong()
+	override fun getItemViewType(position: Int): Int =
+		if (listData[position] is XRegion) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_HAZARD
 
-	// TODO: Introduce ViewHolder pattern for efficiency
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		val result: View
 		val listItem: Any = listData[position]
 
-		if (listItem is XRegion) {
-			result = createHeading(parent.context, listItem)
-		} else {
-			result = createHazardListItem(parent.context, listItem as XHazard)
+		if (convertView == null) {
+			result = when (listItem)  {
+				is XRegion -> createHeading(parent.context, listItem)
+				else -> createHazardListItem(parent.context, listItem as XHazard)
+			}
+		}
+		else {
+			result = when(listItem) {
+				is XRegion -> convertHeadingListItem(convertView, listItem)
+				else -> convertHazardListItem(convertView, listItem as XHazard)
+			}
 		}
 
 		return result
+	}
+
+	private fun convertHeadingListItem(convertView: View, newHeadingData: XRegion): View {
+		(convertView as ListHeadingView_).headingText = newHeadingData.description
+		return convertView
+	}
+
+	private fun convertHazardListItem(convertView: View, newHazardData: XHazard): View {
+		(convertView as HazardListItemView_).hazard = newHazardData
+		return convertView
 	}
 
 	override fun isEnabled(position: Int): Boolean = true
@@ -85,5 +103,7 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 
 	companion object {
 		private val TAG = HazardListAdapter::class.java.simpleName
+		private const val ITEM_VIEW_TYPE_HEADING: Int = 1;
+		private const val ITEM_VIEW_TYPE_HAZARD: Int = 2;
 	}
 }
