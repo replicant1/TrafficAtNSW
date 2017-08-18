@@ -18,23 +18,17 @@ import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment;
-import rod.bailey.trafficatnsw.traveltime.item.HeadingTTListItem;
 import rod.bailey.trafficatnsw.traveltime.item.ITTListItem;
-import rod.bailey.trafficatnsw.traveltime.item.SimpleTTListItem;
 import rod.bailey.trafficatnsw.traveltime.item.TTListItemFactory;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertTrue;
-
-import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getHeading;
-import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getSimple;
-import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getHeading;
 import static rod.bailey.trafficatnsw.instrument.util.TestUtils.assertIsHeading;
-import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getSimpleTravelTime;
-import static rod.bailey.trafficatnsw.instrument.util.TestUtils.newSegment;
 import static rod.bailey.trafficatnsw.instrument.util.TestUtils.assertIsSimple;
 import static rod.bailey.trafficatnsw.instrument.util.TestUtils.assertIsTotal;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getHeading;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getSimpleTravelTime;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.newSegment;
 import static rod.bailey.trafficatnsw.instrument.util.TestUtils.newTotalSegment;
 
 @RunWith(AndroidJUnit4.class)
