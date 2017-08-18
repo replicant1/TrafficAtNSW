@@ -241,4 +241,20 @@ class SegmentIdTest {
 		assertEquals(1, id1?.compareTo(id2))
 
 	}
+
+	@Test
+	fun testToApiTokenNonTotal() {
+		val id1: SegmentId? = SegmentId.parse("S10")
+		assertEquals("S10", id1?.toApiToken())
+		val id2: SegmentId? = SegmentId.parse("S1");
+		assertEquals("S1", id2?.toApiToken())
+	}
+
+	@Test
+	fun testToApiTokenTotal() {
+		val id1: SegmentId? = SegmentId.parse("NTOTAL")
+		assertEquals("NTOTAL", id1?.toApiToken());
+		val id2: SegmentId? = SegmentId.parse("STOTAL");
+		assertEquals("STOTAL", id2?.toApiToken())
+	}
 }

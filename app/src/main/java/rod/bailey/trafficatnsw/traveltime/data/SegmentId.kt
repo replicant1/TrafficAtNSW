@@ -81,6 +81,11 @@ class SegmentId : Comparable<SegmentId> {
 		return 17 + direction.hashCode() + ordinal.hashCode() + isTotalSegment.hashCode();
 	}
 
+	fun toApiToken(): String {
+		return if (isTotalSegment)
+			direction.apiToken + TOTAL_SUFFIX else direction.apiToken + ordinal;
+	}
+
 	companion object {
 		private const val TOTAL_SUFFIX: String = "TOTAL"
 		private const val MIN_ID_CHARS: Int = 2
