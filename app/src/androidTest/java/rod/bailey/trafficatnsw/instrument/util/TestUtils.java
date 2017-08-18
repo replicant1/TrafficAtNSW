@@ -5,11 +5,14 @@ import java.util.List;
 
 import rod.bailey.trafficatnsw.hazard.data.XHazard;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore;
+import rod.bailey.trafficatnsw.traveltime.data.SegmentId;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeProperties;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment;
 import rod.bailey.trafficatnsw.traveltime.item.HeadingTTListItem;
 import rod.bailey.trafficatnsw.traveltime.item.ITTListItem;
 import rod.bailey.trafficatnsw.traveltime.item.SimpleTTListItem;
+
+import static junit.framework.Assert.assertTrue;
 
 /**
  * Utility methods for tests
@@ -73,5 +76,58 @@ public class TestUtils {
 		} // for
 
 		return buf.toString();
+	}
+
+	/**
+	 * @return A new segment with the given SegmentId and travelTime, which is active and included
+	 * in the total.
+	 */
+	public static XTravelTimeSegment newSegment(String segmentIdStr, int travelTime) {
+		SegmentId segmentId = SegmentId.Companion.parse(segmentIdStr);
+		XTravelTimeProperties props = new XTravelTimeProperties(
+				segmentId.getDirection().getApiToken(),
+				segmentId.getDirection().getApiToken() + "_to",
+				true,
+				segmentId.getDirection().getApiToken() + "_from");
+		props.setTravelTimeMinutes(travelTime);
+		XTravelTimeSegment segment = new XTravelTimeSegment(segmentId.toApiToken(), null, props);
+		segment.setIncludedInTotalSilently(true);
+		return segment;
+	}
+
+	public static XTravelTimeSegment newTotalSegment(String segmentIdStr, int travelTime) {
+		XTravelTimeSegment seg = newSegment(segmentIdStr, travelTime);
+		seg.setIncludedInTotalSilently(true);
+		return seg;
+	}
+
+	public static HeadingTTListItem getHeading(int index, LinkedList<ITTListItem> items) {
+		ITTListItem listItem = items.get(index);
+		assertTrue(listItem instanceof HeadingTTListItem);
+		return (HeadingTTListItem) listItem;
+	}
+
+	public static SimpleTTListItem getSimple(int index, LinkedList<ITTListItem> items) {
+		ITTListItem listItem = items.get(index);
+		assertTrue(listItem instanceof SimpleTTListItem);
+		return (SimpleTTListItem) listItem;
+	}
+
+	public static int getSimpleTravelTime(int index, LinkedList<ITTListItem> items) {
+		ITTListItem listItem = items.get(index);
+		assertTrue(listItem instanceof SimpleTTListItem);
+		return ((SimpleTTListItem) listItem).getTravelTime().getProperties().getTravelTimeMinutes();
+	}
+
+	public static void assertIsHeading(int index, LinkedList<ITTListItem> items) {
+		assertTrue(items.get(index) instanceof HeadingTTListItem);
+	}
+
+	public static void assertIsSimple(int index, LinkedList<ITTListItem> items) {
+		assertTrue(items.get(index) instanceof  SimpleTTListItem);
+	}
+
+	public static void assertIsTotal(int index, LinkedList<ITTListItem> items) {
+		assertTrue( ((SimpleTTListItem) items.get(index)).getTravelTime().isTotal());
 	}
 }

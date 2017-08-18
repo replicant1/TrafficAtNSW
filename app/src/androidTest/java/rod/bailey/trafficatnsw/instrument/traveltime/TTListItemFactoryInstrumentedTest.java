@@ -2,7 +2,6 @@ package rod.bailey.trafficatnsw.instrument.traveltime;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.util.Log;
 
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -15,11 +14,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 
 import rod.bailey.trafficatnsw.app.MainActivity_;
-import rod.bailey.trafficatnsw.instrument.util.TestUtils;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfigRegistry;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore;
-import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeProperties;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment;
 import rod.bailey.trafficatnsw.traveltime.item.HeadingTTListItem;
 import rod.bailey.trafficatnsw.traveltime.item.ITTListItem;
@@ -30,12 +27,22 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertTrue;
 
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getHeading;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getSimple;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getHeading;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.assertIsHeading;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.getSimpleTravelTime;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.newSegment;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.assertIsSimple;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.assertIsTotal;
+import static rod.bailey.trafficatnsw.instrument.util.TestUtils.newTotalSegment;
+
 @RunWith(AndroidJUnit4.class)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class TTListItemFactoryInstrumentedTest {
 
 	@Rule
-	public ActivityTestRule<MainActivity_> mActivityRule  = new ActivityTestRule(MainActivity_.class);
+	public ActivityTestRule<MainActivity_> mActivityRule = new ActivityTestRule(MainActivity_.class);
 
 	private static final String LOG_TAG = TTListItemFactoryInstrumentedTest.class.getSimpleName();
 
@@ -48,12 +55,11 @@ public class TTListItemFactoryInstrumentedTest {
 		m1Store = new MotorwayTravelTimesStore(mActivityRule.getActivity(), m1Config);
 	}
 
-	//@Test
+	@Test
 	public void testBothDirsSegsAndTotals() {
-		XTravelTimeSegment n1 = new XTravelTimeSegment("N1", null, null);
-		XTravelTimeSegment n2 = new XTravelTimeSegment("N2", null, null);
-		XTravelTimeSegment ntotal = new XTravelTimeSegment("NTOTAL", null, null);
-
+		XTravelTimeSegment n1 = newSegment("N1", 0);
+		XTravelTimeSegment n2 = newSegment("N2", 0);
+		XTravelTimeSegment ntotal = newTotalSegment("NTOTAL", 0);
 		XTravelTimeSegment s1 = new XTravelTimeSegment("S1", null, null);
 		XTravelTimeSegment s2 = new XTravelTimeSegment("S2", null, null);
 		XTravelTimeSegment stotal = new XTravelTimeSegment("STOTAL", null, null);
@@ -68,26 +74,26 @@ public class TTListItemFactoryInstrumentedTest {
 		assertNotNull(items);
 		assertEquals(segs.size() + 2, items.size()); // Add 2 for headings
 
-		assertTrue(items.get(0) instanceof HeadingTTListItem); // Northbound
-		assertTrue(items.get(1) instanceof SimpleTTListItem); // N1
-		assertTrue(items.get(2) instanceof SimpleTTListItem); // N2
-		assertTrue(items.get(3) instanceof SimpleTTListItem); // NTOTAL
-		assertTrue(items.get(4) instanceof HeadingTTListItem); // Southbound
-		assertTrue(items.get(5) instanceof SimpleTTListItem); // S1
-		assertTrue(items.get(6) instanceof SimpleTTListItem); // S2
-		assertTrue(items.get(7) instanceof SimpleTTListItem); // STOTAL
+		assertIsHeading(0, items); // Northbound
+		assertIsSimple(1, items); // N1
+		assertIsSimple(2, items); // N2
+		assertIsTotal(3, items); // NTOTAL
+		assertIsHeading(4, items); // Southbound
+		assertIsSimple(5, items); // S1
+		assertIsSimple(6, items); // S2
+		assertIsTotal(7, items); // STOTAL
 
-		assertEquals("Northbound", ((HeadingTTListItem)items.get(0)).getText());
-		assertEquals("Southbound", ((HeadingTTListItem)items.get(4)).getText());
+		assertEquals("Northbound", getHeading(0, items).getText());
+		assertEquals("Southbound", getHeading(4, items).getText());
 
-		assertTrue(((SimpleTTListItem)items.get(3)).getTravelTime().isTotal());
-		assertTrue(((SimpleTTListItem)items.get(7)).getTravelTime().isTotal());
+		assertIsTotal(3, items);
+		assertIsTotal(7, items);
 	}
 
-	//@Test
+	@Test
 	public void testBothDirsTotalsOnly() {
-		XTravelTimeSegment ntotal = new XTravelTimeSegment("NTOTAL", null, null);
-		XTravelTimeSegment stotal = new XTravelTimeSegment("STOTAL", null, null);
+		XTravelTimeSegment ntotal = newTotalSegment("NTOTAL", 0);
+		XTravelTimeSegment stotal = newTotalSegment("STOTAL", 0);
 		LinkedList<XTravelTimeSegment> segs = new LinkedList<>();
 		segs.addAll(Arrays.asList(ntotal, stotal));
 		m1Store.primeWithTravelTimes(segs);
@@ -98,48 +104,29 @@ public class TTListItemFactoryInstrumentedTest {
 		assertNotNull(items);
 		assertEquals(segs.size() + 2, items.size());
 
-		assertTrue(items.get(0) instanceof HeadingTTListItem); // Northbound
-		assertTrue(items.get(1) instanceof SimpleTTListItem); // NTOTAL
-		assertTrue(items.get(2) instanceof HeadingTTListItem); // Southbound
-		assertTrue(items.get(3) instanceof SimpleTTListItem); // STOTAL
+		assertIsHeading(0, items); // Northbound
+		assertIsSimple(1, items); // NTOTAL
+		assertIsHeading(2, items); // Southbound
+		assertIsSimple(3, items); // STOTAL
 
-		assertEquals("Northbound", ((HeadingTTListItem)items.get(0)).getText());
-		assertEquals("Southbound", ((HeadingTTListItem)items.get(2)).getText());
+		assertEquals("Northbound", getHeading(0, items).getText());
+		assertEquals("Southbound", getHeading(2, items).getText());
 
-		assertTrue(((SimpleTTListItem)items.get(1)).getTravelTime().isTotal());
-		assertTrue(((SimpleTTListItem)items.get(3)).getTravelTime().isTotal());
+		assertIsTotal(1, items);
+		assertIsTotal(3, items);
 	}
 
 	@Test
-	public void testAllActive() {
-		// Segment N1 : 5 minutes, active, includedInTotal
-		XTravelTimeProperties n1Props = new XTravelTimeProperties("N", "To", true, "From");
-		n1Props.setTravelTimeMinutes(5);
-		XTravelTimeSegment n1 = new XTravelTimeSegment("N1", null, n1Props);
-		n1.setIncludedInTotalSilently(true);
-
-		// Segment N2: 7 minutes, active, includedInTotal
-		XTravelTimeProperties n2Props = new XTravelTimeProperties("N", "XX", true, "YY");
-		n2Props.setTravelTimeMinutes(7);
-		XTravelTimeSegment n2 = new XTravelTimeSegment("N2", null, n2Props);
-		n2.setIncludedInTotalSilently(true);
-
-		// North total
-		XTravelTimeProperties ntotalProps = new XTravelTimeProperties("N", "AA", true, "BB");
-		XTravelTimeSegment ntotal = new XTravelTimeSegment("NTOTAL", null, ntotalProps);
-
-		// Segment S1 : 10 minutes, active
-		XTravelTimeProperties s1Props = new XTravelTimeProperties("S", "To", true, "From");
-		s1Props.setTravelTimeMinutes(10);
-		XTravelTimeSegment s1 = new XTravelTimeSegment("S1", null, s1Props);
-		s1.setIncludedInTotalSilently(true);
-
-		// South total
-		XTravelTimeProperties stotalProps = new XTravelTimeProperties("S", "E", true, "F");
-		XTravelTimeSegment stotal = new XTravelTimeSegment("STOTAL", null, stotalProps);
+	public void testExcludeFromTotal() {
+		XTravelTimeSegment n1 = newSegment("N1", 5);
+		XTravelTimeSegment n2 = newSegment("N2", 7);
+		XTravelTimeSegment ntotal = newSegment("NTOTAL", 0);
+		XTravelTimeSegment s1 = newSegment("S1", 10);
+		XTravelTimeSegment stotal = newSegment("STOTAL", 0);
 
 		LinkedList<XTravelTimeSegment> segs = new LinkedList<>();
 		segs.addAll(Arrays.asList(s1, n1, n2, ntotal, stotal));
+
 		m1Store.primeWithTravelTimes(segs);
 		m1Store.setAllIncludedInTotal();
 
@@ -149,29 +136,40 @@ public class TTListItemFactoryInstrumentedTest {
 		assertNotNull(items);
 		assertEquals(segs.size() + 2, items.size());
 
-		assertTrue(items.get(0) instanceof HeadingTTListItem); // "Northbound" heading
-		assertTrue(items.get(1) instanceof SimpleTTListItem); // N1 segment (5 mins, active)
-		assertTrue(items.get(2) instanceof SimpleTTListItem); // N2 segment (7 mins, active)
-		assertTrue(items.get(3) instanceof SimpleTTListItem); // NTOTAL
-		assertTrue(items.get(4) instanceof HeadingTTListItem); // "Southbound" segment
-		assertTrue(items.get(5) instanceof SimpleTTListItem); // S1 segment (10 mins, active)
-		assertTrue(items.get(6) instanceof SimpleTTListItem); // STOTAL
+		assertIsHeading(0, items); // "Northbound" heading
+		assertIsSimple(1, items); // N1 segment (5 mins, active)
+		assertIsSimple(2, items); // N2 segment (7 mins, active)
+		assertIsTotal(3, items); // NTOTAL
+		assertIsHeading(4, items); // "Southbound" segment
+		assertIsSimple(5, items); // S1 segment (10 mins, active)
+		assertIsTotal(6, items); // STOTAL
 
 		factory.updateTotalsItems(items);
 
 		// Check basic totalling with all segments included
-		assertEquals(12, (int) ((SimpleTTListItem) items.get(3)).getTravelTime().getProperties()
-				.getTravelTimeMinutes());
-		assertEquals(10, (int) ((SimpleTTListItem) items.get(6)).getTravelTime().getProperties()
-				.getTravelTimeMinutes());
+		assertEquals(12, getSimpleTravelTime(3, items));
+		assertEquals(10, getSimpleTravelTime(6, items));
 
 		// Make N1 inactive
 		n1.setIncludedInTotalSilently(false);
 		factory.updateTotalsItems(items);
 
-		// Now that N1 is inactive, check that NTOTAL is 7 minutes, not 12 minutes
-		assertEquals(7, (int) ((SimpleTTListItem) items.get(3)).getTravelTime().getProperties()
-				.getTravelTimeMinutes());
+		// Now that N1 is inactive, check that NTOTAL is 7 minutes
+		assertEquals(7, getSimpleTravelTime(3, items));
+
+		// Make N2 inactive
+		n2.setIncludedInTotalSilently(false);
+		factory.updateTotalsItems(items);
+
+		// Now that N2 AND N2 are inactive, check that NTOTAL is 0 minutes
+		assertEquals(0, getSimpleTravelTime(3, items));
+
+		// Make S1 inactive. Check that STOTAL is now 0 minutes.
+		s1.setIncludedInTotalSilently(false);
+		factory.updateTotalsItems(items);
+
+		assertEquals(0, getSimpleTravelTime(6, items));
 	}
+
 
 }
