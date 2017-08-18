@@ -3,6 +3,7 @@ package rod.bailey.trafficatnsw.hazard.map
 import android.content.Context
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -62,8 +63,8 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 	override fun onMapReady(googleMap: GoogleMap) {
 		googleMap.clear()
 
-		val latlng = LatLng(hazard?.geometry?.latlng?.get(0) ?: 0.0,
-							hazard?.geometry?.latlng?.get(1) ?: 0.0)
+		val latlng = LatLng(hazard?.geometry?.latlng?.get(1) ?: 0.0,
+							hazard?.geometry?.latlng?.get(0) ?: 0.0)
 		val markerOptions = MarkerOptions()
 			.position(latlng)
 			.title(hazard?.properties?.headline ?: getString(R.string.hazard_map_screen_title))
