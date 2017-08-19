@@ -103,7 +103,6 @@ open class MainActivity : AppCompatActivity() {
 				R.id.menu_item_regional_nsw_cameras -> navToCameras(
 					TrafficCameraListMode.REGIONAL)
 				R.id.menu_item_travel_times_m1 -> navToTimes(Motorway.M1)
-				R.id.menu_item_travel_times_m2 -> navToTimes(Motorway.M2)
 				R.id.menu_item_travel_times_m4 -> navToTimes(Motorway.M4)
 				R.id.menu_item_travel_times_m7 -> navToTimes(Motorway.M7)
 			} // when

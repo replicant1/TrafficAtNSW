@@ -11,7 +11,6 @@ import javax.inject.Inject
 class MotorwayConfigRegistry {
 
 	val m1Config: MotorwayConfig
-	val m2Config: MotorwayConfig
 	val m4Config: MotorwayConfig
 	val m7Config: MotorwayConfig
 
@@ -28,18 +27,6 @@ class MotorwayConfigRegistry {
 							  "excluded_from_total_m1", //
 							  config.remoteM1JSONFile(), //
 							  config.localM1JSONFile())
-	}
-
-	private fun createM2Config(): MotorwayConfig {
-		return MotorwayConfig(Motorway.M2,
-							  "M2", //
-							  "Eastbound", //
-							  "Westbound", //
-							  "E", //
-							  "W", //
-							  "excluded_from_total_m2", //
-							  config.remoteM2JSONFile(), //
-							  config.localM2JSONFile())
 	}
 
 	private fun createM4Config(): MotorwayConfig {
@@ -70,7 +57,6 @@ class MotorwayConfigRegistry {
 		TrafficAtNSWApplication.graph.inject(this)
 
 		m1Config = createM1Config()
-		m2Config = createM2Config()
 		m4Config = createM4Config()
 		m7Config = createM7Config()
 	}

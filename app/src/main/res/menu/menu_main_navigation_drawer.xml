@@ -38,10 +38,6 @@
                 android:icon="@drawable/ic_timer_black_24dp"
                 android:title="@string/nav_tt_m1"/>
             <item
-                android:id="@+id/menu_item_travel_times_m2"
-                android:icon="@drawable/ic_timer_black_24dp"
-                android:title="@string/nav_tt_m2"/>
-            <item
                 android:id="@+id/menu_item_travel_times_m4"
                 android:icon="@drawable/ic_timer_black_24dp"
                 android:title="@string/nav_tt_m4"/>
