@@ -3,6 +3,7 @@ package rod.bailey.trafficatnsw.instrument.util;
 import java.util.LinkedList;
 import java.util.List;
 
+import rod.bailey.trafficatnsw.cameras.data.XCamera;
 import rod.bailey.trafficatnsw.hazard.data.XHazard;
 import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore;
 import rod.bailey.trafficatnsw.traveltime.data.SegmentId;
@@ -18,6 +19,17 @@ import static junit.framework.Assert.assertTrue;
  * Utility methods for tests
  */
 public class TestUtils {
+
+	public static XCamera findCameraById(List<XCamera> cameras, String cameraId) {
+		XCamera result = null;
+		for (XCamera camera : cameras) {
+			if (camera.getId() == camera.getId()) {
+				result = camera;
+				break;
+			}
+		}
+		return result;
+	}
 
 	public static XHazard findHazardById(List<XHazard> hazards, int hazardId) {
 		XHazard result = null;

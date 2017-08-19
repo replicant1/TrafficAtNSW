@@ -1,7 +1,7 @@
 package rod.bailey.trafficatnsw.traveltime.data
 
 /**
- * Created by rodbailey on 7/8/17.
+ * The direction you might travel along a segment of motorway.
  */
 enum class SegmentDirection private constructor(val apiToken: String) {
 	N("N"), S("S"), E("E"), W("W");
