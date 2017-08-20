@@ -49,7 +49,7 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 
 	@OptionsItem(R.id.menu_item_refresh_travel_time_list)
 	fun loadCamerasAsync() {
-		presenter.loadCamerasAsync(context, cameraListView)
+		presenter.loadCamerasAsync(activity, cameraListView)
 	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
