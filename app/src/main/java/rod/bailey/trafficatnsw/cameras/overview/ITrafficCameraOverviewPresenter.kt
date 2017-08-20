@@ -13,8 +13,8 @@ interface ITrafficCameraOverviewPresenter: IPresenter<ITrafficCameraOverviewView
 	fun loadCamerasAsync(ctx: Context, listView: ListViewWithEmptyMessage)
 
 	@StringRes
-	fun getScreenTitleForMode(mode: TrafficCameraListMode?): Int
+	fun getScreenTitleForMode(mode: TrafficCameraListMode): Int
 
 	@StringRes
-	fun getEmptyMessageForMode(mode: TrafficCameraListMode?): Int
+	fun getEmptyMessageForMode(mode: TrafficCameraListMode): Int
 }

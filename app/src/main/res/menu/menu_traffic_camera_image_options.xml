@@ -10,7 +10,7 @@
         android:title="@string/camera_menu_item_refresh">
     </item>
 
-    <!-- Icon and title are set to extraFavourite or not-extraFavourite programmatically -->
+    <!-- Icon and title are set to Favourite or Unfavourite programmatically -->
 
     <item
         android:id="@+id/toggle_camera_favourite"

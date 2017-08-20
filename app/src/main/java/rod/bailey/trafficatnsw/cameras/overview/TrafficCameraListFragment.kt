@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
+import org.androidannotations.annotations.OptionsItem
+import org.androidannotations.annotations.OptionsMenu
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
@@ -22,6 +24,7 @@ import javax.inject.Inject
  * create instances of this using static create() method.
  */
 @EFragment
+@OptionsMenu(R.menu.menu_travel_times_options)
 open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 
 	init {
@@ -39,10 +42,15 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 	var modeKey: Int? = null
 
 	@Inject
-	lateinit var presenter: TrafficCameraOverviewPresenter
+	lateinit var cameraCacheSingleton: TrafficCameraCacheSingleton
 
 	@Inject
-	lateinit var cameraCacheSingleton: TrafficCameraCacheSingleton
+	lateinit var presenter: TrafficCameraOverviewPresenter
+
+	@OptionsItem(R.id.menu_item_refresh_travel_time_list)
+	fun loadCamerasAsync() {
+		presenter.loadCamerasAsync(context, cameraListView)
+	}
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -63,14 +71,15 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 		return cameraListView
 	}
 
-	override fun onResume() {
-		super.onResume()
-		presenter.onIViewCreated(this, modeKey)
-	}
-
 	override fun onPause() {
 		super.onPause()
 		presenter.onIViewDestroyed()
+	}
+
+	override fun onResume() {
+		super.onResume()
+		presenter.onIViewCreated(this, modeKey)
+		loadCamerasAsync()
 	}
 
 	override fun refreshCameraList() {

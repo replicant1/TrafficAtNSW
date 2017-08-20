@@ -21,6 +21,18 @@ import javax.inject.Inject
  */
 class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, PropertyChangeListener {
 
+	private val cameraCacheSingleton: TrafficCameraCacheSingleton
+
+	private val dataService: IDataService
+
+	private val ctx: Context
+
+	private lateinit var mode: TrafficCameraListMode
+
+	private lateinit var view: ITrafficCameraOverviewView
+
+	private var disposable: Disposable? = null
+
 	@Inject
 	constructor(ctx: Context,
 				dataService: IDataService,
@@ -30,41 +42,35 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 		this.cameraCacheSingleton = cameraCacheSingleton
 	}
 
-	private val cameraCacheSingleton: TrafficCameraCacheSingleton
+	override fun getScreenTitleForMode(mode: TrafficCameraListMode): Int {
+		return when (mode) {
+			TrafficCameraListMode.FAVOURITES -> R.string.camera_list_screen_title_favourites
+			TrafficCameraListMode.REGIONAL -> R.string.camera_list_screen_title_regional
+			TrafficCameraListMode.SYDNEY -> R.string.camera_list_screen_title_sydney
+		}
+	}
 
-	private val dataService: IDataService
+	override fun getEmptyMessageForMode(mode: TrafficCameraListMode): Int {
+		return when (mode) {
+			TrafficCameraListMode.FAVOURITES -> R.string.camera_list_empty_favourites
+			TrafficCameraListMode.REGIONAL -> R.string.camera_list_empty_regional
+			TrafficCameraListMode.SYDNEY -> R.string.camera_list_empty_sydney
+		}
+	}
 
-	private val ctx: Context
-
-	private lateinit var view: ITrafficCameraOverviewView
-
-	private lateinit var mode: TrafficCameraListMode
-
-	private var disposable: Disposable? = null
+	override fun loadCamerasAsync(ctx: Context, listView: ListViewWithEmptyMessage) {
+		disposable = CommandEngine.execute(
+			DownloadCamerasCommand(dataService),
+			DefaultProgressMonitor(ctx, ctx.getString(R.string.camera_image_loading_msg)),
+			SuccessHandler(this),
+			DefaultErrorHandler(ctx, ctx.getString(R.string.camera_image_load_failure_dialog_msg))
+		)
+	}
 
 	override fun onIViewCreated(view: ITrafficCameraOverviewView, vararg initData: Any?) {
 		this.view = view
-
 		val modeKeyInt: Int = initData[0] as Int
 		mode = TrafficCameraListMode.values().get(modeKeyInt)
-	}
-
-	override fun getScreenTitleForMode(mode: TrafficCameraListMode?): Int {
-		return when (mode) {
-			TrafficCameraListMode.FAVOURITES -> R.string.hazards_list_screen_title_sydney
-			TrafficCameraListMode.REGIONAL -> R.string.hazards_list_screen_title_sydney
-			TrafficCameraListMode.SYDNEY -> R.string.hazards_list_screen_title_sydney
-			null -> R.string.hazards_list_screen_title_sydney
-		}
-	}
-
-	override fun getEmptyMessageForMode(mode: TrafficCameraListMode?): Int {
-		return when (mode) {
-			TrafficCameraListMode.FAVOURITES -> R.string.camera_no_favourites
-			TrafficCameraListMode.REGIONAL -> R.string.camera_no_favourites
-			TrafficCameraListMode.SYDNEY -> R.string.camera_no_favourites
-			null -> R.string.camera_no_favourites
-		}
 	}
 
 	override fun onIViewDestroyed() {
@@ -75,23 +81,12 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 		view.refreshCameraList()
 	}
 
-	override fun loadCamerasAsync(ctx: Context, listView: ListViewWithEmptyMessage) {
-		disposable = CommandEngine.execute(
-			DownloadCamerasCommand(dataService),
-			DefaultProgressMonitor(ctx, "Loading cameras&#8230;"),
-			SuccessHandler(this),
-			DefaultErrorHandler(ctx, "Failed to load cameras")
-		)
-	}
-
-	inner class SuccessHandler(val listener: PropertyChangeListener): ICommandSuccessHandler {
+	inner class SuccessHandler(val listener: PropertyChangeListener) : ICommandSuccessHandler {
 
 		override fun onSuccess(result: Any?) {
 			val allCameras: XCameraCollection = result as XCameraCollection
 			cameraCacheSingleton.init(ctx, allCameras)
 			cameraCacheSingleton.addPropertyChangeListener(listener)
-//			val adapter = TrafficCameraListAdapter(mode.filter)
-//			view.setAdapter(adapter)
 			view.refreshCameraList()
 		}
 	}

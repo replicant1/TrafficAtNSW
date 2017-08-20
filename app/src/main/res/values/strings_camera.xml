@@ -18,4 +18,10 @@
     <string name="camera_no_favourites">You have no Favourite cameras.\n
 		To make a camera one of your favourites, view the camera image
 		and tap the star at the top right of the screen.</string>
+    <string name="camera_list_screen_title_favourites">Favourite Cameras</string>
+    <string name="camera_list_screen_title_regional">Regional Cameras</string>
+    <string name="camera_list_screen_title_sydney">Sydney Cameras</string>
+    <string name="camera_list_empty_favourites">You have no Favourite cameras.</string>
+    <string name="camera_list_empty_regional">There are no Regional cameras</string>
+    <string name="camera_list_empty_sydney">There are no Sydney cameras</string>
 </resources>
