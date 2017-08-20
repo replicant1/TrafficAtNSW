@@ -18,6 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.cameras.data.XCamera;
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton;
+import rod.bailey.trafficatnsw.cameras.data.XCameraCollection;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitAnyTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitFavouritesTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter;
@@ -43,7 +44,8 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 	@Before
 	public void setup() {
 		cache = new TrafficCameraCacheSingleton();
-		cache.init(mActivityRule.getActivity());
+		// TODO Init with json
+//		cache.init(mActivityRule.getActivity(XCameraCollection()));
 	}
 
 	@Test

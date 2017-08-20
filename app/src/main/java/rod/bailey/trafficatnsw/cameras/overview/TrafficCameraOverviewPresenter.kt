@@ -2,6 +2,7 @@ package rod.bailey.trafficatnsw.cameras.overview
 
 import android.content.Context
 import io.reactivex.disposables.Disposable
+import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.command.CommandEngine
 import rod.bailey.trafficatnsw.app.command.DefaultErrorHandler
 import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
@@ -46,13 +47,24 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 
 		val modeKeyInt: Int = initData[0] as Int
 		mode = TrafficCameraListMode.values().get(modeKeyInt)
+	}
 
-		// TODO: Prime cameraCache with loaded response.
-//		cameraCache.init(ctx)
-//		cameraCache.addPropertyChangeListener(this)
-//
-//		view.setScreenTitle(mode.actionBarTitle)
-//		view.setAdapter(TrafficCameraListAdapter((mode.filter)))
+	override fun getScreenTitleForMode(mode: TrafficCameraListMode?): Int {
+		return when (mode) {
+			TrafficCameraListMode.FAVOURITES -> R.string.hazards_list_screen_title_sydney
+			TrafficCameraListMode.REGIONAL -> R.string.hazards_list_screen_title_sydney
+			TrafficCameraListMode.SYDNEY -> R.string.hazards_list_screen_title_sydney
+			null -> R.string.hazards_list_screen_title_sydney
+		}
+	}
+
+	override fun getEmptyMessageForMode(mode: TrafficCameraListMode?): Int {
+		return when (mode) {
+			TrafficCameraListMode.FAVOURITES -> R.string.camera_no_favourites
+			TrafficCameraListMode.REGIONAL -> R.string.camera_no_favourites
+			TrafficCameraListMode.SYDNEY -> R.string.camera_no_favourites
+			null -> R.string.camera_no_favourites
+		}
 	}
 
 	override fun onIViewDestroyed() {
@@ -60,8 +72,7 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent?) {
-		val adapter = TrafficCameraListAdapter(mode.filter)
-		view.setAdapter(adapter);
+		view.refreshCameraList()
 	}
 
 	override fun loadCamerasAsync(ctx: Context, listView: ListViewWithEmptyMessage) {
@@ -79,8 +90,9 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 			val allCameras: XCameraCollection = result as XCameraCollection
 			cameraCacheSingleton.init(ctx, allCameras)
 			cameraCacheSingleton.addPropertyChangeListener(listener)
-			val adapter = TrafficCameraListAdapter(mode.filter)
-			view.setAdapter(adapter)
+//			val adapter = TrafficCameraListAdapter(mode.filter)
+//			view.setAdapter(adapter)
+			view.refreshCameraList()
 		}
 	}
 }

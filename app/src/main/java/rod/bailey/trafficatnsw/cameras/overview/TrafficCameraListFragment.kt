@@ -11,6 +11,7 @@ import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.common.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage_
@@ -31,12 +32,23 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 	/** Top level layout has list with DataLicenceView in footer  */
 	private lateinit var cameraListView: ListViewWithEmptyMessage
 
+	private lateinit var mode: TrafficCameraListMode
+
 	@FragmentArg(ARG_MODE_KEY)
 	@JvmField
 	var modeKey: Int? = null
 
 	@Inject
 	lateinit var presenter: TrafficCameraOverviewPresenter
+
+	@Inject
+	lateinit var cameraCacheSingleton: TrafficCameraCacheSingleton
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		mode = TrafficCameraListMode.values()[modeKey ?: 0]
+		cameraCacheSingleton.filter = mode.filter
+	}
 
 	override fun onCreateView(inflater: LayoutInflater,
 							  container: ViewGroup?,
@@ -47,21 +59,22 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 		cameraListView.listViewAutoHideFooter.lv_list.divider =
 			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
 		cameraListView.listViewAutoHideFooter.lv_list.dividerHeight = 2
-		presenter.onIViewCreated(this, modeKey)
+		activity.title = getString(presenter.getScreenTitleForMode(mode))
 		return cameraListView
 	}
 
-	override fun setScreenTitle(title: String) {
-		activity.title = title
+	override fun onResume() {
+		super.onResume()
+		presenter.onIViewCreated(this, modeKey)
 	}
 
-	override fun onDestroy() {
-		super.onDestroy()
+	override fun onPause() {
+		super.onPause()
 		presenter.onIViewDestroyed()
 	}
 
-	override fun setAdapter(adapter: TrafficCameraListAdapter) {
-		cameraListView.setAdapter(adapter)
+	override fun refreshCameraList() {
+		cameraListView.setAdapter(TrafficCameraListAdapter(mode.filter))
 	}
 
 	companion object {
