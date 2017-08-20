@@ -44,7 +44,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		applyFilter(AdmitAnyTrafficCameraFilter())
 	}
 
-	fun init(ctx: Context) {
+	fun init(ctx: Context, cameras: XCameraCollection) {
 		this.ctx = ctx
 		loadFavourites()
 	}
