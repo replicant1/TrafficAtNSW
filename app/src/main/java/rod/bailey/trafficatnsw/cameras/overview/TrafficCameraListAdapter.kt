@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.common.ui.ListHeadingView_
 import rod.bailey.trafficatnsw.hazard.data.XRegion
@@ -39,7 +39,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 
 	override fun isEnabled(position: Int): Boolean {
 		val dataObj = listData[position]
-		return dataObj is TrafficCamera
+		return dataObj is XCamera
 	}
 
 	private fun createHeadingListItem(region: XRegion, parent: ViewGroup): View {
@@ -48,7 +48,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	}
 
 	private fun createTrafficCameraListItem(ctx: Context,
-											camera: TrafficCamera): TrafficCameraListItemView {
+											camera: XCamera): TrafficCameraListItemView {
 		val item = TrafficCameraListItemView_.build(ctx, camera, camera.isFavourite)
 		item.isFocusable = true
 		return item
@@ -68,12 +68,12 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 		return if (convertView == null) {
 			when (listItem) {
 				is XRegion -> createHeadingListItem(listItem, parent)
-				else -> createTrafficCameraListItem(parent.context, listItem as TrafficCamera)
+				else -> createTrafficCameraListItem(parent.context, listItem as XCamera)
 			}
 		} else {
 			when (listItem) {
 				is XRegion -> convertHeadingListItem(convertView, listItem)
-				else -> convertTrafficCameraListItem(convertView, listItem as TrafficCamera)
+				else -> convertTrafficCameraListItem(convertView, listItem as XCamera)
 			}
 		}
 	}
@@ -83,7 +83,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 		return convertView
 	}
 
-	private fun convertTrafficCameraListItem(convertView: View, newCameraData: TrafficCamera): View {
+	private fun convertTrafficCameraListItem(convertView: View, newCameraData: XCamera): View {
 		(convertView as TrafficCameraListItemView_).camera = newCameraData
 		return convertView
 	}

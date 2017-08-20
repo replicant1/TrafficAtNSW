@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import rod.bailey.trafficatnsw.hazard.data.XGeometry
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
+import java.io.Serializable
 
 /**
  * A traffic camera
@@ -16,7 +17,7 @@ data class XCamera(
 	val geometry: XGeometry?,
 
 	@SerializedName("properties")
-	val properties: XCameraProperties?) : Comparable<XCamera> {
+	val properties: XCameraProperties?) : Comparable<XCamera>, Serializable {
 
 	/** True if this camera is one of the users favourites */
 	private var favourite: Boolean = false
@@ -28,7 +29,7 @@ data class XCamera(
 	}
 
 	private fun fireFavouritePropertyChangeEvent() {
-		support.firePropertyChange(TrafficCamera.PROPERTY_FAVOURITE, null, favourite)
+		support.firePropertyChange(PROPERTY_FAVOURITE, null, favourite)
 	}
 
 	fun setFavouriteSilently(value: Boolean) {
@@ -53,5 +54,9 @@ data class XCamera(
 			}
 		}
 		return 0
+	}
+
+	companion object {
+		const val PROPERTY_FAVOURITE = "rod.bailey.trafficatnsw.extraFavourite"
 	}
 }

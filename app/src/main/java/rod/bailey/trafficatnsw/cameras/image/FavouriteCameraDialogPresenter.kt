@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.util.MLog
 

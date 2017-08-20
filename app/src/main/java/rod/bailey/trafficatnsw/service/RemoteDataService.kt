@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.hazard.data.XHazard

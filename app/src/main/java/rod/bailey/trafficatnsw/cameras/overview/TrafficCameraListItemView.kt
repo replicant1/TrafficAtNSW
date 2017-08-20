@@ -10,12 +10,12 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EViewGroup
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
+import rod.bailey.trafficatnsw.cameras.data.XCamera
 
 @EViewGroup(R.layout.list_item_camera)
 open class TrafficCameraListItemView(private val ctx: Context,
-									 var camera: TrafficCamera,
+									 var camera: XCamera,
 									 private var favourite: Boolean) : FrameLayout(ctx) {
 
 	private inner class ItemClickListener : View.OnClickListener {
@@ -42,8 +42,8 @@ open class TrafficCameraListItemView(private val ctx: Context,
 
 	@AfterViews
 	fun afterViews() {
-		titleTextView?.text = camera.street
-		subtitleTextView?.text = camera.suburb
+		titleTextView?.text = camera.properties?.title
+		subtitleTextView?.text = "camera.suburb"
 		setFavourite(favourite)
 		mainLayout?.setOnClickListener(ItemClickListener())
 	}

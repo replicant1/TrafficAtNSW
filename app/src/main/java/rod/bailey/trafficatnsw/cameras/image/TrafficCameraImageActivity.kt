@@ -18,7 +18,6 @@ import rod.bailey.trafficatnsw.app.command.DefaultErrorHandler
 import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
 import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
 import rod.bailey.trafficatnsw.cameras.data.DownloadCameraImageCommand
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.service.IDataService
@@ -60,33 +59,9 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	@JvmField
 	var descriptionTextView: AppCompatTextView? = null
 
-	@Extra("cameraId")
+	@Extra("camera")
 	@JvmField
-	var extraCameraId: String? = null
-
-	@Extra("index")
-	@JvmField
-	var extraIndex: Int? = null
-
-	@Extra("street")
-	@JvmField
-	var extraStreet: String? = null
-
-	@Extra("suburb")
-	@JvmField
-	var extraSuburb: String? = null
-
-	@Extra("description")
-	@JvmField
-	var extraDescription: String? = null
-
-	@Extra("url")
-	@JvmField
-	var extraUrl: String? = null
-
-	@Extra("extraFavourite")
-	@JvmField
-	var extraFavourite: Boolean? = null
+	var camera: XCamera? = null
 
 	@OptionsMenuItem(R.id.toggle_camera_favourite)
 	@JvmField
@@ -106,11 +81,11 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 
-		titleTextView?.text = extraStreet
-		subtitleTextView?.text = extraSuburb
-		descriptionTextView?.text = extraDescription
+		titleTextView?.text = camera?.properties?.title
+		subtitleTextView?.text = "subtitle"
+		descriptionTextView?.text = camera?.properties?.view
 
-		updateActionBarPerFavouriteStatus(extraFavourite ?: false)
+		updateActionBarPerFavouriteStatus(camera?.isFavourite ?: false)
 
 		refresh()
 	}
@@ -122,7 +97,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 
 	private fun loadCameraImageAsync() {
 		disposable = CommandEngine.execute(
-			DownloadCameraImageCommand(dataService, extraCameraId ?: ""),
+			DownloadCameraImageCommand(dataService, camera?.id ?: ""),
 			DefaultProgressMonitor(this, getString(R.string.camera_image_loading_msg)),
 			SuccessHandler(),
 			DefaultErrorHandler(this, getString(R.string.camera_image_load_failure_dialog_msg))
@@ -140,12 +115,12 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 
 	@OptionsItem(R.id.toggle_camera_favourite)
 	fun toggleFavourite() {
-		val camera: XCamera? = cameraCache.getCamera(extraCameraId ?: "")
-		if (camera != null) {
-			val pres = FavouriteCameraDialogPresenter(camera)
+		val cameraVal = camera
+		cameraVal?.let {
+			val pres = FavouriteCameraDialogPresenter(cameraVal)
 			val dialog = pres.build(this)
 			dialog.setOnDismissListener {
-				updateActionBarPerFavouriteStatus(camera.isFavourite)
+				updateActionBarPerFavouriteStatus(camera?.isFavourite ?: false)
 			}
 			dialog.show()
 		}
@@ -160,7 +135,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
-		updateActionBarPerFavouriteStatus(extraFavourite ?: false)
+		updateActionBarPerFavouriteStatus(camera?.isFavourite ?: false)
 		return true
 	}
 
@@ -177,15 +152,8 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	companion object {
 		private val LOG_TAG: String = TrafficCameraImageActivity::class.java.simpleName
 
-		fun start(ctx: Context, camera: TrafficCamera) {
-			TrafficCameraImageActivity_.intent(ctx)
-				.extraIndex(camera.index)
-				.extraStreet(camera.street)
-				.extraSuburb(camera.suburb)
-				.extraDescription(camera.description)
-				.extraUrl(camera.url)
-				.extraFavourite(camera.isFavourite)
-				.start()
+		fun start(ctx: Context, camera: XCamera) {
+			TrafficCameraImageActivity_.intent(ctx).camera(camera).start()
 		}
 	}
 }

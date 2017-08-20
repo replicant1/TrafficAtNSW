@@ -161,7 +161,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		if (TrafficCamera.PROPERTY_FAVOURITE == event.propertyName) {
+		if (XCamera.PROPERTY_FAVOURITE == event.propertyName) {
 			saveFavourites()
 			fireFavouritePropertyChangeEvent()
 		}
