@@ -12,8 +12,25 @@ import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig
  * The latter is only used for unit testing.
  */
 interface IDataService {
+
+	/**
+	 * @return List of all known incidents - but only those that have not ended. Null means
+	 * the info wasn't available.
+	 */
 	fun getHazards(): List<XHazard>?
+
+	/**
+	 * @param motorway Static aspects of the motorway whose travel times we want.
+	 * @return A store already primed with the latest travel times for the given motorway.
+	 */
 	fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore?
+
+	/**
+	 * @param trafficCameraId Identifies the traffic camera whose latest image we want.
+	 * @return The image itself, or null if not available.
+	 */
 	fun getTrafficCameraImage(trafficCameraId: String): Bitmap?
+
+
 	fun getTrafficCameras(): XCameraCollection?
 }

@@ -27,8 +27,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 		cameraCache.filter = filter
 		// Linearize the info in the TrafficCameraCacheSingleton. The resulting list
 		// has two sorts of entries. A XRegion instance if for the beginning of a
-		// region section, a TrafficCamera instance if a camera within a
-		// region section.
+		// region section, a n XCamera instance if a camera within a region section.
 		for (region in sortedCameraRegions()) {
 			listData.add(region)
 			val cameras = cameraCache.getCamerasForRegion(region)

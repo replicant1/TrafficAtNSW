@@ -51,7 +51,6 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 	}
 
 	fun init(cameras: List<XCamera>) {
-		Log.i(LOG_TAG, "Initializing cache with ${cameras.size} cameras")
 		prime(cameras)
 		applyFilter()
 		loadFavourites()
@@ -97,11 +96,8 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 	}
 
 	private fun addSelfAsListenerToAllCameras() {
-		Log.d(LOG_TAG, "Into addSelfAsListenerToAllCaeras")
 		for (camerasInRegion in unfilteredCamerasPerRegion.values) {
-			Log.d(LOG_TAG, "camerasInRegion=${camerasInRegion}")
 			for (camera in camerasInRegion) {
-				Log.d(LOG_TAG, "camera=${camera}")
 				camera.addPropertyChangeListener(this)
 			}
 		}

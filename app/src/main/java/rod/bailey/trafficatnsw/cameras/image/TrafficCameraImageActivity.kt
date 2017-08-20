@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -17,10 +18,7 @@ import rod.bailey.trafficatnsw.app.command.CommandEngine
 import rod.bailey.trafficatnsw.app.command.DefaultErrorHandler
 import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
 import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
-import rod.bailey.trafficatnsw.cameras.data.DownloadCameraImageCommand
-import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
-import rod.bailey.trafficatnsw.cameras.data.XCamera
-import rod.bailey.trafficatnsw.cameras.data.XCameraProperties
+import rod.bailey.trafficatnsw.cameras.data.*
 import rod.bailey.trafficatnsw.service.IDataService
 import javax.inject.Inject
 
@@ -82,17 +80,22 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 
+		Log.d(LOG_TAG, "In afterViews() cameraId=${cameraId}" )
 		val camera: XCamera? = cameraCache.getUnfilteredCamera(cameraId ?: "")
 		if (camera != null) {
 			val props: XCameraProperties? = camera.properties
 			if (props != null) {
-				titleTextView?.text = props.title
-				subtitleTextView?.text = "subtitle"
+				titleTextView?.text = props.deriveTitle()
+				subtitleTextView?.text = props.deriveSuburb()
 				descriptionTextView?.text = props.view
 
 				updateActionBarPerFavouriteStatus(camera.isFavourite)
 				refresh()
+			} else {
+				Log.w(LOG_TAG, "Camera id ${cameraId} has null properties")
 			}
+		} else {
+			Log.w(LOG_TAG, "Couldn't find camera id ${cameraId}")
 		}
 	}
 
@@ -160,6 +163,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 		private val LOG_TAG: String = TrafficCameraImageActivity::class.java.simpleName
 
 		fun start(ctx: Context, cameraId: String) {
+			Log.d(LOG_TAG, "Starting TrafficCameraImageActivity with cameraId ${cameraId}")
 			TrafficCameraImageActivity_.intent(ctx).cameraId(cameraId).start()
 		}
 	}

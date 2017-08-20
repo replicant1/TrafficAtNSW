@@ -4,7 +4,8 @@ import rod.bailey.trafficatnsw.app.command.ICommand
 import rod.bailey.trafficatnsw.service.IDataService
 
 /**
- * Created by rodbailey on 20/8/17.
+ * Asynchronous retrieval of the JSON file that defines all the traffic cameras that are
+ * available, when passed into [CommandEngine]
  */
 class DownloadCamerasCommand(val dataService: IDataService) : ICommand<XCameraCollection> {
 	override fun execute(): XCameraCollection? = dataService.getTrafficCameras();

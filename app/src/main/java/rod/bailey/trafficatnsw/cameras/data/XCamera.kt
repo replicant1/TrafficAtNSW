@@ -27,7 +27,6 @@ data class XCamera(
 	private var support: PropertyChangeSupport? = null
 
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
-		Log.d(LOG_TAG, "Into addPCL with support=${support}")
 		if (support == null) {
 			support = PropertyChangeSupport(this)
 		}

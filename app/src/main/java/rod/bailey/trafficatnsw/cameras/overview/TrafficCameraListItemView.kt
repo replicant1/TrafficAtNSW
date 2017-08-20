@@ -12,6 +12,8 @@ import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.cameras.data.XCamera
+import rod.bailey.trafficatnsw.cameras.data.deriveSuburb
+import rod.bailey.trafficatnsw.cameras.data.deriveTitle
 
 @EViewGroup(R.layout.list_item_camera)
 open class TrafficCameraListItemView(private val ctx: Context,
@@ -42,8 +44,8 @@ open class TrafficCameraListItemView(private val ctx: Context,
 
 	@AfterViews
 	fun afterViews() {
-		titleTextView?.text = camera.properties?.title
-		subtitleTextView?.text = "camera.suburb"
+		titleTextView?.text = camera.properties?.deriveTitle()
+		subtitleTextView?.text = camera.properties?.deriveSuburb()
 		setFavourite(favourite)
 		mainLayout?.setOnClickListener(ItemClickListener())
 	}
