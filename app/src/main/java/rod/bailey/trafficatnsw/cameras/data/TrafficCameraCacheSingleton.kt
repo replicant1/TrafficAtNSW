@@ -162,7 +162,6 @@ class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
 	}
 
 	fun setPropertyChangeListener(listener: PropertyChangeListener) {
-		Log.d(LOG_TAG, "Into singleton.addPCL. listeners=${listener}")
 		propertyChangeListener = listener
 	}
 
@@ -171,7 +170,6 @@ class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
 	}
 
 	private fun fireFavouritePropertyChangeEvent() {
-		Log.d(LOG_TAG, "Firing a PCE from the camera cache singleton")
 		propertyChangeListener?.propertyChange(
 			PropertyChangeEvent(this, PROPERTY_FAVOURITE_SET, null, true))
 	}
@@ -194,9 +192,7 @@ class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		Log.d(LOG_TAG, "Into propertyChange with property name ${event.propertyName}")
 		if (XCamera.PROPERTY_FAVOURITE == event.propertyName) {
-			Log.d(LOG_TAG, "About to save favourites and fire PCE")
 			saveFavourites()
 			fireFavouritePropertyChangeEvent()
 		}

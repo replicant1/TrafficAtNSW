@@ -186,4 +186,16 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 		assertFalse(listenerNotified.get());
 	}
 
+	@Test
+	public void testFavouriteWithOneFilterAndRecoverWithNewFilter() {
+		cache.setFilter(new AdmitRegionalTrafficCameraFilter());
+		XCamera camera = cache.getUnfilteredCamera(FIRST_CAMERA);
+		camera.setFavourite(true);
+
+		cache.setFilter(new AdmitSydneyTrafficCameraFilter());
+		XCamera loadedCamera = cache.getUnfilteredCamera(FIRST_CAMERA);
+		assertNotNull(loadedCamera);
+		assertTrue(loadedCamera.getFavourite());
+	}
+
 }
