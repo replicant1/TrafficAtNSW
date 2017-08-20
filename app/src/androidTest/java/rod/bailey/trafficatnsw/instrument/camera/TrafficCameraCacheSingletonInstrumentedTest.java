@@ -171,4 +171,19 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 		assertTrue(eventReceived.get());
 	}
 
+	@Test
+	public void testRemovePropertyChangeListenerFromCache() {
+		XCamera camera = cache.getUnfilteredCamera(FIRST_CAMERA);
+		final AtomicBoolean listenerNotified = new AtomicBoolean(false);
+		cache.setPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				listenerNotified.set(true);
+			}
+		});
+		cache.removePropertyChangeListener();
+		camera.setFavourite(true);
+		assertFalse(listenerNotified.get());
+	}
+
 }
