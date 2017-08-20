@@ -119,7 +119,6 @@ class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
 		}
 
 		// Load ids of favourite cameras from prefs
-//		val prefs: SharedPreferences? = context?.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
 		val favouriteCameraIds: MutableSet<String>? = prefs.getStringSet(FAVOURITE_STATE_PREF_KEY, null)
 
 		Log.i(LOG_TAG, "Favourite cameras as loaded from prefs is: ${favouriteCameraIds}")
@@ -157,7 +156,6 @@ class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
 		}
 
 		// Persist ids of favourite cameras to prefs
-//		val prefs = context?.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
 		prefs.edit()?.putStringSet(FAVOURITE_STATE_PREF_KEY, favouriteCameraIds)?.commit()
 
 		return favouriteCameraIds
@@ -168,9 +166,9 @@ class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
 		propertyChangeListener = listener
 	}
 
-//	fun removePropertyChangeListener(listener: PropertyChangeListener) {
-//		support.removePropertyChangeListener(listener)
-//	}
+	fun removePropertyChangeListener() {
+		propertyChangeListener = null
+	}
 
 	private fun fireFavouritePropertyChangeEvent() {
 		Log.d(LOG_TAG, "Firing a PCE from the camera cache singleton")
