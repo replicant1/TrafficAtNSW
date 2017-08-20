@@ -11,13 +11,11 @@ class DefaultProgressMonitor(val ctx: Context, val message: String): ICommandPro
 	private var dialog: IndeterminateProgressDialog? = null
 
 	override fun startProgress() {
-		System.out.println("** DefaultProgressMonitor.startProgress **")
 		dialog = IndeterminateProgressDialog(ctx, message)
 		dialog?.show()
 	}
 
 	override fun stopProgress() {
-		System.out.println("** DefaultProgressMonitor.stopProgress **")
 		dialog?.dismiss()
 	}
 }

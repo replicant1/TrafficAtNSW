@@ -1,6 +1,6 @@
 package rod.bailey.trafficatnsw.cameras.filter
 
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
+import rod.bailey.trafficatnsw.cameras.data.XCamera
 
 interface ITrafficCameraFilter {
 	/**
@@ -9,5 +9,5 @@ interface ITrafficCameraFilter {
 	 * *
 	 * @return true if the given camera is admitted (gets through) this filter
 	 */
-	fun admit(camera: TrafficCamera): Boolean
+	fun admit(camera: XCamera): Boolean
 }

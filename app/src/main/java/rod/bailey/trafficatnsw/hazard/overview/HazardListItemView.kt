@@ -12,6 +12,7 @@ import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.common.ui.IRefreshableView
 import rod.bailey.trafficatnsw.common.ui.ListItemCircularIcon
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XProperties
@@ -35,7 +36,7 @@ import javax.inject.Inject
 open class HazardListItemView(val ctx: Context,
 							  var hazard: XHazard,
 							  val showLastUpdatedDate: Boolean,
-							  val clickable: Boolean) : FrameLayout(ctx) {
+							  val clickable: Boolean) : FrameLayout(ctx), IRefreshableView {
 
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
@@ -112,5 +113,9 @@ open class HazardListItemView(val ctx: Context,
 				rl?.setOnClickListener(HazardListItemClickListener())
 			}
 		}
+	}
+
+	override fun refresh() {
+		afterViews()
 	}
 }

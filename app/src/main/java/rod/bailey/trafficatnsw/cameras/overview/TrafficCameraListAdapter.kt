@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ListAdapter
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.common.ui.ListHeadingView_
 import rod.bailey.trafficatnsw.hazard.data.XRegion
@@ -27,8 +27,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 		cameraCache.filter = filter
 		// Linearize the info in the TrafficCameraCacheSingleton. The resulting list
 		// has two sorts of entries. A XRegion instance if for the beginning of a
-		// region section, a TrafficCamera instance if a camera within a
-		// region section.
+		// region section, a n XCamera instance if a camera within a region section.
 		for (region in sortedCameraRegions()) {
 			listData.add(region)
 			val cameras = cameraCache.getCamerasForRegion(region)
@@ -39,7 +38,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 
 	override fun isEnabled(position: Int): Boolean {
 		val dataObj = listData[position]
-		return dataObj is TrafficCamera
+		return dataObj is XCamera
 	}
 
 	private fun createHeadingListItem(region: XRegion, parent: ViewGroup): View {
@@ -48,8 +47,9 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	}
 
 	private fun createTrafficCameraListItem(ctx: Context,
-											camera: TrafficCamera): TrafficCameraListItemView {
-		val item = TrafficCameraListItemView_.build(ctx, camera, camera.isFavourite)
+											camera: XCamera): TrafficCameraListItemView {
+		Log.d(LOG_TAG, "Creating camera list Item ${camera.id} fav=${camera.favourite}")
+		val item = TrafficCameraListItemView_.build(ctx, camera, camera.favourite)
 		item.isFocusable = true
 		return item
 	}
@@ -65,26 +65,29 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		val listItem = listData[position]
 
-		return if (convertView == null) {
-			when (listItem) {
+		 return if (convertView == null) {
+			return when (listItem) {
 				is XRegion -> createHeadingListItem(listItem, parent)
-				else -> createTrafficCameraListItem(parent.context, listItem as TrafficCamera)
+				else -> createTrafficCameraListItem(parent.context, listItem as XCamera)
 			}
 		} else {
 			when (listItem) {
 				is XRegion -> convertHeadingListItem(convertView, listItem)
-				else -> convertTrafficCameraListItem(convertView, listItem as TrafficCamera)
+				else -> convertTrafficCameraListItem(convertView, listItem as XCamera)
 			}
 		}
 	}
 
 	private fun convertHeadingListItem(convertView: View, newHeadingData: XRegion): View {
 		(convertView as ListHeadingView_).headingText = newHeadingData.description
+		convertView.refresh()
 		return convertView
 	}
 
-	private fun convertTrafficCameraListItem(convertView: View, newCameraData: TrafficCamera): View {
+	private fun convertTrafficCameraListItem(convertView: View, newCameraData: XCamera): View {
+		Log.d(LOG_TAG, "Converting camera ${newCameraData.id} fav=${newCameraData.favourite}")
 		(convertView as TrafficCameraListItemView_).camera = newCameraData
+		convertView.refresh()
 		return convertView
 	}
 

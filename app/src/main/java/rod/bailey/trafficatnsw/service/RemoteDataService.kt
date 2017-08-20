@@ -4,11 +4,13 @@ import android.content.Context
 import android.graphics.Bitmap
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.cameras.data.XCamera
+import rod.bailey.trafficatnsw.cameras.data.XCameraCollection
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.traveltime.data.*
+import rod.bailey.trafficatnsw.util.AssetUtils
 import rod.bailey.trafficatnsw.util.NetUtils
 import javax.inject.Inject
 
@@ -48,9 +50,14 @@ class RemoteDataService : IDataService {
 		return result
 	}
 
-	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {
-		val camera: TrafficCamera? = cameraCache.getCamera(trafficCameraId)
-		val urlToLoad:String? = camera?.url
+	override fun getTrafficCameraImage(trafficCameraId: String): Bitmap? {
+		val camera: XCamera? = cameraCache.getUnfilteredCamera(trafficCameraId)
+		val urlToLoad:String? = camera?.properties?.imageURL
 		return if (urlToLoad == null) null else NetUtils.loadRemoteFileAsImage(urlToLoad)
+	}
+
+	override fun getTrafficCameras(): XCameraCollection? {
+		val jsonStr: String? = AssetUtils.loadAssetFileAsString(context, "cameras.json");
+		return if (jsonStr == null) null else XCameraCollection.parseCameraJson(jsonStr);
 	}
 }

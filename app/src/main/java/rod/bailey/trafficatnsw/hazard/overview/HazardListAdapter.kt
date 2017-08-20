@@ -73,11 +73,13 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 
 	private fun convertHeadingListItem(convertView: View, newHeadingData: XRegion): View {
 		(convertView as ListHeadingView_).headingText = newHeadingData.description
+		convertView.refresh()
 		return convertView
 	}
 
 	private fun convertHazardListItem(convertView: View, newHazardData: XHazard): View {
 		(convertView as HazardListItemView_).hazard = newHazardData
+		convertView.refresh()
 		return convertView
 	}
 

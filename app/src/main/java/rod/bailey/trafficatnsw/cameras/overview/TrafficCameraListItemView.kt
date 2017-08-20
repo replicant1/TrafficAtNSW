@@ -10,17 +10,20 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EViewGroup
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
+import rod.bailey.trafficatnsw.cameras.data.XCamera
+import rod.bailey.trafficatnsw.cameras.data.deriveSuburb
+import rod.bailey.trafficatnsw.cameras.data.deriveTitle
+import rod.bailey.trafficatnsw.common.ui.IRefreshableView
 
 @EViewGroup(R.layout.list_item_camera)
 open class TrafficCameraListItemView(private val ctx: Context,
-									 var camera: TrafficCamera,
-									 private var favourite: Boolean) : FrameLayout(ctx) {
+									 var camera: XCamera,
+									 private var favourite: Boolean) : FrameLayout(ctx), IRefreshableView {
 
 	private inner class ItemClickListener : View.OnClickListener {
 		override fun onClick(v: View?) {
-			TrafficCameraImageActivity.start(ctx, camera)
+			TrafficCameraImageActivity.start(ctx, camera.id ?: "")
 		}
 	}
 
@@ -42,8 +45,8 @@ open class TrafficCameraListItemView(private val ctx: Context,
 
 	@AfterViews
 	fun afterViews() {
-		titleTextView?.text = camera.street
-		subtitleTextView?.text = camera.suburb
+		titleTextView?.text = camera.properties?.deriveTitle()
+		subtitleTextView?.text = camera.properties?.deriveSuburb()
 		setFavourite(favourite)
 		mainLayout?.setOnClickListener(ItemClickListener())
 	}
@@ -56,6 +59,11 @@ open class TrafficCameraListItemView(private val ctx: Context,
 			else
 				R.drawable.ic_star_border_black_24dp)
 		invalidate()
+	}
+
+	override fun refresh() {
+		afterViews()
+		setFavourite(favourite)
 	}
 
 	companion object {

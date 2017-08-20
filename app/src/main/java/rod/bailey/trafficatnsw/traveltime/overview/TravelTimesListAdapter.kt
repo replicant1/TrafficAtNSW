@@ -65,11 +65,13 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesStore) : BaseAdapter(), List
 
 	private fun convertHeadingListItem(convertView: View, newHeading: String): View {
 		(convertView as ListHeadingView_).headingText = newHeading
+		convertView.refresh()
 		return convertView
 	}
 
 	private fun convertTravelTimeListItem(convertView: View, newSegment: XTravelTimeSegment): View {
 		(convertView as TravelTimesListItemView_).travelTime = newSegment
+		convertView.refresh()
 		return convertView
 	}
 

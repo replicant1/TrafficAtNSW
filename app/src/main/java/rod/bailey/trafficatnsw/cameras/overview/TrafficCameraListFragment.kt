@@ -3,14 +3,18 @@ package rod.bailey.trafficatnsw.cameras.overview
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.EFragment
 import org.androidannotations.annotations.FragmentArg
+import org.androidannotations.annotations.OptionsItem
+import org.androidannotations.annotations.OptionsMenu
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.common.predicate.EmptyListEmptyMessagePredicate
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage_
@@ -21,6 +25,7 @@ import javax.inject.Inject
  * create instances of this using static create() method.
  */
 @EFragment
+@OptionsMenu(R.menu.menu_travel_times_options)
 open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 
 	init {
@@ -31,12 +36,28 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 	/** Top level layout has list with DataLicenceView in footer  */
 	private lateinit var cameraListView: ListViewWithEmptyMessage
 
+	private lateinit var mode: TrafficCameraListMode
+
 	@FragmentArg(ARG_MODE_KEY)
 	@JvmField
 	var modeKey: Int? = null
 
 	@Inject
+	lateinit var cameraCacheSingleton: TrafficCameraCacheSingleton
+
+	@Inject
 	lateinit var presenter: TrafficCameraOverviewPresenter
+
+	@OptionsItem(R.id.menu_item_refresh_travel_time_list)
+	fun loadCamerasAsync() {
+		presenter.loadCamerasAsync(activity, cameraListView)
+	}
+
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		mode = TrafficCameraListMode.values()[modeKey ?: 0]
+		cameraCacheSingleton.filter = mode.filter
+	}
 
 	override fun onCreateView(inflater: LayoutInflater,
 							  container: ViewGroup?,
@@ -47,24 +68,30 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 		cameraListView.listViewAutoHideFooter.lv_list.divider =
 			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
 		cameraListView.listViewAutoHideFooter.lv_list.dividerHeight = 2
-		presenter.onIViewCreated(this, modeKey)
+		activity.title = getString(presenter.getScreenTitleForMode(mode))
 		return cameraListView
 	}
 
-	override fun setScreenTitle(title: String) {
-		activity.title = title
-	}
-
-	override fun onDestroy() {
-		super.onDestroy()
+	override fun onPause() {
+		super.onPause()
 		presenter.onIViewDestroyed()
 	}
 
-	override fun setAdapter(adapter: TrafficCameraListAdapter) {
-		cameraListView.setAdapter(adapter)
+	override fun onResume() {
+		super.onResume()
+		presenter.onIViewCreated(this, modeKey)
+		loadCamerasAsync()
+	}
+
+	override fun refreshCameraList() {
+		Log.d(LOG_TAG, "Into refreshCameraList: d2e5699.isFavourite=${cameraCacheSingleton.getUnfilteredCamera
+		("d2e5699")?.favourite}")
+		cameraListView.setAdapter(TrafficCameraListAdapter(mode.filter))
 	}
 
 	companion object {
+		private val LOG_TAG = TrafficCameraListFragment::class.java.simpleName
+
 		/** Key for the sole argument passed to this fragment.  */
 		private const val ARG_MODE_KEY = "MODE"
 

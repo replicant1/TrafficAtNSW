@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.cameras.data.XCameraCollection
 import rod.bailey.trafficatnsw.service.IDataService
 
 import rod.bailey.trafficatnsw.hazard.data.XHazard
@@ -43,7 +44,7 @@ class TestDataService : IDataService {
 											 LOCAL_INCIDENTS_JSON_FILE)).hazards
 	}
 
-	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {
+	override fun getTrafficCameraImage(trafficCameraId: String): Bitmap? {
 		return AssetUtils.loadAssetFileAsImage(context,
 											   LOCAL_TRAFFIC_CAMERA_IMAGE)
 	}
@@ -54,5 +55,10 @@ class TestDataService : IDataService {
 		val result = MotorwayTravelTimesStore(context, motorway)
 		result.primeWithTravelTimes(times)
 		return result
+	}
+
+	override fun getTrafficCameras(): XCameraCollection? {
+		val jsonStr: String? = AssetUtils.loadAssetFileAsString(context, "cameras.json");
+		return if (jsonStr == null) null else XCameraCollection.parseCameraJson(jsonStr);
 	}
 }

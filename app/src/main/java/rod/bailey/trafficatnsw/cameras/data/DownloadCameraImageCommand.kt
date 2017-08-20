@@ -9,7 +9,7 @@ import rod.bailey.trafficatnsw.service.IDataService
  * traffic camera using the [IDataService].
  */
 class DownloadCameraImageCommand(val dataService: IDataService,
-								 val cameraId: Int) : ICommand<Bitmap?> {
+								 val cameraId: String) : ICommand<Bitmap?> {
 
 	override fun execute(): Bitmap? {
 		return dataService.getTrafficCameraImage(cameraId)

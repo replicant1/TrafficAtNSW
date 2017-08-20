@@ -27,7 +27,7 @@ class AppModule(val app: Application) {
 	@Provides
 	@Singleton
 	fun provideTrafficCameraCacheSingleton(): TrafficCameraCacheSingleton {
-		return TrafficCameraCacheSingleton()
+		return TrafficCameraCacheSingleton(TrafficAtNSWApplication.context)
 	}
 
 	@Provides
@@ -41,14 +41,6 @@ class AppModule(val app: Application) {
 	fun provideConfigSingleton(): ConfigSingleton {
 		return ConfigSingleton()
 	}
-
-//	@Provides
-//	@Singleton
-//	fun provideIDataService(): IDataService {
-//		// Use RemoteDataService to fetch from remote URL
-//		// Use TestDataService to fetch from files in the /assets directory
-//		return TestDataService()
-//	}
 
 	@Provides
 	fun provideContext(): Context = TrafficAtNSWApplication.context
