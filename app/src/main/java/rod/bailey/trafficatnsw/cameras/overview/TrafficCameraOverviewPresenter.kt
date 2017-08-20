@@ -1,6 +1,7 @@
 package rod.bailey.trafficatnsw.cameras.overview
 
 import android.content.Context
+import android.util.Log
 import io.reactivex.disposables.Disposable
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.command.CommandEngine
@@ -84,10 +85,19 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 	inner class SuccessHandler(val listener: PropertyChangeListener) : ICommandSuccessHandler {
 
 		override fun onSuccess(result: Any?) {
+			Log.d(LOG_TAG, "onSuccess: ${result}")
 			val allCameras: XCameraCollection = result as XCameraCollection
-			cameraCacheSingleton.init(ctx, allCameras)
-			cameraCacheSingleton.addPropertyChangeListener(listener)
-			view.refreshCameraList()
+			if (allCameras.cameras != null) {
+				cameraCacheSingleton.init(allCameras.cameras)
+				cameraCacheSingleton.addPropertyChangeListener(listener)
+				view.refreshCameraList()
+			} else {
+				Log.w(LOG_TAG, "allCameras.cameras was null")
+			}
 		}
+	}
+
+	companion object {
+		private val LOG_TAG = TrafficCameraOverviewPresenter::class.java.simpleName
 	}
 }

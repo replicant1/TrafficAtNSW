@@ -10,6 +10,7 @@ import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
 import java.util.*
+import javax.inject.Inject
 
 /**
  * Normally we would read this in from a JSON file, but the contents are hardcoded
@@ -25,9 +26,12 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 	}
 
 	private val support = PropertyChangeSupport(this)
-	private val filteredCamerasPerRegion = HashMap<XRegion, List<XCamera>>()
-	private val unfilteredCamerasPerRegion = HashMap<XRegion, List<XCamera>>()
-	private lateinit var ctx: Context
+	private val filteredCamerasPerRegion = HashMap<XRegion, MutableList<XCamera>>()
+	private val unfilteredCamerasPerRegion = HashMap<XRegion, MutableList<XCamera>>()
+
+	@Inject
+	@JvmField
+	var context: Context? = null
 
 	/**
 	 * Set the filter that all subsequent "get camera" operations will be filtered through
@@ -36,20 +40,44 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		get() = field
 		set(value) {
 			field = value
-			applyFilter(field)
+			applyFilter()
 		}
 
-	init {
-		initUnfiltered()
-		applyFilter(AdmitAnyTrafficCameraFilter())
+	fun init(camerasJSON: String) {
+		val allCameras: XCameraCollection = XCameraCollection.parseCameraJson(camerasJSON)
+		if (allCameras.cameras != null) {
+			init(allCameras.cameras)
+		}
 	}
 
-	fun init(ctx: Context, cameras: XCameraCollection) {
-		this.ctx = ctx
+	fun init(cameras: List<XCamera>) {
+		Log.i(LOG_TAG, "Initializing cache with ${cameras.size} cameras")
+		prime(cameras)
+		applyFilter()
 		loadFavourites()
 	}
 
-	fun getCamera(id: String): XCamera? {
+	private fun prime(allCameras: List<XCamera>) {
+		unfilteredCamerasPerRegion.clear()
+		for (camera in allCameras) {
+			val props: XCameraProperties? = camera.properties
+			if (props != null) {
+				val regionStr: String? = props.region
+				if (regionStr != null) {
+					val region = XRegion.valueOf(regionStr)
+					if (!unfilteredCamerasPerRegion.containsKey(region)) {
+						unfilteredCamerasPerRegion.put(region, LinkedList<XCamera>())
+					}
+
+					unfilteredCamerasPerRegion[region]?.add(camera)
+				}
+			}
+		}
+
+		addSelfAsListenerToAllCameras()
+	}
+
+	fun getUnfilteredCamera(id: String): XCamera? {
 		var result: XCamera? = null
 		val cameraCollections = unfilteredCamerasPerRegion.values
 		for (cameraList in cameraCollections) {
@@ -68,21 +96,12 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		return filteredCamerasPerRegion.get(region) ?: LinkedList()
 	}
 
-	private fun initUnfiltered() {
-//		unfilteredCamerasPerRegion.put(XRegion.SYD_MET, createSydMetData())
-//		unfilteredCamerasPerRegion.put(XRegion.SYD_NORTH, createSydNorthData())
-//		unfilteredCamerasPerRegion.put(XRegion.SYD_SOUTH, createSydSouthData())
-//		unfilteredCamerasPerRegion.put(XRegion.SYD_WEST, createSydWestData())
-//		unfilteredCamerasPerRegion.put(XRegion.REG_NORTH, createRegNorthData())
-//		unfilteredCamerasPerRegion.put(XRegion.REG_SOUTH, createRegSouthData())
-		// Note: There are no cameras in REG_WEST at this time
-
-		addSelfAsListenerToAllCameras()
-	}
-
 	private fun addSelfAsListenerToAllCameras() {
+		Log.d(LOG_TAG, "Into addSelfAsListenerToAllCaeras")
 		for (camerasInRegion in unfilteredCamerasPerRegion.values) {
+			Log.d(LOG_TAG, "camerasInRegion=${camerasInRegion}")
 			for (camera in camerasInRegion) {
+				Log.d(LOG_TAG, "camera=${camera}")
 				camera.addPropertyChangeListener(this)
 			}
 		}
@@ -97,7 +116,7 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		}
 
 		// Load ids of favourite cameras from prefs
-		val prefs: SharedPreferences? = ctx.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
+		val prefs: SharedPreferences? = context?.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
 		val favouriteCameraIds = prefs?.getStringSet(FAVOURITE_STATE_PREF_KEY, null)
 
 		Log.i(LOG_TAG, "Favourite cameras as loaded from prefs is: ${favouriteCameraIds}")
@@ -131,8 +150,8 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		}
 
 		// Persist ids of favourite cameras to prefs
-		val prefs = ctx.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
-		prefs.edit().putStringSet(FAVOURITE_STATE_PREF_KEY, favouriteCameraIds).commit()
+		val prefs = context?.getSharedPreferences(FAVOURITE_CAMERAS_FILE_NAME, Context.MODE_PRIVATE)
+		prefs?.edit()?.putStringSet(FAVOURITE_STATE_PREF_KEY, favouriteCameraIds)?.commit()
 	}
 
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
@@ -147,14 +166,16 @@ class TrafficCameraCacheSingleton : PropertyChangeListener {
 		support.firePropertyChange(PROPERTY_FAVOURITE_SET, null, this)
 	}
 
-	private fun applyFilter(f: ITrafficCameraFilter) {
+	private fun applyFilter() {
 		filteredCamerasPerRegion.clear()
 		for (region in unfilteredCamerasPerRegion.keys) {
-			val unfilteredCameras: List<XCamera>? = unfilteredCamerasPerRegion[region]
+			val unfilteredCameras: MutableList<XCamera>? = unfilteredCamerasPerRegion[region]
 			unfilteredCameras?.let {
-				val filteredCameras = unfilteredCameras.filter { f.admit(it) }
+				val filteredCameras: List<XCamera> = unfilteredCameras.filter { filter.admit(it) }
 				if (filteredCameras.isNotEmpty()) {
-					filteredCamerasPerRegion.put(region, filteredCameras)
+					val mutableFilteredCameras = LinkedList<XCamera>()
+					mutableFilteredCameras.addAll(filteredCameras)
+					filteredCamerasPerRegion.put(region, mutableFilteredCameras)
 				}
 			}
 		}

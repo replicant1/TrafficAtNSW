@@ -18,7 +18,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.cameras.data.XCamera;
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton;
-import rod.bailey.trafficatnsw.cameras.data.XCameraCollection;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitAnyTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitFavouritesTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter;
@@ -116,7 +115,7 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 				return false;
 			}
 		});
-		XCamera camera = cache.getCamera("1");
+		XCamera camera = cache.getUnfilteredCamera("1");
 		assertNotNull(camera);
 		assertEquals("1", camera.getId());
 		assertEquals(XRegion.SYD_MET, camera.getProperties().getRegion());
@@ -124,7 +123,7 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 
 	@Test
 	public void testMakingFavouriteSendsEventToCacheSingleton() {
-		XCamera camera = cache.getCamera("1");
+		XCamera camera = cache.getUnfilteredCamera("1");
 		final AtomicBoolean eventReceived = new AtomicBoolean(false);
 		cache.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override

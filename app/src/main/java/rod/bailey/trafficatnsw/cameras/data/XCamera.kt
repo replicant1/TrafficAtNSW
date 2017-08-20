@@ -1,5 +1,6 @@
 package rod.bailey.trafficatnsw.cameras.data
 
+import android.util.Log
 import com.google.gson.annotations.SerializedName
 import rod.bailey.trafficatnsw.hazard.data.XGeometry
 import java.beans.PropertyChangeListener
@@ -10,6 +11,7 @@ import java.io.Serializable
  * A traffic camera
  */
 data class XCamera(
+
 	@SerializedName("id")
 	val id: String?,
 
@@ -22,14 +24,21 @@ data class XCamera(
 	/** True if this camera is one of the users favourites */
 	private var favourite: Boolean = false
 
-	private val support = PropertyChangeSupport(this)
+	private var support: PropertyChangeSupport? = null
 
 	fun addPropertyChangeListener(listener: PropertyChangeListener) {
-		support.addPropertyChangeListener(listener)
+		Log.d(LOG_TAG, "Into addPCL with support=${support}")
+		if (support == null) {
+			support = PropertyChangeSupport(this)
+		}
+		support?.addPropertyChangeListener(listener)
 	}
 
 	private fun fireFavouritePropertyChangeEvent() {
-		support.firePropertyChange(PROPERTY_FAVOURITE, null, favourite)
+		if (support == null) {
+			support = PropertyChangeSupport(this)
+		}
+		support?.firePropertyChange(PROPERTY_FAVOURITE, null, favourite)
 	}
 
 	fun setFavouriteSilently(value: Boolean) {
@@ -57,6 +66,7 @@ data class XCamera(
 	}
 
 	companion object {
+		private val LOG_TAG = XCamera::class.java.simpleName
 		const val PROPERTY_FAVOURITE = "rod.bailey.trafficatnsw.extraFavourite"
 	}
 }

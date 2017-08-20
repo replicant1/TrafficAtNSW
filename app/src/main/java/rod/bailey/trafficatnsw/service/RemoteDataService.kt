@@ -51,7 +51,7 @@ class RemoteDataService : IDataService {
 	}
 
 	override fun getTrafficCameraImage(trafficCameraId: String): Bitmap? {
-		val camera: XCamera? = cameraCache.getCamera(trafficCameraId)
+		val camera: XCamera? = cameraCache.getUnfilteredCamera(trafficCameraId)
 		val urlToLoad:String? = camera?.properties?.imageURL
 		return if (urlToLoad == null) null else NetUtils.loadRemoteFileAsImage(urlToLoad)
 	}

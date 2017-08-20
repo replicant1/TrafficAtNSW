@@ -20,7 +20,7 @@ open class TrafficCameraListItemView(private val ctx: Context,
 
 	private inner class ItemClickListener : View.OnClickListener {
 		override fun onClick(v: View?) {
-			TrafficCameraImageActivity.start(ctx, camera)
+			TrafficCameraImageActivity.start(ctx, camera.id ?: "")
 		}
 	}
 
