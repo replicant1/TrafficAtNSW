@@ -5,13 +5,14 @@ import android.content.Context
 import android.content.DialogInterface
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
+import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.util.MLog
 
 /**
  * Presents the confirmation dialog shown when the user elects to add or remove
  * the present camera from their set of extraFavourite cameras.
  */
-class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
+class FavouriteCameraDialogPresenter(private val camera: XCamera) {
 
 	/**
 	 * Listens for button taps on the radio buttons
@@ -20,7 +21,7 @@ class FavouriteCameraDialogPresenter(private val camera: TrafficCamera) {
 		override fun onClick(arg0: DialogInterface, index: Int) {
 			when (index) {
 				DialogInterface.BUTTON_POSITIVE -> {
-					MLog.i(LOG_TAG, "Toggle extraFavourite state of camera " + camera.index)
+					MLog.i(LOG_TAG, "Toggle extraFavourite state of camera " + camera.id)
 					camera.isFavourite = !camera.isFavourite
 				}
 				DialogInterface.BUTTON_NEGATIVE -> {

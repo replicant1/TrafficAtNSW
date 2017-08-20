@@ -2,6 +2,7 @@ package rod.bailey.trafficatnsw.cameras.overview
 
 import android.content.Context
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.cameras.data.XCameraCollection
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.inject.Inject
@@ -31,7 +32,8 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 		val modeKeyInt: Int = initData[0] as Int
 		mode = TrafficCameraListMode.values().get(modeKeyInt)
 
-		cameraCache.init(ctx)
+		// TODO: Prime cameraCache with loaded response.
+		cameraCache.init(ctx, XCameraCollection(emptyList()))
 		cameraCache.addPropertyChangeListener(this)
 
 		view.setScreenTitle(mode.actionBarTitle)

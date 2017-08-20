@@ -6,6 +6,7 @@ import rod.bailey.trafficatnsw.app.ConfigSingleton
 import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
 import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.traveltime.data.*
@@ -48,9 +49,9 @@ class RemoteDataService : IDataService {
 		return result
 	}
 
-	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {
-		val camera: TrafficCamera? = cameraCache.getCamera(trafficCameraId)
-		val urlToLoad:String? = camera?.url
+	override fun getTrafficCameraImage(trafficCameraId: String): Bitmap? {
+		val camera: XCamera? = cameraCache.getCamera(trafficCameraId)
+		val urlToLoad:String? = camera?.properties?.imageURL
 		return if (urlToLoad == null) null else NetUtils.loadRemoteFileAsImage(urlToLoad)
 	}
 }

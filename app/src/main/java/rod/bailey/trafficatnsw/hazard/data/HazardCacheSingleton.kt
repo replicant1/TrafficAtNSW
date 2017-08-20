@@ -23,7 +23,6 @@ class HazardCacheSingleton {
 	private val unfilteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
 	private val filteredHazardsPerRegion = HashMap<XRegion, MutableList<XHazard>>()
 
-	@Synchronized
 	fun init(hazardsJSON: String) {
 		val allHazards: List<XHazard>? = XHazardCollection.Companion.parseIncidentJson(hazardsJSON).hazards
 		if (allHazards != null) {
@@ -31,7 +30,6 @@ class HazardCacheSingleton {
 		}
 	}
 
-	@Synchronized
 	fun init(hazards: List<XHazard>) {
 		prime(hazards)
 		applyFilter()

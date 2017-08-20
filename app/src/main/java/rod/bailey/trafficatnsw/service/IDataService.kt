@@ -13,5 +13,5 @@ import rod.bailey.trafficatnsw.traveltime.data.MotorwayConfig
 interface IDataService {
 	fun getHazards(): List<XHazard>?
 	fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore?
-	fun getTrafficCameraImage(trafficCameraId: Int): Bitmap?
+	fun getTrafficCameraImage(trafficCameraId: String): Bitmap?
 }

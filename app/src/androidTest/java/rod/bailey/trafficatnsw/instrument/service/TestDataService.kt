@@ -43,7 +43,7 @@ class TestDataService : IDataService {
 											 LOCAL_INCIDENTS_JSON_FILE)).hazards
 	}
 
-	override fun getTrafficCameraImage(trafficCameraId: Int): Bitmap? {
+	override fun getTrafficCameraImage(trafficCameraId: String): Bitmap? {
 		return AssetUtils.loadAssetFileAsImage(context,
 											   LOCAL_TRAFFIC_CAMERA_IMAGE)
 	}

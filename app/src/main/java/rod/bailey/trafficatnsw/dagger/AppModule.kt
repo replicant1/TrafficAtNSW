@@ -42,14 +42,6 @@ class AppModule(val app: Application) {
 		return ConfigSingleton()
 	}
 
-//	@Provides
-//	@Singleton
-//	fun provideIDataService(): IDataService {
-//		// Use RemoteDataService to fetch from remote URL
-//		// Use TestDataService to fetch from files in the /assets directory
-//		return TestDataService()
-//	}
-
 	@Provides
 	fun provideContext(): Context = TrafficAtNSWApplication.context
 

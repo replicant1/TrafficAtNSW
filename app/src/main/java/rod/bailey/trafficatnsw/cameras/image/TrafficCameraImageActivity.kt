@@ -20,6 +20,7 @@ import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
 import rod.bailey.trafficatnsw.cameras.data.DownloadCameraImageCommand
 import rod.bailey.trafficatnsw.cameras.data.TrafficCamera
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
+import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.service.IDataService
 import javax.inject.Inject
 
@@ -58,6 +59,10 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	@ViewById(R.id.tv_camera_description)
 	@JvmField
 	var descriptionTextView: AppCompatTextView? = null
+
+	@Extra("cameraId")
+	@JvmField
+	var extraCameraId: String? = null
 
 	@Extra("index")
 	@JvmField
@@ -117,7 +122,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 
 	private fun loadCameraImageAsync() {
 		disposable = CommandEngine.execute(
-			DownloadCameraImageCommand(dataService, extraIndex ?: 0),
+			DownloadCameraImageCommand(dataService, extraCameraId ?: ""),
 			DefaultProgressMonitor(this, getString(R.string.camera_image_loading_msg)),
 			SuccessHandler(),
 			DefaultErrorHandler(this, getString(R.string.camera_image_load_failure_dialog_msg))
@@ -135,7 +140,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 
 	@OptionsItem(R.id.toggle_camera_favourite)
 	fun toggleFavourite() {
-		val camera: TrafficCamera? = cameraCache.getCamera(extraIndex ?: 0)
+		val camera: XCamera? = cameraCache.getCamera(extraCameraId ?: "")
 		if (camera != null) {
 			val pres = FavouriteCameraDialogPresenter(camera)
 			val dialog = pres.build(this)
