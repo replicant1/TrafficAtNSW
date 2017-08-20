@@ -4,6 +4,6 @@ import rod.bailey.trafficatnsw.cameras.data.XCamera
 
 class AdmitFavouritesTrafficCameraFilter : ITrafficCameraFilter {
 	override fun admit(camera: XCamera): Boolean {
-		return camera.isFavourite
+		return camera.favourite
 	}
 }

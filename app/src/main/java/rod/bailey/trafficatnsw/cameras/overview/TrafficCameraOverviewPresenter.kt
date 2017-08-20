@@ -79,6 +79,7 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent?) {
+		Log.d(LOG_TAG, "Into TCOverviewPresenter. About to call view.refreshCameraList()")
 		view.refreshCameraList()
 	}
 
@@ -89,7 +90,7 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 			val allCameras: XCameraCollection = result as XCameraCollection
 			if (allCameras.cameras != null) {
 				cameraCacheSingleton.init(allCameras.cameras)
-				cameraCacheSingleton.addPropertyChangeListener(listener)
+				cameraCacheSingleton.setPropertyChangeListener(listener)
 				view.refreshCameraList()
 			} else {
 				Log.w(LOG_TAG, "allCameras.cameras was null")

@@ -27,7 +27,7 @@ class AppModule(val app: Application) {
 	@Provides
 	@Singleton
 	fun provideTrafficCameraCacheSingleton(): TrafficCameraCacheSingleton {
-		return TrafficCameraCacheSingleton()
+		return TrafficCameraCacheSingleton(TrafficAtNSWApplication.context)
 	}
 
 	@Provides

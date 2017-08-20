@@ -89,7 +89,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 				subtitleTextView?.text = props.deriveSuburb()
 				descriptionTextView?.text = props.view
 
-				updateActionBarPerFavouriteStatus(camera.isFavourite)
+				updateActionBarPerFavouriteStatus(camera.favourite)
 				refresh()
 			} else {
 				Log.w(LOG_TAG, "Camera id ${cameraId} has null properties")
@@ -129,7 +129,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 			val pres = FavouriteCameraDialogPresenter(cameraVal)
 			val dialog = pres.build(this)
 			dialog.setOnDismissListener {
-				updateActionBarPerFavouriteStatus(cameraVal.isFavourite)
+				updateActionBarPerFavouriteStatus(cameraVal.favourite)
 			}
 			dialog.show()
 		}
@@ -145,7 +145,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
 		val camera = cameraCache.getUnfilteredCamera(cameraId ?: "")
-		updateActionBarPerFavouriteStatus(camera?.isFavourite ?: false)
+		updateActionBarPerFavouriteStatus(camera?.favourite ?: false)
 		return true
 	}
 

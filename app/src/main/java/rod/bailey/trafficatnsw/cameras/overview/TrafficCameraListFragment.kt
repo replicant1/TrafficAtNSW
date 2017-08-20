@@ -3,6 +3,7 @@ package rod.bailey.trafficatnsw.cameras.overview
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -83,10 +84,14 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 	}
 
 	override fun refreshCameraList() {
+		Log.d(LOG_TAG, "Into refreshCameraList: d2e5699.isFavourite=${cameraCacheSingleton.getUnfilteredCamera
+		("d2e5699")?.favourite}")
 		cameraListView.setAdapter(TrafficCameraListAdapter(mode.filter))
 	}
 
 	companion object {
+		private val LOG_TAG = TrafficCameraListFragment::class.java.simpleName
+
 		/** Key for the sole argument passed to this fragment.  */
 		private const val ARG_MODE_KEY = "MODE"
 

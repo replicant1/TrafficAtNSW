@@ -48,7 +48,8 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 
 	private fun createTrafficCameraListItem(ctx: Context,
 											camera: XCamera): TrafficCameraListItemView {
-		val item = TrafficCameraListItemView_.build(ctx, camera, camera.isFavourite)
+		Log.d(LOG_TAG, "Creating camera list Item ${camera.id} fav=${camera.favourite}")
+		val item = TrafficCameraListItemView_.build(ctx, camera, camera.favourite)
 		item.isFocusable = true
 		return item
 	}
@@ -84,6 +85,7 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	}
 
 	private fun convertTrafficCameraListItem(convertView: View, newCameraData: XCamera): View {
+		Log.d(LOG_TAG, "Converting camera ${newCameraData.id} fav=${newCameraData.favourite}")
 		(convertView as TrafficCameraListItemView_).camera = newCameraData
 		convertView.refresh()
 		return convertView

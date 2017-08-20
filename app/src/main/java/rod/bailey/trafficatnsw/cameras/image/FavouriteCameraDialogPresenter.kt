@@ -20,8 +20,9 @@ class FavouriteCameraDialogPresenter(private val camera: XCamera) {
 		override fun onClick(arg0: DialogInterface, index: Int) {
 			when (index) {
 				DialogInterface.BUTTON_POSITIVE -> {
-					MLog.i(LOG_TAG, "Toggle extraFavourite state of camera " + camera.id)
-					camera.isFavourite = !camera.isFavourite
+
+					camera.favourite = !camera.favourite
+					MLog.i(LOG_TAG, "Toggle Favourite state of camera ${camera.id} to ${camera.favourite}")
 				}
 				DialogInterface.BUTTON_NEGATIVE -> {
 					// Empty
@@ -31,7 +32,7 @@ class FavouriteCameraDialogPresenter(private val camera: XCamera) {
 	}
 
 	init {
-		MLog.i(LOG_TAG, "IPresenter created for camera with extraFavourite status " + camera.isFavourite)
+		MLog.i(LOG_TAG, "IPresenter created for camera with extraFavourite status " + camera.favourite)
 	}
 
 	fun build(ctx: Context): AlertDialog {
@@ -39,13 +40,13 @@ class FavouriteCameraDialogPresenter(private val camera: XCamera) {
 		val builder = AlertDialog.Builder(ctx)
 		builder.setTitle(ctx.getString(R.string.camera_favourite_confirmation_dialog_title))
 		builder.setPositiveButton(
-			if (camera.isFavourite)
+			if (camera.favourite)
 				ctx.getString(R.string.camera_favourite_confirmation_dialog_remove_button)
 			else
 				ctx.getString(R.string.camera_favourite_confirmation_dialog_add_button), listener)
 		builder.setNegativeButton(ctx.getString(R.string.negative_dialog_button), listener)
 		builder.setMessage(
-			if (camera.isFavourite)
+			if (camera.favourite)
 				ctx.getString(R.string.camera_unfavourite_confirmation_dialog_msg)
 			else
 				ctx.getString(R.string.camera_favourite_confirmation_dialog_msg))

@@ -1,8 +1,10 @@
 package rod.bailey.trafficatnsw.cameras.data
 
 import android.util.Log
+import android.util.Property
 import com.google.gson.annotations.SerializedName
 import rod.bailey.trafficatnsw.hazard.data.XGeometry
+import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
 import java.io.Serializable
@@ -21,33 +23,32 @@ data class XCamera(
 	@SerializedName("properties")
 	val properties: XCameraProperties?) : Comparable<XCamera>, Serializable {
 
-	/** True if this camera is one of the users favourites */
-	private var favourite: Boolean = false
+	private var propertyChangeListener: PropertyChangeListener? = null
 
-	private var support: PropertyChangeSupport? = null
-
-	fun addPropertyChangeListener(listener: PropertyChangeListener) {
-		if (support == null) {
-			support = PropertyChangeSupport(this)
-		}
-		support?.addPropertyChangeListener(listener)
+	fun setPropertyChangeListener(listener: PropertyChangeListener) {
+		propertyChangeListener = listener
 	}
 
 	private fun fireFavouritePropertyChangeEvent() {
-		if (support == null) {
-			support = PropertyChangeSupport(this)
-		}
-		support?.firePropertyChange(PROPERTY_FAVOURITE, null, favourite)
+		propertyChangeListener?.propertyChange(
+			PropertyChangeEvent(this, PROPERTY_FAVOURITE, null,  favourite))
 	}
 
 	fun setFavouriteSilently(value: Boolean) {
+		val listener = propertyChangeListener
+		propertyChangeListener = null
+
 		favourite = value
+
+		if (listener != null) {
+			propertyChangeListener = listener
+		}
 	}
 
-	var isFavourite: Boolean
-		get() = favourite
+	var favourite: Boolean = false
+		get() = field
 		set(value) {
-			favourite = value
+			field = value
 			fireFavouritePropertyChangeEvent()
 		}
 
