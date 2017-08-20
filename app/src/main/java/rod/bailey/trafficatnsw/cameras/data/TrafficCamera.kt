@@ -14,6 +14,7 @@ import java.beans.PropertyChangeSupport
  * @param region RMS region in which the camera resides
  * @param index Ordinal of this camera - serves as an id
  */
+@Deprecated("")
 class TrafficCamera(val street: String?, val suburb: String?, val description: String?,
 					val url: String?, val region: XRegion?,
 					val index: Int) : Comparable<TrafficCamera> {

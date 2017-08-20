@@ -33,7 +33,7 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 		mode = TrafficCameraListMode.values().get(modeKeyInt)
 
 		// TODO: Prime cameraCache with loaded response.
-		cameraCache.init(ctx, XCameraCollection(emptyList()))
+		cameraCache.init(ctx)
 		cameraCache.addPropertyChangeListener(this)
 
 		view.setScreenTitle(mode.actionBarTitle)

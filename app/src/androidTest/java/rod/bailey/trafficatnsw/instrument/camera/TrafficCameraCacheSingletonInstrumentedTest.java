@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import rod.bailey.trafficatnsw.app.MainActivity_;
-import rod.bailey.trafficatnsw.cameras.data.TrafficCamera;
+import rod.bailey.trafficatnsw.cameras.data.XCamera;
 import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitAnyTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitFavouritesTrafficCameraFilter;
@@ -89,11 +89,11 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 	@Test
 	public void testAdmitFavouritesFilter() {
 		cache.setFilter(new AdmitFavouritesTrafficCameraFilter());
-		List<TrafficCamera> cameras = cache.getCamerasForRegion(XRegion.SYD_MET);
+		List<XCamera> cameras = cache.getCamerasForRegion(XRegion.SYD_MET);
 
 		// Set the first camera in SYD_MET to a favouritd
 		boolean favouriteSet = false;
-		for (TrafficCamera camera : cameras) {
+		for (XCamera camera : cameras) {
 			if (!favouriteSet) {
 				camera.setFavourite(true);
 				favouriteSet = true;
@@ -101,7 +101,7 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 		}
 
 		// We now know there is at least 1 favourite in SYD_MET
-		List<TrafficCamera> favouriteCameras = cache.getCamerasForRegion(XRegion.SYD_MET);
+		List<XCamera> favouriteCameras = cache.getCamerasForRegion(XRegion.SYD_MET);
 		assertNotNull(favouriteCameras);
 		assertTrue(favouriteCameras.size() >= 1);
 	}
@@ -110,19 +110,19 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 	public void testGetCameraIgnoresFilter() {
 		cache.setFilter(new ITrafficCameraFilter() {
 			@Override
-			public boolean admit(TrafficCamera camera) {
+			public boolean admit(XCamera camera) {
 				return false;
 			}
 		});
-		TrafficCamera camera = cache.getCamera(1);
+		XCamera camera = cache.getCamera("1");
 		assertNotNull(camera);
-		assertEquals(1, camera.getIndex());
-		assertEquals(XRegion.SYD_MET, camera.getRegion());
+		assertEquals("1", camera.getId());
+		assertEquals(XRegion.SYD_MET, camera.getProperties().getRegion());
 	}
 
 	@Test
 	public void testMakingFavouriteSendsEventToCacheSingleton() {
-		TrafficCamera camera = cache.getCamera(1);
+		XCamera camera = cache.getCamera("1");
 		final AtomicBoolean eventReceived = new AtomicBoolean(false);
 		cache.addPropertyChangeListener(new PropertyChangeListener() {
 			@Override
