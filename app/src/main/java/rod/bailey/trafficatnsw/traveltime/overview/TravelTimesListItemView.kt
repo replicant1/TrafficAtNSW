@@ -12,10 +12,11 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EViewGroup
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
+import rod.bailey.trafficatnsw.common.ui.IRefreshableView
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment
 
 @EViewGroup(R.layout.list_item_travel_time)
-open class TravelTimesListItemView(val ctx: Context, var travelTime: XTravelTimeSegment) : FrameLayout(ctx) {
+open class TravelTimesListItemView(val ctx: Context, var travelTime: XTravelTimeSegment) : FrameLayout(ctx), IRefreshableView {
 
 	private inner class ItemOnClickListener : View.OnClickListener {
 		override fun onClick(view: View) {
@@ -79,5 +80,9 @@ open class TravelTimesListItemView(val ctx: Context, var travelTime: XTravelTime
 
 		leftColView?.invalidate()
 		rightColView?.invalidate()
+	}
+
+	override fun refresh() {
+		afterViews()
 	}
 }

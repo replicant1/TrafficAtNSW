@@ -14,11 +14,12 @@ import rod.bailey.trafficatnsw.cameras.image.TrafficCameraImageActivity
 import rod.bailey.trafficatnsw.cameras.data.XCamera
 import rod.bailey.trafficatnsw.cameras.data.deriveSuburb
 import rod.bailey.trafficatnsw.cameras.data.deriveTitle
+import rod.bailey.trafficatnsw.common.ui.IRefreshableView
 
 @EViewGroup(R.layout.list_item_camera)
 open class TrafficCameraListItemView(private val ctx: Context,
 									 var camera: XCamera,
-									 private var favourite: Boolean) : FrameLayout(ctx) {
+									 private var favourite: Boolean) : FrameLayout(ctx), IRefreshableView {
 
 	private inner class ItemClickListener : View.OnClickListener {
 		override fun onClick(v: View?) {
@@ -58,6 +59,11 @@ open class TrafficCameraListItemView(private val ctx: Context,
 			else
 				R.drawable.ic_star_border_black_24dp)
 		invalidate()
+	}
+
+	override fun refresh() {
+		afterViews()
+		setFavourite(favourite)
 	}
 
 	companion object {

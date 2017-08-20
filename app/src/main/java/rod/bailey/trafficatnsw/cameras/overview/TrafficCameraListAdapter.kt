@@ -64,8 +64,8 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		val listItem = listData[position]
 
-		return if (convertView == null) {
-			when (listItem) {
+		 return if (convertView == null) {
+			return when (listItem) {
 				is XRegion -> createHeadingListItem(listItem, parent)
 				else -> createTrafficCameraListItem(parent.context, listItem as XCamera)
 			}
@@ -79,11 +79,13 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 
 	private fun convertHeadingListItem(convertView: View, newHeadingData: XRegion): View {
 		(convertView as ListHeadingView_).headingText = newHeadingData.description
+		convertView.refresh()
 		return convertView
 	}
 
 	private fun convertTrafficCameraListItem(convertView: View, newCameraData: XCamera): View {
 		(convertView as TrafficCameraListItemView_).camera = newCameraData
+		convertView.refresh()
 		return convertView
 	}
 
