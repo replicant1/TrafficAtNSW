@@ -10,8 +10,10 @@ import rod.bailey.trafficatnsw.cameras.data.XCameraCollection
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.traveltime.data.*
-import rod.bailey.trafficatnsw.util.NetUtils
 import rod.bailey.trafficatnsw.util.assetFileAsString
+import rod.bailey.trafficatnsw.util.loadFile
+import rod.bailey.trafficatnsw.util.loadImage
+import java.net.URL
 import javax.inject.Inject
 
 /**
@@ -34,13 +36,13 @@ class RemoteDataService : IDataService {
 	}
 
 	override fun getHazards(): List<XHazard>? {
-		val jsonStr: String? = NetUtils.loadRemoteFileAsString(config.remoteIncidentsJSONFile())
+		val jsonStr: String? = URL(config.remoteIncidentsJSONFile()).loadFile()
 		return if (jsonStr == null) null else  XHazardCollection.Companion.parseIncidentJson(jsonStr).hazards
 	}
 
 	override fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore? {
 		var result: MotorwayTravelTimesStore? = null
-		val jsonStr: String? = NetUtils.loadRemoteFileAsString(motorway.remoteJsonUrl)
+		val jsonStr: String? = URL(motorway.remoteJsonUrl).loadFile()
 
 		if (jsonStr != null) {
 			val tts = XTravelTimeCollection.Companion.parseTravelTimesJson(jsonStr)
@@ -53,7 +55,7 @@ class RemoteDataService : IDataService {
 	override fun getTrafficCameraImage(trafficCameraId: String): Bitmap? {
 		val camera: XCamera? = cameraCache.getUnfilteredCamera(trafficCameraId)
 		val urlToLoad:String? = camera?.properties?.imageURL
-		return if (urlToLoad == null) null else NetUtils.loadRemoteFileAsImage(urlToLoad)
+		return if (urlToLoad == null) null else URL(urlToLoad).loadImage()
 	}
 
 	override fun getTrafficCameras(): XCameraCollection? {
