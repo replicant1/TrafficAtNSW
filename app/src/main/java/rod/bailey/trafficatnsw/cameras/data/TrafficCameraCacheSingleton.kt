@@ -3,21 +3,18 @@ package rod.bailey.trafficatnsw.cameras.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
-import android.util.Property
 import rod.bailey.trafficatnsw.cameras.filter.AdmitAnyTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.hazard.data.XRegion
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
-import java.beans.PropertyChangeSupport
 import java.util.*
-import javax.inject.Inject
 
 /**
  * Normally we would read this in from a JSON file, but the contents are hardcoded
  * here for expediency. Always inject this so it remains a singleton.
  */
-class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
+class TrafficCameraCacheSingleton(ctx: Context) : PropertyChangeListener {
 	private val prefs: SharedPreferences
 
 	init {
@@ -171,7 +168,7 @@ class TrafficCameraCacheSingleton(ctx: Context): PropertyChangeListener {
 
 	private fun fireFavouritePropertyChangeEvent() {
 		propertyChangeListener?.propertyChange(
-			PropertyChangeEvent(this, PROPERTY_FAVOURITE_SET, null, true))
+				PropertyChangeEvent(this, PROPERTY_FAVOURITE_SET, null, true))
 	}
 
 	private fun applyFilter() {
