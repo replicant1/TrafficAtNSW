@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
 import io.reactivex.disposables.Disposable
 import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
@@ -126,12 +127,10 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	fun toggleFavourite() {
 		val cameraVal = cameraCache.getUnfilteredCamera(cameraId ?: "")
 		cameraVal?.let {
-			val pres = FavouriteCameraDialogPresenter(cameraVal)
-			val dialog = pres.build(this)
-			dialog.setOnDismissListener {
-				updateActionBarPerFavouriteStatus(cameraVal.favourite)
-			}
-			dialog.show()
+			cameraVal.favourite = !cameraVal.favourite
+			updateActionBarPerFavouriteStatus(cameraVal.favourite)
+			Toast.makeText(this, if (cameraVal.favourite) R.string.camera_favourites_added
+					else R.string.camera_favourites_removed, Toast.LENGTH_SHORT).show()
 		}
 	}
 

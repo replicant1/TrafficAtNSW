@@ -24,4 +24,6 @@
     <string name="camera_list_empty_favourites">You have no Favourite cameras.</string>
     <string name="camera_list_empty_regional">There are no Regional cameras</string>
     <string name="camera_list_empty_sydney">There are no Sydney cameras</string>
+    <string name="camera_favourites_added">Camera added to Favourites</string>
+    <string name="camera_favourites_removed">Camera removed from Favourites</string>
 </resources>
