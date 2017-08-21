@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatTextView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import io.reactivex.disposables.Disposable
@@ -87,9 +88,17 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 			val props: XCameraProperties? = camera.properties
 			if (props != null) {
 				titleTextView?.text = props.deriveTitle()
-				subtitleTextView?.text = props.deriveSuburb()
-				descriptionTextView?.text = props.view
 
+				val suburbStr: String? = props.deriveSuburb()
+				if (suburbStr == null) {
+					subtitleTextView?.visibility = View.GONE
+				}
+				else {
+					subtitleTextView?.text = suburbStr
+					subtitleTextView?.visibility = View.VISIBLE
+				}
+
+				descriptionTextView?.text = props.view
 				updateActionBarPerFavouriteStatus(camera.favourite)
 				refresh()
 			} else {
