@@ -13,16 +13,14 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
 import java.io.IOException;
-import java.util.List;
 
 import rod.bailey.trafficatnsw.app.MainActivity_;
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton;
-import rod.bailey.trafficatnsw.hazard.data.XHazard;
 import rod.bailey.trafficatnsw.hazard.data.XRegion;
 import rod.bailey.trafficatnsw.hazard.filter.AdmitAnyHazardFilter;
 import rod.bailey.trafficatnsw.hazard.filter.AdmitRegionalHazardFilter;
 import rod.bailey.trafficatnsw.hazard.filter.AdmitSydneyHazardFilter;
-import rod.bailey.trafficatnsw.util.AssetUtils;
+import rod.bailey.trafficatnsw.util.ContextExtensionsKt;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -47,7 +45,7 @@ public class HazardCacheSingletonInstrumentedTest {
 	public void setup() throws IOException {
 		cache = new HazardCacheSingleton();
 		Context appContext = InstrumentationRegistry.getContext();
-		String jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
+		String jsonString = ContextExtensionsKt.assetFileAsString(appContext, JSON_FILE);
 		cache.init(jsonString);
 	}
 

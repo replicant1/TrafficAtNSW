@@ -20,7 +20,7 @@ import rod.bailey.trafficatnsw.hazard.data.XHazardCollection;
 import rod.bailey.trafficatnsw.hazard.data.XLane;
 import rod.bailey.trafficatnsw.hazard.data.XProperties;
 import rod.bailey.trafficatnsw.hazard.data.XRoad;
-import rod.bailey.trafficatnsw.util.AssetUtils;
+import rod.bailey.trafficatnsw.util.ContextExtensionsKt;
 
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
@@ -46,7 +46,7 @@ public class ParseIncident1InstrumentedTest {
 	@Test
 	public void setup00() throws IOException {
 		Context appContext = InstrumentationRegistry.getContext();
-		jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
+		jsonString = ContextExtensionsKt.assetFileAsString(appContext, JSON_FILE);
 	}
 
 	@Test

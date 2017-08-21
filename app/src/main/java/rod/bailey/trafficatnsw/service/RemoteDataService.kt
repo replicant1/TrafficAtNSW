@@ -10,8 +10,8 @@ import rod.bailey.trafficatnsw.cameras.data.XCameraCollection
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.traveltime.data.*
-import rod.bailey.trafficatnsw.util.AssetUtils
 import rod.bailey.trafficatnsw.util.NetUtils
+import rod.bailey.trafficatnsw.util.assetFileAsString
 import javax.inject.Inject
 
 /**
@@ -57,7 +57,7 @@ class RemoteDataService : IDataService {
 	}
 
 	override fun getTrafficCameras(): XCameraCollection? {
-		val jsonStr: String? = AssetUtils.loadAssetFileAsString(context, "cameras.json");
+		val jsonStr: String? = context.assetFileAsString("cameras.json")
 		return if (jsonStr == null) null else XCameraCollection.parseCameraJson(jsonStr);
 	}
 }

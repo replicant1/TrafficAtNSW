@@ -26,7 +26,7 @@ import rod.bailey.trafficatnsw.traveltime.data.MotorwayTravelTimesStore;
 import rod.bailey.trafficatnsw.traveltime.data.SegmentId;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeCollection;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment;
-import rod.bailey.trafficatnsw.util.AssetUtils;
+import rod.bailey.trafficatnsw.util.ContextExtensionsKt;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -66,7 +66,7 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 	@Test
 	public void setup02() throws IOException {
 		// JSON is loaded from the *instrumentation* context, as data file is in the 'androidTest' dir
-		String jsonStr = AssetUtils.INSTANCE.loadAssetFileAsString(InstrumentationRegistry.getContext(), JSON_FILE);
+		String jsonStr = ContextExtensionsKt.assetFileAsString(InstrumentationRegistry.getContext(), JSON_FILE);
 		List<XTravelTimeSegment> times = XTravelTimeCollection.Companion.parseTravelTimesJson(jsonStr).getTravelTimes();
 		assertFalse(store.isPrimed());
 		store.primeWithTravelTimes(times);
@@ -105,7 +105,7 @@ public class MotorwayTravelTimesStoreInstrumentedTest {
 		// Exclusion states now persisted to shared prefs in target context
 
 		// Prime new store with data from instrumented context
-		String jsonStr = AssetUtils.INSTANCE.loadAssetFileAsString(InstrumentationRegistry.getContext(), JSON_FILE);
+		String jsonStr = ContextExtensionsKt.assetFileAsString(InstrumentationRegistry.getContext(), JSON_FILE);
 
 		// Create a new store in target context
 		MotorwayConfig config = new MotorwayConfigRegistry().getM1Config();

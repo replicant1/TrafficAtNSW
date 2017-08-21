@@ -18,7 +18,7 @@ import rod.bailey.trafficatnsw.cameras.data.XCamera;
 import rod.bailey.trafficatnsw.cameras.data.XCameraCollection;
 import rod.bailey.trafficatnsw.cameras.data.XCameraProperties;
 import rod.bailey.trafficatnsw.instrument.util.TestUtils;
-import rod.bailey.trafficatnsw.util.AssetUtils;
+import rod.bailey.trafficatnsw.util.ContextExtensionsKt;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -42,7 +42,7 @@ public class ParseCamerasInstrumentedTest {
 	@Test
 	public void setup00() throws IOException {
 		Context appContext = InstrumentationRegistry.getTargetContext();
-		jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
+		jsonString = ContextExtensionsKt.assetFileAsString(appContext, JSON_FILE);
 	}
 
 	@Test

@@ -11,7 +11,8 @@ import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XHazardCollection
 import rod.bailey.trafficatnsw.instrument.dagger.TestComponent
 import rod.bailey.trafficatnsw.traveltime.data.*
-import rod.bailey.trafficatnsw.util.AssetUtils
+import rod.bailey.trafficatnsw.util.assetFileAsImage
+import rod.bailey.trafficatnsw.util.assetFileAsString
 import javax.inject.Inject
 
 /**
@@ -40,17 +41,15 @@ class TestDataService : IDataService {
 
 	override fun getHazards(): List<XHazard>? {
 		return XHazardCollection.Companion.parseIncidentJson(
-			AssetUtils.loadAssetFileAsString(context,
-											 LOCAL_INCIDENTS_JSON_FILE)).hazards
+			context.assetFileAsString(LOCAL_INCIDENTS_JSON_FILE)).hazards
 	}
 
 	override fun getTrafficCameraImage(trafficCameraId: String): Bitmap? {
-		return AssetUtils.loadAssetFileAsImage(context,
-											   LOCAL_TRAFFIC_CAMERA_IMAGE)
+		return context.assetFileAsImage(LOCAL_TRAFFIC_CAMERA_IMAGE)
 	}
 
 	override fun getMotorwayTravelTimes(motorway: MotorwayConfig): MotorwayTravelTimesStore? {
-		val jsonStr:String = AssetUtils.loadAssetFileAsString(context, motorway.localJsonFileName)
+		val jsonStr:String = context.assetFileAsString(motorway.localJsonFileName)
 		val times: List<XTravelTimeSegment> = XTravelTimeCollection.Companion.parseTravelTimesJson(jsonStr).travelTimes
 		val result = MotorwayTravelTimesStore(context, motorway)
 		result.primeWithTravelTimes(times)
@@ -58,7 +57,7 @@ class TestDataService : IDataService {
 	}
 
 	override fun getTrafficCameras(): XCameraCollection? {
-		val jsonStr: String? = AssetUtils.loadAssetFileAsString(context, "cameras.json");
+		val jsonStr: String? = context.assetFileAsString("cameras.json");
 		return if (jsonStr == null) null else XCameraCollection.parseCameraJson(jsonStr);
 	}
 }

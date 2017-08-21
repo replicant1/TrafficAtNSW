@@ -19,7 +19,7 @@ import rod.bailey.trafficatnsw.hazard.data.XGeometry;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeCollection;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeProperties;
 import rod.bailey.trafficatnsw.traveltime.data.XTravelTimeSegment;
-import rod.bailey.trafficatnsw.util.AssetUtils;
+import rod.bailey.trafficatnsw.util.ContextExtensionsKt;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -45,7 +45,7 @@ public class ParseTravelTimes1InstrumentedTest {
 	@Test
 	public void setup00() throws IOException {
 		Context appContext = InstrumentationRegistry.getContext();
-		jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(appContext, JSON_FILE);
+		jsonString = ContextExtensionsKt.assetFileAsString(appContext, JSON_FILE);
 	}
 
 	@Test

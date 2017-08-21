@@ -1,6 +1,5 @@
 package rod.bailey.trafficatnsw.instrument.camera;
 
-import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -28,7 +27,7 @@ import rod.bailey.trafficatnsw.cameras.filter.AdmitRegionalTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.AdmitSydneyTrafficCameraFilter;
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter;
 import rod.bailey.trafficatnsw.hazard.data.XRegion;
-import rod.bailey.trafficatnsw.util.AssetUtils;
+import rod.bailey.trafficatnsw.util.ContextExtensionsKt;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -54,7 +53,7 @@ public class TrafficCameraCacheSingletonInstrumentedTest {
 		cache = new TrafficCameraCacheSingleton(InstrumentationRegistry.getTargetContext());
 
 		// Use target context as cameras.json is NOT in the androidTest dir
-		String jsonString = AssetUtils.INSTANCE.loadAssetFileAsString(
+		String jsonString = ContextExtensionsKt.assetFileAsString(
 				InstrumentationRegistry.getTargetContext(), JSON_FILE);
 		cache.init(jsonString);
 	}
