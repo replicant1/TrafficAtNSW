@@ -18,6 +18,7 @@
         android:id="@+id/iv_camera_favourite_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_half_std"
         android:src="@drawable/ic_star_black_24dp"/>
 
     <LinearLayout
