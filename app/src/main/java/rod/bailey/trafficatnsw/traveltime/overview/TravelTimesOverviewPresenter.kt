@@ -51,7 +51,6 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 	private fun lazyInitMotorwayConfig() {
 		motorwayConfig = when (motorway) {
 			Motorway.M1 -> motorwayRegistry.m1Config
-			Motorway.M2 -> motorwayRegistry.m2Config
 			Motorway.M4 -> motorwayRegistry.m4Config
 			Motorway.M7 -> motorwayRegistry.m7Config
 		}

@@ -7,7 +7,5 @@ import rod.bailey.trafficatnsw.app.mvp.IView
  */
 interface ITrafficCameraOverviewView : IView {
 
-	fun setAdapter(adapter: TrafficCameraListAdapter)
-
-	fun setScreenTitle(title: String)
+	fun refreshCameraList()
 }

@@ -12,12 +12,13 @@
     android:paddingLeft="@dimen/margin_std"
     android:paddingRight="@dimen/margin_std">
 
-    <!-- Icon that is a star 'extraFavourite' icon -->
+    <!-- Icon that is a star 'Favourite' icon -->
 
     <ImageView
         android:id="@+id/iv_camera_favourite_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/margin_half_std"
         android:src="@drawable/ic_star_black_24dp"/>
 
     <LinearLayout
@@ -26,7 +27,7 @@
         android:layout_marginLeft="@dimen/margin_std"
         android:orientation="vertical">
 
-        <!-- Line 1  -->
+        <!-- Line 1 : Title -->
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_camera_list_item_line_1"
@@ -40,7 +41,7 @@
             android:textSize="16sp"
             tools:text="Line One Twas Brillig and the slithy tove did gyre and gymbal"/>
 
-        <!-- Line 2 is vertically centered in the parent -->
+        <!-- Line 2: Suburb is vertically centered in the parent -->
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_camera_list_item_line_2"
@@ -53,6 +54,7 @@
             android:singleLine="true"
             android:textColor="@color/text_54_percent_black"
             android:textSize="14sp"
+            android:visibility="visible"
             tools:text="Line Two Twas Brillig and the slithy tove did gyre and gymbal"/>
 
     </LinearLayout>

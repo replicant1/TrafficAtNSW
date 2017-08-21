@@ -43,18 +43,40 @@ class TravelTimesListAdapter(db: MotorwayTravelTimesStore) : BaseAdapter(), List
 	override fun getCount(): Int = items.size
 	override fun getItem(position: Int): Any = items[position]
 	override fun getItemId(position: Int): Long = position.toLong()
+	override fun getViewTypeCount(): Int = 2
+	override fun getItemViewType(position: Int): Int =
+		if (items[position] is HeadingTTListItem) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_TRAVEL_TIME_SEGMENT
 
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-		var result: View
 		val item = items[position]
 
-		if (item is HeadingTTListItem) {
-			result = ListHeadingView_.build(parent.context, item.text)
+		return if (convertView == null) {
+			when (item) {
+				is HeadingTTListItem -> ListHeadingView_.build(parent.context, item.text)
+				else -> TravelTimesListItemView_.build(parent.context, (item as SimpleTTListItem).travelTime)
+			}
 		} else {
-			val ttItem = item as SimpleTTListItem
-			result = TravelTimesListItemView_.build(parent.context, ttItem.travelTime)
+			when (item) {
+				is HeadingTTListItem -> convertHeadingListItem(convertView, item.text)
+				else -> convertTravelTimeListItem(convertView, (item as SimpleTTListItem).travelTime)
+			}
 		}
+	}
 
-		return result
+	private fun convertHeadingListItem(convertView: View, newHeading: String): View {
+		(convertView as ListHeadingView_).headingText = newHeading
+		convertView.refresh()
+		return convertView
+	}
+
+	private fun convertTravelTimeListItem(convertView: View, newSegment: XTravelTimeSegment): View {
+		(convertView as TravelTimesListItemView_).travelTime = newSegment
+		convertView.refresh()
+		return convertView
+	}
+
+	companion object {
+		private const val ITEM_VIEW_TYPE_HEADING = 0
+		private const val ITEM_VIEW_TYPE_TRAVEL_TIME_SEGMENT = 1
 	}
 }

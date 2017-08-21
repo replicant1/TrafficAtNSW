@@ -1,5 +1,6 @@
 package rod.bailey.trafficatnsw.traveltime.item
 
+import android.support.annotation.VisibleForTesting
 import rod.bailey.trafficatnsw.traveltime.data.*
 import java.util.*
 
@@ -17,7 +18,8 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 		return result
 	}
 
-	private fun createItemList(): LinkedList<ITTListItem> {
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun createItemList(): LinkedList<ITTListItem> {
 		val result = LinkedList<ITTListItem>()
 
 		if (!travelTimes.isEmpty()) {
@@ -73,50 +75,68 @@ class TTListItemFactory(store: MotorwayTravelTimesStore) {
 	 * calculation by the user, and for some segments being inactive due to
 	 * sensor faults etc.
 	 */
-	private fun updateTotalsItems(items: LinkedList<ITTListItem>) {
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun updateTotalsItems(items: LinkedList<ITTListItem>) {
 		// Total up the times in the forward direction
-		var topHeadingItemIndex = -1
-		var bottomHeadingItemIndex = -1
+		val headings = findHeadings(items)
+		val topHeadingItemIndex: Int? = headings.first
+		val bottomHeadingItemIndex: Int? = headings.second
+
+		if ((topHeadingItemIndex != null) && (bottomHeadingItemIndex != null)) {
+			calcTotalTravelTime(topHeadingItemIndex + 1, bottomHeadingItemIndex - 1, items)
+			calcTotalTravelTime(bottomHeadingItemIndex + 1, items.size - 1, items)
+		}
+	}
+
+	/**
+	 * Total the [travelTime] property value for all ITTListItems in [items] between [startIndex]
+	 * and [endIndex] (both inclusive). Each item in this range is assumed to be a [SimpleTTListItem].
+	 * Only items that are [active] and [includedInTotal] contribute towards the total
+	 */
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun calcTotalTravelTime(startIndex: Int, endIndex: Int, items: LinkedList<ITTListItem>) {
+		if ((startIndex < endIndex) && (startIndex >= 0) && (endIndex < items.size)) {
+			var total: Int = 0
+
+			for (j in startIndex..endIndex) {
+				val item = items[j] as SimpleTTListItem
+				val segment = item.travelTime
+
+				if (segment.isTotal) {
+					segment.properties?.travelTimeMinutes = total
+					break
+				} else {
+					if ((segment.includedInTotal == true) && (segment.properties?.isActive == true)) {
+						total += segment.properties.travelTimeMinutes ?: 0
+					}
+				}
+			}
+		}
+	}
+
+	/**
+	 * @return A Pair in which the first number is the index in [items] of the first
+	 * heading, and the second number is the index in [items] of the second heading.
+	 * The first or both may be null.
+	 */
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun findHeadings(items: LinkedList<ITTListItem>) : Pair<Int?, Int?> {
+		var topHeadingIndex: Int? = null
+		var bottomHeadingIndex: Int? = null
 
 		for (i in items.indices) {
 			val item = items[i]
 
 			if (item is HeadingTTListItem) {
-				if (topHeadingItemIndex == -1) {
-					topHeadingItemIndex = i
+				if (topHeadingIndex == null) {
+					topHeadingIndex = i
 				} else {
-					bottomHeadingItemIndex = i
+					bottomHeadingIndex = i
 				}
 			}
 		}
-		var topTotal = 0
-		for (j in topHeadingItemIndex + 1..bottomHeadingItemIndex - 1) {
-			val ttItem = items[j] as SimpleTTListItem
-			val tt = ttItem.travelTime
 
-			if (tt.isTotal) {
-				tt.properties?.travelTimeMinutes = topTotal
-				break
-			} else {
-				if ((tt.includedInTotal == true) && (tt.properties?.isActive == true)) {
-					topTotal += tt.properties.travelTimeMinutes ?: 0
-				}
-			}
-		}
-		var bottomTotal = 0
-		for (k in bottomHeadingItemIndex + 1..items.size - 1) {
-			val ttItem = items[k] as SimpleTTListItem
-			val tt = ttItem.travelTime
-
-			if (tt.isTotal) {
-				tt.properties?.travelTimeMinutes = bottomTotal
-				break
-			} else {
-				if ((tt.includedInTotal == true) && (tt.properties?.isActive == true)) {
-					bottomTotal += tt.properties.travelTimeMinutes ?: 0
-				}
-			}
-		}
+		return Pair(topHeadingIndex, bottomHeadingIndex)
 	}
 
 }

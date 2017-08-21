@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<!--
+Options menu for the Travel Times screen contains a single item - "Refresh"
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/all_cameras"
-        android:orderInCategory="20"
-        android:showAsAction="ifRoom"
-        android:title="All">
-    </item>
-    <item
-        android:id="@+id/favourite_cameras"
-        android:orderInCategory="9999"
-        android:showAsAction="ifRoom"
-        android:title="Favourites">
-    </item>
+        android:id="@+id/menu_item_refresh_travel_time_list"
+        android:icon="@drawable/ic_sync_white_24dp"
+        android:orderInCategory="1"
+        android:title="@string/camera_menu_item_refresh"
+        app:showAsAction="ifRoom"/>
 
 </menu>

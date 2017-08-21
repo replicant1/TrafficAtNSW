@@ -29,7 +29,6 @@ public class MotorwayConfigRegistryInstrumentedTest {
 	public void testGetConfigsNotNull() {
 		MotorwayConfigRegistry reg = new MotorwayConfigRegistry();
 		assertNotNull(reg.getM1Config());
-		assertNotNull(reg.getM2Config());
 		assertNotNull(reg.getM4Config());
 		assertNotNull(reg.getM7Config());
 	}
@@ -38,7 +37,6 @@ public class MotorwayConfigRegistryInstrumentedTest {
 	public void testMotorwayNamesInConfigs() {
 		MotorwayConfigRegistry reg = new MotorwayConfigRegistry();
 		assertEquals("M1", reg.getM1Config().getMotorwayName());
-		assertEquals("M2", reg.getM2Config().getMotorwayName());
 		assertEquals("M4", reg.getM4Config().getMotorwayName());
 		assertEquals("M7", reg.getM7Config().getMotorwayName());
 	}

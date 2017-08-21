@@ -9,7 +9,7 @@ import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
 
 @EViewGroup(R.layout.list_item_heading)
-open class ListHeadingView(ctx: Context, val headingText: String?) : FrameLayout(ctx) {
+open class ListHeadingView(ctx: Context, var headingText: String?): FrameLayout(ctx), IRefreshableView {
 
 	// Without the @JvmField, the generated field is private in Java
 	@ViewById(R.id.tv_list_item)
@@ -19,5 +19,9 @@ open class ListHeadingView(ctx: Context, val headingText: String?) : FrameLayout
 	@AfterViews
 	fun afterViews() {
 		textView?.text = headingText ?: ""
+	}
+
+	override fun refresh() {
+		afterViews()
 	}
 }

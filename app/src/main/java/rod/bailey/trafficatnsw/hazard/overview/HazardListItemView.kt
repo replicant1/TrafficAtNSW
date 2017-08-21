@@ -10,12 +10,13 @@ import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EViewGroup
 import org.androidannotations.annotations.ViewById
 import rod.bailey.trafficatnsw.R
-import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
-import rod.bailey.trafficatnsw.common.ui.ListItemCircularIcon
-import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
-import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.app.ConfigSingleton
+import rod.bailey.trafficatnsw.app.TrafficAtNSWApplication
+import rod.bailey.trafficatnsw.common.ui.IRefreshableView
+import rod.bailey.trafficatnsw.common.ui.ListItemCircularIcon
+import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XProperties
+import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.ui.LetterColorMapSingleton
 import rod.bailey.trafficatnsw.util.DateUtils
 import java.text.SimpleDateFormat
@@ -33,9 +34,9 @@ import javax.inject.Inject
  */
 @EViewGroup(R.layout.list_item_hazard)
 open class HazardListItemView(val ctx: Context,
-							  val hazard: XHazard,
+							  var hazard: XHazard,
 							  val showLastUpdatedDate: Boolean,
-							  val clickable: Boolean) : FrameLayout(ctx) {
+							  val clickable: Boolean) : FrameLayout(ctx), IRefreshableView {
 
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
@@ -70,9 +71,7 @@ open class HazardListItemView(val ctx: Context,
 
 	private inner class HazardListItemClickListener : View.OnClickListener {
 		override fun onClick(v: View) {
-			if (hazard.hazardId != null) {
-				HazardDetailsActivity.start(ctx, hazard.hazardId)
-			}
+			HazardDetailsActivity.start(ctx, hazard.hazardId ?: -1)
 		}
 	}
 
@@ -114,5 +113,9 @@ open class HazardListItemView(val ctx: Context,
 				rl?.setOnClickListener(HazardListItemClickListener())
 			}
 		}
+	}
+
+	override fun refresh() {
+		afterViews()
 	}
 }

@@ -2,6 +2,7 @@ package rod.bailey.trafficatnsw.app.command
 
 import android.content.Context
 import android.support.v7.app.AlertDialog
+import android.util.Log
 
 /**
  * Handles an error by producing a simple alert dialog containing a standard error message.
@@ -9,7 +10,7 @@ import android.support.v7.app.AlertDialog
 class DefaultErrorHandler(val ctx: Context, val message: String) : ICommandErrorHandler {
 
 	override fun onError(ex: Throwable) {
-		System.out.println("** DefaultErrorHandler.onError() ***" + ex)
+		Log.w(LOG_TAG, ex)
 
 		AlertDialog.Builder(ctx)
 			.setTitle("Error")
@@ -18,5 +19,9 @@ class DefaultErrorHandler(val ctx: Context, val message: String) : ICommandError
 			.setPositiveButton("OK", { dialog, _ -> dialog.cancel()})
 			.create()
 			.show()
+	}
+
+	companion object {
+		private val LOG_TAG = DefaultErrorHandler::class.java.simpleName
 	}
 }

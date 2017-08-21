@@ -14,16 +14,11 @@ class ConfigSingleton {
 	companion object {
 		// The names of the properties in config.properties
 		private val DURATION_TIME_FORMAT = "DurationTimeFormat"
-//		private val LOAD_INCIDENTS_FROM_LOCAL_JSON_FILE = "LoadIncidentsFromLocalJSONFile"
-		private val LOAD_TRAVEL_TIMES_FROM_LOCAL_JSON_FILES = "LoadTravelTimesFromLocalJSONFiles"
-//		private val LOCAL_INCIDENTS_JSON_FILE = "LocalIncidentsJSONFile"
 		private val LOCAL_M1_JSON_FILE = "LocalM1JSONFile"
-		private val LOCAL_M2_JSON_FILE = "LocalM2JSONFile"
 		private val LOCAL_M4_JSON_FILE = "LocalM4JSONFile"
 		private val LOCAL_M7_JSON_FILE = "LocalM7JSONFile"
 		private val REMOTE_INCIDENTS_JSON_FILE = "RemoteIncidentsJSONFile"
 		private val REMOTE_M1_JSON_FILE = "RemoteM1JSONURL"
-		private val REMOTE_M2_JSON_FILE = "RemoteM2JSONURL"
 		private val REMOTE_M4_JSON_FILE = "RemoteM4JSONURL"
 		private val REMOTE_M7_JSON_FILE = "RemoteM7JSONURL"
 		private val SHOW_LOG_MESSAGES = "ShowLogMessages"
@@ -67,26 +62,8 @@ class ConfigSingleton {
 		return configProperties.getProperty(propertyName)
 	}
 
-//	fun loadIncidentsFromLocalJSONFile(): Boolean {
-//		return getBoolProperty(
-//			LOAD_INCIDENTS_FROM_LOCAL_JSON_FILE)
-//	}
-
-//	fun loadTravelTimesFromLocalJSONFiles(): Boolean {
-//		return getBoolProperty(
-//			LOAD_TRAVEL_TIMES_FROM_LOCAL_JSON_FILES)
-//	}
-
-//	fun localIncidentsJSONFile(): String {
-//		return getStringProperty(LOCAL_INCIDENTS_JSON_FILE)
-//	}
-
 	fun localM1JSONFile(): String {
 		return getStringProperty(LOCAL_M1_JSON_FILE)
-	}
-
-	fun localM2JSONFile(): String {
-		return getStringProperty(LOCAL_M2_JSON_FILE)
 	}
 
 	fun localM4JSONFile(): String {
@@ -103,10 +80,6 @@ class ConfigSingleton {
 
 	fun remoteM1JSONFile(): String {
 		return getStringProperty(REMOTE_M1_JSON_FILE)
-	}
-
-	fun remoteM2JSONFile(): String {
-		return getStringProperty(REMOTE_M2_JSON_FILE)
 	}
 
 	fun remoteM4JSONFile(): String {

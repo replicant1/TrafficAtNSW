@@ -2,6 +2,7 @@ package rod.bailey.trafficatnsw.traveltime.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.support.annotation.VisibleForTesting
 import rod.bailey.trafficatnsw.util.MLog
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
@@ -120,6 +121,14 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 		Collections.sort(travelTimes)
 		addSelfAsPropertyChangeListener()
 		loadExclusionStates()
+	}
+
+	@VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+	fun setAllIncludedInTotal() {
+		for (seg: XTravelTimeSegment in travelTimes) {
+			seg.includedInTotal = true;
+		}
+		saveExclusionStates();
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
