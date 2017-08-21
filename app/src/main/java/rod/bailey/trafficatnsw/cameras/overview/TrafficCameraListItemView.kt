@@ -46,7 +46,15 @@ open class TrafficCameraListItemView(private val ctx: Context,
 	@AfterViews
 	fun afterViews() {
 		titleTextView?.text = camera.properties?.deriveTitle()
-		subtitleTextView?.text = camera.properties?.deriveSuburb()
+
+		val subtitleStr: String? = camera.properties?.deriveSuburb()
+		if (subtitleStr == null) {
+			subtitleTextView?.visibility = View.GONE
+		} else {
+			subtitleTextView?.visibility = View.VISIBLE
+			subtitleTextView?.text = subtitleStr
+		}
+
 		setFavourite(favourite)
 		mainLayout?.setOnClickListener(ItemClickListener())
 	}
