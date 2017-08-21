@@ -18,7 +18,8 @@ import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XProperties
 import rod.bailey.trafficatnsw.hazard.details.HazardDetailsActivity
 import rod.bailey.trafficatnsw.hazard.ui.LetterColorMapSingleton
-import rod.bailey.trafficatnsw.util.DateUtils
+import rod.bailey.trafficatnsw.util.isToday
+import rod.bailey.trafficatnsw.util.isYesterday
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -100,8 +101,8 @@ open class HazardListItemView(val ctx: Context,
 			val updated: Long? = props.lastUpdated
 			if (updated != null) {
 				val dateText: String = when {
-					DateUtils.isYesterday(Date(updated)) -> ctx.getString(R.string.hazard_list_item_date_previous)
-					DateUtils.isToday(Date(updated)) -> SimpleDateFormat(
+					Date(updated).isYesterday() -> ctx.getString(R.string.hazard_list_item_date_previous)
+					Date(updated).isToday() -> SimpleDateFormat(
 						config.hazardTimeFormat(), Locale.ENGLISH).format(updated).toLowerCase()
 					else -> SimpleDateFormat(config.hazardDateFormat(), Locale.ENGLISH).format(updated)
 				}

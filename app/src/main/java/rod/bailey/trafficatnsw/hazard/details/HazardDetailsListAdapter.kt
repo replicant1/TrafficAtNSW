@@ -17,7 +17,7 @@ import rod.bailey.trafficatnsw.hazard.details.ui.view.HtmlListItemView_
 import rod.bailey.trafficatnsw.hazard.details.ui.view.LineListItemView_
 import rod.bailey.trafficatnsw.hazard.details.ui.view.TextFieldListItemView_
 import rod.bailey.trafficatnsw.hazard.overview.HazardListItemView_
-import rod.bailey.trafficatnsw.util.DateUtils
+import rod.bailey.trafficatnsw.util.relativeDateAndTime
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -153,8 +153,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		// First CellRec is for "Created" date/time
 		val props: XProperties? = hazard.properties
 		if ((props != null) && (props.created != null)) {
-			val createdStr = DateUtils.relativeDateAndTime(
-				Date(props.created), capitalize = true)
+			val createdStr = Date(props.created).relativeDateAndTime(true)
 			val createdCellRec = TextFieldCellRec(
 				fieldName = ctx.getString(R.string.hazard_details_field_label_when_started),
 				fieldValue = createdStr)
@@ -165,8 +164,7 @@ class HazardDetailsListAdapter(private val ctx: Context, private val hazard: XHa
 		// 'last updated' cellrec if it will show a different date to the
 		// 'created' date.
 		if ((props != null) && (!isLastUpdatedSameAsCreated) && (props.lastUpdated != null)) {
-			val lastUpdatedStr = DateUtils.relativeDateAndTime(
-				Date(props.lastUpdated), capitalize = true)
+			val lastUpdatedStr = Date(props.lastUpdated).relativeDateAndTime(true)
 			val lastUpdatedCellRec = TextFieldCellRec(
 				fieldName = ctx.getString(R.string.hazard_details_field_label_when_last_checked),
 				fieldValue = lastUpdatedStr)
