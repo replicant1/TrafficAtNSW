@@ -48,18 +48,36 @@ with different `IHazardFilter` implementations applied.
 ### Navigation
 
 ![Navigation Drawer](/doc/screenshot/screenshot_navigation.png)
+
+The Navigation drawer slides out from left of top level screens.
   
 ### Incidents
 
 ![Hazard List](/doc/screenshot/screenshot_hazard_list.png)  
+
+A list of Hazards (Incidents) in Regional NSW, grouped by RMS Region.
+
 ![Hazard Details](/doc/screenshot/screenshot_hazard_details.png)
+
+Details screen for an individual Incident.
+
 ![Map](/doc/screenshot/screenshot_map.png)
+
+Clicking the Location icon on the Hazards Detail screen shows the GPS
+location of the Incident.
   
 ### Traffic Cameras
 
 ![Camera List](/doc/screenshot/screenshot_cameras.png) 
+
+List of traffic cameras in the Sydney area, grouped by RMS Region.
+
 ![Camera Image](/doc/screenshot/screenshot_camera_image.png)
  
 ### Travel Times 
 
 ![Travel Times](/doc/screenshot/screenshot_travel_times.png) 
+
+Travel Times on the M1 Motorway. Touching individual rows toggles the rows'
+travel time in and out of the total travel time for a given direction of travel
+on the Motorway.
