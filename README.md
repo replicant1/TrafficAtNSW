@@ -81,7 +81,8 @@ List of traffic cameras in the Sydney area, grouped by RMS Region.
 ![Camera Image](/doc/screenshot/screenshot_camera_image.png)
 
 Image from an individual traffic camera. Images update on the server
-every minute.
+every minute. The star action toggles the inclusion of this camera
+in the "Favourite Cameras" set.
  
 ### Travel Times 
 
