@@ -9,16 +9,16 @@ package rod.bailey.trafficatnsw.app.mvp
 interface IPresenter<V : IView> {
 
 	/**
-	 * Call this from then end of your views' onIViewCreated() method.
+	 * Call this from then end of your views' onResume() or onCreateView() method.
 	 *
-	 * @param view The IView to be presented
-	 * @param initData Initialization initData the presenter needs to parameterize its' operation.
+	 * @param view The IView to be presented by this IPresenter
+	 * @param initData Initialization data the presenter needs to properly present the IView
 	 */
-	fun onIViewCreated(view: V, vararg initData: Any?)
+	fun onAttachView(view: V, vararg initData: Any?)
 
 	/**
-	 * Call this from your views' onDestroyView() method. This will terminate
+	 * Call this from your views' onPause() or onDestory() method. This will terminate
 	 * any outstanding async server requests this presenter has initiated.
 	 */
-	fun onIViewDestroyed()
+	fun onDetachView()
 }

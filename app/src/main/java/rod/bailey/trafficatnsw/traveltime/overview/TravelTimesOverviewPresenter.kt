@@ -80,7 +80,7 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 		}
 	}
 
-	override fun onIViewDestroyed() {
+	override fun onDetachView() {
 		disposable?.dispose()
 	}
 
@@ -88,7 +88,7 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 	 * @param view The IView being presented
 	 * @param initData Expects a single Int, being the ordinal value of a Motorway element
 	 */
-	override fun onIViewCreated(view: ITravelTimesOverviewView, vararg initData: Any?) {
+	override fun onAttachView(view: ITravelTimesOverviewView, vararg initData: Any?) {
 		this.view = view
 		val motorwayKey: Int = initData[0] as Int
 		motorway = Motorway.values()[motorwayKey]

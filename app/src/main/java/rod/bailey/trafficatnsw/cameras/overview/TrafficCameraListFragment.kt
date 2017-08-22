@@ -74,12 +74,12 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 
 	override fun onPause() {
 		super.onPause()
-		presenter.onIViewDestroyed()
+		presenter.onDetachView()
 	}
 
 	override fun onResume() {
 		super.onResume()
-		presenter.onIViewCreated(this, modeKey)
+		presenter.onAttachView(this, modeKey)
 		loadCamerasAsync()
 	}
 

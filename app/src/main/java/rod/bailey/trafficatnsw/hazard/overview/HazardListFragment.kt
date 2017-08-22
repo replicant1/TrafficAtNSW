@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.view_list.view.*
 import org.androidannotations.annotations.*
 import rod.bailey.trafficatnsw.R
@@ -69,13 +68,13 @@ open class HazardListFragment : Fragment(), IHazardOverviewView {
 
 	override fun onResume() {
 		super.onResume()
-		presenter.onIViewCreated(this)
+		presenter.onAttachView(this)
 		loadHazardsAsync()
 	}
 
 	override fun onPause() {
 		super.onPause()
-		presenter.onIViewDestroyed()
+		presenter.onDetachView()
 	}
 
 	@OptionsItem(R.id.menu_item_refresh_hazard_list)

@@ -67,11 +67,11 @@ class HazardOverviewPresenter : IHazardOverviewPresenter {
 		}
 	}
 
-	override fun onIViewCreated(view: IHazardOverviewView, vararg initData: Any?) {
+	override fun onAttachView(view: IHazardOverviewView, vararg initData: Any?) {
 		this.view = view
 	}
 
-	override fun onIViewDestroyed() {
+	override fun onDetachView() {
 		disposable?.dispose()
 	}
 

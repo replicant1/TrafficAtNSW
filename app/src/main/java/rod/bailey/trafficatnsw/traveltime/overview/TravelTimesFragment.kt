@@ -38,7 +38,7 @@ open class TravelTimesFragment : Fragment(), ITravelTimesOverviewView {
 
 	override fun onDestroyView() {
 		super.onDestroyView()
-		presenter.onIViewDestroyed()
+		presenter.onDetachView()
 	}
 
 	override fun setScreenTitle(title: String) {
@@ -50,7 +50,7 @@ open class TravelTimesFragment : Fragment(), ITravelTimesOverviewView {
 		listView = ListViewWithEmptyMessage_.build(activity,
 												   getString(R.string.tt_times_unavailable),
 												   InactiveTravelTimeEmptyMessagePredicate())
-		presenter.onIViewCreated(this, motorwayKey)
+		presenter.onAttachView(this, motorwayKey)
 		return listView
 	}
 

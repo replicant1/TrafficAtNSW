@@ -68,13 +68,13 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 		)
 	}
 
-	override fun onIViewCreated(view: ITrafficCameraOverviewView, vararg initData: Any?) {
+	override fun onAttachView(view: ITrafficCameraOverviewView, vararg initData: Any?) {
 		this.view = view
 		val modeKeyInt: Int = initData[0] as Int
 		mode = TrafficCameraListMode.values().get(modeKeyInt)
 	}
 
-	override fun onIViewDestroyed() {
+	override fun onDetachView() {
 		disposable?.dispose()
 	}
 
