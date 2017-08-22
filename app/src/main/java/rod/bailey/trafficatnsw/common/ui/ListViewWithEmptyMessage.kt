@@ -1,7 +1,6 @@
 package rod.bailey.trafficatnsw.common.ui
 
 import android.content.Context
-import android.util.Log
 import android.widget.FrameLayout
 import android.widget.ListAdapter
 import org.androidannotations.annotations.AfterViews
@@ -34,7 +33,4 @@ open class ListViewWithEmptyMessage(ctx: Context,
 		listViewAutoHideFooter.setAdapter(adapter)
 	}
 
-	companion object {
-		private val LOG_TAG: String = ListViewWithEmptyMessage::class.java.simpleName
-	}
 }

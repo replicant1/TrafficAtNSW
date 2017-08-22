@@ -3,7 +3,7 @@ package rod.bailey.trafficatnsw.hazard.filter
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XProperties
 import rod.bailey.trafficatnsw.hazard.data.XRegion
-import rod.bailey.trafficatnsw.util.MLog
+import timber.log.Timber
 
 class AdmitSydneyHazardFilter : IHazardFilter {
 	override fun admit(hazard: XHazard): Boolean {
@@ -21,20 +21,13 @@ class AdmitSydneyHazardFilter : IHazardFilter {
 					try {
 						val roadRegion = XRegion.valueOf(roadRegionStr)
 						result = roadRegion.isSydney
-					}
-					catch (thr: Throwable) {
-						MLog.w(TAG,
-							   "Found a region sring that could not be decoded to an enum element: " + roadRegionStr,
-							   thr)
+					} catch (thr: Throwable) {
+						Timber.w(thr, "String could not be decoded to XRegion: %s", roadRegionStr)
 					}
 				}
 			}
 		}
 
 		return result
-	}
-
-	companion object {
-		private val TAG = AdmitSydneyHazardFilter::class.java.simpleName
 	}
 }

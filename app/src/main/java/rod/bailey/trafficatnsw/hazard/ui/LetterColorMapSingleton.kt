@@ -1,7 +1,6 @@
 package rod.bailey.trafficatnsw.hazard.ui
 
 import android.support.annotation.ColorRes
-import android.util.Log
 import rod.bailey.trafficatnsw.R
 import java.util.*
 
@@ -13,14 +12,14 @@ import java.util.*
  * the Material Design guidelines for the circular row icons with a character in the
  * middle of the circle. Case is not significant.
  */
-class LetterColorMapSingleton private constructor(){
+class LetterColorMapSingleton private constructor() {
 
 	private val letterToColorMap: MutableMap<Char, Int> = HashMap<Char, Int>()
 
 	/** Colors from this list are awarded to characters in a cyclic manner */
 	private val colorList: MutableList<Int> = LinkedList<Int>()
 
-	private var colorListIndex:Int = 0
+	private var colorListIndex: Int = 0
 
 	init {
 		colorList.add(R.color.palette_rusty_red)
@@ -44,10 +43,9 @@ class LetterColorMapSingleton private constructor(){
 
 	@ColorRes
 	fun getColorForLetter(ch: Char): Int {
-		val key:Char = ch.toUpperCase()
+		val key: Char = ch.toUpperCase()
 		if (!letterToColorMap.containsKey(key)) {
-			val color:Int = nextColor()
-			Log.d(LOG_TAG, "key=${key}, color=${color}")
+			val color: Int = nextColor()
 			letterToColorMap.put(key, color)
 		}
 		return letterToColorMap.get(key) ?: R.color.palette_rusty_red
@@ -59,7 +57,6 @@ class LetterColorMapSingleton private constructor(){
 	}
 
 	companion object {
-		private val LOG_TAG = LetterColorMapSingleton::class.java.simpleName
 		val instance: LetterColorMapSingleton by lazy { Holder.INSTANCE }
 	}
 }

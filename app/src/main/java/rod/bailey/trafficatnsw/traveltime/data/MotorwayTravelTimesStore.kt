@@ -3,7 +3,7 @@ package rod.bailey.trafficatnsw.traveltime.data
 import android.content.Context
 import android.content.SharedPreferences
 import android.support.annotation.VisibleForTesting
-import rod.bailey.trafficatnsw.util.MLog
+import timber.log.Timber
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
@@ -49,7 +49,7 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 	 * changed.
 	 */
 	private fun fireTotalTravelTimePropertyChangedEvent(travelTime: XTravelTimeSegment) {
-		MLog.i(LOG_TAG, "Firing a PCE on property ${PROPERTY_TOTAL_TRAVEL_TIME} with value ${travelTime}")
+		Timber.i("Firing a PCE on property ${PROPERTY_TOTAL_TRAVEL_TIME} with value ${travelTime}")
 		support.firePropertyChange(PROPERTY_TOTAL_TRAVEL_TIME, null, this)
 	}
 
@@ -65,19 +65,19 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 	 * prior to this.
 	 */
 	private fun loadExclusionStates() {
-		MLog.i(LOG_TAG, "Loading exclusion states")
+		Timber.i("Loading exclusion states")
 		// To begin with mark all as included
 		for (travelTime in travelTimes) {
 			travelTime.setIncludedInTotalSilently(true)
 		}
 		val excludedSegmentIds = prefs.getStringSet(EXCLUSION_STATE_PREFS_KEY, null)
 
-		MLog.i(LOG_TAG, "Exclusion set as loaded from prefs is:")
-		MLog.i(LOG_TAG, "excludedSegmentIds = " + excludedSegmentIds)
+		Timber.i("Exclusion set as loaded from prefs is:")
+		Timber.i("excludedSegmentIds = ${excludedSegmentIds}")
 
 		if (excludedSegmentIds != null) {
 			for (segId in excludedSegmentIds) {
-				MLog.i(LOG_TAG, segId + ",")
+				Timber.i(segId + ",")
 			}
 
 			for (excludedSegmentId in excludedSegmentIds) {
@@ -94,7 +94,7 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 
 	fun getSavedExcludedSegmentIds(): Set<SegmentId> {
 		val result = HashSet<SegmentId>()
-		val excludedSegmentIds : Set<String> = prefs.getStringSet(EXCLUSION_STATE_PREFS_KEY, null)
+		val excludedSegmentIds: Set<String> = prefs.getStringSet(EXCLUSION_STATE_PREFS_KEY, null)
 		for (excludedSegmentIdStr in excludedSegmentIds) {
 			val segmentId: SegmentId? = SegmentId.parse(excludedSegmentIdStr)
 			if (segmentId != null) {
@@ -136,11 +136,8 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 
 		if (event.propertyName == XTravelTimeSegment.PROPERTY_SEGMENT_INCLUDED_IN_TOTAL) {
 			if (!source.isTotal) {
-				MLog.i(LOG_TAG,
-					   "MotorwayTTStore gets notices that property "
-						   + event.propertyName
-						   + " has changed for segment id "
-						   + source.segmentId)
+				Timber.i("MotorwayTTStore gets notices that property %s has changed for segment id %s",
+						event.propertyName, source.segmentId)
 				saveExclusionStates()
 				fireTotalTravelTimePropertyChangedEvent(source)
 			}
@@ -163,12 +160,12 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 	 * this.Order is not important.
 	 */
 	private fun saveExclusionStates() {
-		MLog.d(LOG_TAG, "Saving exclusion states for motorway " + config.motorwayName)
+		Timber.d("Saving exclusion states for motorway ${config.motorwayName}")
 		val excludedSegmentIds = HashSet<String>()
 
 		for (travelTime in travelTimes) {
 			if (travelTime.includedInTotal == false) {
-				MLog.d(LOG_TAG, "Segment${travelTime.segmentId} is excluded so save to prefs")
+				Timber.d("Segment${travelTime.segmentId} is excluded so save to prefs")
 				val segmentIdStr: String = travelTime.segmentId ?: ""
 				if (!segmentIdStr.isEmpty()) {
 					excludedSegmentIds.add(segmentIdStr)
@@ -177,7 +174,7 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 		}
 		val editor = prefs.edit()
 		editor.putStringSet(
-			EXCLUSION_STATE_PREFS_KEY, excludedSegmentIds)
+				EXCLUSION_STATE_PREFS_KEY, excludedSegmentIds)
 		editor.commit()
 	}
 
@@ -193,7 +190,5 @@ class MotorwayTravelTimesStore(ctx: Context, val config: MotorwayConfig) : Prope
 		 * direction of travel on this motorway will need recalculating.
 		 */
 		val PROPERTY_TOTAL_TRAVEL_TIME = "totalTravelTime"
-
-		private val LOG_TAG = MotorwayTravelTimesStore::class.java.simpleName
 	}
 }

@@ -3,7 +3,6 @@ package rod.bailey.trafficatnsw.hazard.map
 import android.content.Context
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -64,12 +63,12 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 		googleMap.clear()
 
 		val latlng = LatLng(hazard?.geometry?.latlng?.get(1) ?: 0.0,
-							hazard?.geometry?.latlng?.get(0) ?: 0.0)
+				hazard?.geometry?.latlng?.get(0) ?: 0.0)
 		val markerOptions = MarkerOptions()
-			.position(latlng)
-			.title(hazard?.properties?.headline ?: getString(R.string.hazard_map_screen_title))
-			.draggable(false)
-			.flat(false)
+				.position(latlng)
+				.title(hazard?.properties?.headline ?: getString(R.string.hazard_map_screen_title))
+				.draggable(false)
+				.flat(false)
 
 		googleMap.addMarker(markerOptions)
 		googleMap.isBuildingsEnabled = false
@@ -81,7 +80,6 @@ open class ShowHazardOnMapActivity : AppCompatActivity(), OnMapReadyCallback {
 	}
 
 	companion object {
-		private val LOG_TAG = ShowHazardOnMapActivity::class.java.simpleName
 		private const val MAP_ZOOM: Float = 18f
 		private const val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id.map"
 
