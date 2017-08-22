@@ -38,67 +38,7 @@ data class XRoad(
 	@SerializedName("queueLength")
 	val queueLength: Int?,
 
-	//	val fullStreetAddress: String?,
-
 	@SerializedName("impactedLanes")
 	val impactedLanes: List<XLane>?)
-
-//	init {
-//		conditionTendency = safeGetString(json, "conditionTendency")
-//		crossStreet = safeGetString(json, "crossStreet")
-//		delay = safeGetString(json, "delay")
-//		locationQualifier = safeGetString(json, "locationQualifier")
-//		mainStreet = safeGetString(json, "mainStreet")
-//		region = safeGetString(json, "region")
-//		secondLocation = safeGetString(json, "secondLocation")
-//		suburb = safeGetString(json, "suburb")
-//		trafficVolume = safeGetString(json, "trafficVolume")
-//		queueLength = safeGetInt(json, "queueLength")
-//
-//		// The 'fullStreetAddress' is pieced together from these properties:
-//		// mainStreet, locationQualifier, crossStreet, secondLocation.
-//		// The only mandatory property is mainStreet
-//
-//		val fullStr = StringBuffer(mainStreet)
-//
-//		if (isNonEmpty(crossStreet)) {
-//			fullStr.append(" ")
-//			fullStr.append(locationQualifier)
-//			fullStr.append(" ")
-//			fullStr.append(crossStreet)
-//		}
-//
-//		if (isNonEmpty(secondLocation)) {
-//			fullStr.append(" and ")
-//			fullStr.append(secondLocation)
-//		}
-//
-//		fullStreetAddress = fullStr.toString()
-//
-//		// Parse out the Lanes objects
-//
-//		val lanes = LinkedList<XLane>()
-//		val lanesJSONArray:JSONArray? = JSONUtils.safeGetJSONArray(json, "impactedLanes")
-//
-//		if (lanesJSONArray != null) {
-//			for (i in 0..lanesJSONArray.length() - 1) {
-//				try {
-//					val laneJsonObject = lanesJSONArray.getJSONObject(i)
-//					val lane = XLane(laneJsonObject)
-//					lanes.add(lane)
-//				}
-//				catch (e: JSONException) {
-//					MLog.w(TAG, "Failed to parse XLane from JSON object", e)
-//				}
-//			}
-//		}
-//
-//		impactedLanes = lanes
-//	}
-
-//	companion object {
-//
-//		private val TAG = XRoad::class.java.simpleName
-//	}
 
 

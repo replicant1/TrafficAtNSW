@@ -10,7 +10,7 @@ import rod.bailey.trafficatnsw.common.ui.ListHeadingView_
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.data.XRegion
-import rod.bailey.trafficatnsw.util.MLog
+import timber.log.Timber
 import java.util.*
 import javax.inject.Inject
 
@@ -28,11 +28,11 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 	init {
 		TrafficAtNSWApplication.graph.inject(this)
 
-		MLog.d(TAG, "About to collate the listData from HazardCacheSingleton contents")
+		Timber.d("Collating data from HazardCacheSingleton")
 		for (region in sortedHazardRegions()) {
 			listData.add(region)
 			val hazards: List<XHazard>? =
-				hazardCacheSingleton.getFilteredHazardsForRegion(region)
+					hazardCacheSingleton.getFilteredHazardsForRegion(region)
 			if (hazards != null) {
 				listData.addAll(hazards.sorted())
 			}
@@ -44,14 +44,14 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 	}
 
 	private fun createHeading(ctx: Context, region: XRegion): View
-		= ListHeadingView_.build(ctx, region.description)
+			= ListHeadingView_.build(ctx, region.description)
 
 	override fun getCount(): Int = listData.size
 	override fun getItem(position: Int): Any = listData[position]
 	override fun getItemId(position: Int): Long = position.toLong()
 
 	override fun getItemViewType(position: Int): Int =
-		if (listData[position] is XRegion) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_HAZARD
+			if (listData[position] is XRegion) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_HAZARD
 
 	override fun getViewTypeCount(): Int = 2
 
@@ -91,7 +91,7 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 
 		for (region in XRegion.values()) {
 			val hazardsForRegion =
-				hazardCacheSingleton.getFilteredHazardsForRegion(region)
+					hazardCacheSingleton.getFilteredHazardsForRegion(region)
 
 			if (hazardsForRegion != null && !hazardsForRegion.isEmpty()) {
 				sortedRegions.add(region)
@@ -102,7 +102,6 @@ class HazardListAdapter : BaseAdapter(), ListAdapter {
 	}
 
 	companion object {
-		private val TAG = HazardListAdapter::class.java.simpleName
 		private const val ITEM_VIEW_TYPE_HEADING: Int = 0;
 		private const val ITEM_VIEW_TYPE_HAZARD: Int = 1;
 	}

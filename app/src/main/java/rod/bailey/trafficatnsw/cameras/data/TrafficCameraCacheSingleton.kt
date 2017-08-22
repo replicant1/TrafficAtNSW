@@ -2,10 +2,10 @@ package rod.bailey.trafficatnsw.cameras.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import rod.bailey.trafficatnsw.cameras.filter.AdmitAnyTrafficCameraFilter
 import rod.bailey.trafficatnsw.cameras.filter.ITrafficCameraFilter
 import rod.bailey.trafficatnsw.hazard.data.XRegion
+import timber.log.Timber
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import java.util.*
@@ -25,7 +25,6 @@ class TrafficCameraCacheSingleton(ctx: Context) : PropertyChangeListener {
 		const val PROPERTY_FAVOURITE_SET = "rod.bailey.trafficatnsw.favouriteSet"
 		private const val FAVOURITE_CAMERAS_FILE_NAME = "favourite_cameras"
 		private const val FAVOURITE_STATE_PREF_KEY = "FAVOURITE"
-		private val LOG_TAG = TrafficCameraCacheSingleton::class.java.simpleName
 	}
 
 	private var propertyChangeListener: PropertyChangeListener? = null
@@ -118,7 +117,7 @@ class TrafficCameraCacheSingleton(ctx: Context) : PropertyChangeListener {
 		// Load ids of favourite cameras from prefs
 		val favouriteCameraIds: MutableSet<String>? = prefs.getStringSet(FAVOURITE_STATE_PREF_KEY, null)
 
-		Log.i(LOG_TAG, "Favourite cameras as loaded from prefs is: ${favouriteCameraIds}")
+		Timber.i("Favourite cameras as loaded from prefs is: ${favouriteCameraIds}")
 
 		// Set in-memory cameras' "isFavourite" to true if camera id is in prefs
 		favouriteCameraIds?.let {
@@ -139,14 +138,14 @@ class TrafficCameraCacheSingleton(ctx: Context) : PropertyChangeListener {
 	 * even those not admitted by the current filter.
 	 */
 	fun saveFavourites(): HashSet<String> {
-		Log.d(LOG_TAG, "Into saveFavourites")
+		Timber.d("Into saveFavourites")
 		val favouriteCameraIds = HashSet<String>()
 
 		// Accumulate a single list of all cameras marked as favourites
 		unfilteredCamerasPerRegion.values.forEach {
 			for (camera in it) {
 				if ((camera.favourite) && (camera.id != null)) {
-					Log.d(LOG_TAG, "Found a favourite camera: ${camera.id}")
+					Timber.d("Found a favourite camera: ${camera.id}")
 					favouriteCameraIds.add(camera.id)
 				}
 			}

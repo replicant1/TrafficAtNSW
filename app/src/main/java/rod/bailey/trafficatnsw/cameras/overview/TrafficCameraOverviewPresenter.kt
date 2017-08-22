@@ -1,7 +1,6 @@
 package rod.bailey.trafficatnsw.cameras.overview
 
 import android.content.Context
-import android.util.Log
 import io.reactivex.disposables.Disposable
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.app.command.CommandEngine
@@ -13,6 +12,7 @@ import rod.bailey.trafficatnsw.cameras.data.TrafficCameraCacheSingleton
 import rod.bailey.trafficatnsw.cameras.data.XCameraCollection
 import rod.bailey.trafficatnsw.common.ui.ListViewWithEmptyMessage
 import rod.bailey.trafficatnsw.service.IDataService
+import timber.log.Timber
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
 import javax.inject.Inject
@@ -61,10 +61,10 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 
 	override fun loadCamerasAsync(ctx: Context, listView: ListViewWithEmptyMessage) {
 		disposable = CommandEngine.execute(
-			DownloadCamerasCommand(dataService),
-			DefaultProgressMonitor(ctx, ctx.getString(R.string.camera_image_loading_msg)),
-			SuccessHandler(this),
-			DefaultErrorHandler(ctx, ctx.getString(R.string.camera_image_load_failure_dialog_msg))
+				DownloadCamerasCommand(dataService),
+				DefaultProgressMonitor(ctx, ctx.getString(R.string.camera_image_loading_msg)),
+				SuccessHandler(this),
+				DefaultErrorHandler(ctx, ctx.getString(R.string.camera_image_load_failure_dialog_msg))
 		)
 	}
 
@@ -79,26 +79,21 @@ class TrafficCameraOverviewPresenter : ITrafficCameraOverviewPresenter, Property
 	}
 
 	override fun propertyChange(evt: PropertyChangeEvent?) {
-		Log.d(LOG_TAG, "Into TCOverviewPresenter. About to call view.refreshCameraList()")
+		Timber.d("Into TCOverviewPresenter. About to call view.refreshCameraList()")
 		view.refreshCameraList()
 	}
 
 	inner class SuccessHandler(val listener: PropertyChangeListener) : ICommandSuccessHandler {
 
 		override fun onSuccess(result: Any?) {
-			Log.d(LOG_TAG, "onSuccess: ${result}")
 			val allCameras: XCameraCollection = result as XCameraCollection
 			if (allCameras.cameras != null) {
 				cameraCacheSingleton.init(allCameras.cameras)
 				cameraCacheSingleton.setPropertyChangeListener(listener)
 				view.refreshCameraList()
 			} else {
-				Log.w(LOG_TAG, "allCameras.cameras was null")
+				Timber.w("allCameras.cameras was null")
 			}
 		}
-	}
-
-	companion object {
-		private val LOG_TAG = TrafficCameraOverviewPresenter::class.java.simpleName
 	}
 }

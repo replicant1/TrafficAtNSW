@@ -9,7 +9,7 @@ import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
 import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
 import rod.bailey.trafficatnsw.service.IDataService
 import rod.bailey.trafficatnsw.traveltime.data.*
-import rod.bailey.trafficatnsw.util.MLog
+import timber.log.Timber
 import java.beans.PropertyChangeEvent
 import javax.inject.Inject
 
@@ -58,7 +58,7 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 	}
 
 	override fun propertyChange(event: PropertyChangeEvent) {
-		MLog.i(LOG_TAG, "TTOverview Presenter notified property ${event.propertyName} has changed")
+		Timber.i("TTOverview Presenter notified property ${event.propertyName} has changed")
 		if (event.propertyName == MotorwayTravelTimesStore.PROPERTY_TOTAL_TRAVEL_TIME) {
 			view.setMotorwayData(mwayStore)
 		}
@@ -66,10 +66,10 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 
 	override fun onFreshMotorwayDataRequested(ctx: Context) {
 		disposable = CommandEngine.execute(
-			DownloadTravelTimesCommand(ctx, motorwayConfig, dataService),
-			DefaultProgressMonitor(ctx, ctx.getString(R.string.tt_load_progress_msg, motorwayConfig.motorwayName)),
-			SuccessHandler(),
-			DefaultErrorHandler(ctx, ctx.getString(R.string.tt_download_dialog_msg)))
+				DownloadTravelTimesCommand(ctx, motorwayConfig, dataService),
+				DefaultProgressMonitor(ctx, ctx.getString(R.string.tt_load_progress_msg, motorwayConfig.motorwayName)),
+				SuccessHandler(),
+				DefaultErrorHandler(ctx, ctx.getString(R.string.tt_download_dialog_msg)))
 	}
 
 	inner class SuccessHandler : ICommandSuccessHandler {
@@ -105,9 +105,5 @@ class TravelTimesOverviewPresenter : ITravelTimesOverviewPresenter {
 		mwayStore = newData
 		mwayStore.addPropertyChangeListener(this)
 		view.setMotorwayData(newData)
-	}
-
-	companion object {
-		private val LOG_TAG: String = TravelTimesOverviewPresenter::class.java.simpleName
 	}
 }

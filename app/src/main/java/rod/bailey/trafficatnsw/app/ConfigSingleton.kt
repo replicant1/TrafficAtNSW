@@ -1,10 +1,10 @@
 package rod.bailey.trafficatnsw.app
 
 import android.content.Context
-import android.util.Log
+import timber.log.Timber
 import java.io.IOException
 import java.io.InputStream
-import java.util.Properties
+import java.util.*
 
 /**
  * Provides global access to the config.properties file. Always inject this to make sure
@@ -21,11 +21,8 @@ class ConfigSingleton {
 		private val REMOTE_M1_JSON_FILE = "RemoteM1JSONURL"
 		private val REMOTE_M4_JSON_FILE = "RemoteM4JSONURL"
 		private val REMOTE_M7_JSON_FILE = "RemoteM7JSONURL"
-		private val SHOW_LOG_MESSAGES = "ShowLogMessages"
 		private val HAZARD_TIME_FORMAT = "HazardTimeFormat"
 		private val HAZARD_DATE_FORMAT = "HazardDateFormat"
-
-		private val LOG_TAG = ConfigSingleton::class.java.simpleName
 	}
 
 	private val configProperties = Properties()
@@ -36,9 +33,8 @@ class ConfigSingleton {
 		try {
 			istream = context.assets.open(propertiesFileName)
 			configProperties.load(istream)
-		}
-		catch (e: IOException) {
-			Log.e(LOG_TAG, "Failed to load config.properties file", e)
+		} catch (e: IOException) {
+			Timber.e(e, "Failed to load config.properties file")
 		}
 	}
 
@@ -88,14 +84,6 @@ class ConfigSingleton {
 
 	fun remoteM7JSONFile(): String {
 		return getStringProperty(REMOTE_M7_JSON_FILE)
-	}
-
-	/**
-	 * @return If YES, MLog messages appear on the console. This slows things
-	 * *         down considerably.
-	 */
-	fun showLogMessages(): Boolean {
-		return getBoolProperty(SHOW_LOG_MESSAGES)
 	}
 
 }

@@ -1,12 +1,9 @@
 package rod.bailey.trafficatnsw.cameras.data
 
-import android.util.Log
-import android.util.Property
 import com.google.gson.annotations.SerializedName
 import rod.bailey.trafficatnsw.hazard.data.XGeometry
 import java.beans.PropertyChangeEvent
 import java.beans.PropertyChangeListener
-import java.beans.PropertyChangeSupport
 import java.io.Serializable
 
 /**
@@ -14,14 +11,14 @@ import java.io.Serializable
  */
 data class XCamera(
 
-	@SerializedName("id")
-	val id: String?,
+		@SerializedName("id")
+		val id: String?,
 
-	@SerializedName("geometry")
-	val geometry: XGeometry?,
+		@SerializedName("geometry")
+		val geometry: XGeometry?,
 
-	@SerializedName("properties")
-	val properties: XCameraProperties?) : Comparable<XCamera>, Serializable {
+		@SerializedName("properties")
+		val properties: XCameraProperties?) : Comparable<XCamera>, Serializable {
 
 	private var propertyChangeListener: PropertyChangeListener? = null
 
@@ -31,7 +28,7 @@ data class XCamera(
 
 	private fun fireFavouritePropertyChangeEvent() {
 		propertyChangeListener?.propertyChange(
-			PropertyChangeEvent(this, PROPERTY_FAVOURITE, null,  favourite))
+				PropertyChangeEvent(this, PROPERTY_FAVOURITE, null, favourite))
 	}
 
 	fun setFavouriteSilently(value: Boolean) {

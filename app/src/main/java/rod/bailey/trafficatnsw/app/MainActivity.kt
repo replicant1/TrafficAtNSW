@@ -7,11 +7,11 @@ import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.Gravity
 import android.view.MenuItem
 import org.androidannotations.annotations.AfterViews
 import org.androidannotations.annotations.EActivity
+import rod.bailey.trafficatnsw.BuildConfig
 import rod.bailey.trafficatnsw.R
 import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListFragment
 import rod.bailey.trafficatnsw.cameras.overview.TrafficCameraListMode
@@ -19,8 +19,10 @@ import rod.bailey.trafficatnsw.hazard.overview.HazardListFragment
 import rod.bailey.trafficatnsw.hazard.overview.HazardOverviewMode
 import rod.bailey.trafficatnsw.traveltime.data.Motorway
 import rod.bailey.trafficatnsw.traveltime.overview.TravelTimesFragment
-import rod.bailey.trafficatnsw.util.MLog
+import timber.log.Timber
+import timber.log.Timber.DebugTree
 import javax.inject.Inject
+
 
 @EActivity(R.layout.activity_main)
 open class MainActivity : AppCompatActivity() {
@@ -45,8 +47,11 @@ open class MainActivity : AppCompatActivity() {
 		// Initialize config facility
 		config.init(CONFIG_PROPERTIES_FILE_NAME, this)
 
-		// This logging facility needs initialization
-		MLog.init(config)
+		// This logging facility needs initialization. Log messages only
+		// appear in DEBUG, not in production.
+//		if (BuildConfig.DEBUG) {
+			Timber.plant(DebugTree())
+//		}
 	}
 
 	@AfterViews
@@ -108,7 +113,7 @@ open class MainActivity : AppCompatActivity() {
 			private val drawerLayout: DrawerLayout) : NavigationView.OnNavigationItemSelectedListener {
 
 		override fun onNavigationItemSelected(item: MenuItem): Boolean {
-			Log.d(LOG_TAG, "onNavigationItemSelected: item=" + item)
+			Timber.d("onNavigationItemSelected: item=${item}")
 			when (item.itemId) {
 				R.id.menu_item_sydney_incidents ->
 					navigateToHazardsScreen(HazardOverviewMode.SYDNEY)
