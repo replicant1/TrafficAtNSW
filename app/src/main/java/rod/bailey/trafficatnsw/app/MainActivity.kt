@@ -49,9 +49,9 @@ open class MainActivity : AppCompatActivity() {
 
 		// This logging facility needs initialization. Log messages only
 		// appear in DEBUG, not in production.
-//		if (BuildConfig.DEBUG) {
+		if (BuildConfig.DEBUG) {
 			Timber.plant(DebugTree())
-//		}
+		}
 	}
 
 	@AfterViews
