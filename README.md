@@ -35,7 +35,7 @@ from the `IPresenter` at the appropriate times in its Android lifecycle. Typical
 and `onPause` lifecycle methods are the appropriate places to attach and detach the View
 from the Presenter.
 
-![IView and IPresenter](/doc/uml/uml_view_presenter_interface.pdf)
+![IView and IPresenter](/doc/uml/uml_view_presenter_interfaces.pdf)
 
 The following shows `IView` and `IPresenter` implementations for the Hazards screens. Both the
 "Sydney Incidents" and  "Regional Incidents" screens use the same Presenter and View classes, just
