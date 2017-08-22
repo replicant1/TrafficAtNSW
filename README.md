@@ -25,21 +25,41 @@ The app makes use of these libraries:
 * *RxJava* - For asynchronous loading of data
 * *Timber* - For logging
 
+## Design
+
+The two fundamental interfaces in the app are `IView` and `IPresenter`, which represent the
+View and Presenter parties in the classic `MVP` pattern. The `IView` is just a tag interface
+implemented by Fragments and Activities that are views. The `IPresenter` is generally injected
+into the `IView` implementation. It attaches itself to the `IPresenter` and detaches itself
+from the `IPresenter` at the appropriate times in its Android lifecycle. Typically the `onResume`
+and `onPause` lifecycle methods are the appropriate places to attach and detach the View
+from the Presenter.
+
+![IView and IPresenter](/doc/uml/uml_view_presenter_interface.pdf)
+
+The following shows `IView` and `IPresenter` implementations for the Hazards screens. Both the
+"Sydney Incidents" and  "Regional Incidents" screens use the same Presenter and View classes, just
+with different `IHazardFilter` implementations applied.
+
+![Hazards View and Presenter](/doc/uml/uml_hazards_vp.pdf)
+
 ## Screenshots
 
 ### Navigation
 
- ![Navigation Drawer](/doc/navigation.png)
+![Navigation Drawer](/doc/screenshot/screenshot_navigation.png)
   
 ### Incidents
 
-  ![Hazard List](/doc/hazard_list.png)  ![Hazard Details](/doc/hazard_details.png)
-  ![Map](/doc/map.png)
+![Hazard List](/doc/screenshot/screenshot_hazard_list.png)  
+![Hazard Details](/doc/screenshot/screenshot_hazard_details.png)
+![Map](/doc/screenshot/screenshot_map.png)
   
 ### Traffic Cameras
 
-  ![Camera List](/doc/cameras.png) ![Camera Image](/doc/camera_image.png)
+![Camera List](/doc/screenshot/screenshot_cameras.png) 
+![Camera Image](/doc/screenshot/screenshot_camera_image.png)
  
 ### Travel Times 
 
-  ![Travel Times](/doc/travel_times.png) 
+![Travel Times](/doc/screenshot/screenshot_travel_times.png) 
