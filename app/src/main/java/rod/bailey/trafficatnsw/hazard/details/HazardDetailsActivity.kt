@@ -13,7 +13,7 @@ import rod.bailey.trafficatnsw.common.ui.ListViewAutoHideFooter_
 import rod.bailey.trafficatnsw.hazard.data.HazardCacheSingleton
 import rod.bailey.trafficatnsw.hazard.data.XHazard
 import rod.bailey.trafficatnsw.hazard.map.ShowHazardOnMapActivity
-import rod.bailey.trafficatnsw.util.MLog
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -42,7 +42,7 @@ open class HazardDetailsActivity : AppCompatActivity() {
 
 	@AfterExtras
 	fun afterExtras() {
-		MLog.i(LOG_TAG, "Showing details of hazard id " + hazardId)
+		Timber.i("Showing details of hazard id %s", hazardId)
 		val tmpHazard: XHazard? = hazardCacheSingleton.getUnfilteredHazard(hazardId ?: 0)
 
 		if (tmpHazard != null) {
@@ -73,7 +73,6 @@ open class HazardDetailsActivity : AppCompatActivity() {
 	}
 
 	companion object {
-		private val LOG_TAG = HazardDetailsActivity::class.java.simpleName
 		private const val EXTRA_HAZARD_ID_INT: String = "rod.bailey.trafficatnsw.hazard.id"
 
 		fun start(ctx: Context, hazardId: Int) {

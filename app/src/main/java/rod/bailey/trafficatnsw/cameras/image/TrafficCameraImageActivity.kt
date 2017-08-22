@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatTextView
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -22,6 +21,7 @@ import rod.bailey.trafficatnsw.app.command.DefaultProgressMonitor
 import rod.bailey.trafficatnsw.app.command.ICommandSuccessHandler
 import rod.bailey.trafficatnsw.cameras.data.*
 import rod.bailey.trafficatnsw.service.IDataService
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -82,7 +82,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 		actionBar?.setDisplayShowCustomEnabled(true)
 		actionBar?.setDisplayHomeAsUpEnabled(true)
 
-		Log.d(LOG_TAG, "In afterViews() cameraId=${cameraId}" )
+		Timber.d("In afterViews() cameraId=${cameraId}")
 		val camera: XCamera? = cameraCache.getUnfilteredCamera(cameraId ?: "")
 		if (camera != null) {
 			val props: XCameraProperties? = camera.properties
@@ -92,8 +92,7 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 				val suburbStr: String? = props.deriveSuburb()
 				if (suburbStr == null) {
 					subtitleTextView?.visibility = View.GONE
-				}
-				else {
+				} else {
 					subtitleTextView?.text = suburbStr
 					subtitleTextView?.visibility = View.VISIBLE
 				}
@@ -102,10 +101,10 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 				updateActionBarPerFavouriteStatus(camera.favourite)
 				refresh()
 			} else {
-				Log.w(LOG_TAG, "Camera id ${cameraId} has null properties")
+				Timber.w("Camera id ${cameraId} has null properties")
 			}
 		} else {
-			Log.w(LOG_TAG, "Couldn't find camera id ${cameraId}")
+			Timber.w("Couldn't find camera id ${cameraId}")
 		}
 	}
 
@@ -116,10 +115,10 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 
 	private fun loadCameraImageAsync() {
 		disposable = CommandEngine.execute(
-			DownloadCameraImageCommand(dataService, cameraId ?: ""),
-			DefaultProgressMonitor(this, getString(R.string.camera_image_loading_msg)),
-			SuccessHandler(),
-			DefaultErrorHandler(this, getString(R.string.camera_image_load_failure_dialog_msg))
+				DownloadCameraImageCommand(dataService, cameraId ?: ""),
+				DefaultProgressMonitor(this, getString(R.string.camera_image_loading_msg)),
+				SuccessHandler(),
+				DefaultErrorHandler(this, getString(R.string.camera_image_load_failure_dialog_msg))
 		)
 	}
 
@@ -139,16 +138,16 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 			cameraVal.favourite = !cameraVal.favourite
 			updateActionBarPerFavouriteStatus(cameraVal.favourite)
 			Toast.makeText(this, if (cameraVal.favourite) R.string.camera_favourites_added
-					else R.string.camera_favourites_removed, Toast.LENGTH_SHORT).show()
+			else R.string.camera_favourites_removed, Toast.LENGTH_SHORT).show()
 		}
 	}
 
 	private fun updateActionBarPerFavouriteStatus(isFavourite: Boolean) {
 		favouriteMenuItem?.setIcon(
-			if (isFavourite)
-				R.drawable.ic_star_white_24dp
-			else
-				R.drawable.ic_star_border_white_24dp)
+				if (isFavourite)
+					R.drawable.ic_star_white_24dp
+				else
+					R.drawable.ic_star_border_white_24dp)
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -168,10 +167,8 @@ open class TrafficCameraImageActivity : AppCompatActivity() {
 	}
 
 	companion object {
-		private val LOG_TAG: String = TrafficCameraImageActivity::class.java.simpleName
-
 		fun start(ctx: Context, cameraId: String) {
-			Log.d(LOG_TAG, "Starting TrafficCameraImageActivity with cameraId ${cameraId}")
+			Timber.d("Starting TrafficCameraImageActivity with cameraId ${cameraId}")
 			TrafficCameraImageActivity_.intent(ctx).cameraId(cameraId).start()
 		}
 	}

@@ -3,7 +3,6 @@ package rod.bailey.trafficatnsw.cameras.overview
 import android.app.Fragment
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,10 +62,10 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 							  container: ViewGroup?,
 							  savedInstanceState: Bundle?): View? {
 		cameraListView = ListViewWithEmptyMessage_.build(activity,
-														 getString(R.string.camera_no_favourites),
-														 EmptyListEmptyMessagePredicate())
+				getString(R.string.camera_no_favourites),
+				EmptyListEmptyMessagePredicate())
 		cameraListView.listViewAutoHideFooter.lv_list.divider =
-			ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
+				ContextCompat.getDrawable(activity, R.drawable.line_list_divider_partial)
 		cameraListView.listViewAutoHideFooter.lv_list.dividerHeight = 2
 		activity.title = getString(presenter.getScreenTitleForMode(mode))
 		return cameraListView
@@ -84,8 +83,6 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 	}
 
 	override fun refreshCameraList() {
-		Log.d(LOG_TAG, "Into refreshCameraList: d2e5699.isFavourite=${cameraCacheSingleton.getUnfilteredCamera
-		("d2e5699")?.favourite}")
 		cameraListView.setAdapter(TrafficCameraListAdapter(mode.filter))
 	}
 
@@ -97,7 +94,7 @@ open class TrafficCameraListFragment : Fragment(), ITrafficCameraOverviewView {
 
 		fun create(mode: TrafficCameraListMode): TrafficCameraListFragment {
 			return TrafficCameraListFragment_.builder().arg(
-				ARG_MODE_KEY, mode.ordinal).build()
+					ARG_MODE_KEY, mode.ordinal).build()
 		}
 	}
 }

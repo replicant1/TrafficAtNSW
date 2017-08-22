@@ -22,6 +22,8 @@ The app makes use of these libraries:
   * `@OptionsItem`
 * *Dagger* - Dependency injection, switching between test and real implementations of `IDataService`
 * *GSON* - For parsing of JSON data files
+* *RxJava* - For asynchronous loading of data
+* *Timber* - For logging
 
 ## Screenshots
 

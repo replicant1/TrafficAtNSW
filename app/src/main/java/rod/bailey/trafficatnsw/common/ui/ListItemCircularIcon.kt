@@ -7,7 +7,6 @@ import android.graphics.Paint
 import android.graphics.RectF
 import android.support.annotation.ColorRes
 import android.util.AttributeSet
-import android.util.Log
 import android.widget.TextView
 import org.androidannotations.annotations.EView
 import rod.bailey.trafficatnsw.R
@@ -39,13 +38,10 @@ open class ListItemCircularIcon : TextView {
 		circleColor = a.getColor(R.styleable.ListItemCircularIcon_circleColor, R.color.palette_rusty_red)
 		circleLetter = a.getString(R.styleable.ListItemCircularIcon_circleLetter)
 		a.recycle()
-
-		Log.d(LOG_TAG, "from c'tor: circleColor=${circleColor}, circleLetter=${circleLetter}")
 	}
 
 	override fun onDraw(canvas: Canvas?) {
 		if (canvas != null) {
-			Log.d(LOG_TAG, "canvas.width=${canvas.width}, canvas.height=${canvas.height}, circleColor=${circleColor}")
 			val rect: RectF = RectF(0f, 0f, canvas.width.toFloat(), canvas.height.toFloat())
 			val paint: Paint = Paint()
 			paint.color = circleColor
@@ -56,9 +52,5 @@ open class ListItemCircularIcon : TextView {
 		// Has to appear *after* the drawing of the circle background so that
 		// the text appears on top of the circle.
 		super.onDraw(canvas)
-	}
-
-	companion object {
-		private val LOG_TAG: String = ListItemCircularIcon::class.java.simpleName
 	}
 }

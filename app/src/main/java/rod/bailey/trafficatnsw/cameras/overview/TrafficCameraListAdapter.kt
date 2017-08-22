@@ -1,7 +1,6 @@
 package rod.bailey.trafficatnsw.cameras.overview
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -48,7 +47,6 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 
 	private fun createTrafficCameraListItem(ctx: Context,
 											camera: XCamera): TrafficCameraListItemView {
-		Log.d(LOG_TAG, "Creating camera list Item ${camera.id} fav=${camera.favourite}")
 		val item = TrafficCameraListItemView_.build(ctx, camera, camera.favourite)
 		item.isFocusable = true
 		return item
@@ -58,14 +56,14 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	override fun getItem(position: Int): Any = listData[position]
 	override fun getItemId(position: Int): Long = position.toLong()
 	override fun getItemViewType(position: Int): Int =
-		if (listData[position] is XRegion) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_TRAFFIC_CAMERA
+			if (listData[position] is XRegion) ITEM_VIEW_TYPE_HEADING else ITEM_VIEW_TYPE_TRAFFIC_CAMERA
 
 	override fun getViewTypeCount(): Int = 2
 
 	override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 		val listItem = listData[position]
 
-		 return if (convertView == null) {
+		return if (convertView == null) {
 			return when (listItem) {
 				is XRegion -> createHeadingListItem(listItem, parent)
 				else -> createTrafficCameraListItem(parent.context, listItem as XCamera)
@@ -85,7 +83,6 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	}
 
 	private fun convertTrafficCameraListItem(convertView: View, newCameraData: XCamera): View {
-		Log.d(LOG_TAG, "Converting camera ${newCameraData.id} fav=${newCameraData.favourite}")
 		(convertView as TrafficCameraListItemView_).camera = newCameraData
 		convertView.refresh()
 		return convertView
@@ -105,7 +102,6 @@ class TrafficCameraListAdapter(filter: ITrafficCameraFilter) : BaseAdapter(), Li
 	}
 
 	companion object {
-		private val LOG_TAG = TrafficCameraListAdapter::class.java.simpleName
 		private const val ITEM_VIEW_TYPE_HEADING = 0
 		private const val ITEM_VIEW_TYPE_TRAFFIC_CAMERA = 1
 	}

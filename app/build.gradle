@@ -88,4 +88,7 @@ dependencies {
     // RxAndroid and RxJava
     compile "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
     compile "io.reactivex.rxjava2:rxjava:$rxjava_version"
+
+    // Timber logging utility
+    compile "com.jakewharton.timber:timber:$timber_version"
 }
