@@ -27,6 +27,10 @@ The app makes use of these libraries:
 
 ## Design
 
+### IView and IPresenter interfaces
+
+![IView and IPresenter Class Diagram](/doc/uml/uml_view_presenter_interfaces.jpg)
+
 The two fundamental interfaces in the app are `IView` and `IPresenter`, which represent the
 View and Presenter parties in the classic `MVP` pattern. The `IView` is just a tag interface
 implemented by Fragments and Activities that are views. The `IPresenter` is generally injected
@@ -35,13 +39,31 @@ from the `IPresenter` at the appropriate times in its Android lifecycle. Typical
 and `onPause` lifecycle methods are the appropriate places to attach and detach the View
 from the Presenter.
 
-![IView and IPresenter](/doc/uml/uml_view_presenter_interfaces.jpg)
+### Hazards List screen
+
+![Hazards View and Presenter Class Diagram](/doc/uml/uml_hazards_vp.jpg)
 
 The following shows `IView` and `IPresenter` implementations for the Hazards screens. Both the
 "Sydney Incidents" and  "Regional Incidents" screens use the same Presenter and View classes, just
 with different `IHazardFilter` implementations applied.
 
-![Hazards View and Presenter](/doc/uml/uml_hazards_vp.jpg)
+### Refresh Hazards
+
+![Refresh Hazards Collaboration Diagram](/doc/uml/uml_collab_hazard_refresh.jpg)
+
+0) `HazardsListFragment` tells its Presenter to load Hazards from the Data Service
+1) `HazardsOverviewPresenter` constructs a `DownloadHazardsCommand` to perform the download asynchronously
+2) `HazardsOverviewPresenter` constructs a `DownloadSuccessHandler` to receive the hazards when they are later returned
+3) `HazardsOverviewPresenter` passes the `DownloadHazardsCommand` and the `SuccesHandler` to the `CommandEngine` for 
+asynchronous execution.
+4)  The `CommandEngine` executes the `DownloadHazardsCommand` asynchronously
+5) The `RemoteDataService` gets the `incident.json` file from the remote web server and...
+6) ... returns them to the `DownloadSuccessHandler` for parsing into data objects.
+7) The resulting List of Hazards is stored away in the `HazardCacheSingleton` for future reference
+8) The `DownloadSuccessHandler`, via the `HazardOverviewPresenter`, tells the view (`HazardListFragment`) to
+refresh its display of Hazards because new hazard data is now available in the `HazardCacheSingleton`
+9) The `HazardListFragment` constructs a new `HazardListAdapter` which interrogates the `HazardCacheSingleton` for
+its new data which is then used to populate the Hazards List on the screen.
 
 ## Screenshots
 
