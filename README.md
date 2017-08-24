@@ -47,6 +47,14 @@ The following shows `IView` and `IPresenter` implementations for the Hazards scr
 "Sydney Incidents" and  "Regional Incidents" screens use the same Presenter and View classes, just
 with different `IHazardFilter` implementations applied.
 
+### IDataService
+
+![IDataService](/doc/uml/uml_data_service.jpg)
+
+All domain data is retrieved via the `IDataService` interface. In production, the `RemoteDataService`
+implementation is used, but for testing the `TestDataService` implementation is provided by Dagger
+instead. This is achieved by having different Dagger modules defined for each implementation.
+
 ### Refresh Hazards
 
 ![Refresh Hazards Collaboration Diagram](/doc/uml/uml_collab_hazard_refresh.jpg)
